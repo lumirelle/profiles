@@ -1,0 +1,75 @@
+{
+  // == helper extensions ==
+  "css.enabledLanguages": ["html", "vue"],
+  "css.styleSheets": ["assets/css/**/*.scss", "assets/style/**/*.scss"],
+  "cSpell.customDictionaries": {
+    "dev": {
+      "name": "dev",
+      "path": "~/.cspell.dev.txt",
+      "description": "Words used in development.",
+      "addWords": false
+    },
+    "company": {
+      "name": "company",
+      "path": "~/.cspell.working.txt",
+      "description": "Words used in working.",
+      "addWords": false
+    }
+  },
+  "cSpell.ignoreRegExpList": [
+    "@[\\w-]+\\/[\\w-]+" // npm package: @asdf-ghjk/asdf-ghjk
+  ],
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".*" // dotfile & dotfolder
+  ],
+  "license.author": "Lyana-nullptr",
+  "license.default": "MIT",
+  "powershell.integratedConsole.showOnStartup": false,
+  "projectManager.git.baseFolders": ["D:\\.DevProjects"],
+  "svg.preview.mode": "svg",
+  "i18n-ally.displayLanguage": "zh-CN",
+  // == lint extensions ==
+  "eslint.format.enable": true,
+  "stylelint.validate": ["css", "scss", "postcss", "vue"],
+  // == code format vscode ==
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.markdownlint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  },
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  // == vscode ==
+  "editor.fontFamily": "'0xProto Nerd Font Mono', 'FZYouSongJS 509R', monospace",
+  "editor.fontSize": 16,
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.guides.bracketPairs": "active",
+  "editor.mouseWheelZoom": true,
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "LICENSE": "plaintext"
+  },
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "markdown.preview.fontFamily": "'0xProto Nerd Font Mono', 'FZYouSongJS 509R'",
+  "security.workspace.trust.enabled": false,
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "window.zoomLevel": 2,
+  "workbench.startupEditor": "none",
+  "workbench.iconTheme": "material-icon-theme",
+  "extensions.autoUpdate": false
+}
