@@ -1,0 +1,181 @@
+" author: CherylVolta
+" version: 2024/06/19
+
+" -- leader --
+let mapleader = ' '
+
+" -- plugins --
+" >> setup
+"    高亮复制
+set highlightedyank
+"    快速操作引号等“包围”
+"    cs：更改包围，如：cs'" 将包围光标所在位置的 ' 改为 "
+"    ds：删除包围，如：ds' 将包围的 ' 删除
+"    ys：添加包围，如：ysiw[ 将一个单词用 [] 包围（有空格间隔）
+"    yss：为整行添加包围，如：yss] 将整行用 [] 包围
+"    VS：为选中的块添加包围，如：V3jS' 将所在行与往下3行用 ' 包围
+"    左括号 ([{：与所选文本对象之间有空格
+"    右括号 )]}：与所选文本对象之间无空格
+"    包围除了普通的引号、括号，还支持 HTML 标签，如：cs'<a> 将包围的 ' 改为 <a><a/>
+set surround
+"    aa/ia 方法参数
+set argtextobj
+"    ae/ie 整个文件
+set textobj-entire
+"    自动切换输入法
+set keep-english-in-normal-and-restore-in-insert
+
+" -- basic --
+" >> setup
+"    搜索时忽略大小写
+set ignorecase
+"    智能大小写
+set smartcase
+"    显示行号，相对行号
+set number relativenumber
+"    翻页的行数
+set scroll=10
+" >> keymaps
+"    >> change
+"    home & end
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
+"    j & k
+noremap k gk
+noremap gk k
+noremap j gj
+noremap gj j
+"    翻页
+noremap <c-j> <c-u>
+noremap <c-k> <c-d>
+"    = & +
+noremap = +
+noremap + =
+"    选区缩进
+vnoremap < <gv
+vnoremap > >gv
+"    copy & paste
+nnoremap <c-c> "*yy
+vnoremap <c-c> "*y
+nnoremap <c-v> "*p
+vnoremap <c-v> "*p
+"    esc
+inoremap <c-m> <esc>
+"    redo
+nnoremap U <c-r>
+"    >> nop
+"    宏很少用
+"    用作 query/quick summary/info actions
+noremap Q <nop>
+"    跳转屏幕中部无用
+"    用作 project management actions
+noremap M <nop>
+"    帮助无用
+"    用作代码操作
+noremap K <nop>
+"    >> nop - still not used - still preview
+"    宏很少用
+noremap q <nop>
+noremap @ <nop>
+"    标签使用 IDEA 的标签功能 F11 代替
+noremap m <nop>
+noremap ` <nop>
+noremap ' <nop>
+"    无用
+noremap \ <nop>
+noremap + <nop>
+"    上一页
+noremap <c-b> <nop>
+"    上半页
+noremap <c-u> <nop>
+"    屏幕下滚一行，光标不动
+noremap <c-e> <nop>
+"    显示光标所在位置的文件信息
+noremap <c-g> <nop>
+"    重绘屏幕
+noremap <c-l> <nop>
+"    补全、浏览历史命令
+noremap <c-n> <nop>
+"    文件名补全
+noremap <c-p> <nop>
+"    无
+noremap <c-q> <nop>
+noremap <c-t> <nop>
+noremap <c-\> <nop>
+
+" -- intellij specific --
+" description of idea specific key maps:
+"     <leader>      用于项目弹窗/窗口操作
+"     M[anage]      用于项目管理操作（运行/停止/调试及其子操作/断点及其子操作）
+"     K(c)[ode]     用于代码管理操作
+"     Q[uick]       用于快速信息展示/查询
+" >> setup
+"    J 启用 idea 连接支持
+set ideajoin
+"    进入重构保持模式不变
+set idearefactormode=keep
+" >> keymaps
+"    >> [window] actions
+"    上一个/下一个标签页
+noremap <leader>w :action PreviousTab<CR>
+noremap <leader>e :action NextTab<CR>
+"    项目结构 Structure
+noremap <leader>s :action ShowProjectStructureSettings<CR>
+"    选择运行/调试配置 Run/Debug
+noremap <leader>r :action ChooseRunConfiguration<CR>
+noremap <leader>d :action ChooseDebugConfiguration<CR>
+"    在项目中查找 Find
+noremap <leader>f :action FindInPath<CR>
+"    最近的项目/位置（文件） Project/Location
+noremap <leader>p :action ManageRecentProjects<CR>
+noremap <leader>l :action RecentFiles<CR>
+"    重构菜单
+noremap <leader>g :action Refactorings.QuickListPopupAction<CR>
+"    >> [project] management actions
+"    运行/停止/调试及其子操作
+noremap Mr :action Run<CR>
+noremap Ms :action Stop<CR>
+noremap Mdd :action Debug<CR>
+noremap Mdr :action Resume<CR>
+noremap Mdt :action RunToCursor<CR>
+"    断点及其子操作
+noremap Mbb :action ToggleLineBreakpoint<CR>
+noremap Mbv :action ViewBreakpoints<CR>
+noremap Mbm :action XDebugger.MuteBreakpoints<CR>
+"    >> [code] management actions
+"    重命名/查找/替换
+noremap Kr :action RenameElement<CR>
+"    格式化
+noremap KK :action ReformatCode<CR>
+"    跳转到父类方法
+noremap Ks :action GotoSuperMethod<CR>
+"    跳转到上次修改的地方
+noremap Kl :action JumpToLastChange<CR>
+"    跳转到实现
+noremap Ki :action GotoImplementation<CR>
+"    跳转到声明
+noremap Kd :action GotoDeclaration<CR>
+"    previous method
+noremap K[ :action MethodUp<CR>
+"    next method
+noremap K] :action MethodDown<CR>
+"    >> [quick] summary/info actions
+"    展示用法
+noremap Qu :action FindUsages<CR>
+"    展示快速文档
+noremap Qd :action QuickJavaDoc<CR>
+"    展示方法实现
+noremap Qi :action QuickImplementations<CR>
+"    展示方法形参信息
+noremap Qp :action ParameterInfo<CR>
+"    展示文件结构
+noremap Qs :action FileStructurePopup<CR>
+"    展示表达式求值
+vnoremap Qe :action QuickEvaluateExpression<CR>
+
+" -- vim specific --
+noremap <leader>v :action IdeaVim.ReloadVimRc.reload<CR>
+"    监听 IntellJ 的 Action 名称
+noremap <leader>a :action VimFindActionIdAction<CR>

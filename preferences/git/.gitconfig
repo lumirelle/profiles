@@ -1,0 +1,11 @@
+[init]
+  defaultBranch = main
+[core]
+  ignorecase = false
+[user]
+  name = Lyana
+  email = shabbyacc@outlook.com
+[credential "https://gitee.com"]
+  provider = generic
+[merge]
+  ff = no
