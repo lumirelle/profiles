@@ -7,7 +7,9 @@ esbenp.prettier-vscode
 fsmerge
 git.autofetch
 ideavimrc
+lxgw
 lyana
+mobi.hsz.idea.gitignore
 nologo
 nullptr
 nuxt
