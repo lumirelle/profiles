@@ -74,6 +74,7 @@ Development profiles or something else.
   - node.js
 
     - .npmrc
+    - .nuxtrc
     - .yarnrc
     - volta.hooks.jsonc
 

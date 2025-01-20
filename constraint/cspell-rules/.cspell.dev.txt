@@ -6,10 +6,12 @@ eruda
 esbenp.prettier-vscode
 fsmerge
 git.autofetch
+ideavimrc
 lyana
 nologo
 nullptr
 nuxt
+nuxtrc
 oppo
 preprod
 pwsh
