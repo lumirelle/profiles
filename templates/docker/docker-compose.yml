@@ -2,32 +2,32 @@ services:
   # ！MySQL 容器配置
   mysql_service:
     container_name: mysql_service
-    image: "mysql:8"
+    image: 'mysql:8'
     environment:
       # 允许访问的主机，% 表示放行任意主机
-      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_HOST: '%'
       # MySQL root 账户的默认密码
       MYSQL_ROOT_PASSWORD: root
       TZ: Asia/Shanghai
     ports:
-      - "3306:3306"
+      - '3306:3306'
     volumes:
       # 将数据挂载到 ./mysql_data 目录
-      - "./mysql_data:/var/lib/mysql"
+      - './mysql_data:/var/lib/mysql'
     networks:
       - persistent
   # ！Redis 容器配置
   redis_service:
     container_name: redis_service
-    image: "redis:7-alpine"
-    command: "redis-server"
+    image: 'redis:7-alpine'
+    command: 'redis-server'
     environment:
       TZ: Asia/Shanghai
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       # 将数据挂载到 redis_data 目录
-      - "./redis_volume:/data"
+      - './redis_volume:/data'
     networks:
       - persistent
   # ！前端应用容器配置，见 `Dockerfile_NodeJs`
@@ -41,7 +41,7 @@ services:
       SERVER_PORT: 8081 # 请依据源码配置，指定镜像暴露的端口
       TZ: Asia/Shanghai
     ports:
-      - "8081:8081" # 请依据环境变量 SERVER_PORT 设置
+      - '8081:8081' # 请依据环境变量 SERVER_PORT 设置
     networks:
       - default
   # ！后端应用容器配置，见 `Dockerfile_SpringBoot`、`Dockerfile_Tomcat`
@@ -59,7 +59,7 @@ services:
       TZ: Asia/Shanghai
     ports:
       # 请依据环境变量 SERVER_PORT 设置
-      - "8080:8080"
+      - '8080:8080'
     networks:
       - persistent
       - default

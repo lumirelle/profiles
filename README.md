@@ -53,6 +53,7 @@ Development profiles or something else.
 
   - clash-for-windows
 
+    - README.md
     - cfw-settings.yml
 
   - git
@@ -103,8 +104,9 @@ Development profiles or something else.
 
   - fonts
 
-    - 0xProto.zip
-    - FZYouSJJW_590R.zip
+    - LxgwBrightCode.zip
+    - NerdFontsSymbolsOnly.zip
+    - README.md
 
 - templates: Profile templates like Dockerfile
 

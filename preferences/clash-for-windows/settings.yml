@@ -1,7 +1,7 @@
 showNewVersionIcon: false
 hideAfterStartup: true
 randomControllerPort: true
-runTimeFormat: "hh : mm : ss"
+runTimeFormat: 'hh : mm : ss'
 trayOrders:
   - - icon
   - - status
@@ -14,7 +14,7 @@ connMode: true
 connProfile: true
 connProxy: 1
 latencyTimeout: .nan
-fontFamily: ""
+fontFamily: ''
 proxyOrder: 0
 proxyDelayType: 1
 latencyUrl: http://www.apple.com/library/test/success.html

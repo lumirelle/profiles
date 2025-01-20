@@ -50,8 +50,8 @@
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   // == vscode ==
-  "editor.fontFamily": "'0xProto Nerd Font Mono', 'FZYouSongJS 509R', monospace",
-  "editor.fontSize": 16,
+  "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
+  "editor.fontSize": 18,
   "editor.gotoLocation.multipleDefinitions": "goto",
   "editor.guides.bracketPairs": "active",
   "editor.mouseWheelZoom": true,
@@ -65,10 +65,10 @@
   },
   "git.autofetch": true,
   "git.confirmSync": false,
-  "markdown.preview.fontFamily": "'0xProto Nerd Font Mono', 'FZYouSongJS 509R'",
+  "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 1.8,
   "workbench.startupEditor": "none",
   "workbench.iconTheme": "material-icon-theme",
   "extensions.autoUpdate": false

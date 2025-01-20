@@ -44,13 +44,14 @@
   ],
   "profiles": {
     "defaults": {
-      "cursorShape": "underscore",
+      "experimental.retroTerminalEffect": false,
       "font": {
-        "cellHeight": "1.5",
-        "face": "'0xProto Nerd Font Mono', 'FZYouSongJS 509R'",
+        "builtinGlyphs": false,
+        "face": "'LXGW Bright Code', 'Symbols Nerd Font'",
         "size": 16
       },
       "opacity": 80,
+      "padding": "16",
       "useAcrylic": true
     },
     "list": [
