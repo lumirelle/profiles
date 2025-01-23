@@ -25,7 +25,7 @@
     "vscode-extension",
     ".*" // dotfile & dotfolder
   ],
-  "license.author": "Lyana-nullptr",
+  "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
   "powershell.integratedConsole.showOnStartup": false,
   "projectManager.git.baseFolders": ["D:\\.DevProjects"],
