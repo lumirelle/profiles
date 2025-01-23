@@ -33,7 +33,8 @@ code .editorconfig
 code .prettierrc.json
 
 # 初始化提交
-git add . && git commit -m "init: init project with constraint files"
+git add .
+git commit -m "init: init project with constraint files"
 ```
 
 ### 2. 添加远程并推送
@@ -52,13 +53,16 @@ git push origin main
 
 ### 3. 从远程拉取
 
-当远程有来自他人的更新，应立即从远程拉取，避免基于过时的代码开发。
+当远程有来自他人的更新，应立即从远程拉取，避免基于过时的代码开发。拉取操作实质上是拉取并合并远程代码，如果存在冲突，则会产生合并记录。
 
 ```shell
 # 假设已经添加名为 "origin" 的远程
 git pull origin main:main
 # 或简写为
 git pull origin main
+
+# 等价于
+git fetch origin main:main && git merge origin/main
 ```
 
 ### 4. 创建并切换到开发分支（dev）
@@ -66,6 +70,9 @@ git pull origin main
 完成初始化提交和远程仓库的添加之后就应该分出项目的开发分支，基于开发分支做开发。遵循[规范的多人协作开发流程](https://github.com/wibetter/akfun/blob/master/%E5%A6%82%E4%BD%95%E8%A7%84%E8%8C%83%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%BC%80%E5%8F%91.md)有助于更好地维护项目。
 
 ```shell
+# 从 main 分支分出 dev 分支
+git switch -c dev main
+# 省略时默认从当前分支分出 dev 分支
 git switch -c dev
 ```
 
@@ -74,14 +81,12 @@ git switch -c dev
 每当你想要开发一个新功能时，就要基于开发分支，分出具体的功能分支（feature/\*\*）。开发分支只应该用来合并/整合功能分支。
 
 ```shell
-# 保证执行命令时正在 dev 分支的最新提交上
-git switch dev
-
-git switch -c feature/001 # 分支命名规则：feature/<feature-code>
+git switch -c feature/001 dev # 分支命名规则：feature/<feature-code>
 
 code git-manual.md
 
-git add . && git commit -m "feat: complete feature/001"
+git add .
+git commit -m "feat: complete feature/001"
 ```
 
 ### 6. 将文件用暂存区的版本覆盖（丢弃工作区的更改）
@@ -126,11 +131,13 @@ git switch dev
 
 # 不要使用 fast-forward 模式，会丢失分支记录
 git merge features --no-ff -m "merge: merge branch 'features' into 'dev'"
+# 你也可以将 .gitconfig 中的 merge.ff 配置项设置为 false
+git config --global merge.ff false
 ```
 
-### 10. 删除冗余功能分支
+### 10. 删除冗余临时分支
 
-当功能分支的使命达成时，就要将其删除，避免分支过多而难以维护。
+当功能分支的使命达成时，就要将其删除，避免分支过多而难以维护。其他临时分支，如预发布、紧急修复分支也是如此。
 
 ```shell
 # 查看本地的分支
@@ -138,19 +145,24 @@ git branch
 
 git switch dev
 
+# 务必保证分支内容已经合并到主分支
 git branch -d features
+# 对于从未合并到主分支的分支，需要使用 -D 选项强制删除
+git branch -D features
 ```
 
 ### 11. 储藏更改
 
-当你的更改与其他分支冲突时，想要切换分支前，应将更改储藏起来，完成另一个分支的工作回到原分支后再取出。
+当你的更改与其他分支冲突时，例如你修改的文件在目标分支里根本不存在，此时在切换分支前，需要将更改储藏起来，完成另一个分支的工作回到原分支后再取出。
 
 ```shell
+git stash push
+# 或简写为
 git stash
 
 git switch dev
 
-# ...
+# 完成另一个分支上的工作...
 
 git switch feature/001
 git stash pop
@@ -158,41 +170,36 @@ git stash pop
 
 ### 12. cherry pick
 
-当开发分支并入了很多新提交，而你只想往功能分支中引入其中一个（比如其他功能分支对通用组件做了修改，又添加了自己的功能组件），你可以使用 cherry pick 挑出你想要的那条提交并入自己的分支。
+当开发分支并入了很多新提交，而你只想往功能分支中引入其中一个（比如其他功能分支对通用组件做了修改，又添加了自己的功能组件），你可以使用 cherry pick 挑出你想要的那条提交并入自己的分支。尽量将对通用组件的修改作为一个单独的提交。
 
 ```shell
 git cherry-pick e730e57c66ad91beeaf02886f75caf04d4b615d9 # commit hash
 ```
 
-### 13. 创建并切换到发布分支（release）
+### 13. 创建并切换到预发布分支（release）
 
-当一个阶段的功能完成开发后，对应的功能分支均已合并到开发分支，即准备发布下一个主要版本（major version）时，应该基于开发分支，分出一个发布/预发布分支，用于测试功能和修复问题。
-
-```shell
-# 1.0 发布（此时发布分支还不存在，需要从开发分支新建）
-git switch dev
-git branch -c release
-
-# 2.0 发布（合并开发分支即可）
-git switch release
-git merge dev --no-ff -m "merge: prepare for v2.0.0 release"
-```
-
-每当发布分支上做了修复时，应该将修复合并回开发分支。
+当一个阶段的功能完成开发后，对应的功能分支均已合并到开发分支，即准备发布下一个版本时，应该基于开发分支，分出一个预发布分支，用于 QA 测试和问题修复。
 
 ```shell
-git switch dev
-git merge release --no-ff -m "merge: merge bugfixes"
+# 准备 1.0.0 发布
+git branch -c release-1.0.0 dev
+
+# 测试和修复问题...
 ```
 
 ### 14. 发布新版本
 
-当测试和修复完成后，应该将发布分支合并到主分支，随后给这个最新提交打上版本标签。
+当测试和修复完成后，发布新版本，应该将预发布分支合并到主分支，随后给这个最新提交打上版本标签。预发布分支上的修改同样要合并如开发分支，否则会导致主分支和开发分支出现冲突。
 
 ```shell
+# 确认无误后，合并入主分支并打上版本标签
 git switch main
-git merge release --no-ff -m "merge: v2.0.0 release"
-git tag v2.0.0
+git merge release-1.0.0 --no-ff -m "merge: v1.0.0 release"
+git tag -a v1.0.0
+
+# 修改同样要合并入开发分支
+git switch dev
+git merge release-1.0.0 --no-ff -m "merge: v1.0.0 release"
 ```
 
 ### 15. 紧急修复（hotfix）
@@ -200,12 +207,12 @@ git tag v2.0.0
 当主分支上存在致命缺陷时，应当从主分支分出一个紧急修复分支。修复完成后，应当将紧急修复分支合并到主分支和开发分支上。
 
 ```shell
-git switch main
-git branch -c hotfix/route-missing # 分支命名规则：hotfix/<place-problem>
+git branch -c hotfix/route-missing main # 分支命名规则：hotfix/<place-problem>
 
 code src/router/index.js
 
-git add . && git commit -m "hotfix: fix route missing problem"
+git add .
+git commit -m "hotfix: fix route missing problem"
 
 git switch main
 git merge --no-ff -m "merge: merge hotfix"
@@ -222,9 +229,9 @@ git merge --no-ff -m "merge: merge hotfix"
 
 ### 常驻/临时分支
 
-常驻分支：main、dev、release
+常驻分支：main、dev
 
-临时分支：feature、hotfix
+临时分支：feature、release、hotfix
 
 ### 工作流程
 
@@ -232,18 +239,20 @@ git merge --no-ff -m "merge: merge hotfix"
 
    main
 
+   -< dev
+
+   -< feature/001, feature/002, ... \<coding\>
+
    -> dev
 
-   -> (feature -> dev) \* n
+   -< release-x.x.x \<coding\>
 
-   -> release
-
-   -> dev \* n, main
+   -> dev, main
 
 2. 紧急修复工作流程：
 
    main
 
-   -> hotfix
+   -< hotfix \<coding\>
 
    -> main, dev

@@ -9,3 +9,5 @@
   provider = generic
 [merge]
   ff = no
+[pull]
+	ff = only

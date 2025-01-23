@@ -6,10 +6,12 @@ eruda
 esbenp.prettier-vscode
 fsmerge
 git.autofetch
+gsap
 ideavimrc
 lxgw
 lyana
 mobi.hsz.idea.gitignore
+mvvm
 nologo
 nullptr
 nuxt
