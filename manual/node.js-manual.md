@@ -1,4 +1,4 @@
-# Node.js Environment
+# Node.js Setup
 
 ## What is Node.js?
 

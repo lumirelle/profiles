@@ -2,6 +2,7 @@ axios
 commitlint
 datetimerange
 dotfolder
+dism
 eruda
 esbenp.prettier-vscode
 fsmerge
@@ -26,6 +27,7 @@ runjs
 taliwind
 tiktok
 vant
+ventoy
 vconsole
 vite
 vuedraggable

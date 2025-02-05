@@ -48,13 +48,14 @@ Development profiles or something else.
 
   - git-manual.md
   - node.js-manual.md
+  - windows-manual.md
 
 - preferences: Preferences profiles like `.gitconfig`
 
   - clash-for-windows
 
-    - README.md
     - cfw-settings.yml
+    - README.md
 
   - git
 
