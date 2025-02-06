@@ -7,8 +7,9 @@
 注意：对于 Windows 11 系统，Ventoy 将默认跳过设备检查和联网激活？
 
 - 插入 U 盘，下载安装 [Ventoy](https://www.ventoy.net/cn/download.html)，安装过程遵循[官方说明](https://www.ventoy.net/cn/doc_start.html)
-- 下载安装 BT 工具[比特彗星](https://www.bitcomet.com/cn)，设置 [Tracker](https://github.com/XIU2/TrackersListCollection/blob/master/README-ZH.md)
-- 使用 BT 工具下载 Windows ISO，并放入 U 盘
+- 下载安装 BT 工具[qBittorrent 增强版](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
+- 设置 Tracker <https://fastly.jsdelivr.net/gh/XIU2/TrackersListCollection/all.txt>
+- 使用 BT 工具下载 Windows ISO（推荐专业版），并放入 U 盘
 
   - [Windows 11 ISO](https://next.itellyou.cn/Original/#cbp=Product?ID=42e87ac8-9cd6-eb11-bdf8-e0d4e850c9c6)
   - [Windows 10 ISO](https://next.itellyou.cn/Original/#cbp=Product?ID=f905b2d9-11e7-4ee3-8b52-407a8befe8d1)
@@ -30,23 +31,23 @@
 
   <!-- markdownlint-enable -->
 
-- 使用 Windows11 轻松设置关闭防火墙、调整系统设置（Windows 10 可用）并重启
+- 使用 Windows 11 轻松设置关闭防火墙、调整系统设置（Windows 10 可用）并重启
 
   <!-- markdownlint-disable -->
 
-  | 软件名称           | 来源/安装                                          |
-  | ------------------ | -------------------------------------------------- |
-  | Windows11 轻松设置 | <https://www.bilibili.com/opus/904672369138729017> |
+  | 软件名称            | 来源/安装                                          |
+  | ------------------- | -------------------------------------------------- |
+  | Windows 11 轻松设置 | <https://www.bilibili.com/opus/904672369138729017> |
 
   <!-- markdownlint-enable -->
 
-- （可选）使用 Windows 11 Classic Context Menu 将右键菜单改为经典样式？
+- （可选）使用 Win11 Classic Context Menu 将右键菜单改为经典样式？
 
   <!-- markdownlint-disable -->
 
-  | 软件名称                        | 来源/安装                                                            |
-  | ------------------------------- | -------------------------------------------------------------------- |
-  | Windows 11 Classic Context Menu | <https://www.sordum.org/14479/windows-11-classic-context-menu-v1-2/> |
+  | 软件名称                   | 来源/安装                                                            |
+  | -------------------------- | -------------------------------------------------------------------- |
+  | Win11 Classic Context Menu | <https://www.sordum.org/14479/windows-11-classic-context-menu-v1-2/> |
 
   <!-- markdownlint-enable -->
 
@@ -55,26 +56,28 @@
 
   <!-- markdownlint-disable -->
 
-  | 软件名称                   | 来源/安装                                                                  |
-  | -------------------------- | -------------------------------------------------------------------------- |
-  | uTools                     | <https://www.u-tools.cn/download/>                                         |
-  | 7-zip                      | <https://www.7-zip.org/download.html>                                      |
-  | Git                        | <https://git-scm.com/download/win>                                         |
-  | Visual Studio Code         | <https://code.visualstudio.com/Download>                                   |
-  | Clash for Windows          | <https://github.com/clashdownload/Clash_for_Windows/releases>              |
-  | KeePass 2                  | <https://keepass.info/download.html>                                       |
-  | IDM                        | <https://www.internetdownloadmanager.com/download.html>                    |
-  | Visual C++ Redistributable | <https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist> |
-  | Auto Dark Mode             | <https://apps.microsoft.com/detail/xp8jk4hzbvf435>                         |
-  | PixPin                     | <https://pixpin.cn/>                                                       |
-  | 微信                       | <https://pc.weixin.qq.com/>                                                |
-  | QQ                         | <https://im.qq.com/pcqq/index.shtml>                                       |
-  | LX Music Desktop           | <https://github.com/lyswhut/lx-music-desktop/releases>                     |
-  | PotPlayer                  | <https://apps.microsoft.com/detail/xp8bsbgqw2dks0>                         |
-  | DISM++                     | <https://github.com/Chuyu-Team/Dism-Multi-language/releases>               |
-  | Office Tools Plus          | <https://otp.landian.vip/zh-cn/download.html>                              |
-  | Windows Terminal           | <https://apps.microsoft.com/detail/9n0dx20hk701>                           |
-  | Revo Uninstaller           | <https://www.revouninstaller.com/zh/revo-uninstaller-free-download/>       |
+  | 软件名称                     | 来源/安装                                                                  |
+  | ---------------------------- | -------------------------------------------------------------------------- |
+  | uTools                       | <https://www.u-tools.cn/download/>                                         |
+  | 7-zip                        | <https://www.7-zip.org/download.html>                                      |
+  | Git                          | <https://git-scm.com/download/win>                                         |
+  | Visual Studio Code           | <https://code.visualstudio.com/Download>                                   |
+  | Clash for Windows            | <https://github.com/clashdownload/Clash_for_Windows/releases>              |
+  | KeePass 2                    | <https://keepass.info/download.html>                                       |
+  | IDM                          | <https://www.internetdownloadmanager.com/download.html>                    |
+  | Visual C++ Redistributable   | <https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist> |
+  | Auto Dark Mode               | <https://apps.microsoft.com/detail/xp8jk4hzbvf435>                         |
+  | PixPin                       | <https://pixpin.cn/>                                                       |
+  | 微信                         | <https://pc.weixin.qq.com/>                                                |
+  | QQ                           | <https://im.qq.com/pcqq/index.shtml>                                       |
+  | LX Music Desktop             | <https://github.com/lyswhut/lx-music-desktop/releases>                     |
+  | PotPlayer                    | <https://apps.microsoft.com/detail/xp8bsbgqw2dks0>                         |
+  | DISM++                       | <https://github.com/Chuyu-Team/Dism-Multi-language/releases>               |
+  | Office Tools Plus            | <https://otp.landian.vip/zh-cn/download.html>                              |
+  | Windows Terminal             | <https://apps.microsoft.com/detail/9n0dx20hk701>                           |
+  | Revo Uninstaller             | <https://www.revouninstaller.com/zh/revo-uninstaller-free-download/>       |
+  | Context Menu Manager         | <https://github.com/BluePointLilac/ContextMenuManager/releases>            |
+  | Driver Store Explorer [RAPR] | <https://github.com/lostindark/DriverStoreExplorer/releases>               |
 
   <!-- markdownlint-enable -->
 
@@ -92,7 +95,7 @@
   | Visual Studio     | <https://visualstudio.microsoft.com/zh-cn/downloads/>    |
   | Steam             | <https://store.steampowered.com/about>                   |
   | Epic Games        | <https://store.epicgames.com/zh-CN/download>             |
-  | Rock Star Games   | <https://www.rockstargames.com/downloads>                |
+  | OBS Studio        | <https://obsproject.com/download>                        |
 
   <!-- markdownlint-enable -->
 
