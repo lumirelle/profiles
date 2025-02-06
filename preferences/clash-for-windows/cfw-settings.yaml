@@ -1,7 +1,7 @@
 showNewVersionIcon: false
 hideAfterStartup: true
 randomControllerPort: true
-runTimeFormat: 'hh : mm : ss'
+runTimeFormat: "hh : mm : ss"
 trayOrders:
   - - icon
   - - status
@@ -14,7 +14,7 @@ connMode: true
 connProfile: true
 connProxy: 0
 latencyTimeout: .nan
-fontFamily: ''
+fontFamily: ""
 proxyOrder: 0
 proxyDelayType: 1
 latencyUrl: http://www.apple.com/library/test/success.html
@@ -192,7 +192,7 @@ profileParsersText: >
         #   type: select / url-test / fallback / load-balance     # 手动选择/延迟测试/回退/负载均衡
         #   url: http://www.apple.com/library/test/success.html   # 测试地址
         #   interval: 60                                          # 测试间隔（s）
-        #   tolerance: 150                                        # 容忍度（ms）
+        #   tolerance: 100                                        # 容忍度（ms）
         #   proxies:
         #       - 节点名称
         #       - 其他分组的套娃
@@ -210,27 +210,27 @@ profileParsersText: >
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 60
-            tolerance: 150
+            tolerance: 100
           - name: 🚢 想去祖国的小岛
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: ⚓ 想去华人步行街
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: ⛩️ 想去岛国还人情
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: 🔫 想去自由美利坚
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: 🤣 你选的嘛偶像
             type: select
           - name: 👻 鬼屋
@@ -352,7 +352,7 @@ profileParsersText: >
           - RULE-SET,reject,👻 鬼屋 # 拦截域名
           - RULE-SET,icloud,DIRECT # iCloud
           - RULE-SET,apple,DIRECT # Apple
-          - RULE-SET,google,PROXY # Google
+          - RULE-SET,google,👾 去魔法世界 # Google
           - RULE-SET,proxy,👾 去魔法世界 # 需要代理的域名
           - RULE-SET,direct,DIRECT # 需要直连的域名
           - RULE-SET,lancidr,DIRECT # 本地 IP 池
