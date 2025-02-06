@@ -1,7 +1,7 @@
 showNewVersionIcon: false
 hideAfterStartup: true
 randomControllerPort: true
-runTimeFormat: 'hh : mm : ss'
+runTimeFormat: "hh : mm : ss"
 trayOrders:
   - - icon
   - - status
@@ -14,7 +14,7 @@ connMode: true
 connProfile: true
 connProxy: 0
 latencyTimeout: .nan
-fontFamily: ''
+fontFamily: ""
 proxyOrder: 0
 proxyDelayType: 1
 latencyUrl: http://www.apple.com/library/test/success.html
@@ -352,7 +352,7 @@ profileParsersText: >
           - RULE-SET,reject,👻 鬼屋 # 拦截域名
           - RULE-SET,icloud,DIRECT # iCloud
           - RULE-SET,apple,DIRECT # Apple
-          - RULE-SET,google,PROXY # Google
+          - RULE-SET,google,👾 去魔法世界 # Google
           - RULE-SET,proxy,👾 去魔法世界 # 需要代理的域名
           - RULE-SET,direct,DIRECT # 需要直连的域名
           - RULE-SET,lancidr,DIRECT # 本地 IP 池
