@@ -54,7 +54,7 @@ Development profiles or something else.
 
   - clash-for-windows
 
-    - cfw-settings.yml
+    - cfw-settings.yaml
     - README.md
 
   - git
