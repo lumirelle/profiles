@@ -192,7 +192,7 @@ profileParsersText: >
         #   type: select / url-test / fallback / load-balance     # 手动选择/延迟测试/回退/负载均衡
         #   url: http://www.apple.com/library/test/success.html   # 测试地址
         #   interval: 60                                          # 测试间隔（s）
-        #   tolerance: 150                                        # 容忍度（ms）
+        #   tolerance: 100                                        # 容忍度（ms）
         #   proxies:
         #       - 节点名称
         #       - 其他分组的套娃
@@ -210,27 +210,27 @@ profileParsersText: >
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 60
-            tolerance: 150
+            tolerance: 100
           - name: 🚢 想去祖国的小岛
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: ⚓ 想去华人步行街
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: ⛩️ 想去岛国还人情
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: 🔫 想去自由美利坚
             type: url-test
             url: http://www.apple.com/library/test/success.html
             interval: 180
-            tolerance: 150
+            tolerance: 100
           - name: 🤣 你选的嘛偶像
             type: select
           - name: 👻 鬼屋
