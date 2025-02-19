@@ -5,7 +5,6 @@ dotfolder
 dism
 eruda
 esbenp.prettier-vscode
-fsmerge
 geoip
 git.autofetch
 gsap

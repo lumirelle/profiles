@@ -11,3 +11,11 @@
   ff = no
 [pull]
 	ff = only
+[alias]
+  pl = pull
+  ps = push
+  sw = switch
+  mg = merge
+  rs = reset
+  rb = rebase
+  br = branch

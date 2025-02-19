@@ -1,10 +1,5 @@
 <h1 align="center">
-  <a href="" rel="noopener">
-  <img
-    width="200px"
-    src="docs/images/logo.png"
-    alt="Project logo"
-  ></a>
+  <a href="https://github.com/Lyana-nullptr/profiles" rel="noopener">
 </h1>
 
 <h3 align="center">Profiles</h3>
