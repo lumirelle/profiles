@@ -1,7 +1,9 @@
 airwallex
 axios
+bignumber
 colour
 commitlint
+datacenter
 datetimerange
 dotfolder
 dism
@@ -13,6 +15,7 @@ gsap
 ideavimrc
 lxgw
 lyana
+mathjs
 mobi.hsz.idea.gitignore
 mvvm
 nologo

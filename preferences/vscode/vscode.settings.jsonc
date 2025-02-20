@@ -38,7 +38,7 @@
   "license.year": "2025-now",
   "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "powershell.integratedConsole.showOnStartup": false,
-  "projectManager.git.baseFolders": ["D:\\.DevProjects"],
+  "projectManager.git.baseFolders": ["C:\\Projects"],
   "redhat.telemetry.enabled": false,
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#eeeeee"
@@ -69,7 +69,6 @@
       "iconColour": "#d0a300"
     }
   },
-  "i18n-ally.displayLanguage": "zh-CN",
   // == lint extensions ==
   "eslint.format.enable": true,
   "stylelint.validate": ["css", "scss", "postcss", "vue"],
@@ -96,6 +95,8 @@
   "editor.guides.bracketPairs": "active",
   "editor.mouseWheelZoom": true,
   "editor.rulers": [80, 120],
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
