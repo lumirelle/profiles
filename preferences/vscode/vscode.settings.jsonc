@@ -1,7 +1,15 @@
 {
+  // cSpell:disable
   // == helper extensions ==
+  "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
+  "chat.commandCenter.enabled": false,
   "css.enabledLanguages": ["html", "vue"],
-  "css.styleSheets": ["assets/css/**/*.scss", "assets/style/**/*.scss"],
+  "css.styleSheets": [
+    "assets/**/*.scss",
+    "src/**/*.scss",
+    "assets/**/*.css",
+    "src/**/*.css"
+  ],
   "cSpell.customDictionaries": {
     "dev": {
       "name": "dev",
@@ -14,9 +22,13 @@
     "@[\\w-]+\\/[\\w-]+" // npm package: @asdf-ghjk/asdf-ghjk
   ],
   "cSpell.ignorePaths": [
-    "package-lock.json",
+    "dist",
     "node_modules",
-    "vscode-extension",
+    "package-lock.json",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    "bun.lockb",
+    "bun.lock",
     ".*" // dotfile & dotfolder
   ],
   "git.autofetch": true,
@@ -26,7 +38,7 @@
   "license.year": "2025-now",
   "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "powershell.integratedConsole.showOnStartup": false,
-  "projectManager.git.baseFolders": ["C:\\Projects"],
+  "projectManager.git.baseFolders": ["D:\\.DevProjects"],
   "redhat.telemetry.enabled": false,
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#eeeeee"
@@ -77,14 +89,13 @@
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   // == others vscode ==
+  "explorer.autoOpenDroppedFile": false,
   "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.gotoLocation.multipleDefinitions": "goto",
   "editor.guides.bracketPairs": "active",
   "editor.mouseWheelZoom": true,
   "editor.rulers": [80, 120],
-  "editor.wordWrap": "bounded",
-  "editor.wordWrapColumn": 120,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
@@ -92,7 +103,13 @@
   },
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
+  "window.autoDetectColorScheme": true,
   "window.zoomLevel": 1.5,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.preferredDarkColorTheme": "Vitesse Dark",
+  "workbench.preferredLightColorTheme": "Vitesse Light",
+  "workbench.productIconTheme": "icons-carbon",
   "workbench.startupEditor": "none",
-  "workbench.iconTheme": "material-icon-theme"
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always"
 }
