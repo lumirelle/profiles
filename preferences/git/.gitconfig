@@ -12,6 +12,8 @@
 [pull]
   rebase = true
 [alias]
+  ad = add
+  cm = commit
   pl = pull
   ps = push
   sw = switch
@@ -19,3 +21,4 @@
   rs = reset
   rb = rebase
   br = branch
+  tg = tag
