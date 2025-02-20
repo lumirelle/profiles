@@ -1,5 +1,3 @@
-[init]
-  defaultBranch = main
 [core]
   ignorecase = false
 [user]
@@ -7,7 +5,17 @@
   email = shabbyacc@outlook.com
 [credential "https://gitee.com"]
   provider = generic
+[init]
+  defaultBranch = main
 [merge]
   ff = no
 [pull]
-	ff = only
+  rebase = true
+[alias]
+  pl = pull
+  ps = push
+  sw = switch
+  mg = merge
+  rs = reset
+  rb = rebase
+  br = branch

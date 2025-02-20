@@ -1,18 +1,20 @@
 {
+  // cSpell:disable
   // == helper extensions ==
+  "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
+  "chat.commandCenter.enabled": false,
   "css.enabledLanguages": ["html", "vue"],
-  "css.styleSheets": ["assets/css/**/*.scss", "assets/style/**/*.scss"],
+  "css.styleSheets": [
+    "assets/**/*.scss",
+    "src/**/*.scss",
+    "assets/**/*.css",
+    "src/**/*.css"
+  ],
   "cSpell.customDictionaries": {
     "dev": {
       "name": "dev",
       "path": "~/.cspell.dev.txt",
       "description": "Words used in development.",
-      "addWords": false
-    },
-    "company": {
-      "name": "company",
-      "path": "~/.cspell.working.txt",
-      "description": "Words used in working.",
       "addWords": false
     }
   },
@@ -20,16 +22,53 @@
     "@[\\w-]+\\/[\\w-]+" // npm package: @asdf-ghjk/asdf-ghjk
   ],
   "cSpell.ignorePaths": [
-    "package-lock.json",
+    "dist",
     "node_modules",
-    "vscode-extension",
+    "package-lock.json",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    "bun.lockb",
+    "bun.lock",
     ".*" // dotfile & dotfolder
   ],
+  "git.autofetch": true,
+  "git.blame.editorDecoration.enabled": true,
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
+  "license.year": "2025-now",
+  "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "powershell.integratedConsole.showOnStartup": false,
   "projectManager.git.baseFolders": ["D:\\.DevProjects"],
-  "svg.preview.mode": "svg",
+  "redhat.telemetry.enabled": false,
+  "todo-tree.highlights.defaultHighlight": {
+    "foreground": "#eeeeee"
+  },
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "background": "#0076c0",
+      "iconColour": "#0076c0"
+    },
+    "[ ]": {
+      "background": "#0076c0",
+      "iconColour": "#0076c0"
+    },
+    "[x]": {
+      "background": "#00c063",
+      "iconColour": "#00c063"
+    },
+    "FIXME": {
+      "background": "#cd0000",
+      "iconColour": "#cd0000"
+    },
+    "BUG": {
+      "background": "#cd0000",
+      "iconColour": "#cd0000"
+    },
+    "HACK": {
+      "background": "#d0a300",
+      "iconColour": "#d0a300"
+    }
+  },
   "i18n-ally.displayLanguage": "zh-CN",
   // == lint extensions ==
   "eslint.format.enable": true,
@@ -49,27 +88,28 @@
   },
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
-  // == vscode ==
+  // == others vscode ==
+  "explorer.autoOpenDroppedFile": false,
   "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.gotoLocation.multipleDefinitions": "goto",
   "editor.guides.bracketPairs": "active",
   "editor.mouseWheelZoom": true,
   "editor.rulers": [80, 120],
-  "editor.wordWrap": "bounded",
-  "editor.wordWrapColumn": 120,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
     "LICENSE": "plaintext"
   },
-  "git.autofetch": true,
-  "git.confirmSync": false,
-  "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "window.zoomLevel": 1.8,
-  "workbench.startupEditor": "none",
+  "window.autoDetectColorScheme": true,
+  "window.zoomLevel": 1.5,
   "workbench.iconTheme": "material-icon-theme",
-  "extensions.autoUpdate": false
+  "workbench.preferredDarkColorTheme": "Vitesse Dark",
+  "workbench.preferredLightColorTheme": "Vitesse Light",
+  "workbench.productIconTheme": "icons-carbon",
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 20,
+  "workbench.tree.renderIndentGuides": "always"
 }
