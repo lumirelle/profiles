@@ -12,10 +12,11 @@
 [pull]
   rebase = true
 [alias]
-  ad = add
-  cm = commit
+  a = add
+  c = commit
   pl = pull
   ps = push
+  st = stash
   sw = switch
   mg = merge
   rs = reset
