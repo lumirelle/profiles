@@ -105,7 +105,7 @@
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "window.autoDetectColorScheme": true,
-  "window.zoomLevel": 1.5,
+  "window.zoomLevel": 1.2,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.preferredDarkColorTheme": "Vitesse Dark",
   "workbench.preferredLightColorTheme": "Vitesse Light",
