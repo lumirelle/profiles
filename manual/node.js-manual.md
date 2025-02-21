@@ -1,3 +1,5 @@
+<!-- cSpell:ignore Schniz -->
+
 # Node.js Setup
 
 ## What is Node.js?
@@ -6,37 +8,43 @@
 
 ## How to Use?
 
-### 1. 环境配置（using Windows，Volta）
+### 1. 环境配置（using Windows，PowerShell，FNM）
 
-Volta 是一个 Node.js 和 Node.js 包管理器（npm、yarn、pnpm 等）的版本管理器。
+FNM 是一个跨平台的 Node.js 版本管理器。
+
+安装 fnm，[设置 Shell 环境](https://github.com/Schniz/fnm?tab=readme-ov-file#shell-setup)。
 
 ```shell
-winget install volta.volta -l "D:\\.DevTools\\node.js\\volta" # 选择你最喜欢的安装位置
+winget install Schniz.fnm
 
-volta install node@14 # 安装 node@14 并设为默认
-volta install npm@6 # 安装 npm@6 并设为默认
-volta install yarn@1 # 安装 yarn@1 并设为默认
-volta install pnpm@10 # 安装 pnpm@10 并设为默认
+# 跟随官方教程设置 Shell 环境
+# 以 PowerShell 为例
+echo 'fnm env --use-on-cd --corepack-enabled --shell powershell | Out-String | Invoke-Expression' >> $PROFILE
 
-cd npm-project
-volta pin node@14 # 为项目选择 node@14
-volta pin yarn@1 # 为项目选择 yarn@1
+# 设置镜像源（系统环境变量），重启终端
+# FNM_NODE_DIST_MIRROR = https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
 
-yarn install
+# 安装 node 22 并设为默认
+fnm install 22
+
+# 设置项目 node 版本，并重启你的终端
+cd a-node-project
+echo 'v22.14.0' > .node-version
+
+# 使用 corepack 安装 pnpm (pnpm 需要 node 18+)
+pnpm install
+
 # ...
 ```
 
 ### 2. 安装事项
 
-- volta 与 corepack 功能重复/可能存在冲突，二者取其一就好；
-- yarn 安装依赖时会严格检查 Node.js 版本是否满足依赖包中 `package.json` 的 `engines` 字段。
+- pnpm 需要 node 18+
 
-  可以使用如下指令来禁用版本检查（可能导致程序运行出现版本兼容性问题）：
+- yarn 安装依赖时会严格检查 Node.js 版本是否满足依赖包中 `package.json` 的 `engines` 字段，可以使用如下指令来禁用版本检查（可能导致程序运行出现版本兼容性问题）：
 
   ```shell
   yarn config set ignore-engines true
   ```
 
-- node-sass 对 Node.js 版本有[严格要求](https://www.npmjs.com/package/node-sass?activeTab=readme#node-version-support-policy)，会导致依赖安装失败/程序运行失败。
-
-  `node-sass@4` 最高仅支持到 `node@14`，因此强烈推荐将 node-sass 迁移至 sass。
+- node-sass 对 Node.js 版本有严格要求，会导致依赖安装失败/程序运行失败。node-sass ^4.14 最高仅支持到 node 14。强烈推荐将 node-sass 迁移至 sass，详见 <https://www.npmjs.com/package/node-sass?activeTab=readme#node-version-support-policy>。

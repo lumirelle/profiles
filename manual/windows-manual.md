@@ -1,3 +1,5 @@
+<!-- cSpell:disable -->
+
 # Windows Setup
 
 ## How to use?
@@ -22,39 +24,25 @@
 
 - 安装火绒并重启系统
 
-  <!-- markdownlint-disable -->
-
   | 软件名称 | 来源/安装                       |
   | -------- | ------------------------------- |
   | 火绒     | <https://www.huorong.cn/person> |
 
-  <!-- markdownlint-enable -->
-
 - 使用 Windows 11 轻松设置关闭防火墙、调整系统设置（Windows 10 可用）并重启
-
-  <!-- markdownlint-disable -->
 
   | 软件名称            | 来源/安装                                          |
   | ------------------- | -------------------------------------------------- |
   | Windows 11 轻松设置 | <https://www.bilibili.com/opus/904672369138729017> |
 
-  <!-- markdownlint-enable -->
-
 - 使用 HEU KMS Activator 激活 Windows
-
-  <!-- markdownlint-disable -->
 
   | 软件名称          | 来源/安装                                             |
   | ----------------- | ----------------------------------------------------- |
   | HEU KMS Activator | <https://github.com/zbezj/HEU_KMS_Activator/releases> |
 
-  <!-- markdownlint-enable -->
-
 - 登录 Microsoft 账号，同步系统数据，调整系统设置
 - 浏览器登录 Microsoft 账号同步数据，设置 Adguard、Dark Reader 等插件
 - 按顺序安装配置剩余的必备软件，必备软件必须系统级安装
-
-  <!-- markdownlint-disable -->
 
   | 软件名称                     | 来源/安装                                                                  |
   | ---------------------------- | -------------------------------------------------------------------------- |
@@ -76,18 +64,14 @@
   | Driver Store Explorer [RAPR] | <https://github.com/lostindark/DriverStoreExplorer/releases>               |
   | DISM++                       | <https://github.com/Chuyu-Team/Dism-Multi-language/releases>               |
 
-  <!-- markdownlint-enable -->
-
 - 卸载无用软件：One Drive、微软电脑管家等
 - （可选）安装配置其他软件，其他软件可以用户级安装
-
-  <!-- markdownlint-disable -->
 
   | 软件名称             | 来源/安装                                                          |
   | -------------------- | ------------------------------------------------------------------ |
   | WSL                  | `wsl --install`                                                    |
   | Oh My Posh           | `winget install JanDeDobbeleer.OhMyPosh`                           |
-  | Volta                | `winget install Volta.Volta`                                       |
+  | FNM                  | `winget install Schniz.fnm`                                        |
   | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |
   | Epic Games           | <https://store.epicgames.com/zh-CN/download>                       |
   | Google Earth Pro     | /                                                                  |
@@ -102,8 +86,6 @@
   | Steam                | <https://store.steampowered.com/about>                             |
   | Ventoy               | <https://github.com/ventoy/Ventoy/releases>                        |
   | 微信                 | <https://pc.weixin.qq.com/>                                        |
-
-  <!-- markdownlint-enable -->
 
 ### 3. 维护
 

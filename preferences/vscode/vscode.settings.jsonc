@@ -1,7 +1,6 @@
 {
   // cSpell:disable
   // == helper extensions ==
-  "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
   "chat.commandCenter.enabled": false,
   "css.enabledLanguages": ["html", "vue"],
   "css.styleSheets": [
@@ -32,11 +31,14 @@
     ".*" // dotfile & dotfolder
   ],
   "git.autofetch": true,
+  "git.confirmSync": false,
   "git.blame.editorDecoration.enabled": true,
+  "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
   "license.year": "2025-now",
   "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
+  "npm-intellisense.importLinebreak": "\r\n",
   "powershell.integratedConsole.showOnStartup": false,
   "projectManager.git.baseFolders": ["C:\\Projects"],
   "redhat.telemetry.enabled": false,
@@ -95,6 +97,7 @@
   "editor.guides.bracketPairs": "active",
   "editor.mouseWheelZoom": true,
   "editor.rulers": [80, 120],
+  "editor.tabSize": 2,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 120,
   "explorer.confirmDelete": false,
