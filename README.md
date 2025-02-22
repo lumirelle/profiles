@@ -1,3 +1,5 @@
+<!-- cSpell:ignore mobi ideavimrc -->
+
 <h1 align="center">
   <a href="https://github.com/Lyana-nullptr/profiles" rel="noopener">
 </h1>
