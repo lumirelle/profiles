@@ -53,16 +53,22 @@ git push origin main
 
 ### 3. 从远程拉取
 
-当远程有来自他人的更新，应立即从远程拉取，避免基于过时的代码开发。拉取操作实质上是拉取并合并远程代码，如果存在冲突，则会产生合并记录。
+当远程有来自他人的更新，应立即从远程拉取，避免基于过时的代码开发。拉取操作默认行为是拉取并合并远程代码，如果存在冲突，则会产生合并记录。这样的合并记录是冗余的，因此推荐使用 `--rebase` 参数改变为变基操作。
 
 ```shell
 # 假设已经添加名为 "origin" 的远程
 git pull origin main:main
 # 或简写为
 git pull origin main
-
 # 等价于
 git fetch origin main:main && git merge origin/main
+
+# 假设已经添加名为 "origin" 的远程
+git pull origin main:main --rebase
+# 或简写为
+git pull origin main --rebase
+# 等价于
+git fetch origin main:main && git rebase origin/main
 ```
 
 ### 4. 创建并切换到开发分支（dev）
@@ -135,7 +141,17 @@ git merge features --no-ff -m "merge: merge branch 'features' into 'dev'"
 git config --global merge.ff false
 ```
 
-### 10. 删除冗余临时分支
+### 10. 分支变基
+
+变基用于将基于提交 A 的分支 1 变为基于分支 2 最新提交。请只对尚未推送到远程的分支做变基操作！
+
+```shell
+# branch1 必须是尚未推送到远程的分支
+git switch branch1
+git rebase branch2
+```
+
+### 11. 删除冗余临时分支
 
 当功能分支的使命达成时，就要将其删除，避免分支过多而难以维护。其他临时分支，如预发布、紧急修复分支也是如此。
 
@@ -151,7 +167,7 @@ git branch -d features
 git branch -D features
 ```
 
-### 11. 储藏更改
+### 12. 储藏更改
 
 当你的更改与其他分支冲突时，例如你修改的文件在目标分支里根本不存在，此时在切换分支前，需要将更改储藏起来，完成另一个分支的工作回到原分支后再取出。
 
@@ -168,7 +184,7 @@ git switch feature/001
 git stash pop
 ```
 
-### 12. cherry pick
+### 13. cherry pick
 
 当开发分支并入了很多新提交，而你只想往功能分支中引入其中一个（比如其他功能分支对通用组件做了修改，又添加了自己的功能组件），你可以使用 cherry pick 挑出你想要的那条提交并入自己的分支。尽量将对通用组件的修改作为一个单独的提交。
 
@@ -176,7 +192,7 @@ git stash pop
 git cherry-pick e730e57c66ad91beeaf02886f75caf04d4b615d9 # commit hash
 ```
 
-### 13. 创建并切换到预发布分支（release）
+### 14. 创建并切换到预发布分支（release）
 
 当一个阶段的功能完成开发后，对应的功能分支均已合并到开发分支，即准备发布下一个版本时，应该基于开发分支，分出一个预发布分支，用于 QA 测试和问题修复。
 
@@ -187,7 +203,7 @@ git branch -c release-1.0.0 dev
 # 测试和修复问题...
 ```
 
-### 14. 发布新版本
+### 15. 发布新版本
 
 当测试和修复完成后，发布新版本，应该将预发布分支合并到主分支，随后给这个最新提交打上版本标签。预发布分支上的修改同样要合并如开发分支，否则会导致主分支和开发分支出现冲突。
 
@@ -202,7 +218,7 @@ git switch dev
 git merge release-1.0.0 --no-ff -m "merge: v1.0.0 release"
 ```
 
-### 15. 紧急修复（hotfix）
+### 16. 紧急修复（hotfix）
 
 当主分支上存在致命缺陷时，应当从主分支分出一个紧急修复分支。修复完成后，应当将紧急修复分支合并到主分支和开发分支上。
 
@@ -221,11 +237,11 @@ git switch dev
 git merge --no-ff -m "merge: merge hotfix"
 ```
 
-## Addition
+## 17. .gitconfig
 
-### 小贴士
+你可以使用 `.gitconfig` 来配置 Git 的默认选项，见 [Git Configuration](../preferences/git/.gitconfig)。
 
-1. 你可以用提交的 Hash 值、HEAD 和相对 HEAD 等方式指定一个提交；
+## 其他
 
 ### 常驻/临时分支
 
