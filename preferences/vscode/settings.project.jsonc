@@ -1,7 +1,27 @@
 {
   // cspell:disable
-  "eslint.validate": ["js", "vue"],
-  "stylelint.validate": ["css", "scss", "html", "vue"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml"
+  ],
+  "stylelint.validate": [
+    "css",
+    "less",
+    "sass",
+    "scss",
+    "postcss",
+    "html",
+    "vue"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit",

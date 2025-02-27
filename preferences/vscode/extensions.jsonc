@@ -8,10 +8,12 @@
     "ultram4rine.vscode-choosealicense",
     "streetsidesoftware.code-spell-checker",
     "naumovs.color-highlight",
+    "subframe7536.custom-ui-style",
     "anish.easy-npm",
     "editorconfig.editorconfig",
     "usernamehw.errorlens",
     "dbaeumer.vscode-eslint",
+    "degreat.fonted",
     "eamodio.gitlens",
     "antfu.goto-alias",
     "ms-vscode.hexeditor",
@@ -39,6 +41,7 @@
     "antfu.theme-vitesse",
     "vue.volar",
     "hollowtree.vue-snippets",
+    "antfu.where-am-i",
     "redhat.vscode-yaml"
   ]
 }
