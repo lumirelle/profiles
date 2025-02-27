@@ -87,8 +87,9 @@ Development profiles or something else.
 
   - vscode
 
-    - vscode.extensions.jsonc
-    - vscode.settings.jsonc
+    - extensions.jsonc
+    - settings.project.jsonc
+    - settings.user.jsonc
 
   - windows-terminal
 

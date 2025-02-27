@@ -2,4 +2,4 @@ $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = [Text.E
 
 fnm env --use-on-cd --corepack-enabled --shell powershell | Out-String | Invoke-Expression
 
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/space.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/the-unnamed.omp.json" | Invoke-Expression

@@ -3,12 +3,7 @@
   // == helper extensions ==
   "chat.commandCenter.enabled": false,
   "css.enabledLanguages": ["html", "vue"],
-  "css.styleSheets": [
-    "assets/**/*.scss",
-    "src/**/*.scss",
-    "assets/**/*.css",
-    "src/**/*.css"
-  ],
+  "css.styleSheets": ["**/*.scss", "**/*.css"],
   "cSpell.customDictionaries": {
     "dev": {
       "name": "dev",
@@ -21,8 +16,10 @@
     "@[\\w-]+\\/[\\w-]+" // npm package: @asdf-ghjk/asdf-ghjk
   ],
   "cSpell.ignorePaths": [
+    ".nuxt",
     "dist",
     "node_modules",
+    "package.json",
     "package-lock.json",
     "yarn.lock",
     "pnpm-lock.yaml",
@@ -32,7 +29,8 @@
   ],
   "git.autofetch": true,
   "git.confirmSync": false,
-  "git.blame.editorDecoration.enabled": true,
+  "gitlens.views.commits.files.layout": "tree",
+  "gitlens.plusFeatures.enabled": false,
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
@@ -72,8 +70,8 @@
     }
   },
   // == lint extensions ==
-  "eslint.format.enable": true,
-  "stylelint.validate": ["css", "scss", "postcss", "vue"],
+  "eslint.validate": ["js", "vue"],
+  "stylelint.validate": ["css", "scss", "html", "vue"],
   // == code format vscode ==
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
