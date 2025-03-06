@@ -1,32 +1,18 @@
 {
   // cspell:disable
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml",
-    "toml"
-  ],
-  "stylelint.validate": [
-    "css",
-    "less",
-    "sass",
-    "scss",
-    "postcss",
-    "html",
-    "vue"
-  ],
+  // == vscode: format ==
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": { "editor.defaultFormatter": "jock.svg" },
+  "[powershell]": { "editor.defaultFormatter": "ms-vscode.powershell" },
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.fixAll.stylelint": "explicit",
     "source.fixAll.markdownlint": "explicit"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  // == extensions: lint ==
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "html"],
+  "stylelint.validate": ["css", "less", "sass", "scss", "postcss", "html", "vue"]
 }
