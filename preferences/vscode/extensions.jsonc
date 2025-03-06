@@ -10,6 +10,7 @@
     // ↑↑ ui
 
     // ↓↓ language / file support
+    "remcohaszing.schemastore",
     "vue.volar",
     "uni-helper.uni-highlight-vscode",
     "uni-helper.uni-app-schemas-vscode",
