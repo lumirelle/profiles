@@ -54,8 +54,8 @@
     "antfu.goto-alias",
     "gruntfuggly.todo-tree",
     "lokalise.i18n-ally",
-    "github.copilot",
-    "github.copilot-chat",
+    "github.copilot", // vscode only
+    "github.copilot-chat", // vscode only
     // ↑↑ coding helper
 
     // ↓↓ project helper
