@@ -140,6 +140,9 @@
   "editor.gotoLocation.multipleDefinitions": "goto",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 0
+  },
   "files.associations": {
     "LICENSE": "plaintext"
   },
@@ -249,7 +252,6 @@
   "license.year": "2025-now",
 
   // == extensions: others ==
-  "chat.commandCenter.enabled": false,
   "css.enabledLanguages": ["html", "vue"],
   "css.styleSheets": ["**/*.scss", "**/*.css"],
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
