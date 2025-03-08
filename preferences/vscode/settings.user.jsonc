@@ -22,6 +22,7 @@
   "workbench.preferredDarkColorTheme": "Vitesse Dark",
   "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.productIconTheme": "icons-carbon",
+  "workbench.activityBar.orientation": "vertical",
   "workbench.tree.indent": 10,
   "workbench.tree.renderIndentGuides": "always",
 
