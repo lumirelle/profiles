@@ -1,12 +1,10 @@
-<!-- cSpell:ignore Schniz -->
-
-# Node.js Setup
+# Node.js Manual
 
 ## What is Node.js?
 
 独立于浏览器运行的 JS 运行时环境（类同 JVM）。
 
-## How to Use?
+## How to setup?
 
 ### 1. 环境配置（基于 Windows，PowerShell，FNM）
 

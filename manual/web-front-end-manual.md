@@ -1,6 +1,6 @@
-# Daily Report Of Front End
+# Front End Manual
 
-## Table of Contents
+## TOC
 
 | Content                                                 | Reported | Studied |
 | ------------------------------------------------------- | :------: | :-----: |

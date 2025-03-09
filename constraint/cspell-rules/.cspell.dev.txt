@@ -1,4 +1,7 @@
 airwallex
+augroup
+autocmd
+autocmds
 axios
 bignumber
 colour
@@ -14,15 +17,19 @@ gsap
 gtag
 hellojs
 iconfont
+ideavimrc
 lazyload
+lazyvim
 lxgw
 lyana
 mathjs
+miniconda
 mvvm
 nologo
 nullptr
 nuxt
 nuxtrc
+nvim
 oppo
 preprod
 pwsh
