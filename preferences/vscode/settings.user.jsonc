@@ -4,7 +4,7 @@
   "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.lineNumbers": "interval",
+  "editor.lineNumbers": "relative",
   "editor.rulers": [80, 120],
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 120,
@@ -159,6 +159,7 @@
     "**/bun.lockb": true,
     "**/bun.lock": true
   },
+  "search.showLineNumbers": true,
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "workbench.startupEditor": "none",
