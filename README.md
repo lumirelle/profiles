@@ -1,4 +1,4 @@
-<!-- cSpell:ignore mobi ideavimrc -->
+<!-- cSpell:ignore nvim autocmds mobi ideavimrc -->
 
 <h1 align="center">
   <a href="https://github.com/Lyana-nullptr/profiles" rel="noopener">
@@ -58,7 +58,7 @@ Development profiles or something else.
 
     - .gitconfig
 
-  - jetbrains
+  - jetbrains (outdated)
 
     - mobi.hsz.idea.gitignore
 
@@ -77,19 +77,25 @@ Development profiles or something else.
     - .yarnrc
     - volta.hooks.jsonc
 
+  - nvim/lua/config
+
+    - autocmds.lua
+    - options.lua
+
   - powershell
 
     - Microsoft.PowerShell_profile.ps1
 
   - vim
 
-    - .ideavimrc
+    - .ideavimrc (outdated)
 
   - vscode
 
     - extensions.jsonc
     - settings.project.jsonc
     - settings.user.jsonc
+    - trusted-domains.jsonc
 
   - windows-terminal
 
@@ -127,6 +133,6 @@ Development profiles or something else.
 
 Just download the profiles you want and put it on the right place.
 
-## ✍️ Authors <a name = "authors"></a>
+## ✍️ Authors <a name="authors"></a>
 
 - [@Lyana-nullptr](https://github.com/Lyana-nullptr) - Anything

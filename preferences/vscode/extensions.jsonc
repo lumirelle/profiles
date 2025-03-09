@@ -44,16 +44,18 @@
     // ↑↑ ext helper
 
     // ↓↓ coding helper
+    "asvetliakov.vscode-neovim",
     "antfu.smart-clicks",
     "oderwat.indent-rainbow",
     "ecmel.vscode-html-css",
-    "visualstudioexptteam.intellicode-api-usage-examples",
     "naumovs.color-highlight",
     "christian-kohler.path-intellisense",
     "christian-kohler.npm-intellisense",
     "antfu.goto-alias",
     "gruntfuggly.todo-tree",
     "lokalise.i18n-ally",
+    "github.copilot", // vscode only
+    "github.copilot-chat", // vscode only
     // ↑↑ coding helper
 
     // ↓↓ project helper
@@ -65,7 +67,7 @@
     // ↓↓ other helper
     "lanhuapp.lanhuapp",
     "ms-vscode.live-server",
-    "anish.easy-npm",
+    "taipaxu.npm-search",
     "herrmannplatz.npm-dependency-links",
     "ultram4rine.vscode-choosealicense",
     "thomascsd.vscode-readme-pattern"

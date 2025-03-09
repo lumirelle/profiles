@@ -4,7 +4,7 @@
   "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.lineNumbers": "interval",
+  "editor.lineNumbers": "relative",
   "editor.rulers": [80, 120],
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 120,
@@ -140,6 +140,9 @@
   "editor.gotoLocation.multipleDefinitions": "goto",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 0
+  },
   "files.associations": {
     "LICENSE": "plaintext"
   },
@@ -156,6 +159,7 @@
     "**/bun.lockb": true,
     "**/bun.lock": true
   },
+  "search.showLineNumbers": true,
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "workbench.startupEditor": "none",
@@ -249,7 +253,6 @@
   "license.year": "2025-now",
 
   // == extensions: others ==
-  "chat.commandCenter.enabled": false,
   "css.enabledLanguages": ["html", "vue"],
   "css.styleSheets": ["**/*.scss", "**/*.css"],
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
