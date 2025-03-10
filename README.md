@@ -1,5 +1,3 @@
-<!-- cSpell:ignore nvim autocmds mobi ideavimrc -->
-
 <h1 align="center">
   <a href="https://github.com/Lyana-nullptr/profiles" rel="noopener">
 </h1>
@@ -27,7 +25,7 @@
 - [Usage](#usage)
 - [Authors](#authors)
 
-## 🧐 About <a name = "about"></a>
+## 🧐 About <a name="about"></a>
 
 Development profiles or something else.
 
@@ -45,6 +43,8 @@ Development profiles or something else.
 
   - git-manual.md
   - node.js-manual.md
+  - prefabricated-dish-manual.md
+  - web-front-end-manual.md
   - windows-manual.md
 
 - preferences: Preferences profiles like `.gitconfig`
@@ -77,10 +77,15 @@ Development profiles or something else.
     - .yarnrc
     - volta.hooks.jsonc
 
-  - nvim/lua/config
+  - nvim
 
-    - autocmds.lua
-    - options.lua
+    - lua/config
+
+      - autocmds.lua
+      - keymaps.lua
+      - options.lua
+
+    - init.lua
 
   - powershell
 
@@ -124,10 +129,6 @@ Development profiles or something else.
       - tomcat/Dockerfile
 
     - docker-compose.yml
-
-- working: Profiles for working
-
-  - daily-report-of-front-study.md
 
 ## 🎈 Usage <a name="usage"></a>
 

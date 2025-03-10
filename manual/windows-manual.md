@@ -1,15 +1,13 @@
-<!-- cSpell:disable -->
+# Windows 手册 Windows Manual
 
-# Windows Setup
+## 如何配置？ How to setup?
 
-## How to use?
+### 1. 使用 Ventoy 制作 U 盘启动器，安装 Windows 系统
 
-### 1. 准备 Ventoy，安装 Windows 系统
+> 注意：Ventoy 默认跳过了 Windows 系统的设备检测和联网激活，如你不小心联网，可以通过拔掉网线再登录的方式实现本地账户登录。
 
-注意：对于 Windows 11 系统，Ventoy 将默认跳过设备检查和联网激活，如你不小心联网，可以通过把网线再登录的方式实现本地账户登录。
-
-- 插入 U 盘，下载安装 [Ventoy](https://www.ventoy.net/cn/download.html)，安装过程遵循[官方说明](https://www.ventoy.net/cn/doc_start.html)
-- 下载安装 BT 工具[qBittorrent 增强版](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
+- 插入 U 盘，下载并安装 [Ventoy](https://www.ventoy.net/cn/download.html)，安装过程遵循[官方说明](https://www.ventoy.net/cn/doc_start.html)
+- 下载并安装 BT 工具[qBittorrent 增强版](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
 - 设置 Tracker <https://fastly.jsdelivr.net/gh/XIU2/TrackersListCollection/all.txt>
 - 使用 BT 工具下载 Windows ISO（推荐专业版），并放入 U 盘（如你正在使用 Clash，请切换到直连模式）
 
@@ -17,11 +15,12 @@
   - [Windows 10 ISO](https://next.itellyou.cn/Original/#cbp=Product?ID=f905b2d9-11e7-4ee3-8b52-407a8befe8d1)
   - [其他](https://next.itellyou.cn/Original/#)
 
-- （可选）在 U 盘中常备必要软件及其配置
-- U 盘启动，选择 Ventoy 中的 Windows ISO 文件，启动执行引导程序，选择企业版，完成系统安装
+- （可选）在 U 盘中准备必要软件及其配置
+- U 盘启动，选择 Ventoy 中的 Windows ISO 文件，启动执行引导程序，选择专业版，完成系统安装
 
 ### 2. 安装必要软件，卸载无用软件
 
+- 关闭 Windows Defender 的防病毒功能
 - 安装火绒并重启系统
 
   | 软件名称 | 来源/安装                       |
@@ -42,7 +41,7 @@
 
 - 登录 Microsoft 账号，同步系统数据，调整系统设置
 - 浏览器登录 Microsoft 账号同步数据，设置 Adguard、Dark Reader 等插件
-- 按顺序安装配置剩余的必备软件，必备软件必须系统级安装
+- 按顺序系统级安装并配置如下基建软件：
 
   | 软件名称                     | 来源/安装                                                                  |
   | ---------------------------- | -------------------------------------------------------------------------- |
@@ -52,40 +51,60 @@
   | Clash for Windows            | <https://github.com/clashdownload/Clash_for_Windows/releases>              |
   | IDM                          | <https://www.internetdownloadmanager.com/download.html>                    |
   | 7-zip                        | <https://www.7-zip.org/download.html>                                      |
-  | Auto Dark Mode               | <https://apps.microsoft.com/detail/xp8jk4hzbvf435>                         |
   | Git                          | <https://git-scm.com/download/win>                                         |
-  | PixPin                       | <https://pixpin.cn/>                                                       |
-  | PotPlayer                    | <https://apps.microsoft.com/detail/xp8bsbgqw2dks0>                         |
-  | NVIDIA App                   | <https://www.nvidia.cn/software/nvidia-app/>                               |
-  | Office Tools Plus            | <https://otp.landian.vip/zh-cn/download.html>                              |
   | Visual C++ Redistributable   | <https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist> |
   | Revo Uninstaller             | <https://www.revouninstaller.com/zh/revo-uninstaller-free-download/>       |
   | Context Menu Manager         | <https://github.com/BluePointLilac/ContextMenuManager/releases>            |
   | Driver Store Explorer [RAPR] | <https://github.com/lostindark/DriverStoreExplorer/releases>               |
   | DISM++                       | <https://github.com/Chuyu-Team/Dism-Multi-language/releases>               |
 
+- 按顺序系统级安装如下工具软件：
+
+  | 软件名称          | 来源/安装                                              |
+  | ----------------- | ------------------------------------------------------ |
+  | 微信              | <https://pc.weixin.qq.com/>                            |
+  | QQ                | <https://im.qq.com/pcqq/index.shtml>                   |
+  | Office Tools Plus | <https://otp.landian.vip/zh-cn/download.html>          |
+  | LX Music Desktop  | <https://github.com/lyswhut/lx-music-desktop/releases> |
+  | NVIDIA App        | <https://www.nvidia.cn/software/nvidia-app/>           |
+  | Steam             | <https://store.steampowered.com/about>                 |
+  | Epic Games        | <https://store.epicgames.com/zh-CN/download>           |
+  | Auto Dark Mode    | <https://apps.microsoft.com/detail/xp8jk4hzbvf435>     |
+  | PixPin            | <https://pixpin.cn/>                                   |
+  | Cursor            | <https://www.cursor.com/cn/downloads>                  |
+  | Neovim            | `winget install Neovim.Neovim`                         |
+  | PotPlayer         | <https://apps.microsoft.com/detail/xp8bsbgqw2dks0>     |
+  | OBS Studio        | <https://obsproject.com/download>                      |
+
+- 按顺序系统级安装如下开发环境：
+
+  | 软件名称           | 来源/安装                                                              |
+  | ------------------ | ---------------------------------------------------------------------- |
+  | PowerShell 7       | <https://github.com/PowerShell/PowerShell/releases/latest>             |
+  | Oh My Posh         | `winget install JanDeDobbeleer.OhMyPosh`                               |
+  | LazyVim            | <https://www.lazyvim.org/installation>                                 |
+  | Mingw-w64          | <https://github.com/niXman/mingw-builds-binaries/releases/latest>      |
+  | FNM & Node.js      | `winget install Schniz.fnm`                                            |
+  | JDK                | <https://www.oracle.com/cn/java/technologies/downloads/#graalvmjava21> |
+  | Miniconda          | <https://www.anaconda.com/download/success#miniconda>                  |
+  | Visual Studio      | <https://visualstudio.microsoft.com/zh-hans/downloads/>                |
+  | Visual Studio Code | 先前已安装                                                             |
+  | JetBrains Toolbox  | <https://www.jetbrains.com/zh-cn/lp/toolbox/>                          |
+  | JetBrains IDEA     | 使用 JetBrains Toolbox 安装                                            |
+  | JetBrains PyCharm  | 使用 JetBrains Toolbox 安装                                            |
+  | WSL                | `wsl --install`                                                        |
+
 - 卸载无用软件：One Drive、微软电脑管家等
 - （可选）安装配置其他软件，其他软件可以用户级安装
 
   | 软件名称             | 来源/安装                                                          |
   | -------------------- | ------------------------------------------------------------------ |
-  | WSL                  | `wsl --install`                                                    |
-  | Oh My Posh           | `winget install JanDeDobbeleer.OhMyPosh`                           |
-  | FNM                  | `winget install Schniz.fnm`                                        |
-  | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |
-  | Epic Games           | <https://store.epicgames.com/zh-CN/download>                       |
-  | Google Earth Pro     | /                                                                  |
-  | JDK                  | <https://www.oracle.com/cn/java/technologies/downloads/>           |
-  | JetBrains ToolBox    | <https://www.jetbrains.com/zh-cn/toolbox-app/>                     |
-  | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |
-  | LX Music Desktop     | <https://github.com/lyswhut/lx-music-desktop/releases>             |
-  | No!! MeiryoUI        | <https://github.com/Tatsu-syo/noMeiryoUI/releases>                 |
-  | OBS Studio           | <https://obsproject.com/download>                                  |
-  | qBittorrent Enhanced | <https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases> |
-  | QQ                   | <https://im.qq.com/pcqq/index.shtml>                               |
-  | Steam                | <https://store.steampowered.com/about>                             |
   | Ventoy               | <https://github.com/ventoy/Ventoy/releases>                        |
-  | 微信                 | <https://pc.weixin.qq.com/>                                        |
+  | qBittorrent Enhanced | <https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases> |
+  | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |
+  | Google Earth Pro     | /                                                                  |
+  | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |
+  | No!! MeiryoUI        | <https://github.com/Tatsu-syo/noMeiryoUI/releases>                 |
 
 ### 3. 维护
 

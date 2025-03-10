@@ -4,7 +4,7 @@
   "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.lineNumbers": "relative",
+  "editor.lineNumbers": "interval",
   "editor.rulers": [80, 120],
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 120,
@@ -140,9 +140,6 @@
   "editor.gotoLocation.multipleDefinitions": "goto",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 0
-  },
   "files.associations": {
     "LICENSE": "plaintext"
   },
@@ -247,7 +244,7 @@
       "stash": true
     }
   },
-  "projectManager.git.baseFolders": ["C:\\Projects"],
+  "projectManager.git.baseFolders": ["C:\\Projects"], // cutomize needed
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
   "license.year": "2025-now",

@@ -1,52 +1,50 @@
-# Daily Report Of Front End
+# Front End Manual
 
-## Table of Contents
+## TOC
 
-| Content                                                 | Reported | Studied |
-| ------------------------------------------------------- | :------: | :-----: |
-| [**规范化开发**](#normalize)                            |    O     |    O    |
-| [**前端技术发展过程**](#tech-development)               |    -     |    O    |
-| [**CSS 框架**](#css-framework)                          |    O     |    O    |
-| [**用户界面构建框架 & 应用框架 & 组件库**](#frameworks) |    -     |    O    |
-| **Vue.js（用户界面构建框架）**                          |    O     |    O    |
-| > Vue 响应式系统                                        |    O     |    O    |
-| > Vue 生命周期                                          |    O     |    O    |
-| > Vue 渲染机制和渲染函数                                |    O     |    O    |
-| > Vue 内置组件                                          |    O     |    O    |
-| > Vue 性能优化                                          |    O     |    O    |
-| > Vue Router                                            |    O     |    O    |
-| > Vuex、Pinia                                           |    O     |    O    |
-| > CSR、SSR、SSG 渲染模式                                |    O     |    O    |
-| > Nuxt.js（适用于 Vue.js 的应用框架）                   |    O     |    O    |
-| > Element UI/Plus（适用于 Vue.js 的组件库）             |    O     |    O    |
-| > Vant（适用于 Vue.js 的移动端组件库）                  |    O     |    O    |
-| [**前端项目工程化**](#engineering)                      |    -     |    -    |
-| > TS                                                    |    -     |    -    |
-| > [模块化](#module)                                     |    -     |    O    |
-| > [构建工具](#build)                                    |    -     |    O    |
-| -- Webpack                                              |    -     |    -    |
-| -- Vite                                                 |    -     |    -    |
-| > [CSS 预处理](#pre-css)                                |    O     |    O    |
-| > [CSS 后处理](#post-css)                               |    -     |    -    |
-| > [Babel](#babel)                                       |    -     |    -    |
-| > [设备屏幕兼容](#screen-comp)                          |    O     |    O    |
-| -- [设备像素 & 逻辑像素](#dpx-lpx)                      |    O     |    O    |
-| -- [rem & postcss-pxtorem](#rem)                        |    O     |    O    |
-| > 测试工具                                              |    -     |    -    |
-| **工具库**                                              |    -     |    -    |
-| > cross-env                                             |    -     |    -    |
-| > Axios                                                 |    -     |    -    |
-| > Day.js                                                |    -     |    -    |
-| > Lodash                                                |    -     |    -    |
-| > SheetJS                                               |    -     |    -    |
-| > Math.js                                               |    -     |    -    |
-| > bignumber.js                                          |    -     |    -    |
-| > clipboard.js                                          |    -     |    -    |
-| > JS Cookie                                             |    -     |    -    |
-| > NProgress                                             |    -     |    -    |
-| > ECharts                                               |    -     |    -    |
-| **杂项**                                                |    -     |    -    |
-| > JSON Schema                                           |    O     |    O    |
+- [规范化开发](#normalize)
+- [前端技术发展过程](#tech-development)
+- [CSS 框架](#css-framework)
+- [用户界面构建框架 & 应用框架 & 组件库](#frameworks)
+- Vue.js（用户界面构建框架）
+  - Vue 响应式系统
+  - Vue 生命周期
+  - Vue 渲染机制和渲染函数
+  - Vue 内置组件
+  - Vue 性能优化
+  - Vue Router
+  - Vuex、Pinia
+  - CSR、SSR、SSG 渲染模式
+  - Nuxt.js（适用于 Vue.js 的应用框架）
+  - Element UI/Plus（适用于 Vue.js 的组件库）
+  - Vant（适用于 Vue.js 的移动端组件库）
+- [前端项目工程化](#engineering)
+  - TS
+  - [模块化](#module)
+  - [构建工具](#build)
+    - Webpack
+    - Vite
+  - [CSS 预处理](#pre-css)
+  - [CSS 后处理](#post-css)
+  - [Babel](#babel)
+  - [设备屏幕兼容](#screen-comp)
+    - [设备像素 & 逻辑像素](#dpx-lpx)
+    - [rem & postcss-pxtorem](#rem)
+  - 测试工具
+- 工具库
+  - cross-env
+  - Axios
+  - Day.js
+  - Lodash
+  - SheetJS
+  - Math.js
+  - bignumber.js
+  - clipboard.js
+  - JS Cookie
+  - NProgress
+  - ECharts
+- 杂项
+  - JSON Schema
 
 ## 规范开发 <a name="normalize"></a>
 
