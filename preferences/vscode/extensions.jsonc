@@ -44,7 +44,6 @@
     // ↑↑ ext helper
 
     // ↓↓ coding helper
-    "asvetliakov.vscode-neovim",
     "antfu.smart-clicks",
     "oderwat.indent-rainbow",
     "ecmel.vscode-html-css",

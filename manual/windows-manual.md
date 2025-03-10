@@ -1,6 +1,6 @@
-# Windows Manual
+# Windows 手册 Windows Manual
 
-## How to setup?
+## 如何配置？ How to setup?
 
 ### 1. 使用 Ventoy 制作 U 盘启动器，安装 Windows 系统
 
@@ -21,7 +21,6 @@
 ### 2. 安装必要软件，卸载无用软件
 
 - 关闭 Windows Defender 的防病毒功能
-
 - 安装火绒并重启系统
 
   | 软件名称 | 来源/安装                       |

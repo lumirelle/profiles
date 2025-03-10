@@ -1,4 +1,4 @@
-# Better Usage
+# 最佳使用 Best Usage
 
 > R.I.P. Clash.
 

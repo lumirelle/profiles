@@ -43,6 +43,7 @@ Development profiles or something else.
 
   - git-manual.md
   - node.js-manual.md
+  - prefabricated-dish-manual.md
   - web-front-end-manual.md
   - windows-manual.md
 

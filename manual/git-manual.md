@@ -1,40 +1,39 @@
-# Git Manual
+# Git 手册 Git Manual
 
-## What is Git?
+## 什么是 Git？ What is Git?
 
 分布式版本控制系统。
 
-### 概念解释
+### 核心概念解释
 
-提交：Git 只追踪和存储文件的更改，几个文件的更改可以组成一次提交，产生一次提交记录。
+提交：一次提交由一或多个文件的更改组成。Git 只追踪和记录提交。
 
-工作区：你编辑文件/产生更改的地方。
+工作区：你当下编辑文件的地方。
 
-暂存区/索引：用来暂存工作区中产生的更改，等待你来提交。暂存区可以避免提交的碎片化。
+暂存区/索引：用来收集和暂存工作区中产生的更改，等待你把他们组织成一个新的提交。（暂存区可以避免提交太笼统或太碎片）
 
-版本库/存储库：记录着每一次提交，即每一次更改的地方。
+版本库/存储库：存储提交记录的地方。新的提交总是基于上一次的提交，因此版本库中的提交记录常常是树状的。树的每一枝就叫做分支。
 
-HEAD：指向当前分支的最新提交，你可以认为是一个软件版本的 latest 标签。
+HEAD：指向当前分支的最新提交。
 
-分支：基于一个提交，做了不同的更改，产生了不同的提交，于是产生了分支。最原始的一条分支称为主分支。
-
-## How to use?
+## 怎么使用？ How to use?
 
 ### 1. 创建版本库并完成初始化提交（init commit）
 
-在初始化提交时，应当完成规范文件、依赖文件的设置。提交后，Git 会自动为你创建一个主分支（通常叫做 main/master，取决于你的 `.gitconfig`
-配置）。
+在初始化提交时，应当完成规范文件、依赖文件等项目基建设置。提交后，Git 会自动为你创建一个主分支，通常叫做 main 或 master（欧，主人！），取决于你的 `.gitconfig` 配置。
 
 ```shell
 # 创建版本库时，Git 将为你自动创建一个没有提交记录的主分支
 git init
 
+# 完成项目基建设置
 code .editorconfig
-code .prettierrc.json
+code .prettierrc.yml
+...
 
 # 初始化提交
 git add .
-git commit -m "init: init project with constraint files"
+git commit -m "init: init project"
 ```
 
 ### 2. 添加远程并推送
@@ -42,33 +41,37 @@ git commit -m "init: init project with constraint files"
 作为分布式版本管理系统，你可以将版本库推送到远程。只有将版本库推送到远程后，才能实现多人协作开发。
 
 ```shell
-# 添加名为 "origin" 的远程
+# 添加名为 origin 的远程
 git remote add origin https://github.com/user/repo.git
 
-# 将本地版本库的 main 分支推送到 "origin" 远程的 main 分支
+# 将本地版本库的 main 分支推送到远程 origin 的 main 分支
 git push origin main:main
-# 或简写为
+# 通常本地和远程分支是同名的，可简写为
 git push origin main
+# 通常只有一个远程且为默认名 origin，可简写为
+git push main
+# 如果你推送的是当前分支，可进一步简写为
+git push
 ```
 
 ### 3. 从远程拉取
 
-当远程有来自他人的更新，应立即从远程拉取，避免基于过时的代码开发。拉取操作默认行为是拉取并合并远程代码，如果存在冲突，则会产生合并记录。这样的合并记录是冗余的，因此推荐使用 `--rebase` 参数改变为变基操作。
+当远程有来自他人的更新，应及时从远程拉取，避免基于过时的代码开发。拉取操作默认行为是拉取并合并，如果存在冲突，则会产生合并记录。这样的合并记录是冗余的，因此推荐使用 `--rebase` 参数改为变基操作。
 
 ```shell
 # 假设已经添加名为 "origin" 的远程
 git pull origin main:main
-# 或简写为
-git pull origin main
 # 等价于
 git fetch origin main:main && git merge origin/main
+# 或最终简写为
+git pull
 
-# 假设已经添加名为 "origin" 的远程
+# 使用 --rebase 参数
 git pull origin main:main --rebase
-# 或简写为
-git pull origin main --rebase
 # 等价于
 git fetch origin main:main && git rebase origin/main
+# 或最终简写为
+git pull -- rebase
 ```
 
 ### 4. 创建并切换到开发分支（dev）
@@ -137,6 +140,7 @@ git switch dev
 
 # 不要使用 fast-forward 模式，会丢失分支记录
 git merge features --no-ff -m "merge: merge branch 'features' into 'dev'"
+
 # 你也可以将 .gitconfig 中的 merge.ff 配置项设置为 false
 git config --global merge.ff false
 ```
@@ -237,19 +241,19 @@ git switch dev
 git merge --no-ff -m "merge: merge hotfix"
 ```
 
-## 17. .gitconfig
+### 17. .gitconfig
 
 你可以使用 `.gitconfig` 来配置 Git 的默认选项，见 [Git Configuration](../preferences/git/.gitconfig)。
 
-## 其他
+### 18. 总结
 
-### 常驻/临时分支
+分支时效性：
 
 常驻分支：main、dev
 
 临时分支：feature、release、hotfix
 
-### 工作流程
+Git 工作流程：
 
 1. 开发工作流程：
 
