@@ -18,6 +18,8 @@ gtag
 hellojs
 iconfont
 ideavimrc
+keymap
+keymaps
 lazyload
 lazyvim
 lxgw

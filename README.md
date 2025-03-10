@@ -76,10 +76,15 @@ Development profiles or something else.
     - .yarnrc
     - volta.hooks.jsonc
 
-  - nvim/lua/config
+  - nvim
 
-    - autocmds.lua
-    - options.lua
+    - lua/config
+
+      - autocmds.lua
+      - keymaps.lua
+      - options.lua
+
+    - init.lua
 
   - powershell
 
