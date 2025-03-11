@@ -244,7 +244,7 @@
       "stash": true
     }
   },
-  "projectManager.git.baseFolders": ["C:\\Projects"], // cutomize needed
+  "projectManager.git.baseFolders": ["C:\\Projects"], // customize needed
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
   "license.year": "2025-now",
