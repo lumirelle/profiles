@@ -95,6 +95,10 @@ Development profiles or something else.
 
     - .ideavimrc (outdated)
 
+  - vs
+
+    - backup.vssettings
+
   - vscode
 
     - extensions.jsonc
