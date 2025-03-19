@@ -20,7 +20,7 @@ Require node@^16, npm@^8, nuxt@^2.18.2.
     "source.fixAll.markdownlint": "explicit"
   },
   // == extensions: lint ==
-  "eslint.validate": ["js", "ts", "vue"],
+  "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
   "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"]
 }
 ```
@@ -63,30 +63,28 @@ shell (`npm pkg` require npm@>=7)
 na pkg set scripts.preinstall='node ./scripts/preinstall.js'
 ```
 
-## 3. 设置 js 检查、格式化与解析
+## 3. 设置代码检查与格式化
 
 shell
 
 ```shell
+# prettier
+ni -D prettier@^3.5.2
+
 # eslint
 ni -D eslint@^8.57.1
-# eslint module for nuxt2, server side support
+# eslint module for nuxt2，提供服务端 eslint 支持，nuxt < v2.9 时，需要将其安装为依赖
 ni -D @nuxtjs/eslint-module@nuxt2
 # eslint plugins
 ni -D eslint-plugin-vue@^9.32.0 eslint-plugin-nuxt@^4.0.0
-
-# prettier
-ni -D prettier@^3.5.2
-# eslint plugin & config prettier
-# 将 prettier 的输出显示到 eslint 上 & 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
+# eslint plugin & config for prettier
+# 将 prettier 的规则插入到 eslint & 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
 ni -D eslint-plugin-prettier@^5.2.3
 ni -D eslint-config-prettier@^10.0.1
 
-# Babel 解析器，为 eslint 提供非 es5 语法的解析支持（可选），受 babel.config.js 配置影响
+# Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响
 nun babel-eslint
 ni -D @babel/eslint-parser@^7.26.8
-# 如遇找不到预设，请安装
-ni -D @nuxt/babel-preset-app@^2.18.1
 ```
 
 .eslintrc.js
@@ -126,6 +124,10 @@ module.exports = {
     eqeqeq: 'warn',
     camelcase: 'warn',
   },
+  // 全局变量，避免 eslint 报变量未定义的错
+  globals: {
+    // ...
+  },
 }
 ```
 
@@ -135,6 +137,7 @@ module.exports = {
 semi: false
 singleQuote: true
 endOfLine: auto
+printWidth: 120
 ```
 
 nuxt.config.js
@@ -144,44 +147,63 @@ export default {
   // ...
   buildModules: [
     // ...
+    // nuxt < v2.9 时，需要将其放置在 modules
     '@nuxtjs/eslint-module',
   ],
 }
 ```
 
-## 4. 设置 js 转换和 polyfill
+## 4. 设置 babel 解析器
 
 ```shell
-# nuxt2 内置 babel 支持，在项目构建期间启用，转换 js 代码
-# polyfill 可以由 babel presets 控制按需引入，无需自己导入
-npm un babel-polyfill
-# babel plugins，将 mjs 动态 import 转为 cjs 的 require、自动移除代码中的 console
-npm i -D  babel-plugin-dynamic-import-node@^2.3.3 babel-plugin-transform-remove-console@^6.9.4
-# @babel/plugin-proposal-private-property-in-object 已弃用，如需要或兼容，请安装旧版
-npm i -D @babel/plugin-proposal-private-property-in-object@^7.21.11
-# 或使用
-npm i -D @babel/plugin-transform-private-property-in-object@^7.25.9
+# NOTE: nuxt@^2.18.1 依赖 @nuxt/babel-preset-app@^2.18.1，默认集成了 babel@7 和 core-js@3
+
+# babel plugins，自动移除代码中的 console 和自动导入 UI 样式
+ni -D babel-plugin-transform-remove-console@^6.9.4 babel-plugin-component@^1.1.1
+# @nuxt/babel-preset-app@^2.18.1 依赖的 @babel/plugin-proposal-private-property-in-object 已弃用，为兼容，需指定安装旧版本
+ni -D @babel/plugin-proposal-private-property-in-object@^7.21.11
+
+# babel@7 后不再维护 babel-polyfill，需要转为使用 core-js/stable
+nun babel-polyfill
+```
+
+nuxt.config.js
+
+```js
+export default {
+  // ...
+  build: {
+    // ...
+    // nuxt@^2.18.1 拥有默认的 babel 选项和配置，要使用外部 babel 配置文件，需要更改默认选项
+    babel: {
+      babelrc: true,
+      configFile: './babel.config.js',
+    },
+  },
+}
 ```
 
 babel.config.js
 
 ```js
-const plugins = []
+// 此配置会在 nuxt 构建和 eslint 解析时共同使用
+module.exports = function (api) {
+  api.cache(true)
 
-if (['preprod', 'production'].includes(process.env.NODE_ENV)) {
-  // 预发布和正式环境删除console打印
-  plugins.push('transform-remove-console')
-}
+  // nuxt babel 预设，使用 core-js@3（必要！！！）
+  const presets = [['@nuxt/babel-preset-app', { corejs: { version: 3 } }]]
+  // element ui 自动导入样式
+  const plugins = [['component', { libraryName: 'element-ui', styleLibraryName: 'theme-chalk' }]]
 
-module.exports = {
-  // 添加预设
-  presets: ['@nuxt/babel-preset-app'],
-  env: {
-    development: {
-      plugins: ['dynamic-import-node'],
-    },
-  },
-  plugins: [...plugins],
+  if (['preprod', 'production'].includes(process.env.NODE_ENV)) {
+    // 预发布和正式环境删除console打印
+    plugins.push('transform-remove-console')
+  }
+
+  return {
+    presets,
+    plugins,
+  }
 }
 ```
 
@@ -191,10 +213,12 @@ shell
 
 ```shell
 # 限制 node 版本的罪魁祸首！
-npm un node-sass
-npm i -D sass@^1.85.0 sass-loader@version-10
-# 用来将指定的 sass 文件作为全局变量，注入到其他所有 sass 文件
-npm i -D @nuxtjs/style-resources@1
+nun node-sass
+
+# sass 和 sass-loader
+ni -D sass@^1.85.1 sass-loader@version-10
+# nuxt 模块，用于为其他的样式文件复用指定的样式文件
+ni -D @nuxtjs/style-resources@1
 ```
 
 nuxt.config.js
@@ -205,7 +229,7 @@ export default {
     // ...
     '@nuxtjs/style-resources',
   ],
-  // 实现 scss 文件复用（无需手动导入）
+  // 设置需要复用的样式文件
   styleResources: {
     scss: ['assets/styles/variables.scss', 'assets/styles/mixin.scss'],
   },
@@ -216,7 +240,7 @@ export default {
       scss: {
         sassOptions: {
           // scss 支持本身不需要任何配置
-          // 这是当代码中使用弃用 API 时，禁用警告（因为实在是太多咧）
+          // 这是当代码中使用到大量的弃用 API 时，需要禁用警告（因为实在是太多咧）
           silenceDeprecations: [
             'legacy-js-api',
             'mixed-decls',
@@ -232,53 +256,42 @@ export default {
 }
 ```
 
-## 6. 设置 style 检查、格式化与解析
+## 6. 设置样式检查、格式化
 
 shell
 
 ```shell
-# stylelint & stylelint module
-npm i -D stylelint@^15.11.0
-npm i -D @nuxtjs/stylelint-module@nuxt2
+# stylelint
+ni -D stylelint@^15.11.0
+# stylelint module for nux，类同 eslint-module
+ni -D @nuxtjs/stylelint-module@nuxt2
 # stylelint plugins，scss 支持和 排序支持
-npm i -D stylelint-scss@5 stylelint-order@6
+ni -D stylelint-scss@5 stylelint-order@6
 # stylelint configs，标准、scss、clean order
-npm i -D stylelint-config-standard@^34.0.0 stylelint-config-standard-scss@^11.1.0 stylelint-config-clean-order@^7.0.0
+ni -D stylelint-config-standard@^34.0.0 stylelint-config-standard-scss@^11.1.0 stylelint-config-clean-order@^7.0.0
+# stylelint plugin for prettier，类同 eslint-plugin-prettier
+# stylelint 15 起，不再与 prettier 存在规则冲突，因此不需要 stylelint-config-prettier
+ni -D stylelint-prettier@^4.1.0
 
-# prettier
-# stylelint plugin prettier，功能同 eslint plugin prettier
-# stylelint 15 起，不在与 prettier 存在规则冲突，因此不需要 stylelint config prettier
-npm i -D stylelint-prettier@^4.1.0
-
-# postcss 以及解析器
-npm un @nuxt/postcss8
-npm i -D postcss@^8.5.3
-npm i -D postcss-scss@^4.0.9 postcss-html@^1.8.0
+# stylelint 需要 postcss 解析器提供语法解析支持（地位类同 babel）
+nun @nuxt/postcss8
+ni -D postcss@^8.5.3
+ni -D postcss-scss@^4.0.9 postcss-html@^1.8.0
 ```
 
 stylelint.config.js
 
 ```js
 module.exports = {
+  // extends = plugins + rules
   extends: [
     'stylelint-config-standard',
     'stylelint-config-standard-scss',
     'stylelint-config-clean-order',
+    // 必须将 prettier 放在最后
     'stylelint-prettier/recommended',
   ],
   plugins: [],
-  overrides: [
-    // 使用 postcss-html 的 html 语法解析器匹配文件中的 style
-    {
-      files: ['**/*.{html,vue}'],
-      customSyntax: 'postcss-html',
-    },
-    // 使用 postcss-scss 的 scss 语法解析器匹配文件中的 style
-    {
-      files: ['**/*.{css,sass,scss}'],
-      customSyntax: 'postcss-scss',
-    },
-  ],
   rules: {
     // stylelint-config-recommended
     'block-no-empty': [true, { severity: 'warning' }],
@@ -328,7 +341,7 @@ module.exports = {
       },
     ],
     'scss/dollar-variable-pattern': [
-      '^(-?[a-z][a-z0-9]*)(-[a-z0-9]+)*$',
+      '^(-{1,2}?[a-z][a-z0-9]*)(-[a-z0-9]+)*$',
       {
         message: 'Expected variable to be kebab-case',
         severity: 'warning',
@@ -344,6 +357,18 @@ module.exports = {
     ],
     'scss/double-slash-comment-whitespace-inside': ['always', { severity: 'warning' }],
   },
+  overrides: [
+    // 使用 postcss-html 的 html 语法解析器匹配文件中的 style
+    {
+      files: ['**/*.{html,vue}'],
+      customSyntax: 'postcss-html',
+    },
+    // 使用 postcss-scss 的 scss 语法解析器匹配文件中的 style
+    {
+      files: ['**/*.{css,sass,scss}'],
+      customSyntax: 'postcss-scss',
+    },
+  ],
 }
 ```
 
@@ -359,7 +384,7 @@ export default {
 }
 ```
 
-## 7. 设置 style 转换（postcss）
+## 7. 设置 postcss 后处理器
 
 shell
 
@@ -367,7 +392,7 @@ shell
 # TODO：postcss 插件
 ```
 
-## 8. 配置 npm 快速检查/修复脚本和忽略文件
+## 8. 配置 npm 快速检查/修复脚本和 eslint、stylelint 忽略文件
 
 shell
 
@@ -383,42 +408,60 @@ na pkg set scripts.fix='npm run fix:js && npm run fix:style'
 .eslintignore
 
 ```shell
+# 忽略 . 目录下文件的语法检查
+.husky
 .nuxt
-# 忽略assets目录下文件的语法检查
+.vscode
+
+# 忽略 assets 目录下文件的语法检查
 assets/fonts
 assets/icons
 assets/images
-# 忽略node目录下文件的语法检查
-node_modules
-# 忽略static目录下文件的语法检查
+assets/lang
+assets/styles
+# 忽略 static 目录下文件的语法检查
 static
+
+# 忽略 node_modules 目录下文件的语法检查
+node_modules
+
+# 忽略 modules 目录下 plugin.js 文件的语法检查
+modules/**/plugin.js
 ```
 
 .stylelintignore
 
 ```shell
+# 忽略 . 目录下文件的语法检查
+.husky
 .nuxt
-# 忽略assets目录下文件的语法检查
+.vscode
+
+# 忽略 assets 目录下文件的语法检查
 assets/enum
 assets/fonts
 assets/icons
 assets/images
 assets/lang
 assets/utils
-# 忽略node目录下文件的语法检查
+
+# 忽略 static 目录下文件的语法检查
+static
+
+# 忽略 node_modules 目录下文件的语法检查
 node_modules
-# 忽略纯js目录
+
+# 忽略其他纯js目录
 api
 locales
 middleware
 mixins
+modules
 plugins
 router
 scripts
 store
 utils
-# 忽略static目录下文件的语法检查
-static
 ```
 
 ## 9. 配置提交检查/修复

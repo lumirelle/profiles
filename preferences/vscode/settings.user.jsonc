@@ -165,7 +165,7 @@
   "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
 
   // == extensions: lint ==
-  "eslint.validate": ["js", "ts", "vue"],
+  "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
   "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"],
   "cSpell.customDictionaries": {
     "dev": {
