@@ -158,8 +158,8 @@ export default {
 ```shell
 # NOTE: nuxt@^2.18.1 依赖 @nuxt/babel-preset-app@^2.18.1，默认集成了 babel@7 和 core-js@3
 
-# babel plugins，自动移除代码中的 console 和自动导入 UI 样式
-ni -D babel-plugin-transform-remove-console@^6.9.4 babel-plugin-component@^1.1.1
+# babel plugins，自动移除代码中的 console
+ni -D babel-plugin-transform-remove-console@^6.9.4
 # @nuxt/babel-preset-app@^2.18.1 依赖的 @babel/plugin-proposal-private-property-in-object 已弃用，为兼容，需指定安装旧版本
 ni -D @babel/plugin-proposal-private-property-in-object@^7.21.11
 
@@ -192,8 +192,7 @@ module.exports = function (api) {
 
   // nuxt babel 预设，使用 core-js@3（必要！！！）
   const presets = [['@nuxt/babel-preset-app', { corejs: { version: 3 } }]]
-  // element ui 自动导入样式
-  const plugins = [['component', { libraryName: 'element-ui', styleLibraryName: 'theme-chalk' }]]
+  const plugins = []
 
   if (['preprod', 'production'].includes(process.env.NODE_ENV)) {
     // 预发布和正式环境删除console打印
@@ -299,7 +298,7 @@ module.exports = {
     'no-descending-specificity': [true, { severity: 'warning' }],
     'no-duplicate-selectors': [true, { severity: 'warning' }],
     'no-empty-source': [true, { severity: 'warning' }],
-    'selector-pseudo-class-no-unknown': [true, { severity: 'warning' }],
+    'selector-pseudo-class-no-unknown': [true, { severity: 'warning' }, ignorePseudoClasses: ['deep'] }],
     'selector-pseudo-element-no-unknown': [true, { severity: 'warning' }],
     // stylelint-config-standard
     'at-rule-empty-line-before': [
@@ -419,6 +418,7 @@ assets/icons
 assets/images
 assets/lang
 assets/styles
+
 # 忽略 static 目录下文件的语法检查
 static
 
@@ -451,7 +451,7 @@ static
 # 忽略 node_modules 目录下文件的语法检查
 node_modules
 
-# 忽略其他纯js目录
+# 忽略其他纯 js 目录
 api
 locales
 middleware
