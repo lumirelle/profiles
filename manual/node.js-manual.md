@@ -15,7 +15,7 @@ FNM 是一个跨平台的 Node.js 版本管理器，支持 `.nvmrc` 或 `.node-v
 ```shell
 winget install Schniz.fnm
 
-# 跟随官方教程设置 Shell 环境
+# 跟随官方教程设置 Shell 环境，默认启用 corepack
 # 以 PowerShell 为例，需要允许执行本地脚本
 echo 'fnm env --use-on-cd --corepack-enabled --shell powershell | Out-String | Invoke-Expression' >> $PROFILE
 
@@ -29,8 +29,10 @@ fnm install 22
 cd a-node-project
 echo '22.14.0' > .nvmrc
 
-# 使用 corepack 安装 pnpm (pnpm 需要 node 18+)，并使用 pnpm 安装依赖
-pnpm install
+# 全局安装 @antfu/ni
+npm install -g @antfu/ni
+# 使用 ni 自动检测适用的包管理器 (pnpm 需要 node 18+)
+ni
 
 # ...
 ```

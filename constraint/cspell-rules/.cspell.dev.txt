@@ -12,6 +12,7 @@ datetimerange
 dism
 encryptlong
 eruda
+gapi
 geoip
 gsap
 gtag
@@ -45,9 +46,10 @@ taliwind
 tawk
 tiktok
 vant
-ventoy
 vconsole
+ventoy
 vite
+vssettings
 vuedraggable
 wechat
 winget

@@ -29,4 +29,4 @@
 //
 // You can use the "Manage Trusted Domains" command to open this file.
 // Save this file to apply the trusted domains rules.
-["*.npmjs.com"]
+["*.npmjs.com", "192.168.*.*"]
