@@ -53,8 +53,9 @@
     "antfu.goto-alias",
     "gruntfuggly.todo-tree",
     "lokalise.i18n-ally",
-    "github.copilot", // vscode only
-    "github.copilot-chat", // vscode only
+    "yobravelee.copy-paste-check", // only vscode can download, cursor need compile selfly
+    "github.copilot", // only vscode use
+    "github.copilot-chat", // only vscode use
     // ↑↑ coding helper
 
     // ↓↓ project helper
@@ -67,7 +68,7 @@
     // ↓↓ other helper
     "lanhuapp.lanhuapp",
     "ms-vscode.live-server",
-    "taipaxu.npm-search",
+    "taipaxu.npm-search", // only vscode can download, cursor need compile selfly
     "herrmannplatz.npm-dependency-links",
     "ultram4rine.vscode-choosealicense",
     "thomascsd.vscode-readme-pattern"
