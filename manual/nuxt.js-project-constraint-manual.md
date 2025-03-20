@@ -1,6 +1,6 @@
-<!-- cSpell:ignore execpath nuxtjs -->
+<!-- cSpell:ignore execpath -->
 
-# Node.js 项目规范手册 Node.js Project Constraint Manual (Nuxt 2 / Vue 2)
+# Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual (Nuxt 2 / Vue 2)
 
 Require node@^16, npm@^8, nuxt@^2.18.2.
 
