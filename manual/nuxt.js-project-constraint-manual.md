@@ -298,8 +298,8 @@ module.exports = {
     'no-descending-specificity': [true, { severity: 'warning' }],
     'no-duplicate-selectors': [true, { severity: 'warning' }],
     'no-empty-source': [true, { severity: 'warning' }],
-    'selector-pseudo-class-no-unknown': [true, { severity: 'warning' }, ignorePseudoClasses: ['deep'] }],
-    'selector-pseudo-element-no-unknown': [true, { severity: 'warning' }],
+    'selector-pseudo-class-no-unknown': [true, { severity: 'warning', ignorePseudoClasses: ['deep'] }],
+    'selector-pseudo-element-no-unknown': [true, { severity: 'warning', ignorePseudoElements: ['input-placeholder'] }],
     // stylelint-config-standard
     'at-rule-empty-line-before': [
       'always',
@@ -340,7 +340,7 @@ module.exports = {
       },
     ],
     'scss/dollar-variable-pattern': [
-      '^(-{1,2}?[a-z][a-z0-9]*)(-[a-z0-9]+)*$',
+      '^(-{0,2}?[a-z][a-z0-9]*)(-[a-z0-9]+)*$',
       {
         message: 'Expected variable to be kebab-case',
         severity: 'warning',
