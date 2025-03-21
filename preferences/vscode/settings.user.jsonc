@@ -258,7 +258,8 @@
   "svg.preview.mode": "svg",
   "todo-tree.regex.enableMultiLine": true,
   "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "[ ]", "[x]", "NOTE"],
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*\\*(\\s+\\*.*)*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)", // support multiple-line comment
+  "todo-tree.regex.regex": "(//|#|<!--|;|\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)", // support multiple-line comment
+  "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#eeeeee"
   },
