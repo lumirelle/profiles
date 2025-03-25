@@ -30,7 +30,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/3/18 22:58:13",
+    "//": "Last update at 2025/3/19 08:57:40",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -246,7 +246,7 @@
   "projectManager.git.baseFolders": ["C:\\Projects"], // customize needed
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
-  "license.year": "2025-now",
+  "license.year": "2025-present",
 
   // == extensions: others ==
   "css.enabledLanguages": ["html", "vue"],
@@ -256,10 +256,22 @@
   "powershell.integratedConsole.showOnStartup": false,
   "redhat.telemetry.enabled": false,
   "svg.preview.mode": "svg",
+  "todo-tree.regex.enableMultiLine": true,
+  "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "[ ]", "[x]", "NOTE"],
+  "todo-tree.regex.regex": "(//|#|<!--|;|\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)", // support multiple-line comment
+  "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#eeeeee"
   },
   "todo-tree.highlights.customHighlight": {
+    "BUG": {
+      "background": "#cd0000",
+      "iconColour": "#cd0000"
+    },
+    "FIXME": {
+      "background": "#d0a300",
+      "iconColour": "#d0a300"
+    },
     "TODO": {
       "background": "#0076c0",
       "iconColour": "#0076c0"
@@ -272,17 +284,10 @@
       "background": "#00c063",
       "iconColour": "#00c063"
     },
-    "FIXME": {
-      "background": "#cd0000",
-      "iconColour": "#cd0000"
-    },
-    "BUG": {
-      "background": "#cd0000",
-      "iconColour": "#cd0000"
-    },
-    "HACK": {
-      "background": "#d0a300",
-      "iconColour": "#d0a300"
+    "NOTE": {
+      "background": "#ad66ff",
+      "iconColour": "#ad66ff"
     }
-  }
+  },
+  "duplicated-code.exclude": ["**/node_modules/**", "**/coverage/**", "**/dist/**", "**/build/**", ".nuxt/**"]
 }

@@ -9,16 +9,17 @@
     "subframe7536.custom-ui-style",
     // ↑↑ ui
 
-    // ↓↓ language / file support
+    // ↓↓ language / file / framework support
     "remcohaszing.schemastore",
     "vue.volar",
+    "nuxtr.nuxtr-vscode",
     "uni-helper.uni-highlight-vscode",
     "uni-helper.uni-app-schemas-vscode",
     "jock.svg",
     "redhat.vscode-yaml",
     "ms-vscode.powershell",
     "ms-vscode.hexeditor",
-    //↑↑ language / file support
+    //↑↑ language / file / framework support
 
     // ↓↓ constraint
     "editorconfig.editorconfig",
