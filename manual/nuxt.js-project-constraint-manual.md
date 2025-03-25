@@ -40,12 +40,13 @@ jsconfig.json
 }
 ```
 
-## 1. nuxt 升级
+## 1. 基础依赖升级
 
 shell
 
 ```shell
 ni nuxt@2.17.3 -E
+ni vue@^2.7.16 webpack@webpack-4 @babel/core@^7.26.1 core-js@^3.41.0
 ```
 
 ## 2. 统一包管理工具
@@ -53,8 +54,11 @@ ni nuxt@2.17.3 -E
 scripts/preinstall.js
 
 ```js
-if (!/npm/.test(process.env.npm_execpath) || '') {
-  console.warn(`\u001B[33m 请使用 npm 作为包管理工具安装！\u001B[39m\n`)
+const allowedPackageManagers = ['npm']
+const isAllowedManager = allowedPackageManagers.some((manager) => process.env.npm_execpath?.includes(manager))
+
+if (!isAllowedManager) {
+  console.warn(`\u001B[33m 请使用 ${allowedPackageManagers.join('、')} 包管理器！\u001B[39m\n`)
   process.exit(1)
 }
 ```
@@ -80,7 +84,7 @@ ni -D @nuxtjs/eslint-module@nuxt2
 # eslint plugins
 ni -D eslint-plugin-vue@^9.33.0 eslint-plugin-nuxt@^4.0.0
 # eslint configs
-ni -D @nuxtjs/eslint-config@12.0.0
+ni -D @nuxtjs/eslint-config@^12.0.0
 
 # eslint plugin for prettier ... Well, you don't really need it
 # eslint config for prettier, 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
@@ -103,6 +107,7 @@ module.exports = {
     parser: '@babel/eslint-parser',
     // 设置为无需 babel 配置文件
     requireConfigFile: false,
+    ecmaVersion: 6,
   },
 
   // 继承插件 plugins 的推荐配置或共享配置 configs
@@ -185,12 +190,11 @@ ni -D stylelint@^15.11.0
 ni -D @nuxtjs/stylelint-module@nuxt2
 # stylelint plugins ... Well, you don't really need them
 # stylelint configs
-ni -D stylelint-config-standard@^34.0.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-recess-order@^6.0.0
+ni -D stylelint-config-standard@^34.0.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-recess-order@^4.6.0
 
 # eslint plugin & config for prettier ... Well, you don't really need them
 
 # stylelint 需要 postcss 解析器提供语法解析支持（地位可以说是类同 babel）
-nun @nuxt/postcss8
 ni -D postcss-html@^1.8.0
 ```
 
@@ -380,7 +384,7 @@ store
 utils
 ```
 
-## 9. 配置提交检查/修复
+## 7. 配置提交检查/修复
 
 shell
 
@@ -419,13 +423,11 @@ package.json
 }
 ```
 
-## 10. 设置 babel 解析器
+## 8. 设置 babel 解析器
 
 ```shell
 # NOTE: nuxt@2.17.3 依赖 @nuxt/babel-preset-app@2.17.3，默认集成了 babel@7 和 core-js@3
 
-# babel plugins，自动移除代码中的 console
-ni -D babel-plugin-transform-remove-console@^6.9.4
 # @babel/plugin-proposal-private-property-in-object 已弃用，为兼容，需指定安装旧版本
 # ni -D @babel/plugin-proposal-private-property-in-object@^7.21.11
 
@@ -460,11 +462,6 @@ module.exports = function (api) {
   const presets = [['@nuxt/babel-preset-app', { corejs: { version: 3 } }]]
   const plugins = []
 
-  if (['preprod', 'production'].includes(process.env.NODE_ENV)) {
-    // 预发布和正式环境删除console打印
-    plugins.push('transform-remove-console')
-  }
-
   return {
     presets,
     plugins,
@@ -472,27 +469,26 @@ module.exports = function (api) {
 }
 ```
 
-## TODO: 11. 设置 postcss 处理器
+## TODO: 9. 设置 postcss 处理器
 
 shell
 
 ```shell
-# ：postcss 插件
+# nun @nuxt/postcss8
 ```
 
-## 12. 设置 webpack 打包优化
+## 10. 设置 webpack 打包优化
 
 ```shell
 ni nuxt-precompress@^0.5.9
 
-ni -D uglifyjs-webpack-plugin@^2.2.0 optimize-css-assets-webpack-plugin@^6.0.1
+ni -D terser-webpack-plugin@version-1
 ```
 
 nuxt.config.js
 
 ```js
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
-import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
 
 export default {
   // ...
@@ -566,31 +562,23 @@ export default {
       },
 
       minimizer: [
-        new UglifyJsPlugin({
+        // terser-webpack-plugin@^1, terser@^4
+        new TerserPlugin({
           exclude: /\/node_modules/,
-          uglifyOptions: {
-            // 删除注释
-            output: { comments: false },
-          },
-          cache: true,
           parallel: true,
-          sourceMap: false,
-        }),
-        new OptimizeCSSAssetsPlugin({
-          cssProcessor: require('cssnano'),
-          cssProcessorOptions: {
-            preset: [
-              'default',
-              {
-                discardComments: {
-                  removeAll: true,
-                },
-                zindex: false, // 保持 z-index 不变
-              },
-            ],
+          cache: true,
+          terserOptions: {
+            compress: {
+              // 生产移除 console.*
+              drop_console: true,
+            },
+            mangle: true, // 混淆变量名
+            output: {
+              comments: false,
+              beautify: false, // 不美化输出
+            },
           },
-          canPrint: false,
-          assetNameRegExp: /\.css$/g,
+          extractComments: false,
         }),
       ],
     },
