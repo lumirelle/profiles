@@ -46,6 +46,7 @@ shell
 
 ```shell
 ni nuxt@2.17.3 -E
+ni -D @nuxt/types@2.17.3 -E
 ni vue@^2.7.16 webpack@webpack-4 @babel/core@^7.26.1 core-js@^3.41.0
 ```
 
@@ -110,7 +111,7 @@ module.exports = {
     ecmaVersion: 6,
   },
 
-  // 继承插件 plugins 的推荐配置或共享配置 configs
+  // 继承共享配置 configs 或插件 plugins 的推荐配置
   extends: [
     // 内含了 plugin:vue/recommended
     '@nuxtjs',
@@ -133,7 +134,6 @@ module.exports = {
     'vue/no-reserved-component-names': 'warn',
     'vue/no-mutating-props': 'warn',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-empty': 'warn',
     'no-unused-vars': 'warn',
     eqeqeq: 'warn',
     camelcase: 'warn',
@@ -175,8 +175,8 @@ package.json
 ```json
 {
   // ...
-  "resolutions": {
-    "stylelint-config-recommended": "^13.0.0"
+  "overrides": {
+    "stylelint-config-recommended": "13.0.0"
   }
 }
 ```
@@ -188,62 +188,60 @@ shell
 ni -D stylelint@^15.11.0
 # stylelint module for nux，类同 eslint-module
 ni -D @nuxtjs/stylelint-module@nuxt2
-# stylelint plugins ... Well, you don't really need them
 # stylelint configs
-ni -D stylelint-config-standard@^34.0.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-recess-order@^4.6.0
+ni -D stylelint-config-recommended-scss@^13.1.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-clean-order@^7.0.0
 
 # eslint plugin & config for prettier ... Well, you don't really need them
 
 # stylelint 需要 postcss 解析器提供语法解析支持（地位可以说是类同 babel）
-ni -D postcss-html@^1.8.0
+ni -D postcss-html@^1.8.0 postcss-scss@^4.0.9
 ```
 
 stylelint.config.js
 
 ```js
 module.exports = {
-  // 自定义解析器
-  // 使用 postcss-html 解析 .html,js,css, ... 等文件中的样式
-  customSyntax: 'postcss-html',
+  // 配置 html 和 scss 的语法解析器
+  overrides: [
+    {
+      files: ['*.html', '*.vue'],
+      customSyntax: 'postcss-html',
+    },
+    {
+      files: ['*.scss'],
+      customSyntax: 'postcss-scss',
+    },
+  ],
 
-  // 继承插件 plugins 的推荐配置或共享配置 configs
-  extends: ['stylelint-config-standard', 'stylelint-config-recommended-vue', 'stylelint-config-recess-order'],
+  // 继承共享配置 configs
+  extends: [
+    'stylelint-config-recommended-scss',
+    'stylelint-config-recommended-vue/scss',
+    'stylelint-config-clean-order',
+  ],
 
   plugins: [],
   rules: {
     // stylelint-config-recommended
     'block-no-empty': [true, { severity: 'warning' }],
-    'font-family-no-missing-generic-family-keyword': [true, { severity: 'warning' }],
     'no-descending-specificity': [true, { severity: 'warning' }],
-    'no-duplicate-selectors': [true, { severity: 'warning' }],
     'no-empty-source': [true, { severity: 'warning' }],
-    'selector-pseudo-class-no-unknown': [true, { severity: 'warning', ignorePseudoClasses: ['deep'] }],
-    'selector-pseudo-element-no-unknown': [true, { severity: 'warning', ignorePseudoElements: ['input-placeholder'] }],
-    // stylelint-config-standard
+    'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global', 'slotted'] }],
+    'selector-pseudo-element-no-unknown': [
+      true,
+      { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted', 'input-placeholder'] },
+    ],
+    // stylelint-config-recommended-scss
+    'scss/at-extend-no-missing-placeholder': [true, { severity: 'warning' }],
+    'scss/comment-no-empty': [true, { severity: 'warning' }],
+    // stylelint-config-clean-order
     'at-rule-empty-line-before': [
       'always',
       {
-        except: ['blockless-after-blockless', 'first-nested'],
-        ignore: ['after-comment'],
-        ignoreAtRules: ['else'],
+        ignore: ['first-nested', 'blockless-after-same-name-blockless', 'after-comment'],
+        ignoreAtRules: ['if', 'else'],
         severity: 'warning',
       },
-    ],
-    'custom-property-pattern': [
-      '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
-      { message: (name) => `Expected custom property name "${name}" to be kebab-case`, severity: 'warning' },
-    ],
-    'keyframes-name-pattern': [
-      '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
-      { message: (name) => `Expected keyframe name "${name}" to be kebab-case`, severity: 'warning' },
-    ],
-    'selector-class-pattern': [
-      '^([a-z][a-z0-9]*)((-|__|--)[a-z0-9]+)*$',
-      { message: (selector) => `Expected class selector "${selector}" to be BEM case`, severity: 'warning' },
-    ],
-    'selector-id-pattern': [
-      '^([a-z][a-z0-9]*)((-|__|--)[a-z0-9]+)*$',
-      { message: (selector) => `Expected id selector "${selector}" to be BEM case`, severity: 'warning' },
     ],
   },
 }
@@ -270,7 +268,7 @@ shell
 nun node-sass
 
 # sass 和 sass-loader
-ni -D sass@^1.85.1 sass-loader@version-10
+ni -D sass@^1.86.0 sass-loader@version-10
 
 # nuxt 模块，通过自动导入实现样式 mixin
 ni -D @nuxtjs/style-resources@^1.2.2
@@ -347,6 +345,9 @@ node_modules
 
 # 忽略 modules 目录下 plugin.js 文件的语法检查
 modules/**/plugin.js
+
+# 忽略 app.html 文件的语法检查
+app.html
 ```
 
 .stylelintignore
@@ -382,6 +383,9 @@ router
 scripts
 store
 utils
+
+# 忽略 app.html 文件的语法检查
+app.html
 ```
 
 ## 7. 配置提交检查/修复
