@@ -4,7 +4,7 @@
 
 Based on node@^16, npm@^8, nuxt@2.17.3 (vue@2, webpack@4, babel@7, core-js@3).
 
-## 0. 更新 .vscode/settings.json 和 jsconfig.json
+## 0. 更新 .vscode/settings.json, jsconfig.json
 
 .vscode/settings.json
 
@@ -64,7 +64,7 @@ if (!isAllowedManager) {
 }
 ```
 
-shell (`npm pkg` require npm@>=7)
+shell (command `npm pkg` require npm@>=7)
 
 ```shell
 na pkg set scripts.preinstall='node ./scripts/preinstall.js'
@@ -324,7 +324,7 @@ na pkg set scripts.fix='npm run fix:js && npm run fix:style'
 
 .eslintignore
 
-```shell
+```ignore
 # 忽略 . 目录下文件的语法检查
 .husky
 .nuxt
@@ -352,7 +352,7 @@ app.html
 
 .stylelintignore
 
-```shell
+```ignore
 # 忽略 . 目录下文件的语法检查
 .husky
 .nuxt
@@ -388,6 +388,30 @@ utils
 app.html
 ```
 
+.prettierignore
+
+```ignore
+# 忽略 . 目录下文件的语法检查
+.husky
+.nuxt
+.vscode
+
+# 忽略 assets 目录下文件的语法检查
+assets/fonts
+assets/icons
+assets/images
+assets/lang
+
+# 忽略 static 目录下文件的语法检查
+static
+
+# 忽略 node_modules 目录下文件的语法检查
+node_modules
+
+# 忽略 app.html 文件的语法检查
+app.html
+```
+
 ## 7. 配置提交检查/修复
 
 shell
@@ -399,32 +423,31 @@ ni -D husky@^8.0.3 lint-staged@^14.0.1
 shell
 
 ```shell
-# 删除 husky@4 配置
+# 删除 package.json 中的配置
 na pkg delete husky
+na pkg delete lint-staged
+```
+
+shell
+
+```shell
 # 配置 husky@8
 na pkg set scripts.prepare='husky install'
 nr prepare
 nlx husky add .husky/pre-commit 'npx lint-staged'
-
-na pkg delete lint-staged
 ```
 
-package.json
+.lintstagedrc.yaml
 
-```json
-{
-  // ...
-  // 配置 lint-staged
-  "lint-staged": {
-    "*.{js,vue}": ["eslint --fix --ignore-path .eslintignore", "prettier --write --ignore-path .eslintignore"],
-    "*.{css,scss,html,vue}": [
-      "stylelint --fix --ignore-path .stylelintignore --allow-empty-input",
-      "prettier --write --ignore-path .stylelintignore"
-    ],
-    "!(*.js|*.html|*.vue|*.css|*.scss)": ["prettier --write --ignore-unknown"]
-  }
-  // ...
-}
+```yaml
+'*.{js,vue}':
+  - 'eslint --fix --ignore-path .eslintignore'
+  - 'prettier --write --ignore-path .eslintignore'
+'*.{css,scss,html,vue}':
+  - 'stylelint --fix --ignore-path .stylelintignore --allow-empty-input'
+  - 'prettier --write --ignore-path .stylelintignore'
+'!(*.js|*.html|*.vue|*.css|*.scss)':
+  - 'prettier --write --ignore-path .prettierignore --ignore-unknown'
 ```
 
 ## 8. 设置 babel 解析器
@@ -432,7 +455,7 @@ package.json
 ```shell
 # NOTE: nuxt@2.17.3 依赖 @nuxt/babel-preset-app@2.17.3，默认集成了 babel@7 和 core-js@3
 
-# @babel/plugin-proposal-private-property-in-object 已弃用，为兼容，需指定安装旧版本
+# @babel/plugin-proposal-private-property-in-object 已弃用，为兼容，可能需指定安装旧版本
 # ni -D @babel/plugin-proposal-private-property-in-object@^7.21.11
 
 # babel@7 后不再维护 babel-polyfill，需要转为使用 core-js/stable
@@ -588,4 +611,15 @@ export default {
     },
   },
 }
+```
+
+## 11. 项目兼容性
+
+.browserslistrc
+
+.browserslistrc
+
+```browserslist
+> 1%
+last 2 versions
 ```

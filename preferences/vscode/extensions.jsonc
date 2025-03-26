@@ -17,6 +17,7 @@
     "uni-helper.uni-app-schemas-vscode",
     "jock.svg",
     "redhat.vscode-yaml",
+    "webben.browserslist",
     "ms-vscode.powershell",
     "ms-vscode.hexeditor",
     //↑↑ language / file / framework support
