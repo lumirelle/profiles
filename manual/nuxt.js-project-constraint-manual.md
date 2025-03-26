@@ -4,7 +4,7 @@
 
 Based on node@^16, npm@^8, nuxt@2.17.3 (vue@2, webpack@4, babel@7, core-js@3).
 
-## 0. 更新 .vscode/settings.json, jsconfig.json
+## 0. 更新 vscode 配置
 
 .vscode/settings.json
 
@@ -450,73 +450,15 @@ nlx husky add .husky/pre-commit 'npx lint-staged'
   - 'prettier --write --ignore-path .prettierignore --ignore-unknown'
 ```
 
-## 8. 设置 babel 解析器
-
-```shell
-# NOTE: nuxt@2.17.3 依赖 @nuxt/babel-preset-app@2.17.3，默认集成了 babel@7 和 core-js@3
-
-# @babel/plugin-proposal-private-property-in-object 已弃用，为兼容，可能需指定安装旧版本
-# ni -D @babel/plugin-proposal-private-property-in-object@^7.21.11
-
-# babel@7 后不再维护 babel-polyfill，需要转为使用 core-js/stable
-nun babel-polyfill
-```
-
-nuxt.config.js
-
-```js
-export default {
-  // ...
-  build: {
-    // ...
-    // nuxt 默认不读取 babel 配置，要使用外部 babel 配置文件，需要更改默认配置
-    babel: {
-      babelrc: true,
-      configFile: './babel.config.js',
-    },
-  },
-}
-```
-
-babel.config.js
-
-```js
-// 此配置会在 nuxt 构建和 eslint 解析时共同使用
-module.exports = function (api) {
-  api.cache(true)
-
-  // nuxt babel 预设，使用 core-js@3（必要！！！）
-  const presets = [['@nuxt/babel-preset-app', { corejs: { version: 3 } }]]
-  const plugins = []
-
-  return {
-    presets,
-    plugins,
-  }
-}
-```
-
-## TODO: 9. 设置 postcss 处理器
-
-shell
-
-```shell
-# nun @nuxt/postcss8
-```
-
-## 10. 设置 webpack 打包优化
+## 8. 设置 webpack 打包优化
 
 ```shell
 ni nuxt-precompress@^0.5.9
-
-ni -D terser-webpack-plugin@version-1
 ```
 
 nuxt.config.js
 
 ```js
-import TerserPlugin from 'terser-webpack-plugin'
-
 export default {
   // ...
 
@@ -550,10 +492,31 @@ export default {
   },
 
   build: {
-    // ...
-    // 将所有 CSS 提取到单个文件中，避免刷新时样式未加载，导致元素移动，受 splitChunks 配置影响
+    // nuxt@2.17.3 依赖的 @nuxt/webpack 内置了如下优化插件
+    // extract-css-chunks-webpack-plugin
     extractCSS: true,
+    // optimize-css-assets-webpack-plugin
+    optimizeCSS: {
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      },
+      canPrint: true,
+    },
+    // terser-webpack-plugin
+    terser:
+      process.env.NODE_ENV === 'preprod' || process.env.NODE_ENV === 'production'
+        ? {
+            extractComments: false,
+            terserOptions: {
+              // 移除 console.*
+              compress: { drop_console: true },
+              mangle: true, // 混淆变量名
+              output: { comments: false, beautify: false },
+            },
+          }
+        : undefined,
 
+    // webpack
     optimization: {
       splitChunks: {
         chunks: 'all',
@@ -571,13 +534,13 @@ export default {
             test: /\.(css|vue)$/,
             chunks: 'all',
             enforce: true,
+            priority: 50,
           },
-          common: {
+          echarts: {
+            test: /node_modules[\\/]echarts/,
             chunks: 'all',
-            priority: 10,
-            minSize: 0,
-            minChunks: 2,
-            reuseExistingChunk: true,
+            priority: 20,
+            name: 'echarts',
           },
           elementui: {
             test: /node_modules[\\/]element-ui/,
@@ -587,35 +550,19 @@ export default {
           },
         },
       },
-
-      minimizer: [
-        // terser-webpack-plugin@^1, terser@^4
-        new TerserPlugin({
-          exclude: /\/node_modules/,
-          parallel: true,
-          cache: true,
-          terserOptions: {
-            compress: {
-              // 生产移除 console.*
-              drop_console: true,
-            },
-            mangle: true, // 混淆变量名
-            output: {
-              comments: false,
-              beautify: false, // 不美化输出
-            },
-          },
-          extractComments: false,
-        }),
-      ],
     },
   },
 }
 ```
 
-## 11. 项目兼容性
+## 9. 项目兼容性
 
-.browserslistrc
+polyfill (shell)
+
+```shell
+# babel@7 后不再维护 babel-polyfill，需要转为使用 core-js/stable
+nun babel-polyfill
+```
 
 .browserslistrc
 
