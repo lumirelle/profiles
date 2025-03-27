@@ -517,36 +517,31 @@ export default {
         : undefined,
 
     // webpack
+    splitChunks: {
+      layouts: false, // 不自动拆分布局代码
+      pages: true, // 自动拆分页面代码
+      commons: true, // 自动拆分公共模块
+    },
     optimization: {
       splitChunks: {
         chunks: 'all',
-        minSize: 5000000, //  5M
-        maxSize: 10000000, // 10M
+        minSize: 30000,
+        maxSize: 244 * 1024, // 244kb
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
         cacheGroups: {
-          // 先抽离第三方模块，再抽离公共模块，要不然执行抽离公共模块就截止不会往下执行
-          vendors: {
-            chunks: 'initial',
-            priority: 100,
-            test: /[\\/]node_modules[\\/]/,
-          },
           styles: {
-            name: 'styles',
             test: /\.(css|vue)$/,
-            chunks: 'all',
-            enforce: true,
+            name: 'styles',
             priority: 50,
+            enforce: true,
+            reuseExistingChunk: true,
           },
-          echarts: {
-            test: /node_modules[\\/]echarts/,
-            chunks: 'all',
-            priority: 20,
-            name: 'echarts',
-          },
-          elementui: {
-            test: /node_modules[\\/]element-ui/,
-            chunks: 'all',
-            priority: 20,
+          elementUI: {
             name: 'element-ui',
+            test: /node_modules[\\/]element-ui/,
+            priority: 20,
           },
         },
       },
