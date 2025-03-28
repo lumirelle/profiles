@@ -41,16 +41,20 @@ git commit -m "init: init project"
 作为分布式版本管理系统，你可以将版本库推送到远程。只有将版本库推送到远程后，才能实现多人协作开发。
 
 ```shell
-# 添加名为 origin 的远程
-git remote add origin https://github.com/user/repo.git
+# 添加远程
+# 格式：`git remote add <远程名> <远程库 URL>`
+git remote add origin https://github.com/Lyana-nullptr/profiles.git
 
-# 将本地版本库的 main 分支推送到远程 origin 的 main 分支
-git push origin main:main
-# 通常本地和远程分支是同名的，可简写为
-git push origin main
-# 通常只有一个远程且为默认名 origin，可简写为
-git push main
-# 如果你推送的是当前分支，可进一步简写为
+# 首次推送分支，需要使用 `--set-upstream` | `-u` 参数设置上游
+# 格式：`git push -u <远程名> <本地分支名>:<远程分支名>`
+git push -u origin main:main
+# 如果本地和远程分支名相同，则可以将 `<本地分支名>:<远程分支名>` 简写为 `<分支名>`，git pull 等命令同理
+# 格式：`git push -u <远程名> <分支名>`
+git push -u origin main
+
+# 后续推送分支，通常一个版本库只会设置一个默认的名为 origin 的远程，因此约定在这种情况下 `<远程名>` 可以省略
+# 设置过上游后，后续所有涉及远程分支操作时就可以自动推断分支和上游 `<本地分支名>:<远程分支名>`
+# 格式：`git push`
 git push
 ```
 
@@ -59,19 +63,24 @@ git push
 当远程有来自他人的更新，应及时从远程拉取，避免基于过时的代码开发。拉取操作默认行为是拉取并合并，如果存在冲突，则会产生合并记录。这样的合并记录是冗余的，因此推荐使用 `--rebase` 参数改为变基操作。
 
 ```shell
-# 假设已经添加名为 "origin" 的远程
-git pull origin main:main
-# 等价于
-git fetch origin main:main && git merge origin/main
-# 或最终简写为
-git pull
+# 基于上文已经添加的的远程 origin
 
-# 使用 --rebase 参数
-git pull origin main:main --rebase
+# 默认 pull 行为
+git pull
+# 使用默认的远程，自动推断分支和上游
+git pull origin main
 # 等价于
-git fetch origin main:main && git rebase origin/main
-# 或最终简写为
+git fetch origin main && git merge origin/main
+
+# 使用 `--rebase` 参数
 git pull -- rebase
+# 使用默认的远程，自动推断分支和上游
+git pull origin main --rebase
+# 等价于
+git fetch origin main && git rebase origin/main
+
+# 你也可以将 .gitconfig 中的 pull.rebase 配置项设置为 true
+git config --global pull.rebase true
 ```
 
 ### 4. 创建并切换到开发分支（dev）
@@ -80,17 +89,19 @@ git pull -- rebase
 
 ```shell
 # 从 main 分支分出 dev 分支
+# 格式：`git switch -c <新分支名> <基分支名>`
 git switch -c dev main
-# 省略时默认从当前分支分出 dev 分支
+
+# 省略 `<基分支名>` 时默认使用当前分支
 git switch -c dev
 ```
 
-### 5. 创建并切换到功能分支（feature/\*\*）
+### 5. 创建并切换到功能分支（feature/xx）
 
-每当你想要开发一个新功能时，就要基于开发分支，分出具体的功能分支（feature/\*\*）。开发分支只应该用来合并/整合功能分支。
+每当你想要开发一个新功能时，就要基于开发分支，分出具体的功能分支（feature/xx）。开发分支只应该用来合并/整合功能分支。
 
 ```shell
-git switch -c feature/001 dev # 分支命名规则：feature/<feature-code>
+git switch -c feature/001 dev # 推荐的功能分支命名规则：`feature/<feature-code>`
 
 code git-manual.md
 
@@ -104,7 +115,7 @@ git commit -m "feat: complete feature/001"
 
 ```shell
 # git checkout 在不指定提交时，会读取该文件在暂存区中的版本
-# "--"" 是指不要将后面的内容解释为命令参数，以此避免文件中的 "-" 符号被解析为参数
+# `--` 参数是指不要将后面的内容解释为命令参数，以此避免文件名中带有 `-` 符号导致其被解析为参数
 # 将 index.html 用暂存区中的版本覆盖
 git checkout -- index.html
 ```
@@ -160,15 +171,21 @@ git rebase branch2
 当功能分支的使命达成时，就要将其删除，避免分支过多而难以维护。其他临时分支，如预发布、紧急修复分支也是如此。
 
 ```shell
-# 查看本地的分支
-git branch
-
+# 本地删除
+# 切换到其他分支
 git switch dev
-
-# 务必保证分支内容已经合并到主分支
+# 务必保证分支可以安全删除（例如已经过时，并完全合并到了主分支）
 git branch -d features
 # 对于从未合并到主分支的分支，需要使用 -D 选项强制删除
 git branch -D features
+
+# 远程删除
+git push -d origin features
+# 远程删除后，需要使用 `--prune` 参数同步远程分支缓存
+git fetch --prune
+
+# 你也可以将 .gitconfig 中的 fetch.prune 配置项设置为 true
+git config --global fetch.prune true
 ```
 
 ### 12. 储藏更改
@@ -180,20 +197,22 @@ git stash push
 # 或简写为
 git stash
 
-git switch dev
-
 # 完成另一个分支上的工作...
+git switch dev
+...
+git a .
+git c -m 'feat: just do sth'
 
 git switch feature/001
 git stash pop
 ```
 
-### 13. cherry pick
+### 13. Cherry Pick
 
-当开发分支并入了很多新提交，而你只想往功能分支中引入其中一个（比如其他功能分支对通用组件做了修改，又添加了自己的功能组件），你可以使用 cherry pick 挑出你想要的那条提交并入自己的分支。尽量将对通用组件的修改作为一个单独的提交。
+当开发分支并入了很多新提交，而你只想往功能分支中引入其中一个（比如其他功能分支对通用组件做了修改，又添加了自己的功能组件），你可以使用 Cherry Pick 挑出你想要的那条提交并入自己的分支。尽量将对通用组件的修改作为一个单独的提交。
 
 ```shell
-git cherry-pick e730e57c66ad91beeaf02886f75caf04d4b615d9 # commit hash
+git cherry-pick xxxxxxxxxxxxxxxxxxxxxxxxxxxx # commit hash
 ```
 
 ### 14. 创建并切换到预发布分支（release）

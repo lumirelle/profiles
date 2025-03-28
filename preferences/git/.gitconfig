@@ -7,6 +7,8 @@
   provider = generic
 [init]
   defaultBranch = main
+[fetch]
+  prune = true
 [merge]
   ff = no
 [pull]
@@ -22,5 +24,6 @@
   mg = merge
   rs = reset
   rb = rebase
+  re = remote
   br = branch
   tg = tag
