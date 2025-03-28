@@ -34,7 +34,7 @@
     // ↓↓ snippets helper
     "tahabasri.snippets",
     "jmsv.javascriptsnippetsstandard",
-    "hollowtree.vue-snippets",
+    "sdras.vue-vscode-snippets",
     "uni-helper.uni-app-snippets-vscode",
     "ss.element-ui-snippets",
 
@@ -45,7 +45,9 @@
     "gruntfuggly.todo-tree",
     // -- actions
     "antfu.smart-clicks",
+    "tombonnike.vscode-status-bar-format-toggle",
     "ecmel.vscode-html-css",
+    "chakrounanas.turbo-console-log",
     "christian-kohler.path-intellisense",
     "christian-kohler.npm-intellisense",
     "antfu.goto-alias",

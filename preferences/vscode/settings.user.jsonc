@@ -3,7 +3,9 @@
   // == vscode: ui ==
   "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
+  "editor.cursorBlinking": "smooth",
   "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
   "editor.lineNumbers": "interval",
   "editor.rulers": [80, 120],
   "editor.wordWrap": "bounded",
@@ -13,6 +15,7 @@
   "editor.mouseWheelZoom": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.fontWeight": "300",
   "terminal.integrated.tabs.enabled": true,
   "window.zoomLevel": 1.2,
@@ -30,7 +33,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/3/24 09:10:06",
+    "//": "Last update at 2025/3/27 11:48:43",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -138,8 +141,10 @@
   },
 
   // == vscode: others ==
-  "explorer.autoOpenDroppedFile": false,
+  "editor.mouseWheelScrollSensitivity": 2,
+  "editor.fastScrollSensitivity": 3,
   "editor.gotoLocation.multipleDefinitions": "goto",
+  "explorer.autoOpenDroppedFile": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
