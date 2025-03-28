@@ -7,72 +7,70 @@
     "pkief.material-icon-theme",
     "antfu.icons-carbon",
     "subframe7536.custom-ui-style",
-    // ↑↑ ui
 
-    // ↓↓ language / file / framework support
+    // ↓↓ languages / files / frameworks support
+    // -- languages & files
     "remcohaszing.schemastore",
-    "vue.volar",
-    "nuxtr.nuxtr-vscode",
-    "uni-helper.uni-highlight-vscode",
-    "uni-helper.uni-app-schemas-vscode",
+    "webben.browserslist",
     "jock.svg",
     "redhat.vscode-yaml",
     "ms-vscode.powershell",
     "ms-vscode.hexeditor",
-    //↑↑ language / file / framework support
+    // -- frameworks
+    "vue.volar",
+    "lokalise.i18n-ally",
+    "uni-helper.uni-highlight-vscode",
+    "uni-helper.uni-app-schemas-vscode",
 
-    // ↓↓ constraint
+    // ↓↓ constraints helper
     "editorconfig.editorconfig",
-    "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
     "davidanson.vscode-markdownlint",
     "streetsidesoftware.code-spell-checker",
     "usernamehw.errorlens",
-    // ↑↑ constraint
 
-    // ↓↓ snippest
+    // ↓↓ snippets helper
     "tahabasri.snippets",
     "jmsv.javascriptsnippetsstandard",
-    "hollowtree.vue-snippets",
-    "ss.element-ui-snippets",
+    "sdras.vue-vscode-snippets",
     "uni-helper.uni-app-snippets-vscode",
-    // ↑↑ snippest
-
-    // ↓↓ ext helper
-    "l13rary.l13-built-in-extensions",
-    "vscode.javascript-modified", // modified by extension "l13rary.l13-built-in-extensions", without snippets
-    // ↑↑ ext helper
+    "ss.element-ui-snippets",
 
     // ↓↓ coding helper
-    "antfu.smart-clicks",
+    // -- views
     "oderwat.indent-rainbow",
-    "ecmel.vscode-html-css",
     "naumovs.color-highlight",
+    "gruntfuggly.todo-tree",
+    // -- actions
+    "antfu.smart-clicks",
+    "tombonnike.vscode-status-bar-format-toggle",
+    "ecmel.vscode-html-css",
+    "chakrounanas.turbo-console-log",
     "christian-kohler.path-intellisense",
     "christian-kohler.npm-intellisense",
     "antfu.goto-alias",
-    "gruntfuggly.todo-tree",
-    "lokalise.i18n-ally",
-    "yobravelee.copy-paste-check", // only vscode can download, cursor need compile selfly
+    "ms-vscode.live-server",
     "github.copilot", // only vscode use
     "github.copilot-chat", // only vscode use
-    // ↑↑ coding helper
 
     // ↓↓ project helper
+    // -- general
+    "sandcastle.vscode-open",
     "antfu.where-am-i",
     "alefragnani.project-manager",
-    "eamodio.gitlens",
     "antfu.file-nesting",
-    // ↑↑ project helper
-
-    // ↓↓ other helper
-    "lanhuapp.lanhuapp",
-    "ms-vscode.live-server",
-    "taipaxu.npm-search", // only vscode can download, cursor need compile selfly
+    // -- npm
+    "taipaxu.npm-search",
     "herrmannplatz.npm-dependency-links",
+    // -- git
+    "eamodio.gitlens",
     "ultram4rine.vscode-choosealicense",
-    "thomascsd.vscode-readme-pattern"
-    // ↑↑ other helper
+    "thomascsd.vscode-readme-pattern",
+
+    // ↓↓ ext helper
+    "l13rary.l13-built-in-extensions",
+    "vscode.javascript-modified" // modified by extension "l13rary.l13-built-in-extensions", without snippets
   ]
 }

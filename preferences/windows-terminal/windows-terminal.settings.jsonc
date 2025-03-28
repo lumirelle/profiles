@@ -7,18 +7,11 @@
         "action": "copy",
         "singleLine": false
       },
-      "id": "User.copy.644BA8F2",
-      "keys": "ctrl+c"
+      "id": "User.copy.644BA8F2"
     },
     {
       "command": "paste",
-      "id": "User.paste",
-      "keys": "ctrl+v"
-    },
-    {
-      "command": "find",
-      "id": "User.find",
-      "keys": "ctrl+shift+f"
+      "id": "User.paste"
     },
     {
       "command": {
@@ -26,8 +19,11 @@
         "split": "auto",
         "splitMode": "duplicate"
       },
-      "id": "User.splitPane.A6751878",
-      "keys": "alt+shift+d"
+      "id": "User.splitPane.A6751878"
+    },
+    {
+      "command": "find",
+      "id": "User.find"
     }
   ],
   "centerOnLaunch": true,
@@ -36,6 +32,24 @@
   "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
   "initialCols": 100,
   "initialRows": 25,
+  "keybindings": [
+    {
+      "id": "User.copy.644BA8F2",
+      "keys": "ctrl+c"
+    },
+    {
+      "id": "User.find",
+      "keys": "ctrl+shift+f"
+    },
+    {
+      "id": "User.paste",
+      "keys": "ctrl+v"
+    },
+    {
+      "id": "User.splitPane.A6751878",
+      "keys": "alt+shift+d"
+    }
+  ],
   "language": "zh-Hans",
   "newTabMenu": [
     {
@@ -44,12 +58,14 @@
   ],
   "profiles": {
     "defaults": {
-      "experimental.retroTerminalEffect": false,
+      "backgroundImage": "desktopWallpaper",
+      "backgroundImageOpacity": 0.5,
       "font": {
         "builtinGlyphs": false,
-        "face": "'LXGW Bright Code', 'Symbols Nerd Font'",
+        "face": "'LXGW Bright Code TC', 'Symbols Nerd Font'",
         "size": 16
       },
+      "intenseTextStyle": "all",
       "opacity": 80,
       "padding": "16",
       "useAcrylic": true
@@ -89,5 +105,8 @@
     ]
   },
   "schemes": [],
-  "themes": []
+  "tabWidthMode": "titleLength",
+  "theme": "system",
+  "themes": [],
+  "useAcrylicInTabRow": true
 }
