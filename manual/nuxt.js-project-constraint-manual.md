@@ -72,6 +72,8 @@ na pkg set scripts.preinstall='node ./scripts/preinstall.js'
 
 ## 3. 设置代码检查与格式化
 
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了。
+
 shell
 
 ```shell
@@ -167,6 +169,8 @@ export default {
 ```
 
 ## 4. 设置样式检查与格式化
+
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了。
 
 stylelint-config-recommende-vue 未对依赖做精细版本限制，导致依赖 stylelint-config-recommended 解析为最新不支持 node@16 的版本，需要配置 resolutions 来解决：
 
