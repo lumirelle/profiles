@@ -1,7 +1,7 @@
 {
   // cSpell:disable
   // == vscode: ui ==
-  "editor.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
+  "editor.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.cursorBlinking": "smooth",
   "editor.cursorSmoothCaretAnimation": "on",
@@ -169,8 +169,8 @@
   "workbench.startupEditor": "none",
 
   // == extensions: ui ==
-  "custom-ui-style.font.sansSerif": "'LXGW Bright Code', 'Symbols Nerd Font', sans-serif",
-  "markdown.preview.fontFamily": "'LXGW Bright Code', 'Symbols Nerd Font', monospace",
+  "custom-ui-style.font.sansSerif": "'LXGW Bright Code TC', 'Symbols Nerd Font', sans-serif",
+  "markdown.preview.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
 
   // == extensions: lint ==
   "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
