@@ -179,7 +179,7 @@
   // == extensions: lint ==
   "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
   "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"],
-  "sonarlint.pathToNodeExecutable": "C:\\Users\\xiaoxi\\AppData\\Local\\fnm_multishells\\540_1743389128509\\node.exe", // customize needed
+  "sonarlint.pathToNodeExecutable": "C:\\Users\\JustAdmin\\AppData\\Local\fnm_multishells\\15872_1743424053958\\node.exe", // customize needed
   "cSpell.customDictionaries": {
     "dev": {
       "name": "dev",
