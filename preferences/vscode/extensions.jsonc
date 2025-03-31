@@ -30,6 +30,7 @@
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
     "davidanson.vscode-markdownlint",
+    "sonarsource.sonarlint-vscode",
     "streetsidesoftware.code-spell-checker",
     "usernamehw.errorlens",
 
