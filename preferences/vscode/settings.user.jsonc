@@ -37,7 +37,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/3/29 09:24:03",
+    "//": "Last update at 2025/3/31 09:01:03",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -255,6 +255,7 @@
       "stash": true
     }
   },
+  "gitlens.views.branches.showRemoteBranches": true,
   "projectManager.git.baseFolders": ["C:\\Projects"], // customize needed
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
