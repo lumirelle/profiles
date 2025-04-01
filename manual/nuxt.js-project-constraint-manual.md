@@ -1,8 +1,8 @@
 <!-- cSpell:ignore execpath -->
 
-# Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual (Nuxt 2 / Vue 2)
+# Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual
 
-Based on node@^16, npm@^8, nuxt@2.17.3 (vue@2, webpack@4, babel@7, core-js@3).
+Based on node@^16, npm@^8, nuxt@2.17.3 (vue@^2, webpack@^4, babel@^7, core-js@^3), eslint@^8, stylelint@^15, prettier@^3.
 
 ## 0. 更新 vscode 配置
 
@@ -21,7 +21,11 @@ Based on node@^16, npm@^8, nuxt@2.17.3 (vue@2, webpack@4, babel@7, core-js@3).
   },
   // == extensions: lint ==
   "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
-  "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"]
+  "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"],
+  // == extensions: i18n ==
+  "i18n-ally.localesPaths": ["locales", "assets/lang"],
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "modules/{namespaces}/{locale}.json"
 }
 ```
 
@@ -45,12 +49,15 @@ jsconfig.json
 shell
 
 ```shell
+# nuxt
 ni nuxt@2.17.3 -E
-ni -D @nuxt/types@2.17.3 -E
+ni @nuxt/types@2.17.3 -D -E
+
+# nuxt basic dependencies
 ni vue@^2.7.16 webpack@webpack-4 @babel/core@^7.26.1 core-js@^3.41.0
 ```
 
-## 2. 统一包管理工具
+## 2. 限制包管理器
 
 scripts/preinstall.js
 
@@ -64,17 +71,23 @@ if (!isAllowedManager) {
 }
 ```
 
-shell (command `npm pkg` require npm@>=7)
+package.json （添加 preinstall script）
 
-```shell
-na pkg set scripts.preinstall='node ./scripts/preinstall.js'
+```json
+{
+  // ...
+  "scripts": {
+    // ...
+    "preinstall": "node ./scripts/preinstall.js"
+  }
+}
 ```
 
 ## 3. 设置代码检查与格式化
 
-> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了。
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了（等它完全支持 Vue）。
 
-shell
+shell（安装依赖）
 
 ```shell
 # prettier
@@ -84,17 +97,20 @@ ni -D prettier@^3.5.3
 ni -D eslint@^8.57.1
 # eslint module for nuxt2，提供服务端 eslint 支持
 ni -D @nuxtjs/eslint-module@nuxt2
-# eslint plugins
-ni -D eslint-plugin-vue@^9.33.0 eslint-plugin-nuxt@^4.0.0
-# eslint configs
+# eslint configs（捆绑了 eslint-plugin-vue）
 ni -D @nuxtjs/eslint-config@^12.0.0
 
-# eslint plugin for prettier ... Well, you don't really need it
+# eslint plugin for nuxt，提供 SSR 模式某些禁止操作的 lint
+ni -D eslint-plugin-nuxt@^4.0.0
+
 # eslint config for prettier, 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
 ni -D eslint-config-prettier@^10.1.1
+# eslint plugin for prettier ... Not recommended
 
-# Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响
+# Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响（如有）
+# 删除旧的解析器（如有）
 nun babel-eslint
+# 安装新的解析器
 ni -D @babel/eslint-parser@^7.26.10
 ```
 
@@ -105,8 +121,6 @@ module.exports = {
   root: true,
   // 自定义解析器
   parserOptions: {
-    // 修改的是 parserOptions 这里的 parser ！！！
-    // parser 由 babel-eslint 换成 @babel/eslint-parser
     parser: '@babel/eslint-parser',
     // 设置为无需 babel 配置文件
     requireConfigFile: false,
@@ -115,7 +129,7 @@ module.exports = {
 
   // 继承共享配置 configs 或插件 plugins 的推荐配置
   extends: [
-    // 内含了 plugin:vue/recommended
+    // 包含了 plugin:vue/recommended
     '@nuxtjs',
     'plugin:nuxt/recommended',
     // 必须将 prettier 放在最后
@@ -128,7 +142,7 @@ module.exports = {
     commonjs: true,
     es6: true,
   },
-  // 加载插件（扩展的插件会自动加载，无需配置）
+  // 加载插件（extends 了的插件会自动加载，无需再设置）
   plugins: [],
   // 自定义规则
   rules: {
@@ -170,9 +184,11 @@ export default {
 
 ## 4. 设置样式检查与格式化
 
-> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了。
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了（等它完全支持 Vue）。
 
-stylelint-config-recommende-vue 未对依赖做精细版本限制，导致依赖 stylelint-config-recommended 解析为最新不支持 node@16 的版本，需要配置 resolutions 来解决：
+stylelint-config-recommende-vue 未对依赖 stylelint-config-recommended 做精细版本限制，导致依赖解析到最新版本，不支持 node@^16。
+
+为此，需要通过配置 overrides（require npm@^8.3.0）或 resolutions（require yarn）来解决：
 
 package.json
 
@@ -185,20 +201,21 @@ package.json
 }
 ```
 
-shell
+shell（安装依赖）
 
 ```shell
 # stylelint
 ni -D stylelint@^15.11.0
 # stylelint module for nux，类同 eslint-module
 ni -D @nuxtjs/stylelint-module@nuxt2
-# stylelint configs
+# stylelint configs（捆绑了 stylelint-order）
 ni -D stylelint-config-recommended-scss@^13.1.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-clean-order@^7.0.0
 
-# eslint plugin & config for prettier ... Well, you don't really need them
+# stylelint config & plugin for prettier ... Unnecessary after stylelint 15
 
 # stylelint 需要 postcss 解析器提供语法解析支持（地位可以说是类同 babel）
-ni -D postcss-html@^1.8.0 postcss-scss@^4.0.9
+# 然鹅，stylelint-config-recommended-vue 和 stylelint-config-recommended-scss 捆绑了这两个解析器依赖，因此，无需主动安装
+# ni -D postcss-html@^1.8.0 postcss-scss@^4.0.9
 ```
 
 stylelint.config.js
@@ -224,7 +241,6 @@ module.exports = {
     'stylelint-config-clean-order',
   ],
 
-  plugins: [],
   rules: {
     // stylelint-config-recommended
     'block-no-empty': [true, { severity: 'warning' }],
@@ -265,7 +281,7 @@ export default {
 
 ## 5. 引入 sass 支持和 @nuxtjs/style-resources
 
-shell
+shell（安装依赖）
 
 ```shell
 # 限制 node 版本的罪魁祸首！
@@ -315,15 +331,21 @@ export default {
 
 ## 6. 配置 npm 快速检查/修复脚本和 eslint、stylelint 忽略文件
 
-shell
+package.json
 
-```shell
-na pkg set scripts.lint:js='eslint --ignore-path .eslintignore --ext .js,.vue .'
-na pkg set scripts.fix:js='eslint --fix --ignore-path .eslintignore --ext .js,.vue .'
-na pkg set scripts.lint:style='stylelint --ignore-path .stylelintignore **/*.{css,scss,html,vue}'
-na pkg set scripts.fix:style='stylelint --fix --ignore-path .stylelintignore **/*.{css,scss,html,vue}'
-na pkg set scripts.lint='npm run lint:js && npm run lint:style'
-na pkg set scripts.fix='npm run fix:js && npm run fix:style'
+```json
+{
+  // ...
+  "scripts": {
+    // ...
+    "lint:js": "eslint --ignore-path .eslintignore --ext .js,.vue .",
+    "fix:js": "eslint --fix --ignore-path .eslintignore --ext .js,.vue .",
+    "lint:style": "stylelint --ignore-path .stylelintignore **/*.{css,scss,html,vue}",
+    "fix:style": "stylelint --fix --ignore-path .stylelintignore **/*.{css,scss,html,vue}",
+    "lint": "npm run lint:js && npm run lint:style",
+    "fix": "npm run fix:js && npm run fix:style"
+  }
+}
 ```
 
 .eslintignore
@@ -418,25 +440,37 @@ app.html
 
 ## 7. 配置提交检查/修复
 
-shell
+shell（安装依赖）
 
 ```shell
 ni -D husky@^8.0.3 lint-staged@^14.0.1
 ```
 
-shell
+package.json
 
-```shell
-# 删除 package.json 中的配置
-na pkg delete husky
-na pkg delete lint-staged
+```json
+{
+  // 添加 prepare script
+  "scripts": {
+    // ...
+    "prepare": "husky install"
+  }
+
+  // ...
+
+  // 删除 package.json 中的 husky、lint-staged 配置
+  // "husky": {
+  //   ...
+  // },
+  // "lint-staged": {
+  //   ...
+  // },
+}
 ```
 
-shell
+shell（配置 husky）
 
 ```shell
-# 配置 husky@8
-na pkg set scripts.prepare='husky install'
 nr prepare
 nlx husky add .husky/pre-commit 'npx lint-staged'
 ```
@@ -455,6 +489,8 @@ nlx husky add .husky/pre-commit 'npx lint-staged'
 ```
 
 ## 8. 设置 webpack 打包优化
+
+shell（安装依赖）
 
 ```shell
 ni nuxt-precompress@^0.5.9
@@ -556,16 +592,218 @@ export default {
 
 ## 9. 项目兼容性
 
-polyfill (shell)
+### Polyfill
+
+shell（安装依赖）
 
 ```shell
-# babel@7 后不再维护 babel-polyfill，需要转为使用 core-js/stable
+# babel@7 后不再维护 babel-polyfill，转为使用 core-js/stable
 nun babel-polyfill
 ```
+
+### Broswers List
 
 .browserslistrc
 
 ```browserslist
 > 1%
 last 2 versions
+```
+
+### Cross Env
+
+shell（安装依赖）
+
+```shell
+# 为环境变量提供跨平台兼容性
+ni -D cross-env
+```
+
+package.json（设置了环境变量的 npm scripts，改为通过 cross-env 来执行）
+
+```json
+{
+  // ...
+  "scripts": {
+    // ...
+    // 设置了环境变量，改为通过 cross-env 来执行
+    "dev": "cross-env NODE_ENV=localDevelopment nuxt --max_old_space_size=16384",
+    "build:dev": "cross-env NODE_ENV=development nuxt build",
+    "build:test": "cross-env NODE_ENV=tests nuxt build",
+    "build:preprod": "cross-env NODE_ENV=preprod nuxt build",
+    "build:prod": "cross-env NODE_ENV=production nuxt build",
+    // 没设置环境变量，无需改变
+    "start": "nuxt start"
+  }
+}
+```
+
+## 10. 项目可维护性
+
+shell（安装依赖）
+
+```shell
+ni -D rimraf@v5-legacy
+```
+
+package.json
+
+```json
+{
+  // ...
+  "scripts": {
+    // ...
+    "clean": "npm run clean:dist && npm run clean:modules",
+    "clean:dist": "rimraf .nuxt",
+    "clean:modules": "rimraf node_modules"
+  }
+}
+```
+
+## 11. 项目国际化（Vue i18n）
+
+locales/index.js
+
+```js
+import VueI18n from 'vue-i18n'
+import Vue from 'vue'
+
+import elementMessagesInEN from 'element-ui/lib/locale/lang/en'
+import elementMessagesInZH from 'element-ui/lib/locale/lang/zh-CN'
+import elementLocale from 'element-ui/lib/locale'
+
+Vue.use(VueI18n)
+
+const SUPPORT_LANGUAGES = ['en', 'zh-CN']
+
+// 1. 初始化 messages
+const messages = SUPPORT_LANGUAGES.reduce((messages, language) => {
+  messages[language] = {}
+  return messages
+}, {})
+
+// 2. 获取并设置所有模块的语言内容
+const modules = require.context('./modules', true, /\.json$/)
+
+// 拆分后进行排序，保证层级多的放在后面，防止被覆盖
+// 例如，level1/level2/level3/zh-CN.json，level1/level2/zh-CN.json, 在后面给level1设置level2时会将刚才的level2覆盖
+// 长度越长，越靠后，也可以在下面进行处理，但是我觉得这样会快一点
+const keys = modules.keys()
+const afterSplitAndSort = keys
+  .map((path) => ({ names: path.split('/'), path }))
+  .sort((a, b) => a.names.length - b.names.length)
+
+// 用于存储已处理的模块，用于校验配对
+const processedModules = new Map()
+
+afterSplitAndSort.forEach(({ names, path }) => {
+  const namespaces = names.slice(1, names.length - 1) // 语言文件命名空间
+  const language = names[names.length - 1].split('.')[0] // 语言文件名
+  const message = modules(path) // 语言文件内容
+
+  // 校验语言文件名
+  if (!SUPPORT_LANGUAGES.includes(language)) {
+    console.warn(`[i18n] 警告: 文件 ${path} 不是有效的语言文件，应为 ${SUPPORT_LANGUAGES.join(', ')} 之一`)
+    return
+  }
+
+  // 处理语言文件内容
+  let root = messages[language]
+  // 构建命名空间结构
+  let idx = 0
+  while (idx < namespaces.length - 1) {
+    const leafKey = namespaces[idx]
+    if (!Reflect.get(root, leafKey)) {
+      Reflect.set(root, leafKey, {})
+    }
+    root = Reflect.get(root, leafKey)
+    idx++
+  }
+  // 为构建出的最后一个命名空间层级，设置翻译内容
+  Reflect.set(root, namespaces[namespaces.length - 1], message)
+
+  // 记录已处理的模块
+  const folderPath = namespaces.join('/')
+  if (!processedModules.has(folderPath)) {
+    processedModules.set(folderPath, new Set())
+  }
+  processedModules.get(folderPath).add(language)
+})
+
+// 校验语言文件配对
+processedModules.forEach((files, folderPath) => {
+  if (files.size !== SUPPORT_LANGUAGES.length) {
+    console.warn(
+      `[i18n] 警告: 文件夹 ${folderPath} 缺少必须的语言文件，当前为: ${Array.from(files).join(
+        ', '
+      )}, 应为: ${SUPPORT_LANGUAGES.join(', ')}`
+    )
+  }
+})
+
+// 3. 合并饿了么组件库的国际化
+const elementMessages = {
+  en: elementMessagesInEN,
+  'zh-CN': elementMessagesInZH,
+}
+for (const language of SUPPORT_LANGUAGES) {
+  messages[language] = { ...messages[language], ...elementMessages[language] }
+}
+
+// 4. 初始化 VueI18n 实例
+const i18n = new VueI18n({
+  locale: 'en',
+  fallbackLocale: 'en', // 语言环境中不存在相应massage键时回退到英语
+  messages,
+  silentTranslationWarn: true,
+  // 处理复数形式的规则，例如：
+  // modules/xxx/en.json
+  // {
+  //   "apple": {
+  //     "0": "1 apple",    // 单数
+  //     "1": "{n} apples"  // 复数，其中 key 为 pluralizationRules 返回值
+  //   }
+  // }
+  // xxx.js
+  // $t('apple', { n: 1 })  // 输出: "1 apple"，其中 n 为 choice
+  // $t('apple', { n: 2 })  // 输出: "2 apples"
+  pluralizationRules: {
+    en: (choice) => {
+      return choice <= 1 ? 0 : 1
+    },
+  },
+})
+
+export default function ({ app }) {
+  const locale = app.$cookies.get('language')
+
+  if (!app.i18n) {
+    app.i18n = i18n
+  }
+
+  i18n.locale = locale
+
+  elementLocale.i18n((key, value) => app.i18n.t(key, value))
+}
+
+export { i18n }
+```
+
+项目结构
+
+```text
+-- locales
+
+  -- modules
+
+    -- module-a
+      -- sub-module
+        -- en.json
+        -- zh-CN.json
+
+    -- module-b
+      -- en.json
+      -- zh-CN.json
+
+  -- index.js
 ```

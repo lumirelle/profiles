@@ -31,10 +31,7 @@ Development profiles or something else.
 
 - constraint: Constraint profiles like `.editorconfig`
 
-  - cspell-rules
-
-    - .cspell.dev.txt
-
+  - .cspell.dev.txt
   - .editorconfig
   - .markdownlint.yml
   - .prettierrc.yml
@@ -122,13 +119,21 @@ Development profiles or something else.
     - NerdFontsSymbolsOnly.zip
     - README.md
 
+- scripts: Profiles setup scripts
+
+  - setup.ps1
+
 - templates: Profile templates like Dockerfile
 
   - docker
 
     - dockerfile
 
-      - node.js/Dockerfile
+      - nuxt.js
+
+        - Dockerfile
+        - .dockerignore
+
       - spring-boot/Dockerfile
       - tomcat/Dockerfile
 
@@ -137,6 +142,10 @@ Development profiles or something else.
 ## 🎈 Usage <a name="usage"></a>
 
 Just download the profiles you want and put it on the right place.
+
+Or you can use [the setup script](scripts/setup.ps1) for quick setup and receive the updates automatically.
+
+Use PowerShell command `help ./scripts/setup.ps1 -Full` for more detail.
 
 ## ✍️ Authors <a name="authors"></a>
 

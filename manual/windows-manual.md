@@ -106,7 +106,11 @@
   | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |
   | No!! MeiryoUI        | <https://github.com/Tatsu-syo/noMeiryoUI/releases>                 |
 
-### 3. 维护
+### 3. 设置必要软件
+
+使用 [setup.ps1](../scripts/setup.ps1)。
+
+### 4. 维护
 
 - 定期使用 Revo Uninstaller 卸载无用软件
 - 定期使用 DISM++ 清理系统

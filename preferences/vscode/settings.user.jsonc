@@ -37,7 +37,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/3/27 11:48:43",
+    "//": "Last update at 2025/3/31 09:01:03",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -99,7 +99,7 @@
     "*.component.ts": "$(capture).component.html, $(capture).component.spec.ts, $(capture).component.css, $(capture).component.scss, $(capture).component.sass, $(capture).component.less",
     "*.cpp": "$(capture).hpp, $(capture).h, $(capture).hxx, $(capture).hh",
     "*.cs": "$(capture).*.cs",
-    "*.cshtml": "$(capture).cshtml.cs",
+    "*.cshtml": "$(capture).cshtml.cs, $(capture).cshtml.css",
     "*.csproj": "*.config, *proj.user, appsettings.*, bundleconfig.json",
     "*.css": "$(capture).css.map, $(capture).*.css",
     "*.cxx": "$(capture).hpp, $(capture).h, $(capture).hxx, $(capture).hh",
@@ -179,6 +179,7 @@
   // == extensions: lint ==
   "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
   "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"],
+  "sonarlint.pathToNodeExecutable": "C:\\Users\\JustAdmin\\AppData\\Local\fnm_multishells\\15872_1743424053958\\node.exe", // customize needed
   "cSpell.customDictionaries": {
     "dev": {
       "name": "dev",
@@ -255,6 +256,7 @@
       "stash": true
     }
   },
+  "gitlens.views.branches.showRemoteBranches": true,
   "projectManager.git.baseFolders": ["C:\\Projects"], // customize needed
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
