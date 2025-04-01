@@ -1,21 +1,16 @@
 # 请将该 Dockerfile 放在后端项目的根目录下
 FROM tomcat:9-jre21
 LABEL authors="Lyana-nullptr"\
-  description="基于 Tomcat 9 构建的用于运行 Java Web 后端项目的镜像"
-
-# 环境变量
-ARG ARTIFACT_PATH=""
-ENV ENV_ARTIFACT_PATH=${ARTIFACT_PATH}
-ENV SERVER_PORT=8080
+  description="基于 Tomcat 9 构建的用于运行 Tomcat 后端项目的镜像"
 
 # 工作目录
 WORKDIR /usr/local/tomcat/webapps/
 
-# 复制 .war 文件
-COPY ${ENV_ARTIFACT_PATH} /tmp
-RUN if [ -d "/tmp" ]; then mv /tmp/*.war app.war; fi && rm -rf /tmp
+# 复制并重命名最新的 .war 文件
+COPY /target/artifacts/*.war .
+RUN mv $(ls -t -- *.war | head -n1) app.war
 
 # 启动参数
-EXPOSE ${SERVER_PORT}
+EXPOSE 8080
 
 ENTRYPOINT ["catalina.sh", "run"]

@@ -15,6 +15,7 @@ encryptlong
 eruda
 gapi
 geoip
+graalvm
 gsap
 gtag
 hellojs
@@ -41,6 +42,7 @@ pwsh
 pxtorem
 qrcode
 qrcodejs
+requirepass
 runjs
 screenfull
 stylelintignore
