@@ -3,7 +3,9 @@ augroup
 autocmd
 autocmds
 axios
+backtop
 bignumber
+cascader
 colour
 commitlint
 cleartype
@@ -32,6 +34,7 @@ miniconda
 mvvm
 nologo
 nullptr
+nuxi
 nuxt
 nuxtjs
 nuxtrc
