@@ -2,12 +2,7 @@
 
 # Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual
 
-Based on node@^16.20.2 (npm@^8.19.4), 以下称为 **Old LTS**:
-
-- nuxt@2.17.3 (vue@^2, webpack@^4, babel@^7, core-js@^3)
-- eslint@^8, stylelint@^15, prettier@^3
-
-Based on node^18.20.7 (npm@^10.8.2)，以下称为 **Legacy LTS**:
+Based on node^18.20.7 (npm@^10.8.2):
 
 - nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
 - eslint@^8, stylelint@^16, prettier@^3
@@ -56,14 +51,7 @@ jsconfig.json
 
 ## 1. 基础依赖升级
 
-shell（For Old LTS）
-
-```shell
-ni nuxt@2.17.3 -E
-ni @nuxt/types@2.17.3 -D -E
-```
-
-shell（For Legacy LTS）
+shell
 
 ```shell
 ni nuxt@^2.18.1
@@ -72,22 +60,7 @@ ni @nuxt/types@^2.18.1 -D
 
 ## 2. 限制包管理器
 
-package.json（For Old LTS）
-
-```json
-{
-  // ...
-  "engines": {
-    "node": ">= 16.20.2",
-    "npm": ">= 8.19.4",
-    "yarn": "Please use npm instead of yarn to install dependencies",
-    "pnpm": "Please use npm instead of pnpm to install dependencies"
-  },
-  "packageManager": "npm@8.19.4"
-}
-```
-
-package.json（For Legacy LTS）
+package.json
 
 ```json
 {
@@ -462,45 +435,14 @@ app.html
 
 ## 7. 配置提交检查/修复
 
-shell（安装依赖，For Old LTS）
-
-```shell
-ni husky@^8.0.3 lint-staged@^14.0.1 -D
-```
-
-shell（安装依赖，For Legacy LTS）
+shell（安装依赖，配置 husky）
 
 ```shell
 ni husky@^9.1.7 lint-staged@^15.5.0 -D
-```
 
-package.json
+nlx husky init
 
-```json
-{
-  // 添加 prepare script
-  "scripts": {
-    // ...
-    "prepare": "husky install"
-  }
-
-  // ...
-
-  // 删除 package.json 中的 husky、lint-staged 配置
-  // "husky": {
-  //   ...
-  // },
-  // "lint-staged": {
-  //   ...
-  // },
-}
-```
-
-shell（配置 husky）
-
-```shell
-nr prepare
-nlx husky add .husky/pre-commit 'npx lint-staged'
+echo 'npx lint-staged' > .husky/pre-commit
 ```
 
 .lintstagedrc.yaml

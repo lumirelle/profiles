@@ -1,8 +1,6 @@
 # Node.js 包管理器 - NPM 手册 Node.js Package Manager - NPM Manual
 
-Based on node@^16.20.2 (npm@^8.19.4), 以下称为 **Old LTS**。
-
-Based on node^18.20.7 (npm@^10.8.2)，以下称为 **Legacy LTS**。
+Based on node^18.20.7 (npm@^10.8.2)。
 
 NOTE：未指明何种 LTS 则表示二者都适用。
 
@@ -14,19 +12,7 @@ Node.js 包管理器（Node.js Package Manager），和 Node.js ~~捆绑销售~~
 
 ### 1. 配置 & 切换镜像源
 
-Shell（For Old LTS）
-
-```shell
-npm i -g nrm@1.3.1
-
-# https://registry.npmjs.org/
-nrm use npm
-# https://registry.npmmirror.com/
-nrm use taobao
-# ...
-```
-
-Shell（For Legacy LTS）
+shell
 
 ```shell
 npm i -g nrm
