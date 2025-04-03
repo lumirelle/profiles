@@ -62,10 +62,10 @@ param (
   [string]$Purpose = 'self'
 )
 
-Write-Debug 'Parameters:`n'
-Write-Debug "TargetDir = $TargetDir`n"
-Write-Debug "IgnoreFiles = $IgnoreFiles`n"
-Write-Debug "Force = $Force`n"
+Write-Debug "Parameters:"
+Write-Debug "TargetDir = $TargetDir"
+Write-Debug "IgnoreFiles = $IgnoreFiles"
+Write-Debug "Force = $Force"
 Write-Debug "Purpose = $Purpose`n"
 
 # == INIT ==
