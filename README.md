@@ -29,6 +29,14 @@
 
 Development profiles or something else.
 
+Purpose Dir Structure:
+
+- general: For any situation
+- self: For self usage
+- work: For working (ignore by git)
+
+Sub Dir Structure:
+
 - constraint: Constraint profiles like `.editorconfig`
 
   - .cspell.dev.txt
@@ -40,11 +48,15 @@ Development profiles or something else.
 
   - git-manual.md
   - node.js-manual.md
+  - node.js-pm-npm-manual.md
+  - node.js-pm-yarn-manual.md
+  - nuxt.js-manual.md
+  - nuxt.js-project-constraint-manual.md
   - prefabricated-dish-manual.md
   - web-front-end-manual.md
   - windows-manual.md
 
-- preferences: Preferences profiles like `.gitconfig`
+- preferences: Preferences profiles like `.zshrc`
 
   - clash-for-windows
 
@@ -55,12 +67,9 @@ Development profiles or something else.
 
     - .gitconfig
 
-  - jetbrains (outdated)
+  - jetbrains (need update)
 
-    - mobi.hsz.idea.gitignore
-
-      - ForIDEA.xml
-
+    - mobi.hsz.idea.gitignore/ForIDEA.xml
     - plugins-installed.txt
 
   - maven
@@ -69,9 +78,6 @@ Development profiles or something else.
 
   - node.js
 
-    - .npmrc
-    - .nuxtrc
-    - .yarnrc
     - volta.hooks.jsonc
 
   - nvim
@@ -88,9 +94,9 @@ Development profiles or something else.
 
     - Microsoft.PowerShell_profile.ps1
 
-  - vim
+  - vim (need update)
 
-    - .ideavimrc (outdated)
+    - .ideavimrc
 
   - vs
 
@@ -115,13 +121,9 @@ Development profiles or something else.
 
   - fonts
 
-    - LxgwBrightCode.zip
+    - LxgwBrightCodeTC.zip
     - NerdFontsSymbolsOnly.zip
     - README.md
-
-- scripts: Profiles setup scripts
-
-  - setup.ps1
 
 - templates: Profile templates like Dockerfile
 
@@ -143,9 +145,9 @@ Development profiles or something else.
 
 Just download the profiles you want and put it on the right place.
 
-Or you can use [the setup script](scripts/setup.ps1) for quick setup and receive the updates automatically.
+Or you can use [the setup script](setup.ps1) for quick setup and receive the updates automatically.
 
-Use PowerShell command `help ./scripts/setup.ps1 -Full` for more detail.
+Use PowerShell command `help ./setup.ps1 -Full` for more detail.
 
 ## ✍️ Authors <a name="authors"></a>
 

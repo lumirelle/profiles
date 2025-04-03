@@ -11,52 +11,73 @@
 .PARAMETER Force
   Force to override the existing files
 
+.PARAMETER Purpose
+  The purpose of the profiles, expected values: `self`, `work`
+
+  It is designed for my self, because no one will upload his working profile to github.
+
 .EXAMPLE
   .\scripts\setup.ps1 -TargetDir "C:\Projects"
 
-  This will clone this repository to `C:\Projects\profiles` and create the symbolic links to your computer, so than you can receive the updates automatically.
+  This will clone this repository to `C:\Projects\profiles` and create the symbolic links of supported profiles to your computer, so that you can receive the updates automatically.
+
+.EXAMPLE
+  .\scripts\setup.ps1 -TargetDir "C:\Projects" -UserIgnoreFiles ".gitconfig,.npmrc,.zshrc"
 
   If you want to ignore some files, you can add them to the `UserIgnoreFiles` parameter.
 
-  .\scripts\setup.ps1 -TargetDir "C:\Projects" -UserIgnoreFiles ".gitconfig,.npmrc,.zshrc"
-
   This will ignore `.gitconfig`, `.npmrc` and `.zshrc`.
+
+.EXAMPLE
+  .\scripts\setup.ps1 -TargetDir "C:\Projects" -Force
 
   If you want to force override the existing files, you can add the `Force` parameter.
 
-  .\scripts\setup.ps1 -TargetDir "C:\Projects" -Force
-
   This will force override the existing files.
+
+.EXAMPLE
+  .\scripts\setup.ps1 -TargetDir "C:\Projects" -Purpose "work"
+
+  If you want to use a specific purpose, you can add the `Purpose` parameter.
+
+  This will use configs designed for work.
 #>
 
 param (
   [Parameter(Mandatory = $true)]
   [Alias("t")]
   [string]$TargetDir,
+
   [Parameter(Mandatory = $false)]
   [Alias("i")]
   [string[]]$UserIgnoreFiles = @(),
+
   [Parameter(Mandatory = $false)]
   [Alias("f")]
-  [switch]$Force
+  [switch]$Force,
+
+  [Parameter(Mandatory = $false)]
+  [Alias("p")]
+  [ValidateSet('self', 'work')]
+  [string]$Purpose = 'self'
 )
 
 # == INIT ==
 # 仓库地址
 $GIT_REPO_URL = "https://github.com/Lyana-nullptr/profiles.git"
 
+# TODO: Support `general/preferences/clash-for-windows`
 # 配置文件目录 Name -> Path
 $PROFILE_FOLDERS = @(
-  @{Name = "constraint"; Path = '~' },
-  @{Name = "preferences/git"; Path = '~' },
-  @{Name = "preferences/maven"; Path = '~/.m2' },
-  @{Name = "preferences/node.js"; Path = '~' },
-  @{Name = "preferences/nvim"; Path = "$env:USERPROFILE/AppData/Local/nvim" },
-  @{Name = "preferences/powershell"; Path = Split-Path -Path $PROFILE -Parent }
+  @{Name = "general/constraint"; Path = '~' },
+  @{Name = "$Purpose/preferences/git"; Path = '~' },
+  @{Name = "general/preferences/maven"; Path = '~/.m2' },
+  @{Name = "general/preferences/nvim"; Path = "$env:USERPROFILE/AppData/Local/nvim" },
+  @{Name = "general/preferences/powershell"; Path = Split-Path -Path $PROFILE -Parent }
 )
 
 # 忽略文件
-$IGNORE_FILES = @("wrk.gitconfig", "volta.hooks.jsonc") + $UserIgnoreFiles
+$IGNORE_FILES = @() + $UserIgnoreFiles
 
 # == CHECK ==
 # 如果 TargetDir 不存在，则创建
@@ -71,7 +92,7 @@ if (-not (Test-Path $ProfilesDir)) {
 }
 
 # == SETUP ==
-Write-Host "开始创建符号链接..." -ForegroundColor Green
+Write-Host "Start to setup profiles...`n" -ForegroundColor Green
 
 # 创建符号链接
 foreach ($folder in $PROFILE_FOLDERS) {
@@ -81,6 +102,12 @@ foreach ($folder in $PROFILE_FOLDERS) {
   foreach ($file in $files) {
     # 如果 $file.Name 在 $IGNORE_FILES 中，则跳过
     if ($IGNORE_FILES -contains $file.Name) {
+      Write-Host "忽略文件: $($file.Name)" -ForegroundColor Cyan
+      continue
+    }
+
+    # 如果是 for-work 目录，则跳过
+    if ($file.Name -eq "for-work") {
       Write-Host "忽略文件: $($file.Name)" -ForegroundColor Cyan
       continue
     }
@@ -98,17 +125,17 @@ foreach ($folder in $PROFILE_FOLDERS) {
     # 如果目标文件已存在
     if (Test-Path $targetPath) {
       if ($Force) {
-        Write-Host "文件已存在: $relativePath, 将强制覆盖" -ForegroundColor Yellow
+        Write-Host "File already exists: $relativePath, will force override" -ForegroundColor Yellow
       }
       else {
-        Write-Host "文件已存在: $relativePath, 将跳过" -ForegroundColor Yellow
+        Write-Host "File already exists: $relativePath, will skip" -ForegroundColor Yellow
         continue
       }
     }
 
     # 创建符号链接
     New-Item -ItemType SymbolicLink -Path $targetPath -Target $file.FullName -Force:$Force > $null
-    Write-Host "已创建符号链接: $relativePath -> $($file.FullName)"
+    Write-Host "Created symbolic link: $targetPath -> $($file.FullName)`n"
   }
 }
 
