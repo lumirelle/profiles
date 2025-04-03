@@ -5,7 +5,7 @@
 .PARAMETER TargetDir
   The directory you want to store profiles
 
-.PARAMETER UserIgnoreFiles
+.PARAMETER IgnoreFiles
   The files you want to ignore, separated by comma
 
 .PARAMETER Force
@@ -24,7 +24,7 @@
 .EXAMPLE
   .\scripts\setup.ps1 -TargetDir "C:\Projects" -UserIgnoreFiles ".gitconfig,.npmrc,.zshrc"
 
-  If you want to ignore some files, you can add them to the `UserIgnoreFiles` parameter.
+  If you want to ignore some files, you can add them to the `IgnoreFiles` parameter.
 
   This will ignore `.gitconfig`, `.npmrc` and `.zshrc`.
 
@@ -50,7 +50,7 @@ param (
 
   [Parameter(Mandatory = $false)]
   [Alias("i")]
-  [string[]]$UserIgnoreFiles = @(),
+  [string[]]$IgnoreFiles = @(),
 
   [Parameter(Mandatory = $false)]
   [Alias("f")]
@@ -62,6 +62,12 @@ param (
   [string]$Purpose = 'self'
 )
 
+Write-Debug 'Parameters:`n'
+Write-Debug "TargetDir = $TargetDir`n"
+Write-Debug "IgnoreFiles = $IgnoreFiles`n"
+Write-Debug "Force = $Force`n"
+Write-Debug "Purpose = $Purpose`n"
+
 # == INIT ==
 # 仓库地址
 $GIT_REPO_URL = "https://github.com/Lyana-nullptr/profiles.git"
@@ -69,15 +75,15 @@ $GIT_REPO_URL = "https://github.com/Lyana-nullptr/profiles.git"
 # TODO: Support `general/preferences/clash-for-windows`
 # 配置文件目录 Name -> Path
 $PROFILE_FOLDERS = @(
+  # General
   @{Name = "general/constraint"; Path = '~' },
-  @{Name = "$Purpose/preferences/git"; Path = '~' },
   @{Name = "general/preferences/maven"; Path = '~/.m2' },
   @{Name = "general/preferences/nvim"; Path = "$env:USERPROFILE/AppData/Local/nvim" },
   @{Name = "general/preferences/powershell"; Path = Split-Path -Path $PROFILE -Parent }
+  # With Purpose
+  @{Name = "$Purpose/constraint"; Path = '~' },
+  @{Name = "$Purpose/preferences/git"; Path = '~' }
 )
-
-# 忽略文件
-$IGNORE_FILES = @() + $UserIgnoreFiles
 
 # == CHECK ==
 # 如果 TargetDir 不存在，则创建
@@ -88,6 +94,7 @@ if (-not (Test-Path $TargetDir)) {
 # 如果 TargetDir/profiles 不存在，则克隆仓库
 $ProfilesDir = Join-Path $TargetDir "profiles"
 if (-not (Test-Path $ProfilesDir)) {
+  Write-Host 'No profiles locally, clone repository...'
   git clone $GIT_REPO_URL $ProfilesDir > $null
 }
 
@@ -98,17 +105,16 @@ Write-Host "Start to setup profiles...`n" -ForegroundColor Green
 foreach ($folder in $PROFILE_FOLDERS) {
   # 获取目标目录 $folder.Path 下的所有文件
   $SourceDir = Join-Path $ProfilesDir $folder.Name
+  if (-not (Test-Path $SourceDir)) {
+    Write-Debug "Source directory not found: $SourceDir, skip"
+    continue
+  }
+
   $files = Get-ChildItem -Path $SourceDir -Recurse -File
   foreach ($file in $files) {
-    # 如果 $file.Name 在 $IGNORE_FILES 中，则跳过
-    if ($IGNORE_FILES -contains $file.Name) {
-      Write-Host "忽略文件: $($file.Name)" -ForegroundColor Cyan
-      continue
-    }
-
-    # 如果是 for-work 目录，则跳过
-    if ($file.Name -eq "for-work") {
-      Write-Host "忽略文件: $($file.Name)" -ForegroundColor Cyan
+    # 如果 $file.Name 在 $IgnoreFiles 中，则跳过
+    if ($IgnoreFiles -contains $file.Name) {
+      Write-Host "Ignore files: $($file.Name)" -ForegroundColor Cyan
       continue
     }
 
