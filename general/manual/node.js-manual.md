@@ -22,12 +22,12 @@ echo 'fnm env --use-on-cd --corepack-enabled --shell powershell | Out-String | I
 # 设置镜像源（系统环境变量），重启终端或系统
 # FNM_NODE_DIST_MIRROR = https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
 
-# 安装 node 22 并设为默认
-fnm install 22
+# 安装 node 18 并设为默认
+fnm install 18
 
 # 设置项目 node 版本，并重启你的终端
 cd a-node-project
-echo '22.14.0' > .nvmrc
+echo 'v18.20.7' > .nvmrc
 
 # 全局安装 @antfu/ni
 npm install -g @antfu/ni
@@ -41,3 +41,9 @@ ni
 
 - pnpm 需要 node 18+
 - node-sass 对 Node.js 版本有严格要求，会导致依赖安装失败/程序运行失败。node-sass ^4.14 最高仅支持到 node 14。强烈推荐将 node-sass 迁移至 sass，详见 <https://www.npmjs.com/package/node-sass?activeTab=readme#node-version-support-policy>。
+
+### 3. 包管理器
+
+- [npm](node.js-pm-npm-manual.md)
+- [yarn](node.js-pm-yarn-manual.md)
+- ...

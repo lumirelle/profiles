@@ -1,9 +1,12 @@
+adduser
 airwallex
 augroup
 autocmd
 autocmds
 axios
+backtop
 bignumber
+cascader
 colour
 commitlint
 cleartype
@@ -30,12 +33,15 @@ lyana
 mathjs
 miniconda
 mvvm
+nodir
 nologo
 nullptr
+nuxi
 nuxt
 nuxtjs
 nuxtrc
 nvim
+opencollective
 oppo
 preprod
 pwsh
@@ -48,6 +54,7 @@ screenfull
 stylelintignore
 taliwind
 talkingdata
+taobao
 tawk
 tiktok
 trustpilot

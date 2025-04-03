@@ -2,7 +2,17 @@
 
 # Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual
 
-Based on node@^16, npm@^8, nuxt@2.17.3 (vue@^2, webpack@^4, babel@^7, core-js@^3), eslint@^8, stylelint@^15, prettier@^3.
+Based on node@^16.20.2 (npm@^8.19.4), 以下称为 **Old LTS**:
+
+- nuxt@2.17.3 (vue@^2, webpack@^4, babel@^7, core-js@^3)
+- eslint@^8, stylelint@^15, prettier@^3
+
+Based on node^18.20.7 (npm@^10.8.2)，以下称为 **Legacy LTS**:
+
+- nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
+- eslint@^8, stylelint@^16, prettier@^3
+
+NOTE：未指明何种 LTS 则表示二者都适用。
 
 ## 0. 更新 vscode 配置
 
@@ -46,40 +56,49 @@ jsconfig.json
 
 ## 1. 基础依赖升级
 
-shell
+shell（For Old LTS）
 
 ```shell
-# nuxt
 ni nuxt@2.17.3 -E
 ni @nuxt/types@2.17.3 -D -E
+```
 
-# nuxt basic dependencies
-ni vue@^2.7.16 webpack@webpack-4 @babel/core@^7.26.1 core-js@^3.41.0
+shell（For Legacy LTS）
+
+```shell
+ni nuxt@^2.18.1
+ni @nuxt/types@^2.18.1 -D
 ```
 
 ## 2. 限制包管理器
 
-scripts/preinstall.js
-
-```js
-const allowedPackageManagers = ['npm']
-const isAllowedManager = allowedPackageManagers.some((manager) => process.env.npm_execpath?.includes(manager))
-
-if (!isAllowedManager) {
-  console.warn(`\u001B[33m 请使用 ${allowedPackageManagers.join('、')} 包管理器！\u001B[39m\n`)
-  process.exit(1)
-}
-```
-
-package.json （添加 preinstall script）
+package.json（For Old LTS）
 
 ```json
 {
   // ...
-  "scripts": {
-    // ...
-    "preinstall": "node ./scripts/preinstall.js"
-  }
+  "engines": {
+    "node": ">= 16.20.2",
+    "npm": ">= 8.19.4",
+    "yarn": "Please use npm instead of yarn to install dependencies",
+    "pnpm": "Please use npm instead of pnpm to install dependencies"
+  },
+  "packageManager": "npm@8.19.4"
+}
+```
+
+package.json（For Legacy LTS）
+
+```json
+{
+  // ...
+  "engines": {
+    "node": ">= 18.20.7",
+    "npm": ">= 10.8.2",
+    "yarn": "Please use npm instead of yarn to install dependencies",
+    "pnpm": "Please use npm instead of pnpm to install dependencies"
+  },
+  "packageManager": "npm@10.8.2"
 }
 ```
 
@@ -91,27 +110,27 @@ shell（安装依赖）
 
 ```shell
 # prettier
-ni -D prettier@^3.5.3
+ni prettier@^3.5.3 -D
 
 # eslint
-ni -D eslint@^8.57.1
+ni eslint@^8.57.1 -D
 # eslint module for nuxt2，提供服务端 eslint 支持
-ni -D @nuxtjs/eslint-module@nuxt2
+ni @nuxtjs/eslint-module@nuxt2 -D
 # eslint configs（捆绑了 eslint-plugin-vue）
-ni -D @nuxtjs/eslint-config@^12.0.0
+ni @nuxtjs/eslint-config@^12.0.0 -D
 
 # eslint plugin for nuxt，提供 SSR 模式某些禁止操作的 lint
-ni -D eslint-plugin-nuxt@^4.0.0
+ni eslint-plugin-nuxt@^4.0.0 -D
 
 # eslint config for prettier, 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
-ni -D eslint-config-prettier@^10.1.1
+ni eslint-config-prettier@^10.1.1 -D
 # eslint plugin for prettier ... Not recommended
 
 # Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响（如有）
 # 删除旧的解析器（如有）
 nun babel-eslint
 # 安装新的解析器
-ni -D @babel/eslint-parser@^7.26.10
+ni @babel/eslint-parser@^7.27.0 -D
 ```
 
 .eslintrc.js
@@ -186,9 +205,9 @@ export default {
 
 > 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了（等它完全支持 Vue）。
 
-stylelint-config-recommende-vue 未对依赖 stylelint-config-recommended 做精细版本限制，导致依赖解析到最新版本，不支持 node@^16。
+stylelint-config-recommende-vue 未对依赖 stylelint-config-recommended 做精细版本限制，导致解析到最新版本，不支持 stylelint@^15，而 nuxt@^2 最高仅支持到 stylelint@^15。
 
-为此，需要通过配置 overrides（require npm@^8.3.0）或 resolutions（require yarn）来解决：
+为此，需要通过配置 overrides（require npm@^8.3.0）来解决：
 
 package.json
 
@@ -205,11 +224,11 @@ shell（安装依赖）
 
 ```shell
 # stylelint
-ni -D stylelint@^15.11.0
+ni stylelint@^15.11.0 -D
 # stylelint module for nux，类同 eslint-module
-ni -D @nuxtjs/stylelint-module@nuxt2
+ni @nuxtjs/stylelint-module@nuxt2 -D
 # stylelint configs（捆绑了 stylelint-order）
-ni -D stylelint-config-recommended-scss@^13.1.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-clean-order@^7.0.0
+ni stylelint-config-recommended-scss@^13.1.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-clean-order@^7.0.0 -D
 
 # stylelint config & plugin for prettier ... Unnecessary after stylelint 15
 
@@ -288,10 +307,10 @@ shell（安装依赖）
 nun node-sass
 
 # sass 和 sass-loader
-ni -D sass@^1.86.0 sass-loader@version-10
+ni sass@^1.86.0 sass-loader@version-10 -D
 
 # nuxt 模块，通过自动导入实现样式 mixin
-ni -D @nuxtjs/style-resources@^1.2.2
+ni @nuxtjs/style-resources@^1.2.2 -D
 ```
 
 nuxt.config.js
@@ -338,12 +357,12 @@ package.json
   // ...
   "scripts": {
     // ...
-    "lint:js": "eslint --ignore-path .eslintignore --ext .js,.vue .",
-    "fix:js": "eslint --fix --ignore-path .eslintignore --ext .js,.vue .",
-    "lint:style": "stylelint --ignore-path .stylelintignore **/*.{css,scss,html,vue}",
-    "fix:style": "stylelint --fix --ignore-path .stylelintignore **/*.{css,scss,html,vue}",
     "lint": "npm run lint:js && npm run lint:style",
-    "fix": "npm run fix:js && npm run fix:style"
+    "lint:js": "eslint --ignore-path .eslintignore --ext .js,.vue .",
+    "lint:style": "stylelint --ignore-path .stylelintignore **/*.{css,scss,html,vue}",
+    "fix": "npm run fix:js && npm run fix:style",
+    "fix:js": "eslint --fix --ignore-path .eslintignore --ext .js,.vue .",
+    "fix:style": "stylelint --fix --ignore-path .stylelintignore **/*.{css,scss,html,vue}"
   }
 }
 ```
@@ -434,16 +453,25 @@ static
 # 忽略 node_modules 目录下文件的语法检查
 node_modules
 
+# 忽略 modules 目录下 plugin.js 文件的语法检查
+modules/**/plugin.js
+
 # 忽略 app.html 文件的语法检查
 app.html
 ```
 
 ## 7. 配置提交检查/修复
 
-shell（安装依赖）
+shell（安装依赖，For Old LTS）
 
 ```shell
-ni -D husky@^8.0.3 lint-staged@^14.0.1
+ni husky@^8.0.3 lint-staged@^14.0.1 -D
+```
+
+shell（安装依赖，For Legacy LTS）
+
+```shell
+ni husky@^9.1.7 lint-staged@^15.5.0 -D
 ```
 
 package.json
@@ -653,9 +681,9 @@ package.json
   // ...
   "scripts": {
     // ...
-    "clean": "npm run clean:dist && npm run clean:modules",
+    "clean": "npm run clean:dist && npm run clean:deps",
     "clean:dist": "rimraf .nuxt",
-    "clean:modules": "rimraf node_modules"
+    "clean:deps": "rimraf package-lock.json && rimraf node_modules"
   }
 }
 ```

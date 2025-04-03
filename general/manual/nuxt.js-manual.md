@@ -1,6 +1,6 @@
 # Nuxt.js 手册 Nuxt.js Manual
 
-Based on node@^16, yarn@^1.22.22, nuxt@2.17.3 (vue@2, webpack@4, babel@7, core-js@3).
+Based on node@^18.20.7, yarn@^1.22.22, nuxt@^2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3).
 
 ## 为什么使用？ Why use it?
 
@@ -28,15 +28,13 @@ Based on node@^16, yarn@^1.22.22, nuxt@2.17.3 (vue@2, webpack@4, babel@7, core-j
 
 其他:
 
-- @nuxt/opencollective: 在本包被安装时展示 opencollective 链接
+- @nuxt/opencollective: 在本包被安装时展示 open collective 链接
 - @nuxt/loading-screen: 项目启动页面
 - @nuxt/telemetry: Nuxt.js 遥测数据收集
 
 ## 最佳使用！ Best practice
 
 ### 1. 配置！ Setup
-
-Nuxt.js 2 的 EOL 致使我们不得不手动完成一部分配置。
 
 ```shell
 nlx create-nuxt-app@4 # requires @antfu/ni
@@ -54,12 +52,6 @@ nlx create-nuxt-app@4 # requires @antfu/ni
 # Development tools: jsconfig.json (Recommended for VS Code if you're not using typescript)
 # Continuous integration: None
 # Version control system: Git
-```
-
-第一次依赖安装会失败，因为 node 版本与 cssnano 所需不符，需要指明 nuxt 版本：
-
-```shell
-ni nuxt@2.17.3 -E
 ```
 
 然后依照 [Nuxt.js Project Constraint Manual](nuxt.js-project-constraint-manual.md) 完成基础设置。

@@ -106,9 +106,9 @@
   | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |
   | No!! MeiryoUI        | <https://github.com/Tatsu-syo/noMeiryoUI/releases>                 |
 
-### 3. 设置必要软件
+### 3. 设置必要配置文件
 
-使用 [setup.ps1](../scripts/setup.ps1)。
+使用 [setup.ps1](../../setup.ps1)。
 
 ### 4. 维护
 
