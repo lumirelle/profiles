@@ -72,17 +72,21 @@ Write-Debug "Purpose = $Purpose`n"
 # 仓库地址
 $GIT_REPO_URL = "https://github.com/Lyana-nullptr/profiles.git"
 
-# TODO: Support `general/preferences/clash-for-windows`
 # 配置文件目录 Name -> Path
 $PROFILE_FOLDERS = @(
   # General
   @{Name = "general/constraint"; Path = '~' },
+  @{Name = "general/preferences/clash-for-windows"; Path = "$env:USERPROFILE/.config/clash" },
   @{Name = "general/preferences/maven"; Path = '~/.m2' },
   @{Name = "general/preferences/nvim"; Path = "$env:USERPROFILE/AppData/Local/nvim" },
   @{Name = "general/preferences/powershell"; Path = Split-Path -Path $PROFILE -Parent }
   # With Purpose
   @{Name = "$Purpose/constraint"; Path = '~' },
   @{Name = "$Purpose/preferences/git"; Path = '~' }
+)
+
+$IgnoreFiles += @(
+  'README.md'
 )
 
 # == CHECK ==
@@ -114,7 +118,7 @@ foreach ($folder in $PROFILE_FOLDERS) {
   foreach ($file in $files) {
     # 如果 $file.Name 在 $IgnoreFiles 中，则跳过
     if ($IgnoreFiles -contains $file.Name) {
-      Write-Host "Ignore files: $($file.Name)" -ForegroundColor Cyan
+      Write-Host "Ignore files: $($file.Name)`n" -ForegroundColor Cyan
       continue
     }
 
