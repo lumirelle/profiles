@@ -37,7 +37,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/3/31 09:01:03",
+    "//": "Last update at 2025/4/4 17:41:53",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -179,7 +179,6 @@
   // == extensions: lint ==
   "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
   "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"],
-  "sonarlint.pathToNodeExecutable": "C:\\Users\\JustAdmin\\AppData\\Local\fnm_multishells\\15872_1743424053958\\node.exe", // customize needed
   "cSpell.customDictionaries": {
     "dev": {
       "name": "dev",
