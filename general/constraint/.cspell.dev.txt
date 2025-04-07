@@ -51,6 +51,7 @@ qrcodejs
 requirepass
 runjs
 screenfull
+setdown
 stylelintignore
 taliwind
 talkingdata
