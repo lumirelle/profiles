@@ -7,8 +7,6 @@ Based on node^18.20.7 (npm@^10.8.2):
 - nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
 - eslint@^8, stylelint@^16, prettier@^3
 
-NOTE：未指明何种 LTS 则表示二者都适用。
-
 ## 0. 更新 vscode 配置
 
 .vscode/settings.json
@@ -66,8 +64,8 @@ package.json
 {
   // ...
   "engines": {
-    "node": ">= 18.20.7",
-    "npm": ">= 10.8.2",
+    "node": ">=18.20.7",
+    "npm": ">=10.8.2",
     "yarn": "Please use npm instead of yarn to install dependencies",
     "pnpm": "Please use npm instead of pnpm to install dependencies"
   },
@@ -135,7 +133,7 @@ module.exports = {
     es6: true,
   },
   // 加载插件（extends 了的插件会自动加载，无需再设置）
-  plugins: [],
+  // plugins: [],
   // 自定义规则
   rules: {
     'vue/multi-word-component-names': 'warn',
@@ -146,19 +144,15 @@ module.exports = {
     eqeqeq: 'warn',
     camelcase: 'warn',
   },
-  // 定义全局已有的变量，消除变量未定义
-  globals: {
-    // ...
-  },
 }
 ```
 
 .prettierrc.yaml
 
 ```yaml
+endOfLine: auto
 semi: false
 singleQuote: true
-endOfLine: auto
 printWidth: 120
 ```
 
@@ -180,14 +174,25 @@ export default {
 
 stylelint-config-recommende-vue 未对依赖 stylelint-config-recommended 做精细版本限制，导致解析到最新版本，不支持 stylelint@^15，而 nuxt@^2 最高仅支持到 stylelint@^15。
 
-为此，需要通过配置 overrides（require npm@^8.3.0）来解决：
+为此，需要通过配置 overrides 或 resolutions 来解决：
 
-package.json
+package.json（require npm@^8.3.0）
 
 ```json
 {
   // ...
   "overrides": {
+    "stylelint-config-recommended": "13.0.0"
+  }
+}
+```
+
+package.json（require yarn@\*）
+
+```json
+{
+  // ...
+  "resolutions": {
     "stylelint-config-recommended": "13.0.0"
   }
 }
@@ -236,6 +241,7 @@ module.exports = {
   rules: {
     // stylelint-config-recommended
     'block-no-empty': [true, { severity: 'warning' }],
+    'font-family-no-missing-generic-family-keyword': [true, { severity: 'warning' }],
     'no-descending-specificity': [true, { severity: 'warning' }],
     'no-empty-source': [true, { severity: 'warning' }],
     'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global', 'slotted'] }],
@@ -625,7 +631,7 @@ package.json
     // ...
     "clean": "npm run clean:dist && npm run clean:deps",
     "clean:dist": "rimraf .nuxt",
-    "clean:deps": "rimraf package-lock.json && rimraf node_modules"
+    "clean:deps": "rimraf package-lock.json yarn.lock node_modules"
   }
 }
 ```

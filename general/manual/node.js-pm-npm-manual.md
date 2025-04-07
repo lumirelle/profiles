@@ -2,8 +2,6 @@
 
 Based on node^18.20.7 (npm@^10.8.2)。
 
-NOTE：未指明何种 LTS 则表示二者都适用。
-
 ## 什么是 NPM？ What is NPM?
 
 Node.js 包管理器（Node.js Package Manager），和 Node.js ~~捆绑销售~~。

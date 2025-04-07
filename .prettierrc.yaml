@@ -1,6 +1,1 @@
-# @Lyana-nullptr (shabbyacc@outlook.com)
-
-endOfLine: auto
-semi: false
-singleQuote: true
-printWidth: 120
+./general/constraint/.prettierrc.yaml
