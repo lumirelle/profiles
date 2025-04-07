@@ -50,8 +50,8 @@ Sub Dir Structure:
   - node.js-manual.md
   - node.js-pm-npm-manual.md
   - node.js-pm-yarn-manual.md
-  - nuxt.js-manual.md
-  - nuxt.js-project-constraint-manual.md
+  - nuxt.js-v2-manual.md
+  - nuxt.js-v2-project-constraint-manual.md
   - prefabricated-dish-manual.md
   - web-front-end-manual.md
   - windows-manual.md
