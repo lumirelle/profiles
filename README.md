@@ -148,12 +148,15 @@ Just download the profiles you want and put it on the right place.
 Or you can use [the setup script](setup.ps1) for quick setup and receive the updates automatically:
 
 ```shell
+# NOTE: On windows, you should add `create symbolic link permission` to your current user.
+# Run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.
+
 # cd PATH_TO_HOLD_THIS_REPO
 # eg:
 cd C:/Projects
 
-# Clone this repo, need sudo
-sudo git clone -c core.symlinks=true https://github.com/Lyana-nullptr/profiles.git
+# Clone this repo
+git clone -c core.symlinks=true https://github.com/Lyana-nullptr/profiles.git
 
 # Use PowerShell command `help ./setup.ps1 -Full` for more detail.
 ./setup.ps1
