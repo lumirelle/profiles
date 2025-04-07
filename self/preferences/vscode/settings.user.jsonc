@@ -256,7 +256,7 @@
     }
   },
   "gitlens.views.branches.showRemoteBranches": true,
-  "projectManager.git.baseFolders": ["C:\\Projects"], // customize needed
+  "projectManager.git.baseFolders": ["C:/Projects"],
   "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
   "license.default": "MIT",
   "license.year": "2025-present",
