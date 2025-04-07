@@ -15,15 +15,16 @@
   rebase = true
 [alias]
   a = add
+  b = branch
   c = commit
   cl = clone
+  f = fetch
+  m = merge
+  p = push
   pl = pull
-  ps = push
-  st = stash
-  sw = switch
-  mg = merge
+  r = rebase
+  rm = remote
   rs = reset
-  rb = rebase
-  re = remote
-  br = branch
-  tg = tag
+  s = stash
+  t = tag
+  w = switch
