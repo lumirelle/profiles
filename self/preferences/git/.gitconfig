@@ -1,5 +1,6 @@
 [core]
   ignorecase = false
+  symlinks = true
 [user]
   name = Lyana
   email = shabbyacc@outlook.com
