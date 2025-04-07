@@ -145,9 +145,30 @@ Sub Dir Structure:
 
 Just download the profiles you want and put it on the right place.
 
-Or you can use [the setup script](setup.ps1) for quick setup and receive the updates automatically.
+Or you can use [the setup script](setup.ps1) for quick setup and receive the updates automatically:
 
-Use PowerShell command `help ./setup.ps1 -Full` for more detail.
+```shell
+# cd PATH_TO_HOLD_THIS_REPO
+# eg:
+cd C:/Projects
+
+# Clone this repo, need sudo
+sudo git clone -c core.symlinks=true https://github.com/Lyana-nullptr/profiles.git
+
+# Use PowerShell command `help ./setup.ps1 -Full` for more detail.
+./setup.ps1
+```
+
+You can also use [the setdown script](setdown.ps1) for quick setdown:
+
+```shell
+# cd PATH_TO_THIS_REPO
+# eg:
+cd C:/Projects/profiles
+
+# Use PowerShell command `help ./setdown.ps1 -Full` for more detail.
+./setdown.ps1
+```
 
 ## ✍️ Authors <a name="authors"></a>
 
