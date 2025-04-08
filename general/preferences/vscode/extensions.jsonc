@@ -37,7 +37,6 @@
     "usernamehw.errorlens",
 
     // ↓↓ snippets helper
-    "tahabasri.snippets",
     "jmsv.javascriptsnippetsstandard",
     "nicholashsiang.vscode-vue2-snippets", // need trial
     "nicholashsiang.vscode-vue3-snippets", // need trial
