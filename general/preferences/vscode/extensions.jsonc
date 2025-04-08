@@ -72,6 +72,7 @@
     "antfu.where-am-i",
     "alefragnani.project-manager",
     "antfu.file-nesting",
+    "redhat.fabric8-analytics",
     // -- npm
     "idered.npm",
     "herrmannplatz.npm-dependency-links",
