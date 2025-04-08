@@ -25,6 +25,7 @@
     "uni-helper.uni-app-schemas-vscode",
     // -- platforms
     "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
 
     // ↓↓ constraints helper
     "editorconfig.editorconfig",
