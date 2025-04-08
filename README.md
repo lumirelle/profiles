@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://github.com/Lyana-nullptr/profiles" rel="noopener">
+  <a href="https://github.com/Lumirelle/profiles" rel="noopener">
 </h1>
 
 <h3 align="center">Profiles</h3>
@@ -7,8 +7,8 @@
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)](.)
-[![GitHub Issues](https://img.shields.io/github/issues/Lyana-nullptr/profiles.svg)](https://github.com/Lyana-nullptr/profiles/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Lyana-nullptr/profiles.svg)](https://github.com/Lyana-nullptr/profiles/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/Lumirelle/profiles.svg)](https://github.com/Lumirelle/profiles/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Lumirelle/profiles.svg)](https://github.com/Lumirelle/profiles/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -156,7 +156,7 @@ Or you can use [the setup script](setup.ps1) for quick setup and receive the upd
 cd C:/Projects
 
 # Clone this repo
-git clone -c core.symlinks=true https://github.com/Lyana-nullptr/profiles.git
+git clone -c core.symlinks=true https://github.com/Lumirelle/profiles.git
 
 # Use PowerShell command `help ./setup.ps1 -Full` for more detail.
 ./setup.ps1
@@ -175,4 +175,4 @@ cd C:/Projects/profiles
 
 ## ✍️ Authors <a name="authors"></a>
 
-- [@Lyana-nullptr](https://github.com/Lyana-nullptr) - Anything
+- [@Lumirelle](https://github.com/Lumirelle) - Anything
