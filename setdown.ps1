@@ -39,8 +39,9 @@ $PROFILE_FOLDERS = @(
   @{Name = "general/preferences/maven"; Path = '~/.m2' }
   @{Name = "general/preferences/nvim"; Path = "$env:USERPROFILE/AppData/Local/nvim" }
   @{Name = "general/preferences/powershell"; Path = Split-Path -Path $PROFILE -Parent }
+  @{Name = "general/preferences/git"; Path = '~' }
   # With Purpose
-  @{Name = "$Purpose/preferences/git"; Path = '~' }
+  # ...
   # With Purpose "work"
   @{Name = "work/constraint"; Path = '~' }
 )
