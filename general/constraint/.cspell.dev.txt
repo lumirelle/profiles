@@ -28,8 +28,8 @@ keymap
 keymaps
 lazyload
 lazyvim
+lumirelle
 lxgw
-lyana
 mathjs
 miniconda
 mvvm
