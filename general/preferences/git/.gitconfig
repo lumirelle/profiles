@@ -2,7 +2,7 @@
   ignorecase = false
   symlinks = true
 [user]
-  name = Lyana
+  name = Lumirelle
   email = shabbyacc@outlook.com
 [credential "https://gitee.com"]
   provider = generic
