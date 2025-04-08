@@ -19,7 +19,7 @@
   This will copy and paste `.gitconfig` (under `general` or `self` folder) to current directory.
 
 .EXAMPLE
-  .\scripts\prof.ps1 .gitconfig -Force
+  .\scripts\prof.ps1 .gitconfig -Override
 
   If you want to force override the existing file, you can add the `Override` parameter.
 

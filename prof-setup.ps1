@@ -26,7 +26,7 @@
   This will ignore `.gitconfig`, `.npmrc` and `.zshrc`.
 
 .EXAMPLE
-  .\scripts\prof-setup.ps1 -Force
+  .\scripts\prof-setup.ps1 -Override
 
   If you want to force override the existing files, you can add the `Override` parameter.
 
