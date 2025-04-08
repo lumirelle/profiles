@@ -23,6 +23,8 @@
 
 - [About](#about)
 - [Usage](#usage)
+  - [Manually Setup](#manually_setup)
+  - [Script Setup](#script_setup)
 - [Authors](#authors)
 
 ## 🧐 About <a name="about"></a>
@@ -143,34 +145,47 @@ Sub Dir Structure:
 
 ## 🎈 Usage <a name="usage"></a>
 
+### ✋🏼 Manually Setup <a name="manually_setup"></a>
+
 Just download the profiles you want and put it on the right place.
 
-Or you can use [the setup script](setup.ps1) for quick setup and receive the updates automatically:
-
 ```shell
-# NOTE: On windows, you should add `create symbolic link permission` to your current user.
-# Run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.
-
 # cd PATH_TO_HOLD_THIS_REPO
 # eg:
 cd C:/Projects
 
 # Clone this repo
 git clone -c core.symlinks=true https://github.com/Lumirelle/profiles.git
-
-# Use PowerShell command `help ./setup.ps1 -Full` for more detail.
-./setup.ps1
 ```
 
-You can also use [the setdown script](setdown.ps1) for quick setdown:
+### 📜 Script Setup <a name="script_setup"></a>
+
+If you want to use scripts for lazy setup,
+you should download and unzip this repo,
+then, add the root path to the `PATH` environment variable of your computer.
+
+**NOTE: On windows, you should add `create symbolic link permission` to your current user.**
+**Just run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.**
+
+Now, you can use [the setup script](prof-setup.ps1) for quick setup and receive the updates automatically:
 
 ```shell
-# cd PATH_TO_THIS_REPO
-# eg:
-cd C:/Projects/profiles
+# Use PowerShell command `help prof-setup -Full` for more detail.
+prof-setup
+```
 
-# Use PowerShell command `help ./setdown.ps1 -Full` for more detail.
-./setdown.ps1
+You can also use [the setdown script](prof-setdown.ps1) for quick setdown:
+
+```shell
+# Use PowerShell command `help prof-setdown -Full` for more detail.
+prof-setdown
+```
+
+You can also use [the prof script](prof.ps1) to copy and paste specified profile every where.
+
+```shell
+# Use PowerShell command `help prof -Full` for more detail.
+prof
 ```
 
 ## ✍️ Authors <a name="authors"></a>

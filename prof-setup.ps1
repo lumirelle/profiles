@@ -14,26 +14,26 @@
   It is designed for my self, because no one will upload his working profile to github.
 
 .EXAMPLE
-  .\scripts\setup.ps1
+  .\scripts\prof-setup.ps1
 
   This will create the symbolic links of supported profiles to your computer, so that you can receive the updates automatically.
 
 .EXAMPLE
-  .\scripts\setup.ps1 -IgnoreFiles ".gitconfig,.npmrc,.zshrc"
+  .\scripts\prof-setup.ps1 -IgnoreFiles ".gitconfig,.npmrc,.zshrc"
 
   If you want to ignore some files, you can add them to the `IgnoreFiles` parameter.
 
   This will ignore `.gitconfig`, `.npmrc` and `.zshrc`.
 
 .EXAMPLE
-  .\scripts\setup.ps1 -Force
+  .\scripts\prof-setup.ps1 -Force
 
   If you want to force override the existing files, you can add the `Override` parameter.
 
   This will force override the existing files.
 
 .EXAMPLE
-  .\scripts\setup.ps1 -Purpose "work"
+  .\scripts\prof-setup.ps1 -Purpose "work"
 
   If you want to use a specific purpose, you can add the `Purpose` parameter.
 
@@ -64,16 +64,14 @@ Write-Debug "Purpose = $Purpose`n"
 # 配置文件目录 Name -> Path
 $PROFILE_FOLDERS = @(
   # General
-  @{Name = "general/constraint"; Path = '~' }
-  @{Name = "general/preferences/clash-for-windows"; Path = "$env:USERPROFILE/.config/clash" }
-  @{Name = "general/preferences/maven"; Path = '~/.m2' }
-  @{Name = "general/preferences/nvim"; Path = "$env:USERPROFILE/AppData/Local/nvim" }
-  @{Name = "general/preferences/powershell"; Path = Split-Path -Path $PROFILE -Parent }
-  @{Name = "general/preferences/git"; Path = '~' }
+  @{ Name = "general/constraint"; Path = '~' }
+  @{ Name = "general/preferences/clash-for-windows"; Path = "$env:USERPROFILE/.config/clash" }
+  @{ Name = "general/preferences/git"; Path = '~' }
+  @{ Name = "general/preferences/maven"; Path = '~/.m2' }
+  @{ Name = "general/preferences/nvim"; Path = "$env:USERPROFILE/AppData/Local/nvim" }
+  @{ Name = "general/preferences/powershell"; Path = Split-Path -Path $PROFILE -Parent }
   # With Purpose
-  # ...
-  # With Purpose "work"
-  @{Name = "work/constraint"; Path = '~' }
+  @{ Name = "$Purpose/constraint"; Path = '~' }
 )
 
 # 忽略文件（增加内置）
@@ -88,26 +86,26 @@ $RootDirPath = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
 Write-Host "`nStart to setup profiles...`n" -ForegroundColor Green
 
 # 创建符号链接
-foreach ($folder in $PROFILE_FOLDERS) {
-  # 获取目标目录 $folder.Path 下的所有文件
-  $ProfilesDirPath = Join-Path $RootDirPath $folder.Name
+foreach ($Folder in $PROFILE_FOLDERS) {
+  # 获取目标目录 $Folder.Path 下的所有文件
+  $ProfilesDirPath = Join-Path $RootDirPath $Folder.Name
   if (-not (Test-Path $ProfilesDirPath)) {
     Write-Host "Profiles directory not found: $ProfilesDirPath, skip`n" -ForegroundColor Yellow
     continue
   }
 
-  $files = Get-ChildItem -Path $ProfilesDirPath -Recurse -File
-  foreach ($file in $files) {
-    # 如果 $file.Name 在 $IgnoreFiles 中，则跳过
-    if ($IgnoreFiles -contains $file.Name) {
-      Write-Host "Ignore files: $($file.Name)`n" -ForegroundColor Cyan
+  $Files = Get-ChildItem -Path $ProfilesDirPath -Recurse -File
+  foreach ($File in $Files) {
+    # 如果 $File.Name 在 $IgnoreFiles 中，则跳过
+    if ($IgnoreFiles -contains $File.Name) {
+      Write-Host "Ignore files: $($File.Name)`n" -ForegroundColor Cyan
       continue
     }
 
     # 计算目标路径
     # $RelativePath 是具体配置文件相对 $ProfilesDirPath 的路径
-    $RelativePath = $file.FullName.Substring($ProfilesDirPath.Length + 1)
-    $TargetFilePath = Join-Path $folder.Path $RelativePath
+    $RelativePath = $File.FullName.Substring($ProfilesDirPath.Length + 1)
+    $TargetFilePath = Join-Path $Folder.Path $RelativePath
     $TargetDirPath = Split-Path -Path $TargetFilePath -Parent
 
     # 如果目标目录 $TargetDirPath 不存在，则创建
@@ -127,8 +125,8 @@ foreach ($folder in $PROFILE_FOLDERS) {
     }
 
     # 创建符号链接
-    New-Item -ItemType SymbolicLink -Path $TargetFilePath -Target $file.FullName -Force:$Override > $null
-    Write-Host "Created symbolic link: $TargetFilePath -> $($file.FullName)`n"
+    New-Item -ItemType SymbolicLink -Path $TargetFilePath -Target $File.FullName -Force:$Override > $null
+    Write-Host "Created symbolic link: $TargetFilePath -> $($File.FullName)`n"
   }
 }
 
