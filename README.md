@@ -106,14 +106,11 @@ Sub Dir Structure:
 
   - vscode
 
-    - extensions.default.jsonc (deprecated)
-    - extensions.java.jsonc (deprecated)
-    - extensions.js.jsonc (deprecated)
-    - settings.default.project.jsonc (deprecated)
-    - settings.default.user.jsonc (deprecated)
-    - profile.default.code-profile (test)
-    - profile.java.code-profile (test)
-    - profile.js.code-profile (test)
+    - extensions.default.jsonc
+    - extensions.java.jsonc
+    - extensions.js.jsonc
+    - settings.default.project.jsonc
+    - settings.default.user.jsonc
     - trusted-domains.jsonc
 
   - windows-terminal
