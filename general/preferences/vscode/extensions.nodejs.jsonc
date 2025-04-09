@@ -1,0 +1,93 @@
+{
+  // cspell:disable
+  "recommendations": [
+    // ↓↓ ui
+    "ms-ceintl.vscode-language-pack-zh-hans",
+    "antfu.theme-vitesse",
+    "pkief.material-icon-theme",
+    "antfu.icons-carbon",
+    "subframe7536.custom-ui-style",
+
+    // ↓↓ project
+    // -- general
+    "alefragnani.project-manager",
+    "antfu.where-am-i",
+    "antfu.file-nesting",
+    "sandcastle.vscode-open",
+    "brandonfowler.exe-runner",
+    // -- git & github
+    "eamodio.gitlens",
+    "ultram4rine.vscode-choosealicense",
+    "thomascsd.vscode-readme-pattern",
+    "ziyasal.vscode-open-in-github",
+    // -- *.js
+    "idered.npm",
+    "herrmannplatz.npm-dependency-links",
+
+    // ↓↓ languages / files support
+    // -- languages & files
+    "remcohaszing.schemastore",
+    "jock.svg", // also the formatter for svg
+    "redhat.vscode-yaml",
+    "tomoki1207.pdf",
+    "ms-vscode.powershell", // also the formatter & linter & snippets for powershell
+    "docker.docker", // also the linter for dockerfile
+    "ms-vscode.hexeditor",
+    // -- formatter
+    "editorconfig.editorconfig",
+    "biomejs.biome", // NOTE: not in use now
+    "esbenp.prettier-vscode",
+    // -- linter
+    "davidanson.vscode-markdownlint",
+    // -- snippets
+    "bierner.emojisense",
+    "jmsv.javascriptsnippetsstandard",
+    // -- *.js languages & files
+    "webben.browserslist",
+    "vue.volar",
+    "lokalise.i18n-ally",
+    "antfu.slidev",
+    "uni-helper.uni-highlight-vscode",
+    "uni-helper.uni-app-schemas-vscode",
+    // -- *.js linter
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    // -- *.js snippets
+    "nicholashsiang.vscode-vue2-snippets",
+    "nicholashsiang.vscode-vue3-snippets",
+    "ss.element-ui-snippets",
+    "uni-helper.uni-app-snippets-vscode",
+    "uni-helper.uni-ui-snippets-vscode",
+
+    // ↓↓ coding helper
+    // -- spell
+    "streetsidesoftware.code-spell-checker",
+    // -- views
+    "oderwat.indent-rainbow",
+    "naumovs.color-highlight",
+    "antfu.array-index-inlay",
+    "ibm.output-colorizer",
+    "gruntfuggly.todo-tree",
+    "usernamehw.errorlens",
+    // -- actions
+    "antfu.smart-clicks",
+    "christian-kohler.path-intellisense",
+    "tombonnike.vscode-status-bar-format-toggle",
+    "github.copilot", // NOTE: vscode only
+    "github.copilot-chat", // NOTE: vscode only
+    // -- *.js actions
+    "ecmel.vscode-html-css",
+    "chakrounanas.turbo-console-log",
+    "christian-kohler.npm-intellisense",
+    "antfu.goto-alias",
+    "ms-vscode.live-server",
+
+    // ↓↓ docker
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+
+    // ↓↓ ext helper
+    "l13rary.l13-built-in-extensions",
+    "vscode.javascript-modified" // NOTE: modified by extension "l13rary.l13-built-in-extensions", snippets disabled
+  ]
+}

@@ -171,14 +171,13 @@
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "workbench.startupEditor": "none",
+  "window.newWindowProfile": "默认",
 
   // == extensions: ui ==
   "custom-ui-style.font.sansSerif": "'LXGW Bright Code TC', 'Symbols Nerd Font', sans-serif",
   "markdown.preview.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
 
   // == extensions: lint ==
-  "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
-  "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"],
   "cSpell.customDictionaries": {
     "dev": {
       "name": "dev",
@@ -257,7 +256,7 @@
   },
   "gitlens.views.branches.showRemoteBranches": true,
   "projectManager.git.baseFolders": ["C:/Projects"],
-  "license.author": "Lyana-nullptr (shabbyacc@outlook.com)",
+  "license.author": "Lumirelle (shabbyacc@outlook.com)",
   "license.default": "MIT",
   "license.year": "2025-present",
 
