@@ -26,6 +26,7 @@
     "remcohaszing.schemastore",
     "jock.svg", // also the formatter for svg
     "redhat.vscode-yaml",
+    "bierner.markdown-mermaid",
     "tomoki1207.pdf",
     "ms-vscode.powershell", // also the formatter & linter & snippets for powershell
     "docker.docker", // also the linter for dockerfile
