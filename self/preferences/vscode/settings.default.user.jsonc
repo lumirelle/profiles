@@ -1,43 +1,39 @@
 {
   // cSpell:disable
-  // == vscode: ui ==
+
+  // ↓↓ vscode: ui
+  // -- general
   "editor.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.cursorBlinking": "smooth",
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.smoothScrolling": true,
   "editor.lineNumbers": "interval",
   "editor.rulers": [80, 120],
+  "editor.smoothScrolling": true,
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 120,
   "editor.renderWhitespace": "boundary",
   "editor.guides.bracketPairs": "active",
-  "editor.mouseWheelZoom": true,
+  "terminal.integrated.fontWeight": "300",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.smoothScrolling": true,
-  "terminal.integrated.mouseWheelScrollSensitivity": 2,
-  "terminal.integrated.fastScrollSensitivity": 3,
-  "terminal.integrated.fontWeight": "300",
   "terminal.integrated.tabs.enabled": true,
   "window.zoomLevel": 1.2,
   "window.autoDetectColorScheme": true,
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.list.smoothScrolling": true,
-  "workbench.list.fastScrollSensitivity": 3,
-  "workbench.list.mouseWheelScrollSensitivity": 2,
+  "workbench.activityBar.orientation": "vertical",
   "workbench.preferredDarkColorTheme": "Vitesse Dark",
   "workbench.preferredLightColorTheme": "Vitesse Light",
   "workbench.productIconTheme": "icons-carbon",
-  "workbench.activityBar.orientation": "vertical",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.list.smoothScrolling": true,
   "workbench.tree.indent": 10,
   "workbench.tree.renderIndentGuides": "always",
-
-  // == vscode: nesting ==
+  // -- file nesting
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 4/7/2025, 4:25:51 PM",
+    "//": "Last update at 2025/4/9 11:29:05",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -131,20 +127,8 @@
     "*.xaml": "$(capture).xaml.cs"
   },
 
-  // == vscode: format ==
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[svg]": { "editor.defaultFormatter": "jock.svg" },
-  "[powershell]": { "editor.defaultFormatter": "ms-vscode.powershell" },
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit",
-    "source.fixAll.markdownlint": "explicit"
-  },
-
-  // == vscode: others ==
+  // ↓↓ vscode: behavior
+  "editor.mouseWheelZoom": true,
   "editor.mouseWheelScrollSensitivity": 2,
   "editor.fastScrollSensitivity": 3,
   "editor.gotoLocation.multipleDefinitions": "goto",
@@ -170,41 +154,38 @@
   "search.showLineNumbers": true,
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "workbench.startupEditor": "none",
+  "terminal.integrated.mouseWheelScrollSensitivity": 2,
+  "terminal.integrated.fastScrollSensitivity": 3,
   "window.newWindowProfile": "默认",
+  "workbench.startupEditor": "none",
+  "workbench.list.mouseWheelScrollSensitivity": 2,
+  "workbench.list.fastScrollSensitivity": 3,
 
-  // == extensions: ui ==
+  // ↓↓ vscode: format
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.markdownlint": "explicit"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svg]": { "editor.defaultFormatter": "jock.svg" },
+  "[powershell]": { "editor.defaultFormatter": "ms-vscode.powershell" },
+  "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-docker" },
+
+  // ↓↓ extensions: ui
   "custom-ui-style.font.sansSerif": "'LXGW Bright Code TC', 'Symbols Nerd Font', sans-serif",
   "markdown.preview.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
 
-  // == extensions: lint ==
-  "cSpell.customDictionaries": {
-    "dev": {
-      "name": "dev",
-      "path": "~/.cspell.dev.txt",
-      "description": "Words used in development.",
-      "addWords": false
-    },
-    "wrk": {
-      "name": "wrk",
-      "path": "~/.cspell.wrk.txt",
-      "description": "Words used in wroking.",
-      "addWords": false
-    }
-  },
-  "cSpell.ignorePaths": [
-    ".*", // all of dotfiles & dotfolders
-    "dist",
-    "node_modules",
-    "package.json",
-    "package-lock.json",
-    "yarn.lock",
-    "pnpm-lock.yaml",
-    "bun.lockb",
-    "bun.lock"
-  ],
-
-  // == extensions: project ==
+  // ↓↓ extensions: project
+  // -- general
+  "projectManager.git.baseFolders": ["C:/Projects"],
+  // -- git
+  "license.author": "Lumirelle (shabbyacc@outlook.com)",
+  "license.default": "MIT",
+  "license.year": "2025-present",
   "git.autofetch": true,
   "git.confirmSync": false,
   "gitlens.plusFeatures.enabled": false,
@@ -255,23 +236,42 @@
     }
   },
   "gitlens.views.branches.showRemoteBranches": true,
-  "projectManager.git.baseFolders": ["C:/Projects"],
-  "license.author": "Lumirelle (shabbyacc@outlook.com)",
-  "license.default": "MIT",
-  "license.year": "2025-present",
+  // -- java
+  "java.project.explorer.showNonJavaResources": false,
 
-  // == extensions: others ==
-  "css.enabledLanguages": ["html", "vue"],
-  "css.styleSheets": ["**/*.scss", "**/*.css"],
+  // ↓↓ extensions: lint
+  "cSpell.customDictionaries": {
+    "dev": {
+      "name": "dev",
+      "path": "~/.cspell.dev.txt",
+      "description": "Words used in development.",
+      "addWords": false
+    },
+    "wrk": {
+      "name": "wrk",
+      "path": "~/.cspell.wrk.txt",
+      "description": "Words used in wroking.",
+      "addWords": false
+    }
+  },
+  "cSpell.ignorePaths": [
+    ".*", // all of dotfiles & dotfolders
+    "dist",
+    "node_modules",
+    "package.json",
+    "package-lock.json",
+    "yarn.lock",
+    "pnpm-lock.yaml",
+    "bun.lockb",
+    "bun.lock"
+  ],
+
+  // ↓↓ extensions: others
+  // -- general
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
-  "npm-intellisense.importLinebreak": "\r\n",
   "powershell.integratedConsole.showOnStartup": false,
-  "redhat.telemetry.enabled": false,
   "svg.preview.mode": "svg",
-  "todo-tree.regex.enableMultiLine": true,
   "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "[ ]", "[x]", "NOTE"],
-  "todo-tree.regex.regex": "(//|#|<!--|;|\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)", // support multiple-line comment
-  "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#eeeeee"
   },
@@ -300,5 +300,13 @@
       "background": "#ad66ff",
       "iconColour": "#ad66ff"
     }
-  }
+  },
+  "todo-tree.regex.enableMultiLine": true,
+  "todo-tree.regex.regex": "(//|#|<!--|;|\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)", // support multiple-line comment
+  "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
+
+  // -- js
+  "css.enabledLanguages": ["html", "vue"],
+  "css.styleSheets": ["**/*.scss", "**/*.css"],
+  "npm-intellisense.importLinebreak": "\r\n"
 }
