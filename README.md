@@ -107,7 +107,8 @@ Sub Dir Structure:
   - vscode
 
     - extensions.default.jsonc
-    - extensions.node.js.jsonc
+    - extensions.java.jsonc
+    - extensions.js.jsonc
     - settings.default.project.jsonc
     - settings.default.user.jsonc
     - trusted-domains.jsonc

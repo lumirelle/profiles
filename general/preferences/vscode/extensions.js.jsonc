@@ -20,7 +20,7 @@
     "ultram4rine.vscode-choosealicense",
     "thomascsd.vscode-readme-pattern",
     "ziyasal.vscode-open-in-github",
-    // -- *.js
+    // -- Profile:JS
     "idered.npm",
     "herrmannplatz.npm-dependency-links",
 
@@ -42,17 +42,17 @@
     // -- snippets
     "bierner.emojisense",
     "jmsv.javascriptsnippetsstandard",
-    // -- *.js languages & files
+    // -- Profile:JS languages & files
     "webben.browserslist",
     "vue.volar",
     "lokalise.i18n-ally",
     "antfu.slidev",
     "uni-helper.uni-highlight-vscode",
     "uni-helper.uni-app-schemas-vscode",
-    // -- *.js linter
+    // -- Profile:JS linter
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
-    // -- *.js snippets
+    // -- Profile:JS snippets
     "nicholashsiang.vscode-vue2-snippets",
     "nicholashsiang.vscode-vue3-snippets",
     "ss.element-ui-snippets",
@@ -75,16 +75,18 @@
     "tombonnike.vscode-status-bar-format-toggle",
     "github.copilot", // NOTE: vscode only
     "github.copilot-chat", // NOTE: vscode only
-    // -- *.js actions
+    // -- Profile:JS actions
     "ecmel.vscode-html-css",
     "chakrounanas.turbo-console-log",
     "christian-kohler.npm-intellisense",
     "antfu.goto-alias",
     "ms-vscode.live-server",
 
-    // ↓↓ docker
+    // ↓↓ remote dev
     "ms-azuretools.vscode-docker",
     "ms-vscode-remote.remote-containers",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "ms-vscode-remote.remote-wsl",
 
     // ↓↓ ext helper
     "l13rary.l13-built-in-extensions",
