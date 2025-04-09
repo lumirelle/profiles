@@ -14,26 +14,26 @@
   It is designed for my self, because no one will upload his working profile to github.
 
 .EXAMPLE
-  .\scripts\prof-setup.ps1
+  prof-setup
 
   This will create the symbolic links of supported profiles to your computer, so that you can receive the updates automatically.
 
 .EXAMPLE
-  .\scripts\prof-setup.ps1 -IgnoreFiles ".gitconfig,.npmrc,.zshrc"
+  prof-setup -i ".gitconfig,.npmrc,.zshrc"
 
   If you want to ignore some files, you can add them to the `IgnoreFiles` parameter.
 
   This will ignore `.gitconfig`, `.npmrc` and `.zshrc`.
 
 .EXAMPLE
-  .\scripts\prof-setup.ps1 -Override
+  prof-setup -o
 
   If you want to force override the existing files, you can add the `Override` parameter.
 
   This will force override the existing files.
 
 .EXAMPLE
-  .\scripts\prof-setup.ps1 -Purpose "work"
+  prof-setup -p "work"
 
   If you want to use a specific purpose, you can add the `Purpose` parameter.
 

@@ -8,12 +8,12 @@
   It is designed for my self, because no one will upload his working profile to github.
 
 .EXAMPLE
-  .\scripts\prof-setdown.ps1
+  prof-setdown
 
-  This will remove the symbolic links of supported profiles to your computer.
+  This will remove the symbolic links (just symbolic links) of supported profiles to your computer.
 
 .EXAMPLE
-  .\scripts\prof-setdown.ps1 -Purpose "work"
+  prof-setdown -p "work"
 
   If you want to use a specific purpose, you can add the `Purpose` parameter.
 
