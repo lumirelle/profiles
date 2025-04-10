@@ -181,13 +181,14 @@
 
   // ↓↓ extensions: project
   // -- general
-  "projectManager.git.baseFolders": ["C:/Projects"],
+  "projectManager.git.baseFolders": ["C:/ects"],
   // -- git
   "license.author": "Lumirelle (shabbyacc@outlook.com)",
   "license.default": "MIT",
   "license.year": "2025-present",
   "git.autofetch": true,
   "git.confirmSync": false,
+  "git.openRepositoryInParentFolders": "always",
   "gitlens.plusFeatures.enabled": false,
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.enabled": false,

@@ -41,13 +41,14 @@
     "bierner.emojisense",
     "jmsv.javascriptsnippetsstandard",
     // -- Profile:JAVA language / files support
+    "vscjava.vscode-java-pack", // extension pack, include 6 extensions below
     "redhat.java",
     "vscjava.vscode-java-debug",
     "vscjava.vscode-java-test",
     "vscjava.vscode-java-dependency",
     "vscjava.vscode-maven",
     "vscjava.vscode-gradle",
-    "vmware.vscode-boot-dev-pack",
+    "vmware.vscode-boot-dev-pack", // extension pack, include 3 extensions below
     "vscjava.vscode-spring-initializr",
     "vmware.vscode-spring-boot",
     "vmware.vscode-spring-boot",
@@ -66,6 +67,8 @@
     "antfu.smart-clicks",
     "christian-kohler.path-intellisense",
     "tombonnike.vscode-status-bar-format-toggle",
+    "visualstudioexptteam.vscodeintellicode",
+    "visualstudioexptteam.intellicode-api-usage-examples",
     "github.copilot", // NOTE: vscode only
     "github.copilot-chat", // NOTE: vscode only
 
