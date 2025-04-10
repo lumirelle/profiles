@@ -1,6 +1,9 @@
-# @Lyana-nullptr (shabbyacc@outlook.com)
+# Minimal Prettier Config
+# Lumirelle (shabbyacc@outlook.com)
 
-endOfLine: auto
 semi: false
 singleQuote: true
+
+endOfLine: auto
+
 printWidth: 120

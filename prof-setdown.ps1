@@ -44,8 +44,6 @@ $PROFILE_FOLDERS = @(
   @{ Name = "$Purpose/constraint"; Path = '~' }
 )
 
-# 忽略文件（增加内置）
-
 # 根目录路径
 $RootDirPath = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
 
