@@ -55,3 +55,243 @@ nlx create-nuxt-app@4 # requires @antfu/ni
 ```
 
 然后依照 [Nuxt.js Project Constraint Manual](nuxt.js-project-constraint-manual.md) 完成基础设置。
+
+参考的配置文件格式：
+
+nuxt.config.js
+
+```js
+// Uncomment if you want to analyze useless files, just works on dev mode
+// import UselessAnalyzerWebpackPlugin from 'useless-analyzer-webpack-plugin'
+
+export default {
+  /**
+   * Web page head
+   */
+  head: {
+    title: 'XXX',
+    meta: [
+      // ...
+    ],
+    link: [
+      // ...
+    ],
+    script: [
+      // ...
+    ],
+  },
+
+  /**
+   * Web page global css
+   */
+  css: [
+    // ...
+  ],
+
+  /**
+   * Loading bar style
+   */
+  loading: {
+    // ...
+  },
+
+  /**
+   * Directory configuration
+   */
+  dir: {
+    // ...
+  },
+
+  /**
+   * Build-time modules
+   */
+  buildModules: [
+    '@nuxtjs/style-resources',
+    // ...
+  ],
+
+  styleResources: {
+    scss: '@/assets/css/var.scss',
+  },
+
+  /**
+   * Runtime modules
+   */
+  modules: [
+    'nuxt-precompress',
+    // ...
+  ],
+
+  nuxtPrecompress: {
+    enabled: true,
+    report: false,
+    test: /\.(js|css|json|txt|html|ico|svg|xml|)$/,
+    middleware: {
+      enabled: true,
+      enabledStatic: true,
+      encodingsPriority: ['br', 'gzip'],
+    },
+    gzip: {
+      enabled: true,
+      filename: '[path].gz[query]',
+      threshold: 10240,
+      minRatio: 0.8,
+      compressionOptions: { level: 9 },
+    },
+    brotli: {
+      enabled: true,
+      filename: '[path].br[query]',
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8,
+    },
+  },
+
+  /**
+   * Plugins
+   */
+  plugins: [
+    // ...
+  ],
+
+  /**
+   * Vue.js configuration
+   */
+  vue: {
+    config: {
+      productionTip: false,
+    },
+  },
+
+  /**
+   * Vue Router configuration
+   */
+  router: {
+    // ...
+  },
+
+  /**
+   * Build configuration
+   */
+  build: {
+    cache: false,
+    parallel: true,
+    transpile: [/^element-ui/],
+
+    // Babel
+    babel: {
+      // 按需导入 element-ui 样式
+      plugins: [['component', { libraryName: 'element-ui', styleLibraryName: 'theme-chalk' }]],
+    },
+
+    // PostCSS
+    postcss: {
+      preset: {
+        autoprefixer: true,
+      },
+    },
+
+    // Webpack Loaders
+    loaders: {
+      imgUrl: {
+        limit: 0,
+      },
+      scss: {
+        sassOptions: {
+          // scss 支持本身不需要任何配置
+          // 只有代码中使用到大量的弃用 API 时，才需要禁用警告（因为实在是太多咧）
+          silenceDeprecations: [
+            'legacy-js-api',
+            'mixed-decls',
+            'import',
+            'slash-div',
+            'global-builtin',
+            'function-units',
+          ],
+        },
+      },
+    },
+
+    // Webpack Optimization Plugins
+    // nuxt@2.18.1 依赖的 @nuxt/webpack 内置了如下优化插件
+    // extract-css-chunks-webpack-plugin
+    extractCSS: true,
+    // optimize-css-assets-webpack-plugin
+    optimizeCSS: {
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      },
+      canPrint: true,
+    },
+    // terser-webpack-plugin
+    terser: ['preprod', 'production'].includes(process.env.BUILD_ENV)
+      ? {
+          extractComments: false,
+          terserOptions: {
+            // 移除 console.*
+            compress: { drop_console: true },
+            mangle: true, // 混淆变量名
+            output: { comments: false, beautify: false },
+          },
+        }
+      : {},
+
+    // Uncomment if you want to analyze useless files, just works on dev mode
+    // plugins: [
+    //   new UselessAnalyzerWebpackPlugin({
+    //     src: './',
+    //     additionIgnores: ['app.html', 'app/**/*', 'model/**/*', 'router/**/*', '**/*.scss'],
+    //   }),
+    // ],
+
+    // Webpack Optimization Configuration
+    splitChunks: {
+      layouts: false,
+      pages: true,
+      commons: true,
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 244 * 1024, // 244kb
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 3,
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue|scss)$/,
+            chunks: 'all',
+            enforce: true,
+          },
+          elementUI: {
+            name: 'element-ui',
+            test: /node_modules[\\/]element-ui/,
+            priority: 20,
+          },
+        },
+      },
+    },
+
+    extend(config, { isDev, isClient }) {
+      // ...
+    },
+  },
+
+  /**
+   * Environment variables
+   */
+  env: {
+    // ...
+  },
+
+  /**
+   * Server configuration
+   */
+  server: {
+    port: 80,
+    host: '0.0.0.0',
+  },
+}
+```

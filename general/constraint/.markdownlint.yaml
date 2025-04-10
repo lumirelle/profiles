@@ -1,8 +1,7 @@
-# @Lyana-nullptr (shabbyacc@outlook.com)
+# Minimum Markdownlint config
+# Lumirelle (shabbyacc@outlook.com)
 
 default: true
-
-extends: null
 
 MD013: false
 MD024:

@@ -28,6 +28,7 @@ keymap
 keymaps
 lazyload
 lazyvim
+lintstagedrc
 lumirelle
 lxgw
 mathjs
@@ -52,6 +53,7 @@ requirepass
 runjs
 screenfull
 setdown
+shabbyacc
 stylelintignore
 taliwind
 talkingdata

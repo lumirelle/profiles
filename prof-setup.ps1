@@ -76,6 +76,10 @@ $PROFILE_FOLDERS = @(
 
 # 忽略文件（增加内置）
 $IgnoreFiles += @(
+  '.eslintrc.js',
+  '.lintstagedrc.yaml',
+  'commitlint.config.js',
+  'stylelint.config.js',
   'README.md'
 )
 

@@ -9,6 +9,10 @@ Based on node^18.20.7 (npm@^10.8.2):
 
 ## 0. 更新 vscode 配置
 
+.editorconfig
+
+See [here](../constraint/.editorconfig).
+
 .vscode/settings.json
 
 ```json
@@ -37,7 +41,7 @@ jsconfig.json
 ```json
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "~/*": ["./*"],
       "@/*": ["./*"]
@@ -66,10 +70,11 @@ package.json
   "engines": {
     "node": ">=18.20.7",
     "npm": ">=10.8.2",
-    "yarn": "Please use npm instead of yarn to install dependencies",
-    "pnpm": "Please use npm instead of pnpm to install dependencies"
+    "yarn": ">=1.22.22",
+    "pnpm": ">=10.7.1"
   },
-  "packageManager": "npm@10.8.2"
+  // used by corepack
+  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
 }
 ```
 
@@ -85,8 +90,6 @@ ni prettier@^3.5.3 -D
 
 # eslint
 ni eslint@^8.57.1 -D
-# eslint module for nuxt2，提供服务端 eslint 支持
-ni @nuxtjs/eslint-module@nuxt2 -D
 # eslint configs（捆绑了 eslint-plugin-vue）
 ni @nuxtjs/eslint-config@^12.0.0 -D
 
@@ -106,67 +109,11 @@ ni @babel/eslint-parser@^7.27.0 -D
 
 .eslintrc.js
 
-```js
-module.exports = {
-  root: true,
-  // 自定义解析器
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-    // 设置为无需 babel 配置文件
-    requireConfigFile: false,
-    ecmaVersion: 6,
-  },
-
-  // 继承共享配置 configs 或插件 plugins 的推荐配置
-  extends: [
-    // 包含了 plugin:vue/recommended
-    '@nuxtjs',
-    'plugin:nuxt/recommended',
-    // 必须将 prettier 放在最后
-    'prettier',
-  ],
-
-  env: {
-    browser: true,
-    node: true,
-    commonjs: true,
-    es6: true,
-  },
-  // 加载插件（extends 了的插件会自动加载，无需再设置）
-  // plugins: [],
-  // 自定义规则
-  rules: {
-    'vue/multi-word-component-names': 'warn',
-    'vue/no-reserved-component-names': 'warn',
-    'vue/no-mutating-props': 'warn',
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-unused-vars': 'warn',
-    eqeqeq: 'warn',
-    camelcase: 'warn',
-  },
-}
-```
+See [here](../constraint/.eslintrc.js).
 
 .prettierrc.yaml
 
-```yaml
-endOfLine: auto
-semi: false
-singleQuote: true
-printWidth: 120
-```
-
-nuxt.config.js
-
-```js
-export default {
-  // ...
-  buildModules: [
-    // ...
-    '@nuxtjs/eslint-module',
-  ],
-}
-```
+See [here](../constraint/.prettierrc.yaml).
 
 ## 4. 设置样式检查与格式化
 
@@ -174,9 +121,9 @@ export default {
 
 stylelint-config-recommende-vue 未对依赖 stylelint-config-recommended 做精细版本限制，导致解析到最新版本，不支持 stylelint@^15，而 nuxt@^2 最高仅支持到 stylelint@^15。
 
-为此，需要通过配置 overrides 或 resolutions 来解决：
+为此，需要通过配置 overrides 或 resolutions 或 pnpm.overrides 来解决：
 
-package.json（require npm@^8.3.0）
+package.json（require npm@>=8.3.0）
 
 ```json
 {
@@ -198,13 +145,24 @@ package.json（require yarn@\*）
 }
 ```
 
+package.json（require pnpm@>=6.25.0）
+
+```json
+{
+  // ...
+  "pnpm": {
+    "overrides": {
+      "stylelint-config-recommended": "13.0.0"
+    }
+  }
+}
+```
+
 shell（安装依赖）
 
 ```shell
 # stylelint
 ni stylelint@^15.11.0 -D
-# stylelint module for nux，类同 eslint-module
-ni @nuxtjs/stylelint-module@nuxt2 -D
 # stylelint configs（捆绑了 stylelint-order）
 ni stylelint-config-recommended-scss@^13.1.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-clean-order@^7.0.0 -D
 
@@ -217,65 +175,7 @@ ni stylelint-config-recommended-scss@^13.1.0 stylelint-config-recommended-vue@^1
 
 stylelint.config.js
 
-```js
-module.exports = {
-  // 配置 html 和 scss 的语法解析器
-  overrides: [
-    {
-      files: ['*.html', '*.vue'],
-      customSyntax: 'postcss-html',
-    },
-    {
-      files: ['*.scss'],
-      customSyntax: 'postcss-scss',
-    },
-  ],
-
-  // 继承共享配置 configs
-  extends: [
-    'stylelint-config-recommended-scss',
-    'stylelint-config-recommended-vue/scss',
-    'stylelint-config-clean-order',
-  ],
-
-  rules: {
-    // stylelint-config-recommended
-    'block-no-empty': [true, { severity: 'warning' }],
-    'font-family-no-missing-generic-family-keyword': [true, { severity: 'warning' }],
-    'no-descending-specificity': [true, { severity: 'warning' }],
-    'no-empty-source': [true, { severity: 'warning' }],
-    'selector-pseudo-class-no-unknown': [true, { ignorePseudoClasses: ['deep', 'global', 'slotted'] }],
-    'selector-pseudo-element-no-unknown': [
-      true,
-      { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted', 'input-placeholder'] },
-    ],
-    // stylelint-config-recommended-scss
-    'scss/at-extend-no-missing-placeholder': [true, { severity: 'warning' }],
-    'scss/comment-no-empty': [true, { severity: 'warning' }],
-    // stylelint-config-clean-order
-    'at-rule-empty-line-before': [
-      'always',
-      {
-        ignore: ['first-nested', 'blockless-after-same-name-blockless', 'after-comment'],
-        ignoreAtRules: ['if', 'else'],
-        severity: 'warning',
-      },
-    ],
-  },
-}
-```
-
-nuxt.config.js
-
-```js
-export default {
-  buildModules: [
-    // ...
-    '@nuxtjs/stylelint-module',
-  ],
-  // ...
-}
-```
+See [here](../constraint/stylelint.config.js).
 
 ## 5. 引入 sass 支持和 @nuxtjs/style-resources
 
@@ -300,6 +200,7 @@ export default {
     // ...
     '@nuxtjs/style-resources',
   ],
+
   // 设置需要作为 mixin 的样式文件
   styleResources: {
     scss: ['assets/styles/variables.scss', 'assets/styles/mixin.scss'],
@@ -401,6 +302,7 @@ api
 locales
 middleware
 mixins
+model
 modules
 plugins
 router
@@ -444,25 +346,21 @@ app.html
 shell（安装依赖，配置 husky）
 
 ```shell
-ni husky@^9.1.7 lint-staged@^15.5.0 -D
+ni husky@^9.1.7 lint-staged@^15.5.0 @commitlint/cli@^19.8.0 @commitlint/config-conventional@^19.8.0 -D
 
 nlx husky init
 
 echo 'npx lint-staged' > .husky/pre-commit
+echo 'npx --no-install commitlint --edit $1' > .husky/pre-commit
 ```
 
 .lintstagedrc.yaml
 
-```yaml
-'*.{js,vue}':
-  - 'eslint --fix --ignore-path .eslintignore'
-  - 'prettier --write --ignore-path .eslintignore'
-'*.{css,scss,html,vue}':
-  - 'stylelint --fix --ignore-path .stylelintignore --allow-empty-input'
-  - 'prettier --write --ignore-path .stylelintignore'
-'!(*.js|*.html|*.vue|*.css|*.scss)':
-  - 'prettier --write --ignore-path .prettierignore --ignore-unknown'
-```
+See [here](../constraint/.lintstagedrc.yaml).
+
+commitlint.config.js
+
+See [here](../constraint/commitlint.config.js).
 
 ## 8. 设置 webpack 打包优化
 
@@ -475,6 +373,9 @@ ni nuxt-precompress@^0.5.9
 nuxt.config.js
 
 ```js
+// Uncomment if you want to analyze useless files, just works on dev mode
+// import UselessAnalyzerWebpackPlugin from 'useless-analyzer-webpack-plugin'
+
 export default {
   // ...
 
@@ -508,7 +409,10 @@ export default {
   },
 
   build: {
-    // nuxt@2.17.3 依赖的 @nuxt/webpack 内置了如下优化插件
+    // ...
+
+    // Webpack Optimization Plugins
+    // nuxt@2.18.1 依赖的 @nuxt/webpack 内置了如下优化插件
     // extract-css-chunks-webpack-plugin
     extractCSS: true,
     // optimize-css-assets-webpack-plugin
@@ -519,24 +423,31 @@ export default {
       canPrint: true,
     },
     // terser-webpack-plugin
-    terser:
-      process.env.NODE_ENV === 'preprod' || process.env.NODE_ENV === 'production'
-        ? {
-            extractComments: false,
-            terserOptions: {
-              // 移除 console.*
-              compress: { drop_console: true },
-              mangle: true, // 混淆变量名
-              output: { comments: false, beautify: false },
-            },
-          }
-        : undefined,
+    terser: ['preprod', 'production'].includes(process.env.NODE_ENV)
+      ? {
+          extractComments: false,
+          terserOptions: {
+            // 移除 console.*
+            compress: { drop_console: true },
+            mangle: true, // 混淆变量名
+            output: { comments: false, beautify: false },
+          },
+        }
+      : {},
 
-    // webpack
+    // Uncomment if you want to analyze useless files, just works on dev mode
+    // plugins: [
+    //   new UselessAnalyzerWebpackPlugin({
+    //     src: './',
+    //     additionIgnores: ['app.html', 'app/**/*', 'modules/**/*', 'router/**/*', '**/*.scss'],
+    //   }),
+    // ],
+
+    // Webpack Optimization Configuration
     splitChunks: {
-      layouts: false, // 不自动拆分布局代码
-      pages: true, // 自动拆分页面代码
-      commons: true, // 自动拆分公共模块
+      layouts: false,
+      pages: true,
+      commons: true,
     },
     optimization: {
       splitChunks: {
@@ -562,6 +473,8 @@ export default {
         },
       },
     },
+
+    // ...
   },
 }
 ```
@@ -603,11 +516,14 @@ package.json（设置了环境变量的 npm scripts，改为通过 cross-env 来
   "scripts": {
     // ...
     // 设置了环境变量，改为通过 cross-env 来执行
-    "dev": "cross-env NODE_ENV=localDevelopment nuxt --max_old_space_size=16384",
-    "build:dev": "cross-env NODE_ENV=development nuxt build",
-    "build:test": "cross-env NODE_ENV=tests nuxt build",
-    "build:preprod": "cross-env NODE_ENV=preprod nuxt build",
-    "build:prod": "cross-env NODE_ENV=production nuxt build",
+    "dev": "cross-env BUILD_ENV=develop nuxt",
+    "dev:test": "cross-env BUILD_ENV=test nuxt",
+    "dev:preprod": "cross-env BUILD_ENV=preprod nuxt",
+    "dev:prod": "cross-env BUILD_ENV=production nuxt",
+    "build:dev": "cross-env BUILD_ENV=develop nuxt build",
+    "build:test": "cross-env BUILD_ENV=test  nuxt build",
+    "build:preprod": "cross-env BUILD_ENV=preprod  nuxt build",
+    "build:prod": "cross-env BUILD_ENV=production  nuxt build",
     // 没设置环境变量，无需改变
     "start": "nuxt start"
   }
@@ -615,6 +531,8 @@ package.json（设置了环境变量的 npm scripts，改为通过 cross-env 来
 ```
 
 ## 10. 项目可维护性
+
+### Rimraf
 
 shell（安装依赖）
 
@@ -631,7 +549,7 @@ package.json
     // ...
     "clean": "npm run clean:dist && npm run clean:deps",
     "clean:dist": "rimraf .nuxt",
-    "clean:deps": "rimraf package-lock.json yarn.lock node_modules"
+    "clean:deps": "rimraf package-lock.json yarn.lock pnpm-lock.yaml node_modules"
   }
 }
 ```
@@ -767,19 +685,18 @@ export { i18n }
 
 项目结构
 
-```text
--- locales
+- locales
 
-  -- modules
+  - modules
 
-    -- module-a
-      -- sub-module
-        -- en.json
-        -- zh-CN.json
+    - module-a
 
-    -- module-b
-      -- en.json
-      -- zh-CN.json
+      - sub-module
+        - en.json
+        - zh-CN.json
 
-  -- index.js
-```
+    - module-b
+      - en.json
+      - zh-CN.json
+
+  - index.js
