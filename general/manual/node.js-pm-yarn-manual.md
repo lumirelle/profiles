@@ -6,6 +6,8 @@ Based on Yarn@^1.22.22。
 
 A modern Node.js package manager.
 
+NOTE: 这里的 Yarn 指的是 Yarn Classic。
+
 ## 如何配置？ How to Setup?
 
 ### 1. 配置 & 切换镜像源

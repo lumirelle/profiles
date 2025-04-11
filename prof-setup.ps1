@@ -79,6 +79,7 @@ $IgnoreFiles += @(
   '.eslintrc.js',
   '.lintstagedrc.yaml',
   'commitlint.config.js',
+  'jsconfig.json'
   'stylelint.config.js',
   'README.md'
 )
