@@ -1,6 +1,6 @@
 # Nuxt.js 手册 Nuxt.js Manual
 
-Based on node@^18.20.7, yarn@^1.22.22, nuxt@^2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3).
+Based on node@^18.20.7, yarn@^1.22.22, nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3).
 
 ## 为什么使用？ Why use it?
 

@@ -181,7 +181,7 @@
 
   // ↓↓ extensions: project
   // -- general
-  "projectManager.git.baseFolders": ["C:/ects"],
+  "projectManager.git.baseFolders": ["C:/Projects"],
   // -- git
   "license.author": "Lumirelle (shabbyacc@outlook.com)",
   "license.default": "MIT",

@@ -1,11 +1,13 @@
-<!-- cSpell:ignore execpath -->
-
 # Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual
 
-Based on node^18.20.7 (npm@^10.8.2):
+Requires node@^18.19.0, npm@^10, yarn@^1, pnpm@^10.
+
+Using node@18.20.7, npm@10.8.2, yarn@1.22.22, pnpm@10.7.1.
+
+Main dependencies:
 
 - nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
-- eslint@^8, stylelint@^16, prettier@^3
+- prettier@^3, eslint@^8, stylelint@^15
 
 ## 0. 更新 vscode 配置
 
@@ -15,49 +17,19 @@ See [here](../constraint/.editorconfig).
 
 .vscode/settings.json
 
-```json
-{
-  // cspell:disable
-  // == vscode: format ==
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit",
-    "source.fixAll.markdownlint": "explicit"
-  },
-  // == extensions: lint ==
-  "eslint.validate": ["js", "jsx", "ts", "tsx", "vue"],
-  "stylelint.validate": ["css", "less", "sass", "scss", "html", "vue"],
-  // == extensions: i18n ==
-  "i18n-ally.localesPaths": ["locales", "assets/lang"],
-  "i18n-ally.namespace": true,
-  "i18n-ally.pathMatcher": "modules/{namespaces}/{locale}.json"
-}
-```
+See [here](../preferences/vscode/settings.default.project.jsonc).
 
 jsconfig.json
 
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"]
-    }
-  },
-  "exclude": ["node_modules", ".nuxt", "dist"]
-}
-```
+See [here](../constraint/jsconfig.json).
 
 ## 1. 基础依赖升级
 
 shell
 
 ```shell
-ni nuxt@^2.18.1
-ni @nuxt/types@^2.18.1 -D
+ni nuxt@2.18.1 -E
+ni @nuxt/types@2.18.1 -E -D
 ```
 
 ## 2. 限制包管理器
@@ -68,10 +40,10 @@ package.json
 {
   // ...
   "engines": {
-    "node": ">=18.20.7",
-    "npm": ">=10.8.2",
-    "yarn": ">=1.22.22",
-    "pnpm": ">=10.7.1"
+    "node": ">=18.19.0",
+    "npm": ">=10",
+    "yarn": ">=1",
+    "pnpm": ">=10"
   },
   // used by corepack
   "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
@@ -86,25 +58,23 @@ shell（安装依赖）
 
 ```shell
 # prettier
-ni prettier@^3.5.3 -D
+ni prettier@3.5.3 -D
 
 # eslint
-ni eslint@^8.57.1 -D
-# eslint configs（捆绑了 eslint-plugin-vue）
-ni @nuxtjs/eslint-config@^12.0.0 -D
-
-# eslint plugin for nuxt，提供 SSR 模式某些禁止操作的 lint
-ni eslint-plugin-nuxt@^4.0.0 -D
+ni eslint@8.57.1 -D
+# eslint configs，捆绑了 eslint-plugin-vue
+ni @nuxtjs/eslint-config@12.0.0 -D
+# eslint plugins，提供 SSR 模式禁止操作的 lint
+ni eslint-plugin-nuxt@4.0.0 -D
 
 # eslint config for prettier, 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
-ni eslint-config-prettier@^10.1.1 -D
-# eslint plugin for prettier ... Not recommended
+ni eslint-config-prettier@10.1.2 -D
 
 # Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响（如有）
 # 删除旧的解析器（如有）
 nun babel-eslint
 # 安装新的解析器
-ni @babel/eslint-parser@^7.27.0 -D
+ni @babel/eslint-parser@7.27.0 -D
 ```
 
 .eslintrc.js
@@ -119,7 +89,7 @@ See [here](../constraint/.prettierrc.yaml).
 
 > 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了（等它完全支持 Vue）。
 
-stylelint-config-recommende-vue 未对依赖 stylelint-config-recommended 做精细版本限制，导致解析到最新版本，不支持 stylelint@^15，而 nuxt@^2 最高仅支持到 stylelint@^15。
+stylelint-config-recommended-vue 未对依赖做精细版本限制，stylelint-config-recommended@>=14.0.0 需要 stylelint@^16，而 nuxt@^2 最高仅支持到 stylelint@^15。
 
 为此，需要通过配置 overrides 或 resolutions 或 pnpm.overrides 来解决：
 
@@ -162,15 +132,16 @@ shell（安装依赖）
 
 ```shell
 # stylelint
-ni stylelint@^15.11.0 -D
-# stylelint configs（捆绑了 stylelint-order）
-ni stylelint-config-recommended-scss@^13.1.0 stylelint-config-recommended-vue@^1.6.0 stylelint-config-clean-order@^7.0.0 -D
+ni stylelint@15.11.0 -D
+# stylelint configs，捆绑了 stylelint-scss、stylelint-order
+ni stylelint-config-recommended-scss@13.1.0 stylelint-config-recommended-vue@1.6.0 stylelint-config-clean-order@7.0.0 -D
 
-# stylelint config & plugin for prettier ... Unnecessary after stylelint 15
+# stylelint config for prettier ... Unnecessary after stylelint 15
 
+# FIXME: 理论上说，stylelint-config-recommended-vue 和 stylelint-config-recommended-scss 捆绑了 postcss 解析器的配置和依赖，
+# FIXME: nuxt.js 2 项目（node@^18）无需显示安装依赖，但 vue.js 2 项目 (node@^14) 需要显示安装依赖，也许是 npm 的原因？
 # stylelint 需要 postcss 解析器提供语法解析支持（地位可以说是类同 babel）
-# 然鹅，stylelint-config-recommended-vue 和 stylelint-config-recommended-scss 捆绑了这两个解析器依赖，因此，无需主动安装
-# ni -D postcss-html@^1.8.0 postcss-scss@^4.0.9
+ni -D postcss-html@1.8.0 postcss-scss@4.0.9
 ```
 
 stylelint.config.js
@@ -186,10 +157,10 @@ shell（安装依赖）
 nun node-sass
 
 # sass 和 sass-loader
-ni sass@^1.86.0 sass-loader@version-10 -D
+ni sass@1.86.3 sass-loader@version-10 -D
 
 # nuxt 模块，通过自动导入实现样式 mixin
-ni @nuxtjs/style-resources@^1.2.2 -D
+ni @nuxtjs/style-resources@1.2.2 -D
 ```
 
 nuxt.config.js
@@ -346,9 +317,9 @@ app.html
 shell（安装依赖，配置 husky）
 
 ```shell
-ni husky@^9.1.7 lint-staged@^15.5.0 @commitlint/cli@^19.8.0 @commitlint/config-conventional@^19.8.0 -D
+ni husky@9.1.7 lint-staged@15.5.0 @commitlint/cli@19.8.0 @commitlint/config-conventional@19.8.0 -D
 
-nlx husky init
+npx husky init
 
 echo 'npx lint-staged' > .husky/pre-commit
 echo 'npx --no-install commitlint --edit $1' > .husky/pre-commit
@@ -367,7 +338,7 @@ See [here](../constraint/commitlint.config.js).
 shell（安装依赖）
 
 ```shell
-ni nuxt-precompress@^0.5.9
+ni nuxt-precompress@0.5.9
 ```
 
 nuxt.config.js
@@ -481,16 +452,7 @@ export default {
 
 ## 9. 项目兼容性
 
-### Polyfill
-
-shell（安装依赖）
-
-```shell
-# babel@7 后不再维护 babel-polyfill，转为使用 core-js/stable
-nun babel-polyfill
-```
-
-### Broswers List
+### Browsers List
 
 .browserslistrc
 

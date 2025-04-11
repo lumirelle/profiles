@@ -6,6 +6,7 @@ autocmds
 axios
 backtop
 bignumber
+browserslistrc
 cascader
 colour
 commitlint

@@ -6,7 +6,7 @@
 
 ## 如何配置？ How to setup?
 
-### 1. 环境配置（基于 Windows，PowerShell，FNM）
+### 1. 环境配置（基于 Windows，PowerShell 7，FNM）
 
 FNM 是一个跨平台的 Node.js 版本管理器，支持 `.nvmrc` 或 `.node-version` 配置，支持自动切换 node 版本。
 
@@ -26,8 +26,9 @@ echo 'fnm env --use-on-cd --corepack-enabled --shell powershell | Out-String | I
 fnm install 18
 
 # 设置项目 node 版本，并重启你的终端
-cd a-node-project
-echo 'v18.20.7' > .nvmrc
+cd your-node-project
+fnm use 18
+echo (node -v) > .nvmrc
 
 # 全局安装 @antfu/ni
 npm install -g @antfu/ni
@@ -45,5 +46,6 @@ ni
 ### 3. 包管理器
 
 - [npm](node.js-pm-npm-manual.md)
+- [pnpm](node.js-pm-pnpm-manual.md)
 - [yarn](node.js-pm-yarn-manual.md)
 - ...
