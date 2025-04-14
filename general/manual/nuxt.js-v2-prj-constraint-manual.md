@@ -40,7 +40,7 @@ package.json
 {
   // ...
   "engines": {
-    "node": ">=18.19.0",
+    "node": ">=18",
     "npm": ">=10",
     "yarn": ">=1",
     "pnpm": ">=10"
