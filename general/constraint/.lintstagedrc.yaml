@@ -1,8 +1,11 @@
+# Minimal Lint-Staged Config
+# Lumirelle (shabbyacc@outlook.com)
+
 '*.{js,vue}':
-  - 'eslint --fix --ignore-path .eslintignore'
-  - 'prettier --write --ignore-path .eslintignore'
+  - 'eslint --cache --fix'
+  - 'prettier --cache --write'
 '*.{css,scss,html,vue}':
-  - 'stylelint --fix --ignore-path .stylelintignore --allow-empty-input'
-  - 'prettier --write --ignore-path .stylelintignore'
+  - 'stylelint --cache --fix'
+  - 'prettier --cache --write'
 '!(*.js|*.html|*.vue|*.css|*.scss)':
-  - 'prettier --write --ignore-path .prettierignore --ignore-unknown'
+  - 'prettier --cache --write --ignore-unknown'

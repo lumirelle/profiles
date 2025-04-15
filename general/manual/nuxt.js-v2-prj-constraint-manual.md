@@ -1,6 +1,6 @@
 # Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual
 
-Requires node@^18.19.0, npm@^10, yarn@^1, pnpm@^10.
+Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@\*.
 
 Using node@18.20.7, npm@10.8.2, yarn@1.22.22, pnpm@10.7.1.
 
@@ -15,9 +15,13 @@ Main dependencies:
 
 See [here](../constraint/.editorconfig).
 
+.vscode/extensions.json
+
+See [here](../preferences/vscode/extensions.project.nuxtjs2.jsonc).
+
 .vscode/settings.json
 
-See [here](../preferences/vscode/settings.default.project.jsonc).
+See [here](../preferences/vscode/settings.project.nuxtjs2.jsonc).
 
 jsconfig.json
 
@@ -32,21 +36,22 @@ ni nuxt@2.18.1 -E
 ni @nuxt/types@2.18.1 -E -D
 ```
 
-## 2. 限制包管理器
+## 2. 限制开发环境
 
 package.json
 
 ```json
 {
   // ...
+
+  // Used by corepack
+  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808",
   "engines": {
-    "node": ">=18",
-    "npm": ">=10",
-    "yarn": ">=1",
-    "pnpm": ">=10"
-  },
-  // used by corepack
-  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
+    "node": "^18.12.0 || ^20.9.0 || >=22",
+    "npm": ">=9"
+  }
+
+  // ...
 }
 ```
 
@@ -93,6 +98,19 @@ stylelint-config-recommended-vue 未对依赖做精细版本限制，stylelint-c
 
 为此，需要通过配置 overrides 或 resolutions 或 pnpm.overrides 来解决：
 
+package.json（require pnpm@>=6.25.0）
+
+```json
+{
+  // ...
+  "pnpm": {
+    "overrides": {
+      "stylelint-config-recommended": "13.0.0"
+    }
+  }
+}
+```
+
 package.json（require npm@>=8.3.0）
 
 ```json
@@ -115,26 +133,13 @@ package.json（require yarn@\*）
 }
 ```
 
-package.json（require pnpm@>=6.25.0）
-
-```json
-{
-  // ...
-  "pnpm": {
-    "overrides": {
-      "stylelint-config-recommended": "13.0.0"
-    }
-  }
-}
-```
-
 shell（安装依赖）
 
 ```shell
 # stylelint
 ni stylelint@15.11.0 -D
 # stylelint configs，捆绑了 stylelint-scss、stylelint-order
-ni stylelint-config-recommended-scss@13.1.0 stylelint-config-recommended-vue@1.6.0 stylelint-config-clean-order@7.0.0 -D
+ni stylelint-config-recommended-scss@13.1.0 stylelint-config-recommended-vue@1.6.0 stylelint-config-recess-order@4.6.0 -D
 
 # stylelint config for prettier ... Unnecessary after stylelint 15
 
@@ -201,6 +206,10 @@ export default {
 
 ## 6. 配置 npm 快速检查/修复脚本和 eslint、stylelint 忽略文件
 
+```shell
+ni npm-run-all2@7.0.2 -D
+```
+
 package.json
 
 ```json
@@ -208,121 +217,62 @@ package.json
   // ...
   "scripts": {
     // ...
-    "lint": "npm run lint:js && npm run lint:style",
-    "lint:js": "eslint --ignore-path .eslintignore --ext .js,.vue .",
-    "lint:style": "stylelint --ignore-path .stylelintignore **/*.{css,scss,html,vue}",
-    "fix": "npm run fix:js && npm run fix:style",
-    "fix:js": "eslint --fix --ignore-path .eslintignore --ext .js,.vue .",
-    "fix:style": "stylelint --fix --ignore-path .stylelintignore **/*.{css,scss,html,vue}"
+    "lint": "npm-run-all -s lint:js lint:style",
+    "lint:js": "eslint --cache .",
+    "lint:style": "stylelint --cache **/*.{css,scss,html,vue}",
+    "fix": "npm-run-all -s fix:js fix:style",
+    "fix:js": "eslint --fix --ext .js,.vue .",
+    "fix:style": "stylelint --fix **/*.{css,scss,html,vue}"
   }
 }
-```
-
-.eslintignore
-
-```ignore
-# 忽略 . 目录下文件的语法检查
-.husky
-.nuxt
-.vscode
-
-# 忽略 assets 目录下文件的语法检查
-assets/fonts
-assets/icons
-assets/images
-assets/lang
-assets/styles
-
-# 忽略 static 目录下文件的语法检查
-static
-
-# 忽略 node_modules 目录下文件的语法检查
-node_modules
-
-# 忽略 modules 目录下 plugin.js 文件的语法检查
-modules/**/plugin.js
-
-# 忽略 app.html 文件的语法检查
-app.html
-```
-
-.stylelintignore
-
-```ignore
-# 忽略 . 目录下文件的语法检查
-.husky
-.nuxt
-.vscode
-
-# 忽略 assets 目录下文件的语法检查
-assets/enum
-assets/fonts
-assets/icons
-assets/images
-assets/lang
-assets/utils
-
-# 忽略 static 目录下文件的语法检查
-static
-
-# 忽略 node_modules 目录下文件的语法检查
-node_modules
-
-# 忽略其他纯 js 目录
-api
-locales
-middleware
-mixins
-model
-modules
-plugins
-router
-scripts
-store
-utils
-
-# 忽略 app.html 文件的语法检查
-app.html
 ```
 
 .prettierignore
 
 ```ignore
-# 忽略 . 目录下文件的语法检查
-.husky
+# Build output
 .nuxt
-.vscode
-
-# 忽略 assets 目录下文件的语法检查
-assets/fonts
-assets/icons
+# Assets and static files
+assets/icon
 assets/images
 assets/lang
-
-# 忽略 static 目录下文件的语法检查
 static
-
-# 忽略 node_modules 目录下文件的语法检查
+**/iconfont.*
+# Node modules
 node_modules
-
-# 忽略 modules 目录下 plugin.js 文件的语法检查
-modules/**/plugin.js
-
-# 忽略 app.html 文件的语法检查
+# Nuxt app
+app/view
 app.html
+
 ```
 
 ## 7. 配置提交检查/修复
 
-shell（安装依赖，配置 husky）
+package.json（配置 simple-git-hooks）
+
+```json
+{
+  // ...
+
+  "scripts": {
+    // ...
+    "postinstall": "simple-git-hooks"
+  },
+
+  // ...
+
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  }
+
+  // ...
+}
+```
+
+shell（安装依赖）
 
 ```shell
-ni husky@9.1.7 lint-staged@15.5.0 @commitlint/cli@19.8.0 @commitlint/config-conventional@19.8.0 -D
-
-npx husky init
-
-echo 'npx lint-staged' > .husky/pre-commit
-echo 'npx --no-install commitlint --edit $1' > .husky/pre-commit
+ni simple-git-hooks@2.12.1 lint-staged@15.5.0 @commitlint/cli@19.8.0 @commitlint/config-conventional@19.8.0 -D
 ```
 
 .lintstagedrc.yaml
@@ -406,11 +356,18 @@ export default {
         }
       : {},
 
-    // Uncomment if you want to analyze useless files, just works on dev mode
+    // Uncomment if you want to analyze useless files, just works on localDevelopment mode
     // plugins: [
     //   new UselessAnalyzerWebpackPlugin({
-    //     src: './',
-    //     additionIgnores: ['app.html', 'app/**/*', 'modules/**/*', 'router/**/*', '**/*.scss'],
+    //     preset: 'nuxt',
+    //     ignores: [
+    //       // 添加你需要忽略的文件... / Add files you need to ignore...
+    //       'app.html',
+    //       '**/*.scss',
+    //     ],
+    //     important: [
+    //       // 添加你不想忽略的文件... / Add files you don't want to ignore...
+    //     ],
     //   }),
     // ],
 
@@ -475,6 +432,7 @@ package.json（设置了环境变量的 npm scripts，改为通过 cross-env 来
 ```json
 {
   // ...
+
   "scripts": {
     // ...
     // 设置了环境变量，改为通过 cross-env 来执行
@@ -489,6 +447,8 @@ package.json（设置了环境变量的 npm scripts，改为通过 cross-env 来
     // 没设置环境变量，无需改变
     "start": "nuxt start"
   }
+
+  // ...
 }
 ```
 
@@ -502,14 +462,14 @@ shell（安装依赖）
 ni -D rimraf@v5-legacy
 ```
 
-package.json
+package.json (require npm-run-all2)
 
 ```json
 {
   // ...
   "scripts": {
     // ...
-    "clean": "npm run clean:dist && npm run clean:deps",
+    "clean": "npm-run-all clean:dist clean:deps",
     "clean:dist": "rimraf .nuxt",
     "clean:deps": "rimraf package-lock.json yarn.lock pnpm-lock.yaml node_modules"
   }

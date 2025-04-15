@@ -1,4 +1,7 @@
 /**
+ * @description Minimal CommitLint Config
+ * @author Lumirelle (shabbyacc&#64;outlook.com)
+ *
  * Git message structure:
  *
  * `type: subject`
