@@ -1,6 +1,6 @@
 # Node.js 包管理器 - Yarn 手册 Node.js Package Manager - Yarn Manual
 
-Based on Yarn@^1.22.22。
+Using yarn@1.22.22。
 
 ## 什么是 Yarn？ What is Yarn?
 

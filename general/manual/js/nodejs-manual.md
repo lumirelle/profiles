@@ -45,7 +45,7 @@ ni
 
 ### 3. 包管理器
 
-- [npm](node.js-pm-npm-manual.md)
-- [pnpm](node.js-pm-pnpm-manual.md)
-- [yarn](node.js-pm-yarn-manual.md)
+- [npm](nodejs-pm-npm-manual.md)
+- [pnpm](nodejs-pm-pnpm-manual.md)
+- [yarn](nodejs-pm-yarn-manual.md)
 - ...

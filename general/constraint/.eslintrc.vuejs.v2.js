@@ -1,5 +1,5 @@
 /**
- * @description Minimal ESLint Config for Nuxt2
+ * @description Minimal ESLint Config for Vuejs v2
  * @author Lumirelle (shabbyacc&#64;outlook.com)
  */
 module.exports = {
@@ -13,13 +13,11 @@ module.exports = {
 
   globals: {
     // If you use gapi and other global variables, add them here
-    gapi: 'readonly',
+    // gapi: 'readonly',
   },
 
   extends: [
-    // It bundles eslint-plugin-vue
-    '@nuxtjs',
-    'plugin:nuxt/recommended',
+    'plugin:vue/vue2-recommended',
     // `prettier` must be placed last
     'prettier',
   ],
@@ -27,19 +25,28 @@ module.exports = {
   rules: {
     // FIXME: You'd better fix these rules instead of change the severity to 'warn'
     // eslint-config-standard
-    camelcase: 'warn',
-    eqeqeq: 'warn',
-    'no-unused-vars': 'warn',
+    'eqeqeq': ['warn', 'smart'],
     // eslint-plugin-import
     'import/namespace': ['error', { allowComputed: true }],
     // eslint-plugin-vue
-    'vue/multi-word-component-names': 'warn',
     'vue/no-reserved-component-names': 'warn',
     'vue/no-mutating-props': 'warn',
 
     // Recommended rules
     // eslint-config-standard
+    'camelcase': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-unused-vars': [
+      'error',
+      {
+        args: 'none',
+        caughtErrors: 'none',
+        ignoreRestSiblings: true,
+        vars: 'all',
+      },
+    ],
+    // eslint-plugin-vue
+    'vue/multi-word-component-names': 'off',
   },
 
   ignorePatterns: [

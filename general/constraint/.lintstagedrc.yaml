@@ -1,11 +1,7 @@
 # Minimal Lint-Staged Config
-# Lumirelle (shabbyacc@outlook.com)
+# Lumirelle <https://github.com/Lumirelle>
 
-'*.{js,vue}':
-  - 'eslint --cache --fix'
-  - 'prettier --cache --write'
-'*.{css,scss,html,vue}':
-  - 'stylelint --cache --fix'
-  - 'prettier --cache --write'
-'!(*.js|*.html|*.vue|*.css|*.scss)':
-  - 'prettier --cache --write --ignore-unknown'
+'*':
+  - eslint --cache --fix
+'*.{css,postcss,scss,html,vue}':
+  - stylelint --cache --fix

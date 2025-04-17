@@ -78,6 +78,7 @@ $PROFILE_FOLDERS = @(
 $IgnoreFiles += @(
   '.eslintrc.js',
   '.lintstagedrc.yaml',
+  '.npmrc',
   'commitlint.config.js',
   'jsconfig.json'
   'stylelint.config.js',

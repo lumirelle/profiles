@@ -1,6 +1,7 @@
 /**
- * @description Minimal CommitLint Config
- * @author Lumirelle (shabbyacc&#64;outlook.com)
+ * @file Minimal CommitLint Config
+ * @description This config is a minimal CommitLint config
+ * @author Lumirelle <https://github.com/Lumirelle>
  *
  * Git message structure:
  *
@@ -14,7 +15,7 @@
  *
  * Subject must in lower-case.
  */
-module.exports = {
+export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
     // type

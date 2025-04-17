@@ -1,42 +1,33 @@
-# Nuxt.js 项目规范手册 Nuxt.js Project Constraint Manual
+# Nuxt.js v2 规范手册 Nuxt.js v2 Constraint Manual
 
-Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@\*.
+Requires node@'^18.18.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@>=7.
 
 Using node@18.20.7, npm@10.8.2, yarn@1.22.22, pnpm@10.7.1.
 
 Main dependencies:
 
-- nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
-- prettier@^3, eslint@^8, stylelint@^15
+- nuxt@^2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
+- eslint@latest, stylelint@latest
 
 ## 0. 更新 vscode 配置
 
 .editorconfig
 
-See [here](../constraint/.editorconfig).
+See [here](../../constraint/.editorconfig).
 
 .vscode/extensions.json
 
-See [here](../preferences/vscode/extensions.project.nuxtjs2.jsonc).
+See [here](../../preferences/vscode/project/extensions.vuejs.v2.jsonc).
 
 .vscode/settings.json
 
-See [here](../preferences/vscode/settings.project.nuxtjs2.jsonc).
+See [here](../../preferences/vscode/project/settings.vuejs.v2.jsonc).
 
 jsconfig.json
 
-See [here](../constraint/jsconfig.json).
+See [here](../../constraint/jsconfig.json).
 
-## 1. 基础依赖升级
-
-shell
-
-```shell
-ni nuxt@2.18.1 -E
-ni @nuxt/types@2.18.1 -E -D
-```
-
-## 2. 限制开发环境
+## 1. 更新 package.json 和 .npmrc
 
 package.json
 
@@ -48,112 +39,100 @@ package.json
   "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808",
   "engines": {
     "node": "^18.12.0 || ^20.9.0 || >=22",
-    "npm": ">=9"
+    "npm": ">=9",
+    "pnpm": ">=7"
   }
 
   // ...
 }
+```
+
+.npmrc
+
+See [here](../../constraint/.npmrc).
+
+## 2. 基础依赖升级
+
+shell
+
+```shell
+ni nuxt@^2.18.1
+ni @nuxt/types@^2.18.1 -D
 ```
 
 ## 3. 设置代码检查与格式化
 
-> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了（等它完全支持 Vue）。
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint 迁移为 Biome 了（等它完全支持 Vue）。
+
+为兼容 node@^18，需要配置 pnpm.overrides 或 overrides 或 resolutions：
+
+package.json
+
+```json
+{
+  // ...
+
+  // require pnpm@>=6.25.0
+  "pnpm": {
+    "overrides": {
+      "minimatch": "<10.0.0"
+    }
+  },
+  // require npm@>=8.3.0
+  "overrides": {
+    "minimatch": "<10.0.0"
+  },
+  // require yarn@*
+  "resolutions": {
+    "minimatch": "<10.0.0"
+  }
+}
+```
 
 shell（安装依赖）
 
 ```shell
-# prettier
-ni prettier@3.5.3 -D
-
 # eslint
-ni eslint@8.57.1 -D
-# eslint configs，捆绑了 eslint-plugin-vue
-ni @nuxtjs/eslint-config@12.0.0 -D
-# eslint plugins，提供 SSR 模式禁止操作的 lint
-ni eslint-plugin-nuxt@4.0.0 -D
+ni eslint@latest -D
+# eslint config
+ni @antfu/eslint-config@latest -D
+# eslint plugin
+ni eslint-plugin-format@latest -D
 
-# eslint config for prettier, 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
-ni eslint-config-prettier@10.1.2 -D
-
-# Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响（如有）
+# Babel 解析器，为 eslint 提供语法的解析支持，受 babel.config.js 配置影响（如有）
 # 删除旧的解析器（如有）
 nun babel-eslint
 # 安装新的解析器
-ni @babel/eslint-parser@7.27.0 -D
+ni @babel/eslint-parser -D
 ```
 
-.eslintrc.js
+eslint.config.mjs
 
-See [here](../constraint/.eslintrc.js).
-
-.prettierrc.yaml
-
-See [here](../constraint/.prettierrc.yaml).
+See [here](../../constraint/eslint.config.mjs).
 
 ## 4. 设置样式检查与格式化
 
-> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了（等它完全支持 Vue）。
-
-stylelint-config-recommended-vue 未对依赖做精细版本限制，stylelint-config-recommended@>=14.0.0 需要 stylelint@^16，而 nuxt@^2 最高仅支持到 stylelint@^15。
-
-为此，需要通过配置 overrides 或 resolutions 或 pnpm.overrides 来解决：
-
-package.json（require pnpm@>=6.25.0）
-
-```json
-{
-  // ...
-  "pnpm": {
-    "overrides": {
-      "stylelint-config-recommended": "13.0.0"
-    }
-  }
-}
-```
-
-package.json（require npm@>=8.3.0）
-
-```json
-{
-  // ...
-  "overrides": {
-    "stylelint-config-recommended": "13.0.0"
-  }
-}
-```
-
-package.json（require yarn@\*）
-
-```json
-{
-  // ...
-  "resolutions": {
-    "stylelint-config-recommended": "13.0.0"
-  }
-}
-```
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 Stylelint 迁移为 Biome 了（等它完全支持 Vue）。
 
 shell（安装依赖）
 
 ```shell
 # stylelint
-ni stylelint@15.11.0 -D
+ni stylelint@latest -D
 # stylelint configs，捆绑了 stylelint-scss、stylelint-order
-ni stylelint-config-recommended-scss@13.1.0 stylelint-config-recommended-vue@1.6.0 stylelint-config-recess-order@4.6.0 -D
+ni stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
 
-# stylelint config for prettier ... Unnecessary after stylelint 15
-
-# FIXME: 理论上说，stylelint-config-recommended-vue 和 stylelint-config-recommended-scss 捆绑了 postcss 解析器的配置和依赖，
+# FIXME: 理论上说，stylelint-config-standard-vue 和 stylelint-config-standard-scss 捆绑了 postcss 解析器的配置和依赖，
 # FIXME: nuxt.js 2 项目（node@^18）无需显示安装依赖，但 vue.js 2 项目 (node@^14) 需要显示安装依赖，也许是 npm 的原因？
 # stylelint 需要 postcss 解析器提供语法解析支持（地位可以说是类同 babel）
-ni -D postcss-html@1.8.0 postcss-scss@4.0.9
+# ni postcss-html postcss-scss -D
 ```
 
-stylelint.config.js
+stylelint.config.mjs
 
-See [here](../constraint/stylelint.config.js).
+See [here](../../constraint/stylelint.config.mjs).
 
-## 5. 引入 sass 支持和 @nuxtjs/style-resources
+## 5. 使用 Dart Sass 提供 Sass 支持
 
 shell（安装依赖）
 
@@ -162,28 +141,19 @@ shell（安装依赖）
 nun node-sass
 
 # sass 和 sass-loader
-ni sass@1.86.3 sass-loader@version-10 -D
+ni sass@latest sass-loader@version-10 -D
 
-# nuxt 模块，通过自动导入实现样式 mixin
-ni @nuxtjs/style-resources@1.2.2 -D
 ```
 
 nuxt.config.js
 
 ```js
 export default {
-  buildModules: [
-    // ...
-    '@nuxtjs/style-resources',
-  ],
-
-  // 设置需要作为 mixin 的样式文件
-  styleResources: {
-    scss: ['assets/styles/variables.scss', 'assets/styles/mixin.scss'],
-  },
+  // ...
 
   build: {
     // ...
+
     loaders: {
       scss: {
         sassOptions: {
@@ -200,14 +170,18 @@ export default {
         },
       },
     },
+
+    // ...
   },
+
+  // ...
 }
 ```
 
 ## 6. 配置 npm 快速检查/修复脚本和 eslint、stylelint 忽略文件
 
 ```shell
-ni npm-run-all2@7.0.2 -D
+ni npm-run-all2@latest -D
 ```
 
 package.json
@@ -221,29 +195,10 @@ package.json
     "lint:js": "eslint --cache .",
     "lint:style": "stylelint --cache **/*.{css,scss,html,vue}",
     "fix": "npm-run-all -s fix:js fix:style",
-    "fix:js": "eslint --fix --ext .js,.vue .",
-    "fix:style": "stylelint --fix **/*.{css,scss,html,vue}"
+    "fix:js": "eslint --cache --fix .",
+    "fix:style": "stylelint --cache --fix **/*.{css,scss,html,vue}"
   }
 }
-```
-
-.prettierignore
-
-```ignore
-# Build output
-.nuxt
-# Assets and static files
-assets/icon
-assets/images
-assets/lang
-static
-**/iconfont.*
-# Node modules
-node_modules
-# Nuxt app
-app/view
-app.html
-
 ```
 
 ## 7. 配置提交检查/修复
@@ -272,23 +227,24 @@ package.json（配置 simple-git-hooks）
 shell（安装依赖）
 
 ```shell
-ni simple-git-hooks@2.12.1 lint-staged@15.5.0 @commitlint/cli@19.8.0 @commitlint/config-conventional@19.8.0 -D
+ni simple-git-hooks@latest lint-staged@latest @commitlint/cli@latest @commitlint/config-conventional@latest -D
 ```
 
 .lintstagedrc.yaml
 
-See [here](../constraint/.lintstagedrc.yaml).
+See [here](../../constraint/.lintstagedrc.yaml).
 
 commitlint.config.js
 
-See [here](../constraint/commitlint.config.js).
+See [here](../../constraint/commitlint.config.js).
 
 ## 8. 设置 webpack 打包优化
 
 shell（安装依赖）
 
 ```shell
-ni nuxt-precompress@0.5.9
+ni nuxt-precompress@latest
+ni useless-analyzer-webpack-plugin@latest -D
 ```
 
 nuxt.config.js
@@ -307,7 +263,7 @@ export default {
   nuxtPrecompress: {
     enabled: true,
     report: false,
-    test: /\.(js|css|json|txt|html|ico|svg|xml|)$/,
+    test: /\.(js|css|json|txt|html|ico|svg|xml)$/,
     middleware: {
       enabled: true,
       enabledStatic: true,
@@ -424,7 +380,7 @@ shell（安装依赖）
 
 ```shell
 # 为环境变量提供跨平台兼容性
-ni -D cross-env
+ni -D cross-env@latest
 ```
 
 package.json（设置了环境变量的 npm scripts，改为通过 cross-env 来执行）
@@ -456,6 +412,8 @@ package.json（设置了环境变量的 npm scripts，改为通过 cross-env 来
 
 ### Rimraf
 
+FIXME: 在使用 pnpm 的项目中，会出现 vscode 打开状态占用 node_modules 致使无法删除的问题。
+
 shell（安装依赖）
 
 ```shell
@@ -469,7 +427,7 @@ package.json (require npm-run-all2)
   // ...
   "scripts": {
     // ...
-    "clean": "npm-run-all clean:dist clean:deps",
+    "clean": "npm-run-all -s clean:dist clean:deps",
     "clean:dist": "rimraf .nuxt",
     "clean:deps": "rimraf package-lock.json yarn.lock pnpm-lock.yaml node_modules"
   }
@@ -559,7 +517,7 @@ processedModules.forEach((files, folderPath) => {
 
 // 3. 合并饿了么组件库的国际化
 const elementMessages = {
-  en: elementMessagesInEN,
+  'en': elementMessagesInEN,
   'zh-CN': elementMessagesInZH,
 }
 for (const language of SUPPORT_LANGUAGES) {
