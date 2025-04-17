@@ -43,20 +43,39 @@ Sub Dir Structure:
 
   - .cspell.dev.txt
   - .editorconfig
-  - .markdownlint.yml
-  - .prettierrc.yml
+  - .lintstagedrc.yaml
+  - .markdownlint.yaml
+  - .npmrc
+  - .prettierrc.yaml
+  - commitlint.config.mjs
+  - eslint.config.mjs
+  - jsconfig.json
+  - stylelint.config.mjs
 
 - manual: Manuals like `git-manual.md`
 
-  - git-manual.md
-  - node.js-manual.md
-  - node.js-pm-npm-manual.md
-  - node.js-pm-yarn-manual.md
-  - nuxt.js-v2-manual.md
-  - nuxt.js-v2-project-constraint-manual.md
-  - prefabricated-dish-manual.md
-  - web-front-end-manual.md
-  - windows-manual.md
+  - git
+
+    - git-manual.md
+
+  - life
+
+    - prefabricated-dish-manual.md
+
+  - nodejs
+
+    - nodejs-manual.md
+    - nodejs-pm-npm-manual.md
+    - nodejs-pm-yarn-manual.md
+    - nodejs-pm-pnpm-manual.md
+    - nuxtjs-v2-manual.md
+    - nuxtjs-v2-specification-constraint-manual.md
+    - vuejs-v2-specification-constraint-manual.md
+    - web-front-end-manual.md
+
+  - os
+
+    - windows-manual.md
 
 - preferences: Preferences profiles like `.zshrc`
 
@@ -78,7 +97,7 @@ Sub Dir Structure:
 
     - settings.xml
 
-  - node.js
+  - nodejs
 
     - volta.hooks.jsonc
 
@@ -106,12 +125,18 @@ Sub Dir Structure:
 
   - vscode
 
-    - extensions.default.jsonc
-    - extensions.java.jsonc
-    - extensions.js.jsonc
-    - settings.default.project.jsonc
-    - settings.default.user.jsonc
-    - trusted-domains.jsonc
+    - project
+
+      - extensions.vuejs.v2.jsonc
+      - settings.vuejs.v2.jsonc
+
+    - user
+
+      - extensions.default.jsonc
+      - extensions.java.jsonc
+      - extensions.js.jsonc
+      - settings.default.jsonc
+      - trusted-domains.jsonc
 
   - windows-terminal
 
@@ -135,13 +160,18 @@ Sub Dir Structure:
 
     - dockerfile
 
-      - nuxt.js
+      - nodejs
 
         - Dockerfile
         - .dockerignore
 
-      - spring-boot/Dockerfile
-      - tomcat/Dockerfile
+      - spring-boot
+
+        - Dockerfile
+
+      - tomcat
+
+        - Dockerfile
 
     - docker-compose.yml
 

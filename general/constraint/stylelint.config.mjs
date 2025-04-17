@@ -7,9 +7,9 @@
 /** @type {import('stylelint').Config} */
 export default {
   extends: [
-    // Bundles postcss-scss custom syntax
+    // It bundles postcss-scss custom syntax
     'stylelint-config-standard-scss',
-    // Bundled postcss-html custom syntax
+    // It bundles postcss-html custom syntax
     'stylelint-config-standard-vue/scss',
     'stylelint-config-recess-order',
     // Style formatter

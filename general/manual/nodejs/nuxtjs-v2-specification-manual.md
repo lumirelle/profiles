@@ -86,6 +86,8 @@ package.json
   "resolutions": {
     "minimatch": "<10.0.0"
   }
+
+  // ...
 }
 ```
 
@@ -99,10 +101,10 @@ ni @antfu/eslint-config@latest -D
 # eslint plugin
 ni eslint-plugin-format@latest -D
 
-# Babel 解析器，为 eslint 提供语法的解析支持，受 babel.config.js 配置影响（如有）
+# 一般无需： Babel 解析器，为 eslint 提供新 js 语法的解析支持
 # 删除旧的解析器（如有）
 nun babel-eslint
-# 安装新的解析器
+# 安装新的解析器（一般无需）
 ni @babel/eslint-parser -D
 ```
 
@@ -122,9 +124,9 @@ ni stylelint@latest -D
 # stylelint configs，捆绑了 stylelint-scss、stylelint-order
 ni stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
 
+# stylelint 需要 postcss 解析器提供语法解析支持
 # FIXME: 理论上说，stylelint-config-standard-vue 和 stylelint-config-standard-scss 捆绑了 postcss 解析器的配置和依赖，
 # FIXME: nuxt.js 2 项目（node@^18）无需显示安装依赖，但 vue.js 2 项目 (node@^14) 需要显示安装依赖，也许是 npm 的原因？
-# stylelint 需要 postcss 解析器提供语法解析支持（地位可以说是类同 babel）
 # ni postcss-html postcss-scss -D
 ```
 
@@ -132,7 +134,7 @@ stylelint.config.mjs
 
 See [here](../../constraint/stylelint.config.mjs).
 
-## 5. 使用 Dart Sass 提供 Sass 支持
+## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
 shell（安装依赖）
 
@@ -142,7 +144,6 @@ nun node-sass
 
 # sass 和 sass-loader
 ni sass@latest sass-loader@version-10 -D
-
 ```
 
 nuxt.config.js
@@ -158,7 +159,7 @@ export default {
       scss: {
         sassOptions: {
           // scss 支持本身不需要任何配置
-          // 只有代码中使用到大量的弃用 API 时，才需要禁用警告（因为实在是太多咧）
+          // 只有代码中使用到大量的弃用 API 时，才需要禁用警告（因为警告输出实在是太多咧）
           silenceDeprecations: [
             'legacy-js-api',
             'mixed-decls',
@@ -312,7 +313,7 @@ export default {
         }
       : {},
 
-    // Uncomment if you want to analyze useless files, just works on localDevelopment mode
+    // Uncomment if you want to analyze useless files, just works on dev mode
     // plugins: [
     //   new UselessAnalyzerWebpackPlugin({
     //     preset: 'nuxt',
@@ -369,7 +370,7 @@ export default {
 
 .browserslistrc
 
-```browserslist
+```shell
 > 1%
 last 2 versions
 ```
@@ -433,150 +434,3 @@ package.json (require npm-run-all2)
   }
 }
 ```
-
-## 11. 项目国际化（Vue i18n）
-
-locales/index.js
-
-```js
-import VueI18n from 'vue-i18n'
-import Vue from 'vue'
-
-import elementMessagesInEN from 'element-ui/lib/locale/lang/en'
-import elementMessagesInZH from 'element-ui/lib/locale/lang/zh-CN'
-import elementLocale from 'element-ui/lib/locale'
-
-Vue.use(VueI18n)
-
-const SUPPORT_LANGUAGES = ['en', 'zh-CN']
-
-// 1. 初始化 messages
-const messages = SUPPORT_LANGUAGES.reduce((messages, language) => {
-  messages[language] = {}
-  return messages
-}, {})
-
-// 2. 获取并设置所有模块的语言内容
-const modules = require.context('./modules', true, /\.json$/)
-
-// 拆分后进行排序，保证层级多的放在后面，防止被覆盖
-// 例如，level1/level2/level3/zh-CN.json，level1/level2/zh-CN.json, 在后面给level1设置level2时会将刚才的level2覆盖
-// 长度越长，越靠后，也可以在下面进行处理，但是我觉得这样会快一点
-const keys = modules.keys()
-const afterSplitAndSort = keys
-  .map((path) => ({ names: path.split('/'), path }))
-  .sort((a, b) => a.names.length - b.names.length)
-
-// 用于存储已处理的模块，用于校验配对
-const processedModules = new Map()
-
-afterSplitAndSort.forEach(({ names, path }) => {
-  const namespaces = names.slice(1, names.length - 1) // 语言文件命名空间
-  const language = names[names.length - 1].split('.')[0] // 语言文件名
-  const message = modules(path) // 语言文件内容
-
-  // 校验语言文件名
-  if (!SUPPORT_LANGUAGES.includes(language)) {
-    console.warn(`[i18n] 警告: 文件 ${path} 不是有效的语言文件，应为 ${SUPPORT_LANGUAGES.join(', ')} 之一`)
-    return
-  }
-
-  // 处理语言文件内容
-  let root = messages[language]
-  // 构建命名空间结构
-  let idx = 0
-  while (idx < namespaces.length - 1) {
-    const leafKey = namespaces[idx]
-    if (!Reflect.get(root, leafKey)) {
-      Reflect.set(root, leafKey, {})
-    }
-    root = Reflect.get(root, leafKey)
-    idx++
-  }
-  // 为构建出的最后一个命名空间层级，设置翻译内容
-  Reflect.set(root, namespaces[namespaces.length - 1], message)
-
-  // 记录已处理的模块
-  const folderPath = namespaces.join('/')
-  if (!processedModules.has(folderPath)) {
-    processedModules.set(folderPath, new Set())
-  }
-  processedModules.get(folderPath).add(language)
-})
-
-// 校验语言文件配对
-processedModules.forEach((files, folderPath) => {
-  if (files.size !== SUPPORT_LANGUAGES.length) {
-    console.warn(
-      `[i18n] 警告: 文件夹 ${folderPath} 缺少必须的语言文件，当前为: ${Array.from(files).join(
-        ', '
-      )}, 应为: ${SUPPORT_LANGUAGES.join(', ')}`
-    )
-  }
-})
-
-// 3. 合并饿了么组件库的国际化
-const elementMessages = {
-  'en': elementMessagesInEN,
-  'zh-CN': elementMessagesInZH,
-}
-for (const language of SUPPORT_LANGUAGES) {
-  messages[language] = { ...messages[language], ...elementMessages[language] }
-}
-
-// 4. 初始化 VueI18n 实例
-const i18n = new VueI18n({
-  locale: 'en',
-  fallbackLocale: 'en', // 语言环境中不存在相应massage键时回退到英语
-  messages,
-  silentTranslationWarn: true,
-  // 处理复数形式的规则，例如：
-  // modules/xxx/en.json
-  // {
-  //   "apple": {
-  //     "0": "1 apple",    // 单数
-  //     "1": "{n} apples"  // 复数，其中 key 为 pluralizationRules 返回值
-  //   }
-  // }
-  // xxx.js
-  // $t('apple', { n: 1 })  // 输出: "1 apple"，其中 n 为 choice
-  // $t('apple', { n: 2 })  // 输出: "2 apples"
-  pluralizationRules: {
-    en: (choice) => {
-      return choice <= 1 ? 0 : 1
-    },
-  },
-})
-
-export default function ({ app }) {
-  const locale = app.$cookies.get('language')
-
-  if (!app.i18n) {
-    app.i18n = i18n
-  }
-
-  i18n.locale = locale
-
-  elementLocale.i18n((key, value) => app.i18n.t(key, value))
-}
-
-export { i18n }
-```
-
-项目结构
-
-- locales
-
-  - modules
-
-    - module-a
-
-      - sub-module
-        - en.json
-        - zh-CN.json
-
-    - module-b
-      - en.json
-      - zh-CN.json
-
-  - index.js
