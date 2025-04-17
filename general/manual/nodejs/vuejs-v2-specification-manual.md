@@ -1,50 +1,59 @@
-# Vue.js 项目规范手册 Vue.js Project Constraint Manual
+# Vue.js v2 规范手册 Vue.js v2 Specification Manual
 
-Requires node@^14, npm@^6, yarn@^1.
+Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@>=6.25.0.
 
-Using node@14.21.3, npm@6.14.18, yarn@1.22.22.
+Using node@18.20.7, npm@10.8.2, yarn@1.22.22, pnpm@10.7.1.
 
-- vue@^2.7.16, webpack@^4, babel@^7, core-js@^3
-- prettier@^2, eslint@^6, stylelint@^15
+Main dependencies:
+
+- vue@2.7.16, webpack@^4, babel@^7, core-js@^3
+- prettier@latest, eslint@^8, stylelint@^15
 
 ## 0. 更新 vscode 配置
 
 .editorconfig
 
-See [here](../constraint/.editorconfig).
+See [here](../../constraint/.editorconfig).
+
+.vscode/extensions.json
+
+See [here](../../preferences/vscode/project/extensions.vuejs.v2.jsonc).
 
 .vscode/settings.json
 
-See [here](../preferences/vscode/settings.default.project.jsonc).
+See [here](../../preferences/vscode/project/settings.vuejs.v2.jsonc).
 
 jsconfig.json
 
-See [here](../constraint/jsconfig.json).
+See [here](../../constraint/jsconfig.json).
 
-## 1. 基础依赖升级
-
-shell
-
-```shell
-ni vue@2.7.16 vue-router@3.6.5 vuex@3.6.2 webpack@4.47.0 core-js@3.41.0
-ni @vue/cli-service@4.5.19 -D
-```
-
-## 2. 限制包管理器
+## 1. 更新 package.json
 
 package.json
 
 ```json
 {
   // ...
+
+  // Used by corepack
+  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808",
   "engines": {
-    "node": ">=14",
-    "npm": ">=6",
-    "yarn": "Please use npm or yarn instead of pnpm to install dependencies",
-    "pnpm": "Please use npm or yarn instead of pnpm to install dependencies"
-  },
-  "packageManager": "npm@6.14.18"
+    "node": "^18.12.0 || ^20.9.0 || >=22",
+    "npm": ">=9",
+    "pnpm": ">=6.25.0"
+  }
+
+  // ...
 }
+```
+
+## 2. 基础依赖升级
+
+shell
+
+```shell
+ni vue@2.7.16 vue-router@^3 vuex@^3 webpack@^5 core-js@^3
+ni @vue/cli-service -D
 ```
 
 ## 3. 设置代码检查与格式化
@@ -53,27 +62,30 @@ shell（安装依赖）
 
 ```shell
 # prettier
-ni prettier@2.8.8 -D
+ni prettier -D
 
 # eslint
-ni eslint@6.8.0 -D
+ni eslint@^8 -D
 # eslint plugins, for vue
-ni @vue/cli-plugin-eslint@4.5.19 -D
+ni eslint-plugin-vue -D
 
 # eslint config for prettier, 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
-ni eslint-config-prettier@6.15.0 -D
+ni eslint-config-prettier -D
 
 # Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响（如有）
-ni babel-eslint@10.1.0 -D
+# 删除旧的解析器（如有）
+nun babel-eslint
+# 安装新的解析器
+ni @babel/eslint-parser -D
 ```
 
 .eslintrc.js
 
-See [here](../constraint/.eslintrc.js).
+See [here](../../constraint/.eslintrc.js).
 
 .prettierrc.yaml
 
-See [here](../constraint/.prettierrc.yaml).
+See [here](../../constraint/.prettierrc.yaml).
 
 ## 4. 设置样式检查与格式化
 
@@ -109,7 +121,7 @@ shell（安装依赖）
 
 ```shell
 # stylelint
-ni stylelint@15.11.0 -D
+ni stylelint@15 -D
 # stylelint configs，捆绑了 stylelint-scss、stylelint-order
 ni stylelint-config-recommended-scss@13.1.0 stylelint-config-recommended-vue@1.6.0 stylelint-config-clean-order@7.0.0 -D
 
@@ -123,7 +135,7 @@ ni -D postcss-html@1.8.0 postcss-scss@4.0.9
 
 stylelint.config.js
 
-See [here](../constraint/stylelint.config.js).
+See [here](../../constraint/stylelint.config.js).
 
 ## 5. 引入 sass 支持和 @nuxtjs/style-resources
 

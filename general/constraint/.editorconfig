@@ -1,5 +1,5 @@
 # Minimal EditorConfig
-# Lumirelle (shabbyacc@outlook.com)
+# Lumirelle <https://github.com/Lumirelle>
 
 root = true
 
@@ -12,8 +12,6 @@ tab_width = 2
 
 insert_final_newline = true
 trim_trailing_whitespace = true
-
-max_line_length = 120
 
 [*.{py,java,c,cpp,h,vb,xml}]
 indent_size = 4

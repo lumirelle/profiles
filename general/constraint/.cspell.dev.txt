@@ -68,6 +68,7 @@ ventoy
 vite
 vssettings
 vuedraggable
+vuejs
 vuex
 wechat
 winget

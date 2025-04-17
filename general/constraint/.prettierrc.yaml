@@ -1,8 +1,9 @@
 # Minimal Prettier Config
-# Lumirelle (shabbyacc@outlook.com)
+# Lumirelle <https://github.com/Lumirelle>
 
 semi: false
 singleQuote: true
+quoteProps: consistent
 
 endOfLine: auto
 

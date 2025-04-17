@@ -1,6 +1,13 @@
-# Nuxt.js 手册 Nuxt.js Manual
+# Nuxt.js v2 手册 Nuxt.js v2 Manual
 
-Based on node@^18.20.7, yarn@^1.22.22, nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3).
+Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@>=6.25.0.
+
+Using node@18.20.7, npm@10.8.2, yarn@1.22.22, pnpm@10.7.1.
+
+Main dependencies:
+
+- nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
+- eslint@latest, stylelint@latest
 
 ## 为什么使用？ Why use it?
 
@@ -36,25 +43,7 @@ Based on node@^18.20.7, yarn@^1.22.22, nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7
 
 ### 1. 配置！ Setup
 
-```shell
-nlx create-nuxt-app@4 # requires @antfu/ni
-# Choose the agent: yarn
-
-# Project name: xxx
-# Programming language: JavaScript
-# Package manager: Yarn
-# UI framework: Element(PC) / Vant (Mobile)
-# Nuxt.js modules: Axios
-# Linting tools: ESLint, Prettier, Lint staged files (We will add StyleLint manually for compatible reason)
-# Testing framework: None
-# Rendering mode: Universal (SSR/SSG)
-# Deployment target: Server (Node.js hosting)
-# Development tools: jsconfig.json (Recommended for VS Code if you're not using typescript)
-# Continuous integration: None
-# Version control system: Git
-```
-
-然后依照 [Nuxt.js Project Constraint Manual](nuxt.js-project-constraint-manual.md) 完成基础设置。
+基于任意的 Nuxt.js v2 项目模板依照 [Nuxt.js Project Constraint Manual](nuxt.js-project-constraint-manual.md) 完成基础设置。
 
 参考的配置文件格式：
 
@@ -125,7 +114,7 @@ export default {
   nuxtPrecompress: {
     enabled: true,
     report: false,
-    test: /\.(js|css|json|txt|html|ico|svg|xml|)$/,
+    test: /\.(js|css|json|txt|html|ico|svg|xml)$/,
     middleware: {
       enabled: true,
       enabledStatic: true,
@@ -236,11 +225,18 @@ export default {
         }
       : {},
 
-    // Uncomment if you want to analyze useless files, just works on dev mode
+    // Uncomment if you want to analyze useless files, just works on localDevelopment mode
     // plugins: [
     //   new UselessAnalyzerWebpackPlugin({
-    //     src: './',
-    //     additionIgnores: ['app.html', 'app/**/*', 'model/**/*', 'router/**/*', '**/*.scss'],
+    //     preset: 'nuxt',
+    //     ignores: [
+    //       // 添加你需要忽略的文件... / Add files you need to ignore...
+    //       'app.html',
+    //       '**/*.scss',
+    //     ],
+    //     important: [
+    //       // 添加你不想忽略的文件... / Add files you don't want to ignore...
+    //     ],
     //   }),
     // ],
 

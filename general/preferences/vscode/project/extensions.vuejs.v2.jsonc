@@ -1,0 +1,11 @@
+{
+  // cspell:disable
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "mikestead.dotenv",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "vue.volar",
+    "lokalise.i18n-ally"
+  ]
+}
