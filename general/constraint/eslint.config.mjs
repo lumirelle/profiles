@@ -1,23 +1,24 @@
-/**
- * @file Minimal ESLint Flat Config for Vue.js v2 Based Projects
- * @description This config is a minimal ESLint config for Vue.js v2 based projects, based on @antfu/eslint-config.
- * @author Lumirelle <https://github.com/Lumirelle>
- */
-
 import antfu from '@antfu/eslint-config'
 
 export default antfu(
   /**
-   * Options Config
+   * Config Generation Options
    * @see https://github.com/antfu/eslint-config#vue-2
    */
   {
-    // Set vue version to 2
+    // Vue Options
     vue: {
+      // Disable sfc block detection for styles
+      sfcBlocks: {
+        blocks: {
+          styles: false,
+        },
+      },
+      // Set vue version to 2
       vueVersion: 2,
     },
 
-    // Enable formatters for html and markdown
+    // Enable formatters for html and markdown (requires `eslint-plugin-format`)
     formatters: {
       css: false, // Use stylelint for instead
       html: true,
@@ -26,20 +27,18 @@ export default antfu(
 
     // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
     ignores: [
-      // Build output
-      '.nuxt',
+      // The configuration already includes ignore configurations for build output and node_modules
       // Assets and static files
       'assets/icon',
       'assets/images',
       'assets/lang',
       'static',
       '**/iconfont.*',
-      // Node.js modules
-      'node_modules',
-      // Nuxt app
+      // Nuxt html templates
       'app/view',
       'app.html',
       // Other files
+      'assets/utils/yidun-captcha.js',
     ],
   },
 
