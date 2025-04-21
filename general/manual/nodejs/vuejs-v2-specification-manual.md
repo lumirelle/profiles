@@ -1,13 +1,13 @@
 # Vue.js v2 规范手册 Vue.js v2 Specification Manual
 
-Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@>=6.25.0.
+Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@>=7.
 
 Using node@18.20.7, npm@10.8.2, yarn@1.22.22, pnpm@10.7.1.
 
 Main dependencies:
 
 - vue@2.7.16, webpack@^4, babel@^7, core-js@^3
-- prettier@latest, eslint@^8, stylelint@^15
+- eslint@latest, stylelint@latest
 
 ## 0. 更新 vscode 配置
 
@@ -27,7 +27,7 @@ jsconfig.json
 
 See [here](../../constraint/jsconfig.json).
 
-## 1. 更新 package.json
+## 1. 更新 package.json 和 .npmrc
 
 package.json
 
@@ -40,104 +40,95 @@ package.json
   "engines": {
     "node": "^18.12.0 || ^20.9.0 || >=22",
     "npm": ">=9",
-    "pnpm": ">=6.25.0"
+    "pnpm": ">=7"
   }
 
   // ...
 }
 ```
+
+.npmrc
+
+See [here](../../constraint/.npmrc).
 
 ## 2. 基础依赖升级
 
 shell
 
 ```shell
-ni vue@2.7.16 vue-router@^3 vuex@^3 webpack@^5 core-js@^3
-ni @vue/cli-service -D
+ni vue@2.7.16 vue-router@legacy vuex@^3.6.2 webpack@latest core-js@latest
+ni @vue/cli-service@latest -D
 ```
 
 ## 3. 设置代码检查与格式化
 
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint 迁移为 Biome 了（等它完全支持 Vue）。
+
+为兼容 node@^18，需要配置 pnpm.overrides 或 overrides 或 resolutions：
+
+package.json
+
+```json
+{
+  // ...
+
+  // require pnpm@>=6.25.0
+  "pnpm": {
+    "overrides": {
+      "minimatch": "<10.0.0"
+    }
+  },
+  // require npm@>=8.3.0
+  "overrides": {
+    "minimatch": "<10.0.0"
+  },
+  // require yarn@*
+  "resolutions": {
+    "minimatch": "<10.0.0"
+  }
+
+  // ...
+}
+```
+
 shell（安装依赖）
 
 ```shell
-# prettier
-ni prettier -D
+# eslint & config & plugin
+ni eslint@latest  @antfu/eslint-config@latest eslint-plugin-format@latest -D
 
-# eslint
-ni eslint@^8 -D
-# eslint plugins, for vue
-ni eslint-plugin-vue -D
-
-# eslint config for prettier, 关闭所有（包括其他 eslint 插件）与 prettier 冲突的规则
-ni eslint-config-prettier -D
-
-# Babel 解析器，为 eslint 提供语法的解析支持（可选），受 babel.config.js 配置影响（如有）
+# NOTE: 一般无需。Babel 解析器，为 eslint 提供新 js 语法的解析支持
 # 删除旧的解析器（如有）
 nun babel-eslint
-# 安装新的解析器
+# 安装新的解析器（一般无需）
 ni @babel/eslint-parser -D
 ```
 
-.eslintrc.js
+eslint.config.mjs
 
-See [here](../../constraint/.eslintrc.js).
-
-.prettierrc.yaml
-
-See [here](../../constraint/.prettierrc.yaml).
+See [here](../../constraint/eslint.config.mjs).
 
 ## 4. 设置样式检查与格式化
 
-> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint + Prettier 迁移为 Biome 了（等它完全支持 Vue）。
-
-stylelint-config-recommended-vue 未对依赖做精细版本限制，stylelint-config-recommended@>=14.0.0 需要 stylelint@^16，而 nuxt@^2 最高仅支持到 stylelint@^15。
-
-为此，需要通过配置 overrides 或 resolutions 来解决：
-
-package.json（require npm@^8.3.0）
-
-```json
-{
-  // ...
-  "overrides": {
-    "stylelint-config-recommended": "13.0.0"
-  }
-}
-```
-
-package.json（require yarn@\*）
-
-```json
-{
-  // ...
-  "resolutions": {
-    "stylelint-config-recommended": "13.0.0"
-  }
-}
-```
+> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 Stylelint 迁移为 Biome 了（等它完全支持 Vue）。
 
 shell（安装依赖）
 
 ```shell
-# stylelint
-ni stylelint@15 -D
-# stylelint configs，捆绑了 stylelint-scss、stylelint-order
-ni stylelint-config-recommended-scss@13.1.0 stylelint-config-recommended-vue@1.6.0 stylelint-config-clean-order@7.0.0 -D
+# stylelint & configs，捆绑了 stylelint-scss、stylelint-order
+ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
 
-# stylelint config & plugin for prettier ... Unnecessary after stylelint 15
-
-# FIXME: 理论上说，stylelint-config-recommended-vue 和 stylelint-config-recommended-scss 捆绑了 postcss 解析器的配置和依赖，
+# stylelint 需要 postcss 解析器提供语法解析支持
+# FIXME: 理论上说，stylelint-config-standard-vue 和 stylelint-config-standard-scss 捆绑了 postcss 解析器的配置和依赖，
 # FIXME: nuxt.js 2 项目（node@^18）无需显示安装依赖，但 vue.js 2 项目 (node@^14) 需要显示安装依赖，也许是 npm 的原因？
-# stylelint 需要 postcss 解析器提供语法解析支持（地位可以说是类同 babel）
-ni -D postcss-html@1.8.0 postcss-scss@4.0.9
+# ni postcss-html postcss-scss -D
 ```
 
-stylelint.config.js
+stylelint.config.mjs
 
-See [here](../../constraint/stylelint.config.js).
+See [here](../../constraint/stylelint.config.mjs).
 
-## 5. 引入 sass 支持和 @nuxtjs/style-resources
+## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
 shell（安装依赖）
 
@@ -149,7 +140,41 @@ nun node-sass
 ni sass@1.86.3 sass-loader@version-10 -D
 ```
 
-## 6. 配置 npm 快速检查/修复脚本和 eslint、stylelint 忽略文件
+vue.config.js
+
+```js
+module.exports = {
+  // ...
+
+  css: {
+    loaderOptions: {
+      scss: {
+        sassOptions: {
+          // 禁用 SCSS 废弃功能警告
+          quietDeps: true,
+          // 或者可以按需禁用特定警告
+          silenceDeprecations: [
+            'legacy-js-api',
+            'mixed-decls',
+            'import',
+            'slash-div',
+            'global-builtin',
+            'function-units',
+          ],
+        },
+      },
+    },
+  },
+
+  // ...
+}
+```
+
+## 6. 配置 npm 快速检查/修复脚本
+
+```shell
+ni npm-run-all2@latest -D
+```
 
 package.json
 
@@ -158,62 +183,97 @@ package.json
   // ...
   "scripts": {
     // ...
-    "lint": "npm run lint:js && npm run lint:style",
-    "lint:js": "eslint --ignore-path .eslintignore --ext .js,.vue src",
-    "lint:style": "stylelint --ignore-path .stylelintignore src/**/*.{css,scss,html,vue}",
-    "fix": "npm run fix:js && npm run fix:style",
-    "fix:js": "eslint --fix --ignore-path .eslintignore --ext .js,.vue src",
-    "fix:style": "stylelint --fix --ignore-path .stylelintignore src/**/*.{css,scss,html,vue}"
+    "lint": "npm-run-all -s lint:js lint:style",
+    "lint:js": "eslint --cache .",
+    "lint:style": "stylelint --cache **/*.{css,scss,html,vue}",
+    "fix": "npm-run-all -s fix:js fix:style",
+    "fix:js": "eslint --cache --fix .",
+    "fix:style": "stylelint --cache --fix **/*.{css,scss,html,vue}"
   }
 }
 ```
 
-.eslintignore
+## 7. 配置提交检查/修复
 
-```ignore
-build
-dist
-mock
-node_modules
-public
-theme
+package.json（配置 simple-git-hooks）
+
+```json
+{
+  // ...
+
+  "scripts": {
+    // ...
+    "postinstall": "simple-git-hooks"
+  },
+
+  // ...
+
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  }
+
+  // ...
+}
 ```
 
-.stylelintignore
+shell（安装依赖）
 
-```ignore
-build
-mock
-node_modules
-public
-test
-src/api
-src/assets
-src/icons
-src/router
-src/store
-src/utils
-theme
+```shell
+ni simple-git-hooks@latest lint-staged@latest @commitlint/cli@latest @commitlint/config-conventional@latest -D
 ```
 
-.prettierignore
+.lintstagedrc.yaml
 
-```ignore
-build
-dist
-mock
-node_modules
-public
-theme
+See [here](../../constraint/.lintstagedrc.yaml).
+
+commitlint.config.mjs
+
+See [here](../../constraint/commitlint.config.mjs).
+
+## 8. 设置 webpack 打包优化和未导入文件检测插件
+
+shell（安装依赖）
+
+```shell
+ni useless-analyzer-webpack-plugin@latest -D
 ```
 
-## 7. 项目兼容性
+vue.config.js
+
+```js
+// TODO: ...
+```
+
+## 9. 项目兼容性
 
 ### Browsers List
 
 .browserslistrc
 
-```browserslist
-> 1%
-last 2 versions
+See [here](../../constraint/.browserslistrc).
+
+## 10. 项目可维护性
+
+### Rimraf
+
+FIXME: 在使用 pnpm 的项目中，会出现 vscode 打开状态占用 node_modules 致使无法删除的问题。
+
+shell（安装依赖）
+
+```shell
+ni -D rimraf@v5-legacy
+```
+
+package.json (require npm-run-all2)
+
+```json
+{
+  // ...
+  "scripts": {
+    // ...
+    "clean": "npm-run-all -s clean:dist clean:deps",
+    "clean:dist": "rimraf .nuxt",
+    "clean:deps": "rimraf package-lock.json yarn.lock pnpm-lock.yaml node_modules"
+  }
+}
 ```

@@ -1,3 +1,9 @@
+/**
+ * @file Minimal ESLint Flat Config for Vue.js v2 Based Projects
+ * @description This config is a minimal ESLint config for Vue.js v2 based projects, based on @antfu/eslint-config.
+ * @author Lumirelle <https://github.com/Lumirelle>
+ */
+
 import antfu from '@antfu/eslint-config'
 
 export default antfu(
@@ -33,6 +39,8 @@ export default antfu(
       'assets/images',
       'assets/lang',
       'static',
+      'public',
+      'theme',
       '**/iconfont.*',
       // Nuxt html templates
       'app/view',
@@ -51,8 +59,8 @@ export default antfu(
     languageOptions: {
       // Global variables
       globals: {
-        // If you use gapi and other global variables, add them here
-        gapi: 'readonly',
+        // If you use gapi and other global variables, add them here, eg:
+        // gapi: 'readonly',
       },
     },
 

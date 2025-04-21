@@ -76,6 +76,7 @@ $PROFILE_FOLDERS = @(
 
 # 忽略文件（增加内置）
 $IgnoreFiles += @(
+  '.browserslistrc',
   '.eslintrc.js',
   '.lintstagedrc.yaml',
   '.npmrc',

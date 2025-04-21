@@ -94,14 +94,10 @@ package.json
 shell（安装依赖）
 
 ```shell
-# eslint
-ni eslint@latest -D
-# eslint config
-ni @antfu/eslint-config@latest -D
-# eslint plugin
-ni eslint-plugin-format@latest -D
+# eslint & config & plugin
+ni eslint@latest  @antfu/eslint-config@latest eslint-plugin-format@latest -D
 
-# 一般无需： Babel 解析器，为 eslint 提供新 js 语法的解析支持
+# NOTE: 一般无需。Babel 解析器，为 eslint 提供新 js 语法的解析支持
 # 删除旧的解析器（如有）
 nun babel-eslint
 # 安装新的解析器（一般无需）
@@ -119,10 +115,8 @@ See [here](../../constraint/eslint.config.mjs).
 shell（安装依赖）
 
 ```shell
-# stylelint
-ni stylelint@latest -D
-# stylelint configs，捆绑了 stylelint-scss、stylelint-order
-ni stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
+# stylelint & configs，捆绑了 stylelint-scss、stylelint-order
+ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
 
 # stylelint 需要 postcss 解析器提供语法解析支持
 # FIXME: 理论上说，stylelint-config-standard-vue 和 stylelint-config-standard-scss 捆绑了 postcss 解析器的配置和依赖，
@@ -179,7 +173,7 @@ export default {
 }
 ```
 
-## 6. 配置 npm 快速检查/修复脚本和 eslint、stylelint 忽略文件
+## 6. 配置 npm 快速检查/修复脚本
 
 ```shell
 ni npm-run-all2@latest -D
@@ -235,11 +229,11 @@ ni simple-git-hooks@latest lint-staged@latest @commitlint/cli@latest @commitlint
 
 See [here](../../constraint/.lintstagedrc.yaml).
 
-commitlint.config.js
+commitlint.config.mjs
 
-See [here](../../constraint/commitlint.config.js).
+See [here](../../constraint/commitlint.config.mjs).
 
-## 8. 设置 webpack 打包优化
+## 8. 设置 webpack 打包优化和未导入文件检测插件
 
 shell（安装依赖）
 
@@ -370,10 +364,7 @@ export default {
 
 .browserslistrc
 
-```shell
-> 1%
-last 2 versions
-```
+See [here](../../constraint/.browserslistrc).
 
 ### Cross Env
 
