@@ -33,7 +33,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/4/21 09:59:06",
+    "//": "Last update at 2025/4/21 22:38:10",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -310,7 +310,6 @@
   "todo-tree.regex.enableMultiLine": true,
   "todo-tree.regex.regex": "(//|#|<!--|;|\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)", // support multiple-line comment
   "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
-
   // -- js
   "css.enabledLanguages": ["html", "vue"],
   "css.styleSheets": ["**/*.scss", "**/*.css"],

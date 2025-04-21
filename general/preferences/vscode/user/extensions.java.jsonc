@@ -25,7 +25,8 @@
     // ↓↓ languages / files support
     // -- languages & files
     "remcohaszing.schemastore",
-    "jock.svg", // also the formatter for svg
+    "kurkuza.svg-shrink",
+    "simonsiefke.svg-preview",
     "redhat.vscode-yaml",
     "bierner.markdown-mermaid",
     "tomoki1207.pdf",
