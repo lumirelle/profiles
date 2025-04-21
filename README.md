@@ -43,6 +43,7 @@ Sub Dir Structure:
 
   - .cspell.dev.txt
   - .editorconfig
+  - .gitignore
   - .lintstagedrc.yaml
   - .markdownlint.yaml
   - .npmrc
@@ -88,7 +89,7 @@ Sub Dir Structure:
 
     - .gitconfig
 
-  - jetbrains (need update)
+  - jetbrains (Need update)
 
     - mobi.hsz.idea.gitignore/ForIDEA.xml
     - plugins-installed.txt
@@ -115,7 +116,7 @@ Sub Dir Structure:
 
     - Microsoft.PowerShell_profile.ps1
 
-  - vim (need update)
+  - vim (Need update)
 
     - .ideavimrc
 
@@ -181,6 +182,9 @@ Sub Dir Structure:
 
 Just download the profiles you want and put it on the right place.
 
+**NOTE: On windows, you should add `create symbolic link permission` to your current user.**
+**Just run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.**
+
 ```shell
 # cd PATH_TO_HOLD_THIS_REPO
 # eg:
@@ -192,12 +196,7 @@ git clone -c core.symlinks=true https://github.com/Lumirelle/profiles.git
 
 ### 📜 Script Setup <a name="script_setup"></a>
 
-If you want to use scripts for lazy setup,
-you should download and unzip this repo,
-then, add the root path to the `PATH` environment variable of your computer.
-
-**NOTE: On windows, you should add `create symbolic link permission` to your current user.**
-**Just run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.**
+If you want to use scripts for lazy setup, you should download and unzip this repo, then, add the root path to the `PATH` environment variable of your computer.
 
 Now, you can use [the setup script](prof-setup.ps1) for quick setup and receive the updates automatically:
 
@@ -217,7 +216,7 @@ You can also use [the prof script](prof.ps1) to copy and paste specified profile
 
 ```shell
 # Use PowerShell command `help prof -Full` for more detail.
-prof
+prof .editorconfig
 ```
 
 ## ✍️ Authors <a name="authors"></a>

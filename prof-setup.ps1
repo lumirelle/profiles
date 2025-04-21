@@ -76,12 +76,12 @@ $PROFILE_FOLDERS = @(
 
 # 忽略文件（增加内置）
 $IgnoreFiles += @(
-  '.browserslistrc',
   '.eslintrc.js',
+  '.gitignore',
   '.lintstagedrc.yaml',
   '.npmrc',
   'commitlint.config.js',
-  'jsconfig.json'
+  'jsconfig.json',
   'stylelint.config.js',
   'README.md'
 )

@@ -2,7 +2,7 @@
   // cspell:disable
   "recommendations": [
     "editorconfig.editorconfig",
-    "mikestead.dotenv",
+    "dotenv.dotenv-vscode",
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
     "vue.volar",
