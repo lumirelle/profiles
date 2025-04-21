@@ -35,18 +35,20 @@ export default antfu(
     ignores: [
       // The configuration already includes ignore configurations for build output and node_modules
       // Assets and static files
-      'assets/icon',
-      'assets/images',
-      'assets/lang',
-      'static',
-      'public',
-      'theme',
+      '**/assets/icon',
+      '**/assets/images',
+      '**/assets/lang',
+      '**/assets/langs',
+      '**/static',
+      '**/public',
+      '**/theme',
       '**/iconfont.*',
+      // Tests
+      '**/tests',
       // Nuxt html templates
-      'app/view',
-      'app.html',
+      '**/app/view',
+      '**/app.html',
       // Other files
-      'assets/utils/yidun-captcha.js',
     ],
   },
 
@@ -66,8 +68,17 @@ export default antfu(
 
     // Add custom rules here
     rules: {
+      // We need to use `console` in development environment, we can use terser-webpack-plugin to remove it in production environment
       'no-console': 'off',
+
+      // Vue.js v2 based projects doesn't support these rules
+      // Use global variable `process` instead of `import process from 'process'`, because it's not supported in Vue.js v2 based projects
       'node/prefer-global/process': 'off',
+      // Use `path` instead of `node:path`, because it's not supported in Vue.js v2 based projects
+      'unicorn/prefer-node-protocol': 'off',
+
+      // Use both `indexOf` and `includes`, because it's auto-fix behavior may cause some issues
+      'unicorn/prefer-includes': 'off',
     },
   },
 )

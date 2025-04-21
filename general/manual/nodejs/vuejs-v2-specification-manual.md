@@ -59,8 +59,10 @@ npm pkg set 'packageManager=pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f98
 
 npm pkg set 'engines.node="^18.12.0 || ^20.9.0 || >=22"' 'engines.npm=">=9"' 'engines.pnpm=">=7"' 'engines.yarn=Please use pnpm for instead!'
 
-npm pkg set '"pnpm.overrides.eslint-plugin-import-x>minimatch"="<10.0.0"'
-npm pkg set 'overrides.eslint-plugin-import-x.minimatch="<10.0.0"'
+npm pkg set '"pnpm.overrides.@achrinza/node-ipc"="9.2.9"'
+npm pkg set '"pnpm.overrides.eslint-plugin-import-x>minimatch"="9.0.5"'
+npm pkg set 'overrides.@achrinza/node-ipc="9.2.9"'
+npm pkg set 'overrides.eslint-plugin-import-x.minimatch="9.0.5"'
 
 prof .npmrc -o
 ```
@@ -96,12 +98,14 @@ package.json
 
   "pnpm": {
     "overrides": {
-      "eslint-plugin-import-x>minimatch": "<10.0.0"
+      "@achrinza/node-ipc": "9.2.9",
+      "eslint-plugin-import-x>minimatch": "9.0.5"
     }
   },
   "overrides": {
+    "@achrinza/node-ipc": "9.2.9",
     "eslint-plugin-import-x": {
-      "minimatch": "<10.0.0"
+      "minimatch": "9.0.5"
     }
   }
 
@@ -118,8 +122,8 @@ See [here](../../constraint/.npmrc).
 shell（Command `ni` requires @antfu/ni）
 
 ```shell
-ni vue@^2.7.16 vue-router@legacy vuex@^3.6.2 core-js@latest
-ni @vue/cli-service@^4.5.19 -D
+ni vue@^2.7.16 ni  vue-router@legacy vuex@^3.6.2 core-js@latest
+ni @vue/cli-service@^4.5.19 @vue/cli-plugin-babel@latest vue-template-compiler@latest -D
 ```
 
 ## 3. 设置代码检查与格式化
@@ -165,7 +169,7 @@ shell
 
 ```shell
 # stylelint & configs，捆绑了 stylelint-scss、stylelint-order
-ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
+ni postcss@latest stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
 
 # stylelint 需要 postcss 解析器提供语法解析支持
 # FIXME: 理论上说，stylelint-config-standard-vue 和 stylelint-config-standard-scss 捆绑了 postcss 解析器的配置和依赖，
@@ -354,17 +358,12 @@ vue.config.js
 shell
 
 ```shell
-# cross-env：为环境变量提供跨平台兼容性
-ni -D cross-env@latest
-
 # rimraf：删除文件
 # FIXME: 在使用 pnpm 的项目中，会出现 vscode 打开状态占用 node_modules 致使无法删除的问题。
 ni -D rimraf@v5-legacy
 ```
 
-### 部分快速配置
-
-NOTE：需要使用 cross-env 代理的 npm 脚本应手动配置。设置了环境变量，才需要改为通过 cross-env 来执行。
+### 快速配置
 
 shell
 
@@ -383,20 +382,6 @@ package.json (Requires npm-run-all2)
 {
   // ...
   "scripts": {
-    // ...
-
-    // 设置了环境变量，改为通过 cross-env 来执行
-    "dev": "cross-env BUILD_ENV=develop nuxt",
-    "dev:test": "cross-env BUILD_ENV=test nuxt",
-    "dev:preprod": "cross-env BUILD_ENV=preprod nuxt",
-    "dev:prod": "cross-env BUILD_ENV=production nuxt",
-    "build:dev": "cross-env BUILD_ENV=develop nuxt build",
-    "build:test": "cross-env BUILD_ENV=test  nuxt build",
-    "build:preprod": "cross-env BUILD_ENV=preprod  nuxt build",
-    "build:prod": "cross-env BUILD_ENV=production  nuxt build",
-    // 没设置环境变量，无需改变
-    "start": "nuxt start",
-
     // ...
 
     // 删除构建输出、锁文件、依赖

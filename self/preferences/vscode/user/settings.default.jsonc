@@ -33,7 +33,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/4/9 11:29:05",
+    "//": "Last update at 2025/4/21 09:59:06",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -126,6 +126,17 @@
     "*.wat": "$(capture).wasm",
     "*.xaml": "$(capture).xaml.cs"
   },
+  // -- js
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "keyword.other.dotenv",
+        "settings": {
+          "foreground": "#FF000000"
+        }
+      }
+    ]
+  },
 
   // ↓↓ vscode: behavior
   "editor.mouseWheelZoom": true,
@@ -136,7 +147,8 @@
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
-    "LICENSE": "plaintext"
+    "LICENSE": "plaintext",
+    ".env*": "dotenv"
   },
   "search.exclude": {
     "**/.git": true,
@@ -166,7 +178,6 @@
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[svg]": { "editor.defaultFormatter": "jock.svg" },
   "[powershell]": { "editor.defaultFormatter": "ms-vscode.powershell" },
   "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-docker" },
 
@@ -266,7 +277,6 @@
   // -- general
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
   "powershell.integratedConsole.showOnStartup": false,
-  "svg.preview.mode": "svg",
   "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "[ ]", "[x]", "NOTE"],
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#eeeeee"
@@ -304,5 +314,6 @@
   // -- js
   "css.enabledLanguages": ["html", "vue"],
   "css.styleSheets": ["**/*.scss", "**/*.css"],
-  "npm-intellisense.importLinebreak": "\r\n"
+  "npm-intellisense.importLinebreak": "\r\n",
+  "dotenv.enableAutocloaking": true
 }

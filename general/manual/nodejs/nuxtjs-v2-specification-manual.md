@@ -57,8 +57,8 @@ npm pkg set 'packageManager=pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f98
 
 npm pkg set 'engines.node="^18.12.0 || ^20.9.0 || >=22"' 'engines.npm=">=9"' 'engines.pnpm=">=7"' 'engines.yarn=Please use pnpm for instead!'
 
-npm pkg set '"pnpm.overrides.eslint-plugin-import-x>minimatch"="<10.0.0"'
-npm pkg set 'overrides.eslint-plugin-import-x.minimatch="<10.0.0"'
+npm pkg set '"pnpm.overrides.eslint-plugin-import-x>minimatch"="9.0.5"'
+npm pkg set 'overrides.eslint-plugin-import-x.minimatch="9.0.5"'
 
 prof .npmrc -o
 ```
@@ -94,12 +94,12 @@ package.json
 
   "pnpm": {
     "overrides": {
-      "eslint-plugin-import-x>minimatch": "<10.0.0"
+      "eslint-plugin-import-x>minimatch": "9.0.5"
     }
   },
   "overrides": {
     "eslint-plugin-import-x": {
-      "minimatch": "<10.0.0"
+      "minimatch": "9.0.5"
     }
   }
 
