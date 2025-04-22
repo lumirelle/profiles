@@ -1,12 +1,12 @@
 # Nuxt.js v2 手册 Nuxt.js v2 Manual
 
-Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, yarn@\*, pnpm@>=6.25.0.
+Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-Using node@18.20.7, npm@10.8.2, yarn@1.22.22, pnpm@10.7.1.
+Using node@18.20.7, npm@10.8.2, pnpm@10.7.1.
 
 Main dependencies:
 
-- nuxt@2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
+- nuxt@^2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
 - eslint@latest, stylelint@latest
 
 ## 为什么使用？ Why use it?

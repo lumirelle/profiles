@@ -8,4 +8,4 @@ A fast, disk space efficient Node.js package manager.
 
 ## 如何配置？ How to Setup?
 
-NOTE: PNPM 支持 .npmrc 作为配置文件，配置镜像源可以参考 [NPM](node.js-pm-npm-manual.md)
+NOTE: PNPM 支持 .npmrc 作为配置文件，配置 & 切换镜像源参考 [NPM](nodejs-pm-npm-manual.md)
