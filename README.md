@@ -33,27 +33,36 @@ Development profiles or something else.
 
 Top level directory structure, group by purpose:
 
-- `/for-personal`: **&lt;profiles-collection&gt;** Collection of personal usage profiles
-- `/for-work`: **&lt;profiles-collection&gt;** Collection of work only profiles (Of course, it's include in `.gitignore`)
+- `/for-personal`: **&lt;collection&gt;** Collection of personal usage profiles, support [quickly setup](#script_setup)
+- `/for-work`: **&lt;collection&gt;** Collection of work only profiles (Of course, it's include in `.gitignore`)
 - `/manual`: Manuals
 
-Second level directory structure of **&lt;profiles-collection&gt;**, group by category:
+Second level directory structure of **&lt;collection&gt;**, group by category:
 
-- `/constraint`: **&lt;profiles&gt;** Constraint profiles, like `.editorconfig`
-- `/preferences`: **&lt;profiles&gt;** Preferences profiles, like `.zshrc`
-- `/templates`: **&lt;profiles&gt;** Profile templates, like `Dockerfile`
+- `/constraint`: **&lt;folder|constraint&gt;** Constraint profiles, like `.editorconfig`
+- `/preferences`: **&lt;folder|preferences&gt;** Preferences profiles, like `.zshrc`
+- `/templates`: **&lt;folder|templates&gt;** Profile templates, like `Dockerfile`
 - `/resources`: Resources, like fonts
 
-Third level directory structure of **&lt;profiles&gt;**, group by situation:
+Third level directory structure of **&lt;constraint&gt;**, group by situation:
 
 - `/common`: For commonly usage
-- `/js`: For js based project
 - `/nodejs`: For node.js based project
 - `/webpack`: For webpack based project（It is usually a pure js project）
 - `/vue2`: For vue@^2 based project
-- `/java`: For java based project
-- `/tomcat`: For tomcat based project
-- `/spring-boot`: For sprint boot based project
+
+Third level directory structure of **&lt;preferences&gt;**, group by application:
+
+- `/clash-for-windows`
+- `/git`
+- `/maven`
+- `/neovim`
+- `/powershell`
+- `/volta`
+- `/vs`
+- `/vscode`
+- `/windows-terminal`
+- `/zsh`
 
 ## 🎈 Usage <a name="usage"></a>
 
@@ -62,7 +71,8 @@ Third level directory structure of **&lt;profiles&gt;**, group by situation:
 Just download the profiles you want and put it on the right place.
 
 **NOTE: On windows, you should add `create symbolic link permission` to your current user.**
-**Just run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.**
+
+Just run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.
 
 ```shell
 # cd PATH_TO_HOLD_THIS_REPO
@@ -77,25 +87,25 @@ git clone -c core.symlinks=true https://github.com/Lumirelle/profiles.git
 
 If you want to use scripts for lazy setup, you should download and unzip this repo, then, add the root path to the `PATH` environment variable of your computer.
 
-Now, you can use [the setup script](prof-setup.ps1) for quick setup and receive the updates automatically:
+Now, you can use [the setup script](pset.ps1) for quick setup and receive the updates automatically:
 
 ```shell
-# Use PowerShell command `help prof-setup -Full` for more detail.
-prof-setup
+# Use PowerShell command `help pset -Full` for more detail.
+pset
 ```
 
-You can also use [the setdown script](prof-setdown.ps1) for quick setdown:
+You can also use [the delete script](pdel.ps1) for quick setdown:
 
 ```shell
-# Use PowerShell command `help prof-setdown -Full` for more detail.
-prof-setdown
+# Use PowerShell command `help pdel -Full` for more detail.
+pdel
 ```
 
-You can also use [the prof script](prof.ps1) to copy and paste specified profile every where.
+You can also use [the copy and paste script](pcp.ps1) to copy and paste specified profile every where.
 
 ```shell
-# Use PowerShell command `help prof -Full` for more detail.
-prof .editorconfig
+# Use PowerShell command `help pcp -Full` for more detail.
+pcp .editorconfig
 ```
 
 ## ✍️ Authors <a name="authors"></a>
