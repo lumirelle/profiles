@@ -1,0 +1,5 @@
+Lumirelle
+nvim
+nuxt
+commitlint
+lintstagedrc

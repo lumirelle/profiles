@@ -1,7 +1,0 @@
-# Minimal Lint-Staged Config
-# Lumirelle <https://github.com/Lumirelle>
-
-'*':
-  - eslint --cache --fix
-'*.{css,postcss,scss,html,vue}':
-  - stylelint --cache --fix

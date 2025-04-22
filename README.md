@@ -31,150 +31,29 @@
 
 Development profiles or something else.
 
-Purpose Dir Structure:
+Top level directory structure, group by purpose:
 
-- general: For any situation
-- self: For self usage
-- work: For working (ignore by git)
+- `/for-personal`: **&lt;profiles-collection&gt;** Collection of personal usage profiles
+- `/for-work`: **&lt;profiles-collection&gt;** Collection of work only profiles (Of course, it's include in `.gitignore`)
+- `/manual`: Manuals
 
-Sub Dir Structure:
+Second level directory structure of **&lt;profiles-collection&gt;**, group by category:
 
-- constraint: Constraint profiles like `.editorconfig`
+- `/constraint`: **&lt;profiles&gt;** Constraint profiles, like `.editorconfig`
+- `/preferences`: **&lt;profiles&gt;** Preferences profiles, like `.zshrc`
+- `/templates`: **&lt;profiles&gt;** Profile templates, like `Dockerfile`
+- `/resources`: Resources, like fonts
 
-  - .cspell.dev.txt
-  - .editorconfig
-  - .gitignore
-  - .lintstagedrc.yaml
-  - .markdownlint.yaml
-  - .npmrc
-  - .prettierrc.yaml
-  - commitlint.config.mjs
-  - eslint.config.mjs
-  - jsconfig.json
-  - stylelint.config.mjs
+Third level directory structure of **&lt;profiles&gt;**, group by situation:
 
-- manual: Manuals like `git-manual.md`
-
-  - git
-
-    - git-manual.md
-
-  - life
-
-    - prefabricated-dish-manual.md
-
-  - nodejs
-
-    - nodejs-manual.md
-    - nodejs-pm-npm-manual.md
-    - nodejs-pm-yarn-manual.md
-    - nodejs-pm-pnpm-manual.md
-    - nuxtjs-v2-manual.md
-    - nuxtjs-v2-specification-constraint-manual.md
-    - vuejs-v2-specification-constraint-manual.md
-    - web-front-end-manual.md
-
-  - os
-
-    - windows-manual.md
-
-- preferences: Preferences profiles like `.zshrc`
-
-  - clash-for-windows
-
-    - cfw-settings.yaml
-    - README.md
-
-  - git
-
-    - .gitconfig
-
-  - jetbrains (Need update)
-
-    - mobi.hsz.idea.gitignore/ForIDEA.xml
-    - plugins-installed.txt
-
-  - maven
-
-    - settings.xml
-
-  - nodejs
-
-    - volta.hooks.jsonc
-
-  - nvim
-
-    - lua/config
-
-      - autocmds.lua
-      - keymaps.lua
-      - options.lua
-
-    - init.lua
-
-  - powershell
-
-    - Microsoft.PowerShell_profile.ps1
-
-  - vim (Need update)
-
-    - .ideavimrc
-
-  - vs
-
-    - backup.vssettings
-
-  - vscode
-
-    - project
-
-      - extensions.vuejs.v2.jsonc
-      - settings.vuejs.v2.jsonc
-
-    - user
-
-      - extensions.default.jsonc
-      - extensions.java.jsonc
-      - extensions.js.jsonc
-      - settings.default.jsonc
-      - trusted-domains.jsonc
-
-  - windows-terminal
-
-    - windows-terminal.settings.jsonc
-
-  - zsh
-
-    - .zshrc
-
-- resources: Resources like fonts
-
-  - fonts
-
-    - LxgwBrightCodeTC.zip
-    - NerdFontsSymbolsOnly.zip
-    - README.md
-
-- templates: Profile templates like Dockerfile
-
-  - docker
-
-    - dockerfile
-
-      - nodejs
-
-        - Dockerfile
-        - .dockerignore
-
-      - spring-boot
-
-        - Dockerfile
-
-      - tomcat
-
-        - Dockerfile
-
-    - docker-compose.yml
+- `/common`: For commonly usage
+- `/js`: For js based project
+- `/nodejs`: For node.js based project
+- `/webpack`: For webpack based project（It is usually a pure js project）
+- `/vue2`: For vue@^2 based project
+- `/java`: For java based project
+- `/tomcat`: For tomcat based project
+- `/spring-boot`: For sprint boot based project
 
 ## 🎈 Usage <a name="usage"></a>
 
