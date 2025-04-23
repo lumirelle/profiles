@@ -56,6 +56,7 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
       "volta${slash}",
       "vs${slash}",
       "vscode${slash}",
+      "vscode-ws${slash}",
       "windows-terminal${slash}",
       "zsh${slash}"
     );
