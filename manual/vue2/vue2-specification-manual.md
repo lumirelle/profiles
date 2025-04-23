@@ -44,27 +44,34 @@ See [here](../../for-personal/constraint/common/.editorconfig).
 
 .gitattributes
 
-See [here](../../for-personal/constraint/common/.gitattributes).
+See [here](../../for-personal/constraint/nodejs/.gitattributes).
 
 .gitignore
 
 See [here](../../for-personal/constraint/nodejs/.gitignore).
 
-## 1. 更新 package.json 和 .npmrc
+## 1. 配置包管理器和 .npmrc
 
-### 快速配置
+### 前置任务
 
 shell
 
 ```shell
-npm pkg set 'packageManager=pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808'
+npm i corepack@latest -g
+npm i @antfu/ni@latest -g
+```
+
+### 快速配置
+
+shell（This syntax of command `npm pkg set` requires npm@>=10.9.2）
+
+```shell
+corepack use pnpm@latest-10
 
 npm pkg set 'engines.node="^18.12.0 || ^20.9.0 || >=22"' 'engines.npm=">=9"' 'engines.pnpm=">=7"' 'engines.yarn=Please use pnpm for instead!'
 
 npm pkg set '"pnpm.overrides.@achrinza/node-ipc"="9.2.9"'
-npm pkg set '"pnpm.overrides.eslint-plugin-import-x>minimatch"="9.0.5"'
 npm pkg set 'overrides.@achrinza/node-ipc="9.2.9"'
-npm pkg set 'overrides.eslint-plugin-import-x.minimatch="9.0.5"'
 
 pcp nodejs/.npmrc -o
 ```
@@ -100,15 +107,11 @@ package.json
 
   "pnpm": {
     "overrides": {
-      "@achrinza/node-ipc": "9.2.9",
-      "eslint-plugin-import-x>minimatch": "9.0.5"
+      "@achrinza/node-ipc": "9.2.9"
     }
   },
   "overrides": {
-    "@achrinza/node-ipc": "9.2.9",
-    "eslint-plugin-import-x": {
-      "minimatch": "9.0.5"
-    }
+    "@achrinza/node-ipc": "9.2.9"
   }
 
   // ...
@@ -121,10 +124,10 @@ See [here](../../for-personal/constraint/nodejs/.npmrc).
 
 ## 2. 基础依赖升级
 
-shell（Command `ni` requires @antfu/ni）
+shell
 
 ```shell
-ni vue@^2.7.16 ni  vue-router@legacy vuex@^3.6.2 core-js@latest
+ni vue@^2.7.16 vue-router@legacy vuex@^3.6.2 core-js@latest
 ni @vue/cli-service@^4.5.19 @vue/cli-plugin-babel@latest vue-template-compiler@latest -D
 ```
 
@@ -132,19 +135,13 @@ ni @vue/cli-service@^4.5.19 @vue/cli-plugin-babel@latest vue-template-compiler@l
 
 > 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint 迁移为 Biome 了（等它完全支持 Vue）。
 
-### 依赖安装
+### 前置任务
 
 shell
 
 ```shell
 # eslint & config & plugin
 ni eslint@latest @antfu/eslint-config@latest eslint-plugin-format@latest -D
-
-# NOTE: 一般无需。Babel 解析器，为 eslint 提供新 js 语法的解析支持
-# 删除旧的解析器（如有）
-nun babel-eslint
-# 安装新的解析器（一般无需）
-ni @babel/eslint-parser -D
 ```
 
 ### 快速配置
@@ -165,18 +162,13 @@ See [here](../../for-personal/constraint/vue2/eslint.config.mjs).
 
 > 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 Stylelint 迁移为 Biome 了（等它完全支持 Vue）。
 
-### 依赖安装
+### 前置任务
 
 shell
 
 ```shell
-# stylelint & configs，捆绑了 stylelint-scss、stylelint-order
+# stylelint & configs，捆绑了 stylelint-scss、stylelint-order，以及 postcss 处理器
 ni postcss@latest stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
-
-# stylelint 需要 postcss 解析器提供语法解析支持
-# FIXME: 理论上说，stylelint-config-standard-vue 和 stylelint-config-standard-scss 捆绑了 postcss 解析器的配置和依赖，
-# FIXME: nuxt.js 2 项目（node@^18）无需显示安装依赖，但 vue.js 2 项目 (node@^14) 需要显示安装依赖，也许是 npm 的原因？
-# ni postcss-html postcss-scss -D
 ```
 
 ### 快速配置
@@ -195,7 +187,7 @@ See [here](../../for-personal/constraint/vue2/stylelint.config.mjs).
 
 ## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
-### 依赖安装
+### 前置任务
 
 shell
 
@@ -219,9 +211,8 @@ module.exports = {
     loaderOptions: {
       scss: {
         sassOptions: {
-          // 禁用 SCSS 废弃功能警告
-          quietDeps: true,
-          // 或者可以按需禁用特定警告
+          // scss 支持本身不需要任何配置
+          // 只有代码中使用到大量的弃用 API 时，才需要禁用警告（因为警告输出实在是太多咧）
           silenceDeprecations: [
             'legacy-js-api',
             'mixed-decls',
@@ -241,7 +232,7 @@ module.exports = {
 
 ## 6. 配置 npm 快速检查/修复脚本
 
-### 依赖安装
+### 前置任务
 
 ```shell
 ni npm-run-all2@latest -D
@@ -284,7 +275,7 @@ package.json
 
 ## 7. 配置提交检查/修复
 
-### 依赖安装
+### 前置任务
 
 shell
 

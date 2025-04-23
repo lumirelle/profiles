@@ -44,27 +44,31 @@ See [here](../../for-personal/constraint/common/.editorconfig).
 
 .gitattributes
 
-See [here](../../for-personal/constraint/common/.gitattributes).
+See [here](../../for-personal/constraint/nodejs/.gitattributes).
 
 .gitignore
 
 See [here](../../for-personal/constraint/nodejs/.gitignore).
 
-## 1. 更新 package.json 和 .npmrc
+## 1. 配置包管理器和 .npmrc
+
+### 前置任务
+
+shell
+
+```shell
+npm i corepack@latest -g
+npm i @antfu/ni@latest -g
+```
 
 ### 快速配置
 
-shell（This `npm pkg set` syntax requires npm@>=10.9.2）
+shell（This syntax of command `npm pkg set` requires npm@>=10.9.2）
 
 ```shell
 corepack use pnpm@latest-10
-# or
-npm pkg set 'packageManager=pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f'
 
 npm pkg set 'engines.node=^18.12.0 || ^20.9.0 || >=22' 'engines.npm=>=9' 'engines.pnpm=>=7' 'engines.yarn=Please use pnpm for instead!'
-
-npm pkg set 'pnpm.overrides.eslint-plugin-import-x>minimatch=9.0.5'
-npm pkg set 'overrides.eslint-plugin-import-x.minimatch=9.0.5'
 
 pcp nodejs/.npmrc -o
 ```
@@ -90,36 +94,13 @@ package.json
 }
 ```
 
-为兼容 node 版本，还需要配置 pnpm.overrides（requires pnpm@>=6.25.0）或 overrides（requires npm@>=8.3.0）
-
-package.json
-
-```json
-{
-  // ...
-
-  "pnpm": {
-    "overrides": {
-      "eslint-plugin-import-x>minimatch": "9.0.5"
-    }
-  },
-  "overrides": {
-    "eslint-plugin-import-x": {
-      "minimatch": "9.0.5"
-    }
-  }
-
-  // ...
-}
-```
-
 .npmrc
 
 See [here](../../for-personal/constraint/nodejs/.npmrc).
 
 ## 2. 基础依赖升级
 
-shell（Command `ni` requires @antfu/ni）
+shell
 
 ```shell
 ni nuxt@^2.18.1
@@ -130,19 +111,13 @@ ni @nuxt/types@^2.18.1 -D
 
 > 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint 迁移为 Biome 了（等它完全支持 Vue）。
 
-### 依赖安装
+### 前置任务
 
 shell
 
 ```shell
 # eslint & config & plugin
 ni eslint@latest @antfu/eslint-config@latest eslint-plugin-format@latest -D
-
-# NOTE: 一般无需。Babel 解析器，为 eslint 提供新 js 语法的解析支持
-# 删除旧的解析器（如有）
-nun babel-eslint
-# 安装新的解析器（一般无需）
-ni @babel/eslint-parser -D
 ```
 
 ### 快速配置
@@ -163,18 +138,13 @@ See [here](../../for-personal/constraint/vue2/eslint.config.mjs).
 
 > 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 Stylelint 迁移为 Biome 了（等它完全支持 Vue）。
 
-### 依赖安装
+### 前置任务
 
 shell
 
 ```shell
-# stylelint & configs，捆绑了 stylelint-scss、stylelint-order
+# stylelint & configs，捆绑了 stylelint-scss、stylelint-order，以及 postcss 处理器
 ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
-
-# stylelint 需要 postcss 解析器提供语法解析支持
-# FIXME: 理论上说，stylelint-config-standard-vue 和 stylelint-config-standard-scss 捆绑了 postcss 解析器的配置和依赖，
-# FIXME: nuxt.js 2 项目（node@^18）无需显示安装依赖，但 vue.js 2 项目 (node@^14) 需要显示安装依赖，也许是 npm 的原因？
-# ni postcss-html postcss-scss -D
 ```
 
 ### 快速配置
@@ -193,7 +163,7 @@ See [here](../../for-personal/constraint/vue2/stylelint.config.mjs).
 
 ## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
-### 依赖安装
+### 前置任务
 
 shell
 
@@ -242,7 +212,7 @@ export default {
 
 ## 6. 配置 npm 快速检查/修复脚本
 
-### 依赖安装
+### 前置任务
 
 ```shell
 ni npm-run-all2@latest -D
@@ -250,7 +220,7 @@ ni npm-run-all2@latest -D
 
 ### 快速配置
 
-shell（This `npm pkg set` syntax requires npm@>=10.9.2）
+shell
 
 ```shell
 npm pkg set 'scripts.lint=npm-run-all -s lint:js lint:style'
@@ -285,7 +255,7 @@ package.json
 
 ## 7. 配置提交检查/修复
 
-### 依赖安装
+### 前置任务
 
 shell
 
@@ -295,7 +265,7 @@ ni simple-git-hooks@latest lint-staged@latest @commitlint/cli@latest @commitlint
 
 ### 快速配置
 
-shell（This `npm pkg set` syntax requires npm@>=10.9.2）
+shell
 
 ```shell
 npm pkg set 'scripts.postinstall=simple-git-hooks'
@@ -338,7 +308,7 @@ See [here](../../for-personal/constraint/nodejs/commitlint.config.mjs).
 
 ## 8. 项目兼容性 & 可维护性
 
-### 依赖安装
+### 前置任务
 
 shell
 
@@ -351,7 +321,7 @@ ni -D cross-env@latest
 
 NOTE：需要使用 cross-env 代理的 npm 脚本应手动配置。设置了环境变量，才需要改为通过 cross-env 来执行。
 
-package.json（Requires npm-run-all2）
+package.json
 
 ```json
 {

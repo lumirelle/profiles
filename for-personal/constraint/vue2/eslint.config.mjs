@@ -1,4 +1,4 @@
-import antfu from "@antfu/eslint-config";
+import antfu from '@antfu/eslint-config'
 
 export default antfu(
   // The options for generating the ESLint configurations.
@@ -24,7 +24,7 @@ export default antfu(
       html: true,
       markdown: true,
     },
-  }
+  },
 )
   // Append your custom eslint config
   .append({
@@ -42,38 +42,38 @@ export default antfu(
     // Build output, node_modules and other common ignored files are already included
     ignores: [
       // Assets and static files
-      "**/assets/icon",
-      "**/assets/images",
-      "**/assets/lang",
-      "**/assets/langs",
-      "**/static",
-      "**/public",
-      "**/theme",
-      "**/iconfont.*",
+      '**/assets/icon',
+      '**/assets/images',
+      '**/assets/lang',
+      '**/assets/langs',
+      '**/static',
+      '**/public',
+      '**/theme',
+      '**/iconfont.*',
 
       // Test files
-      "**/tests",
+      '**/tests',
 
       // Nuxt html templates
-      "**/app/view",
-      "**/app.html",
+      '**/app/view',
+      '**/app.html',
 
       // CUSTOM: Add your custom ignored files here
     ],
 
     rules: {
       // We have to use `console` in development environment, we can use build plugin to remove it in production environment
-      "no-console": "off",
+      'no-console': 'off',
 
       // `vue@^2` compatible, because webpack doesn't support these rules
       // Use global variable `process` instead of `import process from 'process'`
-      "node/prefer-global/process": "off",
+      'node/prefer-global/process': 'off',
       // Use `path` instead of `node:path`
-      "unicorn/prefer-node-protocol": "off",
+      'unicorn/prefer-node-protocol': 'off',
 
       // Use both `indexOf` and `includes`, because it's auto-fix behavior may cause some errors
-      "unicorn/prefer-includes": "off",
+      'unicorn/prefer-includes': 'off',
 
       // CUSTOM: Add your custom rules here
     },
-  });
+  })
