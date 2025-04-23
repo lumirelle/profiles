@@ -1,7 +1,5 @@
 {
-  // cspell:disable
-
-  // == format & lint ==
+  // -- format & lint --
   "prettier.enable": false,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {

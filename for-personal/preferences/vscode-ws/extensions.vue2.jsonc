@@ -1,5 +1,4 @@
 {
-  // cspell:disable
   "recommendations": [
     "editorconfig.editorconfig",
     "dotenv.dotenv-vscode",

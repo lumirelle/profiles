@@ -12,7 +12,7 @@
  * ```
  *
  * NOTE:
- * - `<type>` must be one of 'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor','revert', 'style', 'test', 'merge'.
+ * - `<type>` must be one of 'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor','revert', 'style', 'test', 'merge', 'wip.
  * - `<subject>` must in lower-case.
  */
 export default {
@@ -22,7 +22,7 @@ export default {
     'type-enum': [
       2,
       'always',
-      ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test', 'merge'],
+      ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test', 'merge', 'wip'],
     ],
     // <subject>
     'subject-case': [2, 'always', ['lower-case']],

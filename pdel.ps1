@@ -29,6 +29,7 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
     ignores      = @(
       "common${slash}.gitattributes",
       "common${slash}.markdownlint.yaml",
+      "nodejs${slash}.gitattributes",
       "nodejs${slash}.gitignore",
       "nodejs${slash}.lintstagedrc.yaml",
       "nodejs${slash}.npmrc",

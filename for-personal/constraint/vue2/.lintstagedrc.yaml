@@ -1,4 +1,4 @@
-"*":
+'*':
   - eslint --cache --fix
-"*.{css,postcss,scss,html,vue}":
+'*.{css,postcss,scss,html,vue}':
   - stylelint --cache --fix
