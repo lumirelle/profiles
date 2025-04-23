@@ -22,6 +22,7 @@
 ## 📝 Table of Content
 
 - [About](#about)
+- [Catalogs](#catalogs)
 - [Usage](#usage)
   - [Manually Setup](#manually_setup)
   - [Script Setup](#script_setup)
@@ -31,27 +32,29 @@
 
 Development profiles or something else.
 
+## 📑 Catalogs <a name="catalogs"></a>
+
 Top level directory structure, group by purpose:
 
-- `/for-personal`: **&lt;collection&gt;** Collection of personal usage profiles, support [quickly setup](#script_setup)
-- `/for-work`: **&lt;collection&gt;** Collection of work only profiles (Of course, it's include in `.gitignore`)
+- `/for-personal`: **&lt;purpose&gt;** Personal usage profiles, support [<u>quickly setup & delete & copy and paste</u>](#script_setup)
+- `/for-work`: **&lt;purpose&gt;** Work only profiles (Of course, it's include in `.gitignore`)
 - `/manual`: Manuals
 
-Second level directory structure of **&lt;collection&gt;**, group by category:
+Second level directory structure of **&lt;purpose&gt;**, group by category:
 
-- `/constraint`: **&lt;folder|constraint&gt;** Constraint profiles, like `.editorconfig`
-- `/preferences`: **&lt;folder|preferences&gt;** Preferences profiles, like `.zshrc`
-- `/templates`: **&lt;folder|templates&gt;** Profile templates, like `Dockerfile`
-- `/resources`: Resources, like fonts
+- `/constraint`: **&lt;collection|constraint&gt;** Collection of constraint profiles, such as `.editorconfig`, support quickly <u>setup & delete & copy and paste</u>
+- `/preferences`: **&lt;collection|preferences&gt;** Collection of preferences profiles, such as `.zshrc`, support quickly <u>setup & delete & copy and paste</u>
+- `/templates`: **&lt;collection|templates&gt;** Collection of profile templates, such as `Dockerfile`, support quickly <u>copy and paste</u>
+- `/resources`: Resources, such as fonts
 
-Third level directory structure of **&lt;constraint&gt;**, group by situation:
+Third level directory structure of **&lt;collection|constraint&gt;**, group by situation:
 
 - `/common`: For commonly usage
 - `/nodejs`: For node.js based project
 - `/webpack`: For webpack based project（It is usually a pure js project）
 - `/vue2`: For vue@^2 based project
 
-Third level directory structure of **&lt;preferences&gt;**, group by application:
+Third level directory structure of **&lt;collection|preferences&gt;**, group by application:
 
 - `/clash-for-windows`
 - `/git`
@@ -64,15 +67,77 @@ Third level directory structure of **&lt;preferences&gt;**, group by application
 - `/windows-terminal`
 - `/zsh`
 
+Third level directory structure of **&lt;collection|templates&gt;**, group by situation:
+
+- `/common`: For commonly usage
+- `/nodejs`: For node.js based project
+- `/tomcat`: For tomcat based project
+- `/spring-boot`: For spring based project
+
+Total catalogs:
+
+- `for-personal/`
+
+  - `constraint/`
+
+    - `common/`
+    - `nodejs/`
+    - `webpack/`
+    - `vue2/`
+
+  - `preferences/`
+
+    - `clash-for-windows/`
+    - `windows-terminal/`
+    - `powershell/`
+    - `zsh/`
+    - `git/`
+    - `neovim/`
+    - `vscode/`
+    - `vscode-ws/`
+    - `vs/`
+    - `idea/`
+    - `maven/`
+    - `volta/`
+
+  - `templates/`
+
+    - `common/`
+    - `nodejs/`
+    - `tomcat/`
+    - `spring-boot/`
+
+  - `resources/`
+
+    - `fonts/`
+
+- `for-work/`
+
+  - `constraint/`
+
+    - `common/`
+
+  - `preferences/`
+
+    - `git/`
+    - `vscode/`
+
+- `manual/`
+
+  - `life/`
+  - `os/`
+  - `git/`
+  - `nodejs/`
+  - `vue2/`
+  - `nuxt2/`
+
 ## 🎈 Usage <a name="usage"></a>
 
 ### ✋🏼 Manually Setup <a name="manually_setup"></a>
 
 Just download the profiles you want and put it on the right place.
 
-**NOTE: On windows, you should add `create symbolic link permission` to your current user.**
-
-Just run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.
+**NOTE: On windows, you should add `create symbolic link permission` to your current user. For more detail, please Google yourself.**
 
 ```shell
 # cd PATH_TO_HOLD_THIS_REPO

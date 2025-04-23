@@ -25,7 +25,7 @@ param (
 )
 
 Write-Debug "Parameters:"
-Write-Debug "override = $override"
+Write-Debug "override = $override`n"
 
 # -- INIT & CHECK --
 
@@ -35,11 +35,11 @@ $slash = [IO.Path]::DirectorySeparatorChar
 
 # Supported profile collections
 $SUPPORTED_PROFILE_COLLECTIONS = @(
-  @{ 
+  @{
     # `source` is path of collection relative to `rootPath`
-    source       = "for-personal${slash}constraint"; 
+    source       = "for-personal${slash}constraint";
     # `targetFolder` supports `string` and `dictionary`
-    targetFolder = "~"; 
+    targetFolder = "~";
     # `ignores` is relative path to `source`, supports folder and file
     ignores      = @(
       "common${slash}.gitattributes",
@@ -57,8 +57,8 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
       "webpack${slash}eslint.config.mjs"
     );
   },
-  @{ 
-    source       = "for-personal${slash}preferences"; 
+  @{
+    source       = "for-personal${slash}preferences";
     targetFolder = @{
       "git"        = "~";
       "maven"      = "~$slash.m2";
@@ -76,7 +76,6 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
     );
   }
 )
-
 
 # -- START TO SETUP --
 
@@ -121,7 +120,7 @@ foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
 
       # If $targetFolderFullName does not exist, create it
       if (-not (Test-Path $targetFolderFullName)) {
-        New-Item -ItemType Directory -Path $targetFolderFullName -Force > $null
+        New-Item -ItemType Directory -Path $targetFolderFullName -Force | Out-Null
       }
 
       # If the targetFolder file already exists
@@ -132,12 +131,12 @@ foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
         }
         else {
           Write-Host "profile already exists: $targetProfileFullName, will skip`n" -ForegroundColor Yellow
-          continue
+          continue FOREACH_PROFILE
         }
       }
 
       # Create a symbolic link
-      New-Item -ItemType SymbolicLink -Path $targetProfileFullName -Target $profileFullName -Force:$override > $null
+      New-Item -ItemType SymbolicLink -Path $targetProfileFullName -Target $profileFullName -Force:$override | Out-Null
       Write-Host "Created symbolic link: $targetProfileFullName -> $profileFullName`n"
     }
   }

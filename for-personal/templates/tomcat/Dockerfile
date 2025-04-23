@@ -1,7 +1,5 @@
 # 请将该 Dockerfile 放在后端项目的根目录下
 FROM tomcat:11-jre21
-LABEL authors="Lumirelle"\
-  description="基于 Tomcat 9 构建的用于运行 Tomcat 后端项目的镜像"
 
 # 工作目录
 WORKDIR /usr/local/tomcat/webapps/

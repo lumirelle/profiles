@@ -13,43 +13,42 @@ Main dependencies:
 
 ### 快速配置
 
-shell (For command `prof`, please see [README.md#script_setup](../../../README.md#script_setup))
+shell（For command `pcp`, please see [README.md#script_setup](../../README.md#script_setup)）
 
 ```shell
-prof vscode/extensions.vuejs.v2.jsonc .vscode/extensions.json -o
-prof settings.vuejs.v2.jsonc .vscode/settings.json -o
-
-prof .editorconfig -o
-prof jsconfig.json -o
-prof .gitattributes -o
-prof .gitignore -o
+pcp vscode-ws/extensions.vue2.jsonc .vscode/extensions.json -o
+pcp vscode-ws/settings.vue2.jsonc .vscode/settings.json -o
+pcp nodejs/jsconfig.json -o
+pcp .editorconfig -o
+pcp .gitattributes -o
+pcp nodejs/.gitignore -o
 ```
 
 ### 手动配置
 
 .vscode/extensions.json
 
-See [here](../../preferences/vscode/project/extensions.vuejs.v2.jsonc).
+See [here](../../for-personal/preferences/vscode-ws/extensions.vue2.jsonc).
 
 .vscode/settings.json
 
-See [here](../../preferences/vscode/project/settings.vuejs.v2.jsonc).
-
-.editorconfig
-
-See [here](../../constraint/common/.editorconfig).
+See [here](../../for-personal/preferences/vscode-ws/settings.vue2.jsonc).
 
 jsconfig.json
 
-See [here](../../constraint/common/jsconfig.json).
+See [here](../../for-personal/constraint/nodejs/jsconfig.json).
+
+.editorconfig
+
+See [here](../../for-personal/constraint/common/.editorconfig).
 
 .gitattributes
 
-See [here](../../constraint/common/.gitattributes).
+See [here](../../for-personal/constraint/common/.gitattributes).
 
 .gitignore
 
-See [here](../../constraint/nodejs/.gitignore).
+See [here](../../for-personal/constraint/nodejs/.gitignore).
 
 ## 1. 更新 package.json 和 .npmrc
 
@@ -67,7 +66,7 @@ npm pkg set 'engines.node=^18.12.0 || ^20.9.0 || >=22' 'engines.npm=>=9' 'engine
 npm pkg set 'pnpm.overrides.eslint-plugin-import-x>minimatch=9.0.5'
 npm pkg set 'overrides.eslint-plugin-import-x.minimatch=9.0.5'
 
-prof .npmrc -o
+pcp nodejs/.npmrc -o
 ```
 
 ### 手动配置
@@ -116,7 +115,7 @@ package.json
 
 .npmrc
 
-See [here](../../constraint/common/.npmrc).
+See [here](../../for-personal/constraint/nodejs/.npmrc).
 
 ## 2. 基础依赖升级
 
@@ -151,14 +150,14 @@ ni @babel/eslint-parser -D
 shell
 
 ```shell
-prof eslint.config.vue2.mjs ./eslint.config.mjs -o
+pcp vue2/eslint.config.mjs -o
 ```
 
 ### 手动配置
 
 eslint.config.mjs
 
-See [here](../../constraint/eslint.config.vue2.mjs).
+See [here](../../for-personal/constraint/vue2/eslint.config.mjs).
 
 ## 4. 设置样式检查与格式化
 
@@ -183,14 +182,14 @@ ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-stand
 shell
 
 ```shell
-prof stylelint.config.mjs -o
+pcp vue2/stylelint.config.mjs -o
 ```
 
 ### 手动配置
 
 stylelint.config.mjs
 
-See [here](../../constraint/stylelint.config.mjs).
+See [here](../../for-personal/constraint/vue2/stylelint.config.mjs).
 
 ## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
@@ -223,12 +222,12 @@ export default {
           // scss 支持本身不需要任何配置
           // 只有代码中使用到大量的弃用 API 时，才需要禁用警告（因为警告输出实在是太多咧）
           silenceDeprecations: [
-            "legacy-js-api",
-            "mixed-decls",
-            "import",
-            "slash-div",
-            "global-builtin",
-            "function-units",
+            'legacy-js-api',
+            'mixed-decls',
+            'import',
+            'slash-div',
+            'global-builtin',
+            'function-units',
           ],
         },
       },
@@ -238,7 +237,7 @@ export default {
   },
 
   // ...
-};
+}
 ```
 
 ## 6. 配置 npm 快速检查/修复脚本
@@ -302,8 +301,8 @@ shell（This `npm pkg set` syntax requires npm@>=10.9.2）
 npm pkg set 'scripts.postinstall=simple-git-hooks'
 npm pkg set 'simple-git-hooks.pre-commit=npx lint-staged'
 
-prof .lintstagedrc.yaml -o
-prof commitlint.config.mjs -o
+pcp vue2/.lintstagedrc.yaml -o
+pcp nodejs/commitlint.config.mjs -o
 ```
 
 ### 手动配置
@@ -331,142 +330,13 @@ package.json（配置 simple-git-hooks）
 
 .lintstagedrc.yaml
 
-See [here](../../constraint/.lintstagedrc.yaml).
+See [here](../../for-personal/constraint/vue2/.lintstagedrc.yaml).
 
 commitlint.config.mjs
 
-See [here](../../constraint/commitlint.config.mjs).
+See [here](../../for-personal/constraint/nodejs/commitlint.config.mjs).
 
-## 8. 设置 webpack 打包优化和未导入文件检测插件
-
-### 依赖安装
-
-shell
-
-```shell
-ni nuxt-precompress@latest
-ni useless-analyzer-webpack-plugin@latest -D
-```
-
-### 手动配置
-
-nuxt.config.js
-
-```js
-// Uncomment if you want to analyze useless files, just works on dev mode
-// import UselessAnalyzerWebpackPlugin from 'useless-analyzer-webpack-plugin'
-
-export default {
-  // ...
-
-  modules: [
-    //...
-    "nuxt-precompress",
-  ],
-  nuxtPrecompress: {
-    enabled: true,
-    report: false,
-    test: /\.(js|css|json|txt|html|ico|svg|xml)$/,
-    middleware: {
-      enabled: true,
-      enabledStatic: true,
-      encodingsPriority: ["br", "gzip"],
-    },
-    gzip: {
-      enabled: true,
-      filename: "[path].gz[query]",
-      threshold: 10240,
-      minRatio: 0.8,
-      compressionOptions: { level: 9 },
-    },
-    brotli: {
-      enabled: true,
-      filename: "[path].br[query]",
-      compressionOptions: { level: 11 },
-      threshold: 10240,
-      minRatio: 0.8,
-    },
-  },
-
-  build: {
-    // ...
-
-    // Webpack Optimization Plugins
-    // nuxt@2.18.1 依赖的 @nuxt/webpack 内置了如下优化插件
-    // extract-css-chunks-webpack-plugin
-    extractCSS: true,
-    // optimize-css-assets-webpack-plugin
-    optimizeCSS: {
-      cssProcessorPluginOptions: {
-        preset: ["default", { discardComments: { removeAll: true } }],
-      },
-      canPrint: true,
-    },
-    // terser-webpack-plugin
-    terser: ["preprod", "production"].includes(process.env.NODE_ENV)
-      ? {
-          extractComments: false,
-          terserOptions: {
-            // 移除 console.*
-            compress: { drop_console: true },
-            mangle: true, // 混淆变量名
-            output: { comments: false, beautify: false },
-          },
-        }
-      : {},
-
-    // Uncomment if you want to analyze useless files, just works on dev mode
-    // plugins: [
-    //   new UselessAnalyzerWebpackPlugin({
-    //     preset: 'nuxt',
-    //     ignores: [
-    //       // 添加你需要忽略的文件... / Add files you need to ignore...
-    //       'app.html',
-    //       '**/*.scss',
-    //     ],
-    //     important: [
-    //       // 添加你不想忽略的文件... / Add files you don't want to ignore...
-    //     ],
-    //   }),
-    // ],
-
-    // Webpack Optimization Configuration
-    splitChunks: {
-      layouts: false,
-      pages: true,
-      commons: true,
-    },
-    optimization: {
-      splitChunks: {
-        chunks: "all",
-        minSize: 30000,
-        maxSize: 244 * 1024, // 244kb
-        minChunks: 1,
-        maxAsyncRequests: 5,
-        maxInitialRequests: 3,
-        cacheGroups: {
-          styles: {
-            test: /\.(css|vue)$/,
-            name: "styles",
-            priority: 50,
-            enforce: true,
-            reuseExistingChunk: true,
-          },
-          elementUI: {
-            name: "element-ui",
-            test: /node_modules[\\/]element-ui/,
-            priority: 20,
-          },
-        },
-      },
-    },
-
-    // ...
-  },
-};
-```
-
-## 9. 项目兼容性 & 可维护性
+## 8. 项目兼容性 & 可维护性
 
 ### 依赖安装
 
@@ -475,26 +345,11 @@ shell
 ```shell
 # cross-env：为环境变量提供跨平台兼容性
 ni -D cross-env@latest
-
-# rimraf：删除文件
-# FIXME: 在使用 pnpm 的项目中，会出现 vscode 打开状态占用 node_modules 致使无法删除的问题。
-ni -D rimraf@v5-legacy
-```
-
-### 部分快速配置
-
-NOTE：需要使用 cross-env 代理的 npm 脚本应手动配置。设置了环境变量，才需要改为通过 cross-env 来执行。
-
-shell（This `npm pkg set` syntax requires npm@>=10.9.2）
-
-```shell
-npm pkg set 'scripts.clean=npm-run-all -s clean:dist clean:lock clean:deps'
-npm pkg set 'scripts.clean:dist=rimraf .nuxt dist'
-npm pkg set 'scripts.clean:lock=rimraf package-lock.json pnpm-lock.yaml'
-npm pkg set 'scripts.clean:deps=rimraf node_modules'
 ```
 
 ### 手动配置
+
+NOTE：需要使用 cross-env 代理的 npm 脚本应手动配置。设置了环境变量，才需要改为通过 cross-env 来执行。
 
 package.json（Requires npm-run-all2）
 
@@ -515,15 +370,7 @@ package.json（Requires npm-run-all2）
     "build:preprod": "cross-env BUILD_ENV=preprod  nuxt build",
     "build:prod": "cross-env BUILD_ENV=production  nuxt build",
     // 没设置环境变量，无需改变
-    "start": "nuxt start",
-
-    // ...
-
-    // 删除构建输出、锁文件、依赖
-    "clean": "npm-run-all -s clean:dist clean:lock clean:deps",
-    "clean:dist": "rimraf .nuxt dist",
-    "clean:lock": "rimraf rimraf package-lock.json yarn.lock pnpm-lock.yaml",
-    "clean:deps": "rimraf node_modules"
+    "start": "nuxt start"
 
     // ...
   }

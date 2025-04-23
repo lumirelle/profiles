@@ -10,7 +10,7 @@
 
 param ()
 
-Write-Debug "Parameters:"
+Write-Debug "Parameters:`n"
 
 # -- INIT & CHECK --
 
@@ -20,11 +20,11 @@ $slash = [IO.Path]::DirectorySeparatorChar
 
 # Supported profile collections
 $SUPPORTED_PROFILE_COLLECTIONS = @(
-  @{ 
+  @{
     # `source` is path of collection relative to `rootPath`
-    source       = "for-personal${slash}constraint"; 
+    source       = "for-personal${slash}constraint";
     # `targetFolder` supports `string` and `dictionary`
-    targetFolder = "~"; 
+    targetFolder = "~";
     # `ignores` is relative path to `source`, supports folder and file
     ignores      = @(
       "common${slash}.gitattributes",
@@ -42,8 +42,8 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
       "webpack${slash}eslint.config.mjs"
     );
   },
-  @{ 
-    source       = "for-personal${slash}preferences"; 
+  @{
+    source       = "for-personal${slash}preferences";
     targetFolder = @{
       "git"        = "~";
       "maven"      = "~$slash.m2";
@@ -83,7 +83,6 @@ foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
     # Foreach profile
     $profiles = Get-ChildItem -Path $folderFullName -Recurse -File
     :FOREACH_PROFILE foreach ($profile in $profiles) {
-      $profileFullName = $profile.FullName
       $profileName = $profile.Name
       $profileKey = Join-Path $folderName $profileName
 
@@ -103,7 +102,7 @@ foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
         $targetFolderFullName = $collection.targetFolder
       }
 
-      # If $targetFolderFullName does not exist, create it
+      # If $targetFolderFullName does not exist, skip it
       if (-not (Test-Path $targetFolderFullName)) {
         continue FOREACH_PROFILE
       }
@@ -113,13 +112,13 @@ foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
       if (Test-Path $targetProfileFullName) {
         # If the target file is a symbolic link, delete it
         if ((Get-Item $targetProfileFullName).LinkType -eq 'SymbolicLink') {
-          Remove-Item -Path $targetProfileFullName -Force > $null
+          Remove-Item -Path $targetProfileFullName -Force | Out-Null
           Write-Host "Removed symbolic link: $targetProfileFullName`n"
         }
         # If the target file is not a symbolic link, skip
         else {
           Write-Host "Target file are not symbolic link: $targetProfileFullName, skip`n" -ForegroundColor Yellow
-          continue
+          continue FOREACH_PROFILE
         }
       }
     }

@@ -1,4 +1,3 @@
-# @Lyana-nullptr (shabbyacc@outlook.com)
 # NOTE: Docker Compose 通常用于管理持久层容器，例如：MySQL、Redis、MongoDB 等
 version: '3.9'
 

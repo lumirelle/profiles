@@ -1,7 +1,5 @@
 # 请将该 Dockerfile 放在后端项目的根目录下
 FROM ghcr.io/graalvm/graalvm-ce:latest
-LABEL authors="Lumirelle"\
-  description="基于 graalvm-17 构建的用于运行 Spring Boot 后端项目的镜像"
 
 # 工作目录
 WORKDIR /app

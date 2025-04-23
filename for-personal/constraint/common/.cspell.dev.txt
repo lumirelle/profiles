@@ -3,3 +3,4 @@ nvim
 nuxt
 commitlint
 lintstagedrc
+opencollective

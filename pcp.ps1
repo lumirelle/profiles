@@ -1,41 +1,36 @@
 <#
 .DESCRIPTION
-  Quick copy and paste profile to current directory
+  Quickly copy and paste profile to current directory
 
-.PARAMETER SourceFileName
-  The source profile you want to copy and paste
+.PARAMETER source
+  The source profile you want to copy and paste, syntax: `[folder-name/]profile-name`
 
-.PARAMETER Destination
-  The destination path you want to copy and paste
+.PARAMETER target
+  The target path you want to copy and paste
 
   If not specified, it will be the current directory.
 
-.PARAMETER Override
+.PARAMETER override
   Force to override the existing file
 
-.PARAMETER Purpose
-  The purpose of the profiles, expected values: `self`, `work`
-
-  It is designed for my self, because no one will upload his working profile to github.
-
 .EXAMPLE
-  prof .gitconfig
+  pcp .gitconfig
 
   This will copy and paste `.gitconfig` (under `general` or `self` folder) to current directory.
 
 .EXAMPLE
-  prof .gitconfig -d "C:\Users\YourName\Documents\"
+  pcp .gitconfig "C:\Users\YourName\Documents\"
 
-  If you want to copy and paste to a specific directory, you can add the `Destination` parameter.
+  If you want to copy and paste to a specific directory, you can add the `target` parameter.
 
   Note: The destination path **must** end with a forward slash `/` or a backslash `\`.
 
   This will copy and paste `.gitconfig` (under `general` or `self` folder) to `C:\Users\YourName\Documents\`.
 
 .EXAMPLE
-  prof .gitconfig -d "C:\Users\YourName\Documents\.my-gitconfig"
+  pcp .gitconfig "C:\Users\YourName\Documents\.my-gitconfig"
 
-  If you want to copy and paste to a specific directory, and rename it, you can add the `Destination` parameter.
+  If you want to copy and paste to a specific directory, and rename it, you can add the `target` parameter.
 
   Note: The destination path **must not** end with a forward slash `/` or a backslash `\`.
 
@@ -44,136 +39,127 @@
   The file will be renamed to `.my-gitconfig`.
 
 .EXAMPLE
-  prof .gitconfig -o
+  pcp .gitconfig -o
 
-  If you want to force override the existing file, you can add the `Override` parameter.
+  If you want to force override the existing file, you can add the `override` parameter.
 
   This will force override the existing file.
-
-.EXAMPLE
-  prof .gitconfig -p "work"
-
-  If you want to use a specific purpose, you can add the `Purpose` parameter.
-
-  This will use configs designed for work, copy and paste `.gitconfig` (under `general` or `work` folder) to current directory.
 #>
 
 param (
   [Parameter(Mandatory = $true)]
   [Alias("s")]
-  [string]$SourceFileName,
+  [string]$source,
 
   [Parameter(Mandatory = $false)]
-  [Alias("d")]
-  [string]$Destination,
+  [Alias("t")]
+  [string]$target,
+
+  [Parameter(Mandatory = $false)]
+  [Alias("l")]
+  [switch]$isSymbolicLink,
 
   [Parameter(Mandatory = $false)]
   [Alias("o")]
-  [switch]$Override,
-
-  [Parameter(Mandatory = $false)]
-  [Alias("p")]
-  [ValidateSet('self', 'work')]
-  [string]$Purpose = 'self'
+  [switch]$override
 )
 
 Write-Debug "Parameters:"
-Write-Debug "SourceFileName = $SourceFileName"
-Write-Debug "Destination = $Destination"
-Write-Debug "Name = $Name"
-Write-Debug "Override = $Override"
-Write-Debug "Purpose = $Purpose`n"
+Write-Debug "source = $source"
+Write-Debug "target = $target"
+Write-Debug "override = $override`n"
 
 # == INIT & CHECK ==
-# 配置文件目录 Name -> Path
-$PROFILE_FOLDERS = @(
-  # General
-  @{ Name = "general/constraint" }
-  @{ Name = "general/preferences/clash-for-windows" }
-  @{ Name = "general/preferences/git" }
-  @{ Name = "general/preferences/maven" }
-  @{ Name = "general/preferences/nvim" }
-  @{ Name = "general/preferences/powershell" }
-  @{ Name = "general/preferences/vscode/project" }
-  # With Purpose
-  @{ Name = "$Purpose/constraint" }
+
+$rootPath = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
+
+$slash = [IO.Path]::DirectorySeparatorChar
+
+# Supported profile collections
+$SUPPORTED_PROFILE_COLLECTIONS = @(
+  @{
+    # `source` is path of collection relative to `rootPath`
+    source = "for-personal${slash}constraint";
+  },
+  @{
+    source = "for-personal${slash}preferences";
+  },
+  @{
+    source = "for-personal${slash}templates";
+  }
 )
 
-# 忽略文件（增加内置）
-$IgnoreFiles = @(
-  'README.md'
-)
-
-# 根目录路径
-$RootDirPath = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
-
-# 如果 Destination 为空，则使用当前路径
-if (-not $Destination) {
-  $Destination = Get-Location
+# Process $source
+# If $source is not contains `/` or `\`, add `common${slash}` to the beginning
+if ($source -notmatch '[\\/]') {
+  $source = "common${slash}$source"
 }
+Write-Debug "source: $source`n"
 
-# 判断 Destination 目标路径是否存在
-# 如果 Destination 不是以 `/` 或 `\` 结尾，则记录父路径
-if ($Destination -notmatch '[\\/]$') {
-  $DestinationParentFolderPath = Split-Path -Path $Destination -Parent
-  Write-Debug "Destination file name: $DestinationFileName`n"
+# Process $target
+# If target is not specified, use current directory
+if (-not $target) {
+  $target = Get-Location
 }
-# 如果 Destination 以 `/` 或 `\` 结尾，则记录自身
+# Get target folder
+if ($target -notmatch '[\\/]$') {
+  $targetFolder = Split-Path -Path $target -Parent
+}
 else {
-  $DestinationParentFolderPath = $Destination
+  $targetFolder = $target
 }
-# 如果 DestinationParentFolderPath 不存在，则创建
-if (-not (Test-Path $DestinationParentFolderPath)) {
-  Write-Debug "Destination parent folder path not found: $DestinationParentFolderPath, will create`n"
-  New-Item -Path $DestinationParentFolderPath -ItemType Directory -Force | Out-Null
+Write-Debug "target folder: $targetFolder`n"
+# If target folder not exists, create it
+if (-not (Test-Path $targetFolder)) {
+  Write-Debug "target parent folder path not found: $targetFolder, will create`n"
+  New-Item -Path $targetFolder -ItemType Directory -Force | Out-Null
 }
 
-# == Copy & Paste ==
-# 在 PROFILE_FOLDERS 中寻找目标文件，获取文件路径
-$SourceFilePath = $null
-foreach ($Folder in $PROFILE_FOLDERS) {
-  # 获取目录 $Folder.Path 下的所有文件
-  $ProfilesDirPath = Join-Path $RootDirPath $Folder.Name
-  if (-not (Test-Path $ProfilesDirPath)) {
-    Write-Debug "Profiles directory not found: $ProfilesDirPath, skip`n"
+# -- COPY & PASTE --
+
+# Find target file in PROFILE_FOLDERS, get file path
+$sourceFullName = $null
+# Foreach supported profile collection
+foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
+  $collectionFullName = Join-Path $rootPath $collection.source
+  if (-not (Test-Path $collectionFullName)) {
+    Write-Host "Profiles collection not found: $collectionFullName, skip`n" -ForegroundColor Yellow
     continue
   }
 
-  $Files = Get-ChildItem -Path $ProfilesDirPath -Recurse -File
-  foreach ($File in $Files) {
-    # 如果 $File.Name 在 $IgnoreFiles 中，则跳过
-    if ($IgnoreFiles -contains $File.Name) {
-      continue
-    }
-
-    if ($File.Name -eq $SourceFileName) {
-      $SourceFilePath = $File.FullName
-      Write-Debug "Found matched source profile: $SourceFilePath`n"
-      break
-    }
+  # Foreach profile folder in the collection
+  $profileFullName = Join-Path $collectionFullName $source
+  $profileName = Split-Path -Path $profileFullName -Leaf
+  if (Test-Path $profileFullName) {
+    $sourceFullName = $profileFullName
+    Write-Debug "Found matched source profile: $sourceFullName`n"
+    break
   }
 }
 
-# 如果 SourceFilePath 不存在，则输出错误信息
-if (-not $SourceFilePath) {
+# If $sourceFullName does not exist, output error information
+if (-not $sourceFullName) {
   Write-Error "Source profile not found in any profile folders."
   return
 }
 
-# 如果当前路径已存在同名文件，则根据 Override 参数决定是否覆盖
-$CurrentFilePath = Join-Path $Destination $SourceFileName
-Write-Debug "Current file path: $CurrentFilePath`n"
-if (Test-Path $CurrentFilePath) {
-  if ($Override) {
-    Write-Host "File already exists: $SourceFileName, will force override" -ForegroundColor Yellow
-    Copy-Item -Path $SourceFilePath -Destination $Destination -Force
+# If the current path already exists with the same name, decide whether to override based on the override parameter
+$targetFullName = Join-Path $target $profileName
+Write-Debug "Current file path: $targetFullName`n"
+if (Test-Path $targetFullName) {
+  if ($override) {
+    Write-Host "File already exists: $targetFullName, will force override" -ForegroundColor Yellow
   }
   else {
-    Write-Host "File already exists: $SourceFileName, will skip" -ForegroundColor Yellow
+    Write-Host "File already exists: $targetFullName, will skip" -ForegroundColor Yellow
   }
 }
-else {
-  Write-Host "Copying and paste file: $SourceFileName -> $Destination" -ForegroundColor Green
-  Copy-Item -Path $SourceFilePath -Destination $Destination
-}
 
+if ($isSymbolicLink) {
+  New-Item -ItemType SymbolicLink -Path $targetFullName -Target $sourceFullName -Force:$override  | Out-Null
+  Write-Host "Created symbolic link: $profileName -> $target" -ForegroundColor Green
+}
+else {
+  Copy-Item -Path $sourceFullName -Destination $targetFullName -Force:$override  | Out-Null
+  Write-Host "Copied and pasted file: $profileName -> $target" -ForegroundColor Green
+}

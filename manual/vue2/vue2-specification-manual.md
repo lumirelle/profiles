@@ -1,10 +1,8 @@
-<!-- cSpell:ignore achrinza -->
-
-# Vue.js v2 规范手册 Vue.js v2 Specification Manual
+# Vue.js 2 规范手册 Vue.js 2 Specification Manual
 
 Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-Using node@18.20.7, npm@10.8.2, pnpm@10.7.1.
+Using node@18.20.8, npm@10.9.2, pnpm@10.9.0.
 
 Main dependencies:
 
@@ -15,43 +13,42 @@ Main dependencies:
 
 ### 快速配置
 
-shell (Command `prof` requires [Lumirelle/profiles](../../../../profiles))
+shell（For command `pcp`, please see [README.md#script_setup](../../README.md#script_setup)）
 
 ```shell
-prof extensions.vuejs.v2.jsonc .vscode/extensions.json -o
-prof settings.vuejs.v2.jsonc .vscode/settings.json -o
-
-prof .editorconfig -o
-prof jsconfig.json -o
-prof .gitattributes -o
-prof .gitignore -o
+pcp vscode-ws/extensions.vue2.jsonc .vscode/extensions.json -o
+pcp vscode-ws/settings.vue2.jsonc .vscode/settings.json -o
+pcp nodejs/jsconfig.json -o
+pcp .editorconfig -o
+pcp .gitattributes -o
+pcp nodejs/.gitignore -o
 ```
 
 ### 手动配置
 
 .vscode/extensions.json
 
-See [here](../../preferences/vscode/project/extensions.vuejs.v2.jsonc).
+See [here](../../for-personal/preferences/vscode-ws/extensions.vue2.jsonc).
 
 .vscode/settings.json
 
-See [here](../../preferences/vscode/project/settings.vuejs.v2.jsonc).
-
-.editorconfig
-
-See [here](../../constraint/.editorconfig).
+See [here](../../for-personal/preferences/vscode-ws/settings.vue2.jsonc).
 
 jsconfig.json
 
-See [here](../../constraint/jsconfig.json).
+See [here](../../for-personal/constraint/nodejs/jsconfig.json).
+
+.editorconfig
+
+See [here](../../for-personal/constraint/common/.editorconfig).
 
 .gitattributes
 
-See [here](../../constraint/.gitattributes).
+See [here](../../for-personal/constraint/common/.gitattributes).
 
 .gitignore
 
-See [here](../../constraint/.gitignore).
+See [here](../../for-personal/constraint/nodejs/.gitignore).
 
 ## 1. 更新 package.json 和 .npmrc
 
@@ -69,7 +66,7 @@ npm pkg set '"pnpm.overrides.eslint-plugin-import-x>minimatch"="9.0.5"'
 npm pkg set 'overrides.@achrinza/node-ipc="9.2.9"'
 npm pkg set 'overrides.eslint-plugin-import-x.minimatch="9.0.5"'
 
-prof .npmrc -o
+pcp nodejs/.npmrc -o
 ```
 
 ### 手动配置
@@ -81,7 +78,7 @@ package.json
   // ...
 
   // Used by corepack
-  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808",
+  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
   "engines": {
     "node": "^18.12.0 || ^20.9.0 || >=22",
     "npm": ">=9",
@@ -120,7 +117,7 @@ package.json
 
 .npmrc
 
-See [here](../../constraint/.npmrc).
+See [here](../../for-personal/constraint/nodejs/.npmrc).
 
 ## 2. 基础依赖升级
 
@@ -155,14 +152,14 @@ ni @babel/eslint-parser -D
 shell
 
 ```shell
-prof eslint.config.vue2.mjs ./eslint.config.mjs -o
+pcp vue2/eslint.config.mjs -o
 ```
 
 ### 手动配置
 
 eslint.config.mjs
 
-See [here](../../constraint/eslint.config.vue2.mjs).
+See [here](../../for-personal/constraint/vue2/eslint.config.mjs).
 
 ## 4. 设置样式检查与格式化
 
@@ -187,14 +184,14 @@ ni postcss@latest stylelint@latest stylelint-config-standard-scss@latest styleli
 shell
 
 ```shell
-prof stylelint.config.mjs -o
+pcp vue2/stylelint.config.mjs -o
 ```
 
 ### 手动配置
 
 stylelint.config.mjs
 
-See [here](../../constraint/stylelint.config.mjs).
+See [here](../../for-personal/constraint/vue2/stylelint.config.mjs).
 
 ## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
@@ -303,8 +300,8 @@ shell
 npm pkg set 'scripts.postinstall=simple-git-hooks'
 npm pkg set 'simple-git-hooks.pre-commit="npx lint-staged"'
 
-prof .lintstagedrc.yaml -o
-prof commitlint.config.mjs -o
+pcp vue2/.lintstagedrc.yaml -o
+pcp nodejs/commitlint.config.mjs -o
 ```
 
 ### 手动配置
@@ -332,70 +329,8 @@ package.json（配置 simple-git-hooks）
 
 .lintstagedrc.yaml
 
-See [here](../../constraint/.lintstagedrc.yaml).
+See [here](../../for-personal/constraint/vue2/.lintstagedrc.yaml).
 
 commitlint.config.mjs
 
-See [here](../../constraint/commitlint.config.mjs).
-
-## 8. 设置 webpack 打包优化和未导入文件检测插件
-
-### 依赖安装
-
-shell
-
-```shell
-ni useless-analyzer-webpack-plugin@latest -D
-```
-
-### 手动配置
-
-vue.config.js
-
-```js
-// TODO: ...
-```
-
-## 9. 项目兼容性 & 可维护性
-
-### 依赖安装
-
-shell
-
-```shell
-# rimraf：删除文件
-# FIXME: 在使用 pnpm 的项目中，会出现 vscode 打开状态占用 node_modules 致使无法删除的问题。
-ni -D rimraf@v5-legacy
-```
-
-### 快速配置
-
-shell
-
-```shell
-npm pkg set 'scripts.clean="npm-run-all -s clean:dist clean:lock clean:deps"'
-npm pkg set 'scripts.clean:dist="rimraf .nuxt dist"'
-npm pkg set 'scripts.clean:lock="rimraf package-lock.json pnpm-lock.yaml"'
-npm pkg set 'scripts.clean:deps="rimraf node_modules"'
-```
-
-### 手动配置
-
-package.json (Requires npm-run-all2)
-
-```json
-{
-  // ...
-  "scripts": {
-    // ...
-
-    // 删除构建输出、锁文件、依赖
-    "clean": "npm-run-all -s clean:dist clean:lock clean:deps",
-    "clean:dist": "rimraf .nuxt dist",
-    "clean:lock": "rimraf rimraf package-lock.json yarn.lock pnpm-lock.yaml",
-    "clean:deps": "rimraf node_modules"
-
-    // ...
-  }
-}
-```
+See [here](../../for-personal/constraint/nodejs/commitlint.config.mjs).

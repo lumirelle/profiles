@@ -2,7 +2,7 @@
 
 Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-Using node@18.20.7, npm@10.8.2, pnpm@10.7.1.
+Using node@18.20.8, npm@10.9.2, pnpm@10.9.0.
 
 Main dependencies:
 
@@ -35,7 +35,7 @@ Main dependencies:
 
 其他:
 
-- @nuxt/opencollective: 在本包被安装时展示 open collective 链接
+- @nuxt/opencollective: 在本包被安装时展示 opencollective 链接
 - @nuxt/loading-screen: 项目启动页面
 - @nuxt/telemetry: Nuxt.js 遥测数据收集
 
@@ -58,7 +58,7 @@ export default {
    * Web page head
    */
   head: {
-    title: "XXX",
+    title: 'XXX',
     meta: [
       // ...
     ],
@@ -95,19 +95,19 @@ export default {
    * Build-time modules
    */
   buildModules: [
-    "@nuxtjs/style-resources",
+    '@nuxtjs/style-resources',
     // ...
   ],
 
   styleResources: {
-    scss: "@/assets/css/var.scss",
+    scss: '@/assets/css/var.scss',
   },
 
   /**
    * Runtime modules
    */
   modules: [
-    "nuxt-precompress",
+    'nuxt-precompress',
     // ...
   ],
 
@@ -118,18 +118,18 @@ export default {
     middleware: {
       enabled: true,
       enabledStatic: true,
-      encodingsPriority: ["br", "gzip"],
+      encodingsPriority: ['br', 'gzip'],
     },
     gzip: {
       enabled: true,
-      filename: "[path].gz[query]",
+      filename: '[path].gz[query]',
       threshold: 10240,
       minRatio: 0.8,
       compressionOptions: { level: 9 },
     },
     brotli: {
       enabled: true,
-      filename: "[path].br[query]",
+      filename: '[path].br[query]',
       compressionOptions: { level: 11 },
       threshold: 10240,
       minRatio: 0.8,
@@ -172,8 +172,8 @@ export default {
       // 按需导入 element-ui 样式
       plugins: [
         [
-          "component",
-          { libraryName: "element-ui", styleLibraryName: "theme-chalk" },
+          'component',
+          { libraryName: 'element-ui', styleLibraryName: 'theme-chalk' },
         ],
       ],
     },
@@ -195,12 +195,12 @@ export default {
           // scss 支持本身不需要任何配置
           // 只有代码中使用到大量的弃用 API 时，才需要禁用警告（因为实在是太多咧）
           silenceDeprecations: [
-            "legacy-js-api",
-            "mixed-decls",
-            "import",
-            "slash-div",
-            "global-builtin",
-            "function-units",
+            'legacy-js-api',
+            'mixed-decls',
+            'import',
+            'slash-div',
+            'global-builtin',
+            'function-units',
           ],
         },
       },
@@ -213,12 +213,12 @@ export default {
     // optimize-css-assets-webpack-plugin
     optimizeCSS: {
       cssProcessorPluginOptions: {
-        preset: ["default", { discardComments: { removeAll: true } }],
+        preset: ['default', { discardComments: { removeAll: true } }],
       },
       canPrint: true,
     },
     // terser-webpack-plugin
-    terser: ["preprod", "production"].includes(process.env.BUILD_ENV)
+    terser: ['preprod', 'production'].includes(process.env.BUILD_ENV)
       ? {
           extractComments: false,
           terserOptions: {
@@ -253,7 +253,7 @@ export default {
     },
     optimization: {
       splitChunks: {
-        chunks: "all",
+        chunks: 'all',
         minSize: 30000,
         maxSize: 244 * 1024, // 244kb
         minChunks: 1,
@@ -261,13 +261,13 @@ export default {
         maxInitialRequests: 3,
         cacheGroups: {
           styles: {
-            name: "styles",
+            name: 'styles',
             test: /\.(css|vue|scss)$/,
-            chunks: "all",
+            chunks: 'all',
             enforce: true,
           },
           elementUI: {
-            name: "element-ui",
+            name: 'element-ui',
             test: /node_modules[\\/]element-ui/,
             priority: 20,
           },
@@ -292,7 +292,7 @@ export default {
    */
   server: {
     port: 80,
-    host: "0.0.0.0",
+    host: '0.0.0.0',
   },
-};
+}
 ```

@@ -21,16 +21,5 @@
     "yaml",
     "toml",
     "xml"
-  ],
-  "cSpell.words": [
-    "Dobbeleer",
-    "guifont",
-    "Meiryo",
-    "mobi",
-    "RAPR",
-    "Schniz",
-    "shellcmdflag",
-    "shellquote",
-    "shellxquote"
   ]
 }
