@@ -1,9 +1,0 @@
-# Minimum Markdownlint config
-# Lumirelle <https://github.com/Lumirelle>
-
-default: true
-
-MD013: false
-MD024:
-  siblings_only: true
-MD033: false

@@ -22,6 +22,7 @@
 ## 📝 Table of Content
 
 - [About](#about)
+- [Catalogs](#catalogs)
 - [Usage](#usage)
   - [Manually Setup](#manually_setup)
   - [Script Setup](#script_setup)
@@ -31,155 +32,112 @@
 
 Development profiles or something else.
 
-Purpose Dir Structure:
+## 📑 Catalogs <a name="catalogs"></a>
 
-- general: For any situation
-- self: For self usage
-- work: For working (ignore by git)
+Top level directory structure, group by purpose:
 
-Sub Dir Structure:
+- `/for-personal`: **&lt;purpose&gt;** Personal usage profiles, support [<u>quickly setup & delete & copy and paste</u>](#script_setup)
+- `/for-work`: **&lt;purpose&gt;** Work only profiles (Of course, it's include in `.gitignore`)
+- `/manual`: Manuals
 
-- constraint: Constraint profiles like `.editorconfig`
+Second level directory structure of **&lt;purpose&gt;**, group by category:
 
-  - .cspell.dev.txt
-  - .editorconfig
-  - .lintstagedrc.yaml
-  - .markdownlint.yaml
-  - .npmrc
-  - .prettierrc.yaml
-  - commitlint.config.mjs
-  - eslint.config.mjs
-  - jsconfig.json
-  - stylelint.config.mjs
+- `/constraint`: **&lt;collection|constraint&gt;** Collection of constraint profiles, such as `.editorconfig`, support quickly <u>setup & delete & copy and paste</u>
+- `/preferences`: **&lt;collection|preferences&gt;** Collection of preferences profiles, such as `.zshrc`, support quickly <u>setup & delete & copy and paste</u>
+- `/templates`: **&lt;collection|templates&gt;** Collection of profile templates, such as `Dockerfile`, support quickly <u>copy and paste</u>
+- `/resources`: Resources, such as fonts
 
-- manual: Manuals like `git-manual.md`
+Third level directory structure of **&lt;collection|constraint&gt;**, group by situation:
 
-  - git
+- `/common`: For commonly usage
+- `/nodejs`: For node.js based project
+- `/webpack`: For webpack based project（It is usually a pure js project）
+- `/vue2`: For vue@^2 based project
 
-    - git-manual.md
+Third level directory structure of **&lt;collection|preferences&gt;**, group by application:
 
-  - life
+- `/clash-for-windows`
+- `/git`
+- `/maven`
+- `/neovim`
+- `/powershell`
+- `/volta`
+- `/vs`
+- `/vscode`
+- `/windows-terminal`
+- `/zsh`
 
-    - prefabricated-dish-manual.md
+Third level directory structure of **&lt;collection|templates&gt;**, group by situation:
 
-  - nodejs
+- `/common`: For commonly usage
+- `/nodejs`: For node.js based project
+- `/tomcat`: For tomcat based project
+- `/spring-boot`: For spring based project
 
-    - nodejs-manual.md
-    - nodejs-pm-npm-manual.md
-    - nodejs-pm-yarn-manual.md
-    - nodejs-pm-pnpm-manual.md
-    - nuxtjs-v2-manual.md
-    - nuxtjs-v2-specification-constraint-manual.md
-    - vuejs-v2-specification-constraint-manual.md
-    - web-front-end-manual.md
+Total catalogs:
 
-  - os
+- `for-personal/`
 
-    - windows-manual.md
+  - `constraint/`
 
-- preferences: Preferences profiles like `.zshrc`
+    - `common/`
+    - `nodejs/`
+    - `webpack/`
+    - `vue2/`
 
-  - clash-for-windows
+  - `preferences/`
 
-    - cfw-settings.yaml
-    - README.md
+    - `clash-for-windows/`
+    - `windows-terminal/`
+    - `powershell/`
+    - `zsh/`
+    - `git/`
+    - `neovim/`
+    - `vscode/`
+    - `vscode-ws/`
+    - `vs/`
+    - `idea/`
+    - `maven/`
+    - `volta/`
 
-  - git
+  - `templates/`
 
-    - .gitconfig
+    - `common/`
+    - `nodejs/`
+    - `tomcat/`
+    - `spring-boot/`
 
-  - jetbrains (need update)
+  - `resources/`
 
-    - mobi.hsz.idea.gitignore/ForIDEA.xml
-    - plugins-installed.txt
+    - `fonts/`
 
-  - maven
+- `for-work/`
 
-    - settings.xml
+  - `constraint/`
 
-  - nodejs
+    - `common/`
 
-    - volta.hooks.jsonc
+  - `preferences/`
 
-  - nvim
+    - `git/`
+    - `vscode/`
 
-    - lua/config
+- `manual/`
 
-      - autocmds.lua
-      - keymaps.lua
-      - options.lua
-
-    - init.lua
-
-  - powershell
-
-    - Microsoft.PowerShell_profile.ps1
-
-  - vim (need update)
-
-    - .ideavimrc
-
-  - vs
-
-    - backup.vssettings
-
-  - vscode
-
-    - project
-
-      - extensions.vuejs.v2.jsonc
-      - settings.vuejs.v2.jsonc
-
-    - user
-
-      - extensions.default.jsonc
-      - extensions.java.jsonc
-      - extensions.js.jsonc
-      - settings.default.jsonc
-      - trusted-domains.jsonc
-
-  - windows-terminal
-
-    - windows-terminal.settings.jsonc
-
-  - zsh
-
-    - .zshrc
-
-- resources: Resources like fonts
-
-  - fonts
-
-    - LxgwBrightCodeTC.zip
-    - NerdFontsSymbolsOnly.zip
-    - README.md
-
-- templates: Profile templates like Dockerfile
-
-  - docker
-
-    - dockerfile
-
-      - nodejs
-
-        - Dockerfile
-        - .dockerignore
-
-      - spring-boot
-
-        - Dockerfile
-
-      - tomcat
-
-        - Dockerfile
-
-    - docker-compose.yml
+  - `life/`
+  - `os/`
+  - `git/`
+  - `nodejs/`
+  - `vue2/`
+  - `nuxt2/`
 
 ## 🎈 Usage <a name="usage"></a>
 
 ### ✋🏼 Manually Setup <a name="manually_setup"></a>
 
 Just download the profiles you want and put it on the right place.
+
+**NOTE: On windows, you should add `create symbolic link permission` to your current user. For more detail, please Google yourself.**
 
 ```shell
 # cd PATH_TO_HOLD_THIS_REPO
@@ -192,32 +150,27 @@ git clone -c core.symlinks=true https://github.com/Lumirelle/profiles.git
 
 ### 📜 Script Setup <a name="script_setup"></a>
 
-If you want to use scripts for lazy setup,
-you should download and unzip this repo,
-then, add the root path to the `PATH` environment variable of your computer.
+If you want to use scripts for lazy setup, you should download and unzip this repo, then, add the root path to the `PATH` environment variable of your computer.
 
-**NOTE: On windows, you should add `create symbolic link permission` to your current user.**
-**Just run `gpedit.msc`, navigate to `计算机配置 - Windows 设置 - 安全设置 - 本地策略 - 用户权限分配`, and add your current user to `创建符号链接` option.**
-
-Now, you can use [the setup script](prof-setup.ps1) for quick setup and receive the updates automatically:
+Now, you can use [the setup script](pset.ps1) for quick setup and receive the updates automatically:
 
 ```shell
-# Use PowerShell command `help prof-setup -Full` for more detail.
-prof-setup
+# Use PowerShell command `help pset -Full` for more detail.
+pset
 ```
 
-You can also use [the setdown script](prof-setdown.ps1) for quick setdown:
+You can also use [the delete script](pdel.ps1) for quick setdown:
 
 ```shell
-# Use PowerShell command `help prof-setdown -Full` for more detail.
-prof-setdown
+# Use PowerShell command `help pdel -Full` for more detail.
+pdel
 ```
 
-You can also use [the prof script](prof.ps1) to copy and paste specified profile every where.
+You can also use [the copy and paste script](pcp.ps1) to copy and paste specified profile every where.
 
 ```shell
-# Use PowerShell command `help prof -Full` for more detail.
-prof
+# Use PowerShell command `help pcp -Full` for more detail.
+pcp .editorconfig
 ```
 
 ## ✍️ Authors <a name="authors"></a>

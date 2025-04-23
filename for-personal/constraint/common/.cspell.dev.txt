@@ -1,0 +1,6 @@
+Lumirelle
+nvim
+nuxt
+commitlint
+lintstagedrc
+opencollective
