@@ -270,6 +270,8 @@ shell
 ```shell
 npm pkg set 'scripts.postinstall=simple-git-hooks'
 npm pkg set 'simple-git-hooks.pre-commit=npx lint-staged'
+npm pkg set 'lint-staged.*=eslint --fix'
+npm pkg set 'lint-staged[*.{css,postcss,scss,html,vue}]=stylelint --cache --fix'
 
 pcp vue2/.lintstagedrc.yaml -o
 pcp nodejs/commitlint.config.mjs -o
@@ -292,15 +294,15 @@ package.json（配置 simple-git-hooks）
 
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --cache --fix",
+    "*.{css,postcss,scss,html,vue}": "stylelint --cache --fix"
   }
 
   // ...
 }
 ```
-
-.lintstagedrc.yaml
-
-See [here](../../for-personal/constraint/vue2/.lintstagedrc.yaml).
 
 commitlint.config.mjs
 
