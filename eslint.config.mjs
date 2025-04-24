@@ -1,1 +1,1 @@
-D:/.DevEnvironment/profiles/for-personal/constraint/nodejs/eslint.config.mjs
+./for-personal/constraint/nodejs/eslint.config.mjs

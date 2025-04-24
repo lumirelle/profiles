@@ -42,13 +42,6 @@
   This will copy and paste `common/.editorconfig` to `C:\Users\YourName\Documents\editorconfig`, and rename it to `.my-editorconfig`.
 
 .EXAMPLE
-  pcp [-s] .editorconfig -l
-
-  If you want to create a symbolic link, you can add the `isSymbolicLink` parameter.
-
-  This will create a symbolic link to `common/.editorconfig`.
-
-.EXAMPLE
   pcp [-s] .editorconfig -o
 
   If you want to force override the existing file, you can add the `override` parameter.
@@ -66,10 +59,6 @@ param (
   [string]$target,
 
   [Parameter(Mandatory = $false)]
-  [Alias("l")]
-  [switch]$isSymbolicLink,
-
-  [Parameter(Mandatory = $false)]
   [Alias("o")]
   [switch]$override
 )
@@ -77,7 +66,6 @@ param (
 Write-Debug "Parameters:"
 Write-Debug "source = $source"
 Write-Debug "target = $target"
-Write-Debug "isSymbolicLink = $isSymbolicLink"
 Write-Debug "override = $override`n"
 
 # == INIT & CHECK ==
@@ -181,11 +169,5 @@ if (Test-Path $targetFullName) {
 }
 
 # Copy and paste profile
-if ($isSymbolicLink) {
-  New-Item -ItemType SymbolicLink -Path $targetFullName -Target $sourceFullName -Force:$override  | Out-Null
-  Write-Host "Created symbolic link: $profileName -> $target" -ForegroundColor Green
-}
-else {
-  Copy-Item -Path $sourceFullName -Destination $targetFullName -Force:$override  | Out-Null
-  Write-Host "Copied and pasted file: $profileName -> $target" -ForegroundColor Green
-}
+Copy-Item -Path $sourceFullName -Destination $targetFullName -Force:$override  | Out-Null
+Write-Host "Copied and pasted file: $profileName -> $target" -ForegroundColor Green
