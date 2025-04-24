@@ -5,7 +5,7 @@
 .EXAMPLE
   pdel
 
-  This will remove the symbolic links (just symbolic links) of supported profiles to your computer.
+  This will remove the symbolic links (just symbolic links) of supported profiles in your computer.
 #>
 
 param ()
@@ -61,6 +61,11 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
       "windows-terminal${slash}",
       "zsh${slash}"
     );
+  },
+  @{
+    source       = "for-work${slash}constraint";
+    targetFolder = "~";
+    ignores      = @();
   }
 )
 

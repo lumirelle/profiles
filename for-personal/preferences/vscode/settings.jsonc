@@ -14,6 +14,7 @@
   "editor.wordWrapColumn": 120,
   "editor.renderWhitespace": "boundary",
   "editor.guides.bracketPairs": "active",
+  "editor.minimap.enabled": true,
   "terminal.integrated.fontWeight": "300",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
@@ -33,7 +34,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/4/21 22:38:10",
+    "//": "Last update at 2025/4/24 10:03:08",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -184,6 +185,46 @@
   // ↓↓ extensions: ui
   "custom-ui-style.font.sansSerif": "'LXGW Bright Code TC', 'Symbols Nerd Font', sans-serif",
   "markdown.preview.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
+  "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "[ ]", "[x]", "NOTE"],
+  "todo-tree.highlights.defaultHighlight": {
+    "foreground": "#eeeeee"
+  },
+  "todo-tree.highlights.customHighlight": {
+    // BUG: This is a bug
+    "BUG": {
+      "background": "#cd0000",
+      "iconColour": "#cd0000"
+    },
+    // FIXME: Fix me please
+    "FIXME": {
+      "background": "#d0a300",
+      "iconColour": "#d0a300"
+    },
+    // TODO: This is a todo
+    "TODO": {
+      "background": "#0076c0",
+      "iconColour": "#0076c0"
+    },
+    // [ ] This is a todo
+    "[ ]": {
+      "background": "#0076c0",
+      "iconColour": "#0076c0"
+    },
+    // [x] This is a completed todo
+    "[x]": {
+      "background": "#00c063",
+      "iconColour": "#00c063"
+    },
+    // NOTE: This is a note
+    "NOTE": {
+      "background": "#8A2BE2",
+      "iconColour": "#8A2BE2",
+      "icon": "note"
+    }
+  },
+  "todo-tree.regex.enableMultiLine": true,
+  "todo-tree.regex.regex": "(//|#|;|%|REM|^[ \\t]*\\*+|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)|(\"\"\"|'''|<!--|/\\*+|--\\[\\[)\\s*($TAGS)[\\s\\S]*?(\"\"\"|'''|-->|\\*/|\\]\\])",
+  "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
 
   // ↓↓ extensions: project
   // -- general
@@ -262,7 +303,8 @@
     }
   },
   "cSpell.ignorePaths": [
-    ".*", // all of dotfiles & dotfolders
+    // all of dotfiles & dotfolders
+    ".*",
     "dist",
     "node_modules",
     "package.json",
@@ -277,42 +319,9 @@
   // -- general
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
   "powershell.integratedConsole.showOnStartup": false,
-  "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "[ ]", "[x]", "NOTE"],
-  "todo-tree.highlights.defaultHighlight": {
-    "foreground": "#eeeeee"
-  },
-  "todo-tree.highlights.customHighlight": {
-    "BUG": {
-      "background": "#cd0000",
-      "iconColour": "#cd0000"
-    },
-    "FIXME": {
-      "background": "#d0a300",
-      "iconColour": "#d0a300"
-    },
-    "TODO": {
-      "background": "#0076c0",
-      "iconColour": "#0076c0"
-    },
-    "[ ]": {
-      "background": "#0076c0",
-      "iconColour": "#0076c0"
-    },
-    "[x]": {
-      "background": "#00c063",
-      "iconColour": "#00c063"
-    },
-    "NOTE": {
-      "background": "#ad66ff",
-      "iconColour": "#ad66ff"
-    }
-  },
-  "todo-tree.regex.enableMultiLine": true,
-  "todo-tree.regex.regex": "(//|#|<!--|;|\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)", // support multiple-line comment
-  "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
   // -- js
   "css.enabledLanguages": ["html", "vue"],
-  "css.styleSheets": ["**/*.scss", "**/*.css"],
-  "npm-intellisense.importLinebreak": "\r\n",
-  "dotenv.enableAutocloaking": true
+  "css.styleSheets": ["**/*.css", "**/*.postcss", "**/*.scss"],
+  "dotenv.enableAutocloaking": true,
+  "npm-intellisense.importLinebreak": "\r\n"
 }
