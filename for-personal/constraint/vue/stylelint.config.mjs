@@ -1,13 +1,13 @@
 /** @type {import('stylelint').Config} */
 export default {
   extends: [
-    // It bundles postcss-scss custom syntax
     'stylelint-config-standard-scss',
-    // It bundles postcss-html custom syntax
     'stylelint-config-standard-vue/scss',
     'stylelint-config-recess-order',
     // Style formatter
     '@stylistic/stylelint-config',
+    // It bundles postcss-html custom syntax for `.html` like files
+    'stylelint-config-html',
   ],
 
   allowEmptyInput: true,
@@ -24,14 +24,12 @@ export default {
     '**/public/**/*',
     '**/theme/**/*',
     '**/iconfont.*',
-    // Tests
-    '**/tests/**/*',
     // Node modules
     '**/node_modules/**/*',
     // Nuxt app
     '**/app/view/**/*',
     '**/app.html',
-    // Other files
+    // Add your custom ignore files here
   ],
 
   rules: {
@@ -44,7 +42,7 @@ export default {
     // We don't want to set a generic family when we use iconfont
     'font-family-no-missing-generic-family-keyword': null,
 
-    // Warning for descending specificity, for better readability
+    // Warning for descending specificity, for better maintainability
     'no-descending-specificity': [true, { severity: 'warning' }],
 
     // Support pseudo classes and elements provided by vue, webpack and element-ui
@@ -75,5 +73,7 @@ export default {
         ignoreAtRules: ['if', 'else'],
       },
     ],
+
+    // Add your custom rules here
   },
 }

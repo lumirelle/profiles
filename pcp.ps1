@@ -14,39 +14,42 @@
   Force to override the existing file
 
 .EXAMPLE
-  pcp [-s] .gitconfig
+  pcp [-s] .editorconfig
 
-  This will copy and paste `.gitconfig` to current directory.
+  This will copy and paste `common/.editorconfig` to current directory.
 
 .EXAMPLE
-  pcp [-s] .gitconfig [-t] "C:\Users\YourName\Documents\"
+  pcp [-s] nodejs/.editorconfig
+
+  This will copy and paste `nodejs/.editorconfig` to current directory.
+
+.EXAMPLE
+  pcp [-s] .editorconfig [-t] "C:\Users\YourName\Documents\"
 
   If you want to copy and paste to a specific directory, you can add the `target` parameter.
 
-  Note: The destination path **must** end with a forward slash `/` or a backslash `\`.
+  NOTE: The destination path **must** end with a forward slash `/` or a backslash `\`.
 
-  This will copy and paste `.gitconfig` to `C:\Users\YourName\Documents\`.
-
-.EXAMPLE
-  pcp [-s] .gitconfig [-t] "C:\Users\YourName\Documents\.my-gitconfig"
-
-  If you want to copy and paste to a specific directory, and rename it, you can add the `target` parameter.
-
-  Note: The destination path **must not** end with a forward slash `/` or a backslash `\`.
-
-  This will copy and paste `.gitconfig` to `C:\Users\YourName\Documents\gitconfig`.
-
-  The file will be renamed to `.my-gitconfig`.
+  This will copy and paste `common/.editorconfig` to `C:\Users\YourName\Documents\`.
 
 .EXAMPLE
-  pcp [-s] .gitconfig -l
+  pcp [-s] .editorconfig [-t] "C:\Users\YourName\Documents\.my-editorconfig"
+
+  If you want to copy and paste to a specific directory and rename it, you can add the `target` parameter.
+
+  NOTE: The destination path **must not** end with a forward slash `/` or a backslash `\`.
+
+  This will copy and paste `common/.editorconfig` to `C:\Users\YourName\Documents\editorconfig`, and rename it to `.my-editorconfig`.
+
+.EXAMPLE
+  pcp [-s] .editorconfig -l
 
   If you want to create a symbolic link, you can add the `isSymbolicLink` parameter.
 
-  This will create a symbolic link to `.gitconfig`.
+  This will create a symbolic link to `common/.editorconfig`.
 
 .EXAMPLE
-  pcp [-s] .gitconfig -o
+  pcp [-s] .editorconfig -o
 
   If you want to force override the existing file, you can add the `override` parameter.
 
@@ -100,45 +103,47 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
   }
 )
 
-# Process $source
-# If $source is not contains `/` or `\`, add `common${slash}` to the beginning
+# Process `$source`
+# If `$source` is not contains `/` or `\`, add `common${slash}` to the beginning
 if ($source -notmatch '[\\/]') {
   $source = "common${slash}$source"
 }
 Write-Debug "source: $source`n"
 
-# Process $target
-# If target is not specified, use current directory
+# Process `$target`
+# If `$target` is not specified, use current directory
 if (-not $target) {
   $target = Get-Location
 }
-# Get target folder
-if ($target -notmatch '[\\/]$') {
-  $targetFolder = Split-Path -Path $target -Parent
-}
-else {
-  $targetFolder = $target
-}
-Write-Debug "target folder: $targetFolder`n"
-# If target folder not exists, create it
-if (-not (Test-Path $targetFolder)) {
-  Write-Debug "target parent folder path not found: $targetFolder, will create`n"
-  New-Item -Path $targetFolder -ItemType Directory -Force | Out-Null
+# If `$target` is specified and not exists
+elseif (-not (Test-Path $target)) {
+  # Get `$targetFolder`
+  if ($target -notmatch '[\\/]$') {
+    $targetFolder = Split-Path -Path $target -Parent
+  }
+  else {
+    $targetFolder = $target
+  }
+  Write-Debug "target folder: $targetFolder`n"
+  # If `$targetFolder` not exists, create it
+  if (-not (Test-Path $targetFolder)) {
+    Write-Debug "target parent folder path not found: $targetFolder, will create`n"
+    New-Item -Path $targetFolder -ItemType Directory -Force | Out-Null
+  }
 }
 
 # -- COPY & PASTE --
 
-# Find target file in PROFILE_FOLDERS, get file path
 $sourceFullName = $null
 # Foreach supported profile collection
 foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
   $collectionFullName = Join-Path $rootPath $collection.source
   if (-not (Test-Path $collectionFullName)) {
-    Write-Host "Profiles collection not found: $collectionFullName, skip`n" -ForegroundColor Yellow
+    Write-Host "Profiles collection source not found: $($collection.source), skip`n" -ForegroundColor Yellow
     continue
   }
 
-  # Foreach profile folder in the collection
+  # Find matched source profile
   $profileFullName = Join-Path $collectionFullName $source
   $profileName = Split-Path -Path $profileFullName -Leaf
   if (Test-Path $profileFullName) {
@@ -148,15 +153,24 @@ foreach ($collection in $SUPPORTED_PROFILE_COLLECTIONS) {
   }
 }
 
-# If $sourceFullName does not exist, output error information
+# If $sourceFullName is `$null`, output error information
 if (-not $sourceFullName) {
   Write-Error "Source profile not found in any profile folders."
   return
 }
 
-# If the current path already exists with the same name, decide whether to override based on the override parameter
-$targetFullName = Join-Path $target $profileName
+# Get `$targetFullName`
+# If `$target` is a folder, use `$target` as `$targetFullName`
+# Otherwise, use `$target` + `$profileName` to create `$targetFullName`
+if (Test-Path $target -PathType Container) {
+  $targetFullName = Join-Path $target $profileName
+}
+else {
+  $targetFullName = $target
+}
 Write-Debug "Current file path: $targetFullName`n"
+
+# If `$targetFullName` already exists, decide whether to override based on the override parameter
 if (Test-Path $targetFullName) {
   if ($override) {
     Write-Host "File already exists: $targetFullName, will force override" -ForegroundColor Yellow
@@ -166,6 +180,7 @@ if (Test-Path $targetFullName) {
   }
 }
 
+# Copy and paste profile
 if ($isSymbolicLink) {
   New-Item -ItemType SymbolicLink -Path $targetFullName -Target $sourceFullName -Force:$override  | Out-Null
   Write-Host "Created symbolic link: $profileName -> $target" -ForegroundColor Green

@@ -3,17 +3,6 @@ import antfu from '@antfu/eslint-config'
 export default antfu(
   // The options for generating the ESLint configurations
   {
-    // Set vue version to 2
-    vue: {
-      // Disable sfc block detection for styles, because it's not supported in vue@^2
-      sfcBlocks: {
-        blocks: {
-          styles: false,
-        },
-      },
-      vueVersion: 2,
-    },
-
     // Enable formatters for html and markdown (requires `eslint-plugin-format`)
     formatters: {
       css: false, // Use stylelint instead
@@ -54,20 +43,6 @@ export default antfu(
     rules: {
       // We need to use `console` in development environment, we can use build plugin to remove it in production environment
       'no-console': 'off',
-    },
-  })
-  .override('antfu/node/rules', {
-    rules: {
-      // `vue@^2` compatible, because webpack doesn't support this rules
-      // Use global variable `process` instead of `import process from 'process'`
-      'node/prefer-global/process': 'off',
-    },
-  })
-  .override('antfu/unicorn/rules', {
-    rules: {
-      // `vue@^2` compatible, because webpack doesn't support this rules
-      // Use `path` instead of `node:path`
-      'unicorn/prefer-node-protocol': 'off',
     },
   })
   // FIXME: Fix these warnings progressively, because they are too many

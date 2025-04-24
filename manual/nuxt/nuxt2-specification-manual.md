@@ -16,8 +16,8 @@ Main dependencies:
 shell（For command `pcp`, please see [README.md#script_setup](../../README.md#script_setup)）
 
 ```shell
-pcp vscode-ws/extensions.vue2.jsonc .vscode/extensions.json -o
-pcp vscode-ws/settings.vue2.jsonc .vscode/settings.json -o
+pcp vscode-ws/extensions.vue.jsonc .vscode/extensions.json -o
+pcp vscode-ws/settings.vue.jsonc .vscode/settings.json -o
 pcp nodejs/jsconfig.json -o
 pcp .editorconfig -o
 pcp .gitattributes -o
@@ -28,11 +28,11 @@ pcp nodejs/.gitignore -o
 
 .vscode/extensions.json
 
-See [here](../../for-personal/preferences/vscode-ws/extensions.vue2.jsonc).
+See [here](../../for-personal/preferences/vscode-ws/extensions.vue.jsonc).
 
 .vscode/settings.json
 
-See [here](../../for-personal/preferences/vscode-ws/settings.vue2.jsonc).
+See [here](../../for-personal/preferences/vscode-ws/settings.vue.jsonc).
 
 jsconfig.json
 
@@ -144,7 +144,7 @@ shell
 
 ```shell
 # stylelint & configs，捆绑了 stylelint-scss、stylelint-order，以及 postcss 处理器
-ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
+ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest stylelint-config-html@latest -D
 ```
 
 ### 快速配置
@@ -152,14 +152,14 @@ ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-stand
 shell
 
 ```shell
-pcp vue2/stylelint.config.mjs -o
+pcp vue/stylelint.config.mjs -o
 ```
 
 ### 手动配置
 
 stylelint.config.mjs
 
-See [here](../../for-personal/constraint/vue2/stylelint.config.mjs).
+See [here](../../for-personal/constraint/vue/stylelint.config.mjs).
 
 ## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
@@ -214,6 +214,8 @@ export default {
 
 ### 前置任务
 
+shell
+
 ```shell
 ni npm-run-all2@latest -D
 ```
@@ -223,10 +225,10 @@ ni npm-run-all2@latest -D
 shell
 
 ```shell
-npm pkg set 'scripts.lint=npm-run-all -s lint:js lint:style'
+npm pkg set 'scripts.lint=run-s lint:*'
 npm pkg set 'scripts.lint:js=eslint --cache .'
 npm pkg set 'scripts.lint:style=stylelint --cache **/*.{css,postcss,scss,html,vue}'
-npm pkg set 'scripts.fix=npm-run-all -s fix:js fix:style'
+npm pkg set 'scripts.fix=run-s fix:*'
 npm pkg set 'scripts.fix:js=eslint --cache --fix .'
 npm pkg set 'scripts.fix:style=stylelint --cache --fix **/*.{css,postcss,scss,html,vue}'
 ```
@@ -241,10 +243,10 @@ package.json
   "scripts": {
     // ...
 
-    "lint": "npm-run-all -s lint:js lint:style",
+    "lint": "run-s lint:*",
     "lint:js": "eslint --cache .",
     "lint:style": "stylelint --cache **/*.{css,postcss,scss,html,vue}",
-    "fix": "npm-run-all -s fix:js fix:style",
+    "fix": "run-s fix:*",
     "fix:js": "eslint --cache --fix .",
     "fix:style": "stylelint --cache --fix **/*.{css,postcss,scss,html,vue}"
 
@@ -273,7 +275,6 @@ npm pkg set 'simple-git-hooks.pre-commit=npx lint-staged'
 npm pkg set 'lint-staged.*=eslint --fix'
 npm pkg set 'lint-staged[*.{css,postcss,scss,html,vue}]=stylelint --cache --fix'
 
-pcp vue2/.lintstagedrc.yaml -o
 pcp nodejs/commitlint.config.mjs -o
 ```
 

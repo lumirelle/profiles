@@ -12,7 +12,7 @@
  * ```
  *
  * NOTE:
- * - `<type>` must be one of 'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor','revert', 'style', 'test', 'merge', 'wip.
+ * - `<type>` must be one of 'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor','revert', 'style', 'test', 'merge', 'wip'.
  * - `<subject>` must in lower-case.
  */
 export default {
