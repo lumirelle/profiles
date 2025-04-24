@@ -1,4 +1,4 @@
-# Vue.js 2 规范手册 Vue.js 2 Specification Manual
+# Vue.js 3 规范手册 Vue.js 3 Specification Manual
 
 Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
@@ -6,7 +6,7 @@ Using node@18.20.8, npm@10.9.2, pnpm@10.9.0.
 
 Main dependencies:
 
-- vue@^2.7.16, vue-cli@^4 (webpack@^4, babel@^7, core-js@^3)
+- vue@latest, vite@latest (@vitejs/plugin-vue@latest)
 - eslint@latest, stylelint@latest
 
 ## 0. 更新 vscode 配置 和 git 配置
@@ -16,8 +16,8 @@ Main dependencies:
 shell（For command `pcp`, please see [README.md#script_setup](../../README.md#script_setup)）
 
 ```shell
-pcp vscode-ws/extensions.vue2.jsonc .vscode/extensions.json -o
-pcp vscode-ws/settings.vue2.jsonc .vscode/settings.json -o
+pcp vscode-ws/extensions.vue.jsonc .vscode/extensions.json -o
+pcp vscode-ws/settings.vue.jsonc .vscode/settings.json -o
 pcp nodejs/jsconfig.json -o
 pcp .editorconfig -o
 pcp .gitattributes -o
@@ -28,11 +28,11 @@ pcp nodejs/.gitignore -o
 
 .vscode/extensions.json
 
-See [here](../../for-personal/preferences/vscode-ws/extensions.vue2.jsonc).
+See [here](../../for-personal/preferences/vscode-ws/extensions.vue.jsonc).
 
 .vscode/settings.json
 
-See [here](../../for-personal/preferences/vscode-ws/settings.vue2.jsonc).
+See [here](../../for-personal/preferences/vscode-ws/settings.vue.jsonc).
 
 jsconfig.json
 
@@ -68,10 +68,7 @@ shell（This syntax of command `npm pkg set` requires npm@>=10.9.2）
 ```shell
 corepack use pnpm@latest-10
 
-npm pkg set 'engines.node="^18.12.0 || ^20.9.0 || >=22"' 'engines.npm=">=9"' 'engines.pnpm=">=7"' 'engines.yarn=Please use pnpm for instead!'
-
-npm pkg set '"pnpm.overrides.@achrinza/node-ipc"="9.2.9"'
-npm pkg set 'overrides.@achrinza/node-ipc="9.2.9"'
+npm pkg set 'engines.node=^18.12.0 || ^20.9.0 || >=22' 'engines.npm=>=9' 'engines.pnpm=>=7' 'engines.yarn=Please use pnpm for instead!'
 
 pcp nodejs/.npmrc -o
 ```
@@ -97,27 +94,6 @@ package.json
 }
 ```
 
-为兼容 node 版本，还需要配置 pnpm.overrides（requires pnpm@>=6.25.0）或 overrides（requires npm@>=8.3.0）
-
-package.json
-
-```json
-{
-  // ...
-
-  "pnpm": {
-    "overrides": {
-      "@achrinza/node-ipc": "9.2.9"
-    }
-  },
-  "overrides": {
-    "@achrinza/node-ipc": "9.2.9"
-  }
-
-  // ...
-}
-```
-
 .npmrc
 
 See [here](../../for-personal/constraint/nodejs/.npmrc).
@@ -127,8 +103,8 @@ See [here](../../for-personal/constraint/nodejs/.npmrc).
 shell
 
 ```shell
-ni vue@^2.7.16 vue-router@legacy vuex@^3.6.2 core-js@latest
-ni @vue/cli-service@^4.5.19 @vue/cli-plugin-babel@latest vue-template-compiler@latest -D
+ni vue@latest vue-router@latest pinia@latest
+ni vite@latest @vitejs/plugin-vue@latest -D
 ```
 
 ## 3. 设置代码检查与格式化
@@ -149,14 +125,14 @@ ni eslint@latest @antfu/eslint-config@latest eslint-plugin-format@latest -D
 shell
 
 ```shell
-pcp vue2/eslint.config.mjs -o
+pcp vue3/eslint.config.mjs -o
 ```
 
 ### 手动配置
 
 eslint.config.mjs
 
-See [here](../../for-personal/constraint/vue2/eslint.config.mjs).
+See [here](../../for-personal/constraint/vue3/eslint.config.mjs).
 
 ## 4. 设置样式检查与格式化
 
@@ -168,7 +144,7 @@ shell
 
 ```shell
 # stylelint & configs，捆绑了 stylelint-scss、stylelint-order，以及 postcss 处理器
-ni postcss@latest stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest -D
+ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest stylelint-config-html@latest -D
 ```
 
 ### 快速配置
@@ -176,14 +152,14 @@ ni postcss@latest stylelint@latest stylelint-config-standard-scss@latest styleli
 shell
 
 ```shell
-pcp vue2/stylelint.config.mjs -o
+pcp vue/stylelint.config.mjs -o
 ```
 
 ### 手动配置
 
 stylelint.config.mjs
 
-See [here](../../for-personal/constraint/vue2/stylelint.config.mjs).
+See [here](../../for-personal/constraint/vue/stylelint.config.mjs).
 
 ## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
@@ -195,8 +171,8 @@ shell
 # 限制 node 版本的罪魁祸首！
 nun node-sass
 
-# sass 和 sass-loader
-ni sass@latest sass-loader@version-10 -D
+# sass
+ni sass@latest -D
 ```
 
 ### 手动配置
@@ -208,7 +184,7 @@ module.exports = {
   // ...
 
   css: {
-    loaderOptions: {
+    preprocessorOptions: {
       scss: {
         sassOptions: {
           // scss 支持本身不需要任何配置
@@ -234,6 +210,8 @@ module.exports = {
 
 ### 前置任务
 
+shell
+
 ```shell
 ni npm-run-all2@latest -D
 ```
@@ -243,12 +221,12 @@ ni npm-run-all2@latest -D
 shell
 
 ```shell
-npm pkg set 'scripts.lint="npm-run-all -s lint:js lint:style"'
-npm pkg set 'scripts.lint:js="eslint --cache ."'
-npm pkg set 'scripts.lint:style="stylelint --cache **/*.{css,postcss,scss,html,vue}"'
-npm pkg set 'scripts.fix="npm-run-all -s fix:js fix:style"'
-npm pkg set 'scripts.fix:js="eslint --cache --fix ."'
-npm pkg set 'scripts.fix:style="stylelint --cache --fix **/*.{css,postcss,scss,html,vue}"'
+npm pkg set 'scripts.lint=run-s lint:*'
+npm pkg set 'scripts.lint:js=eslint --cache .'
+npm pkg set 'scripts.lint:style=stylelint --cache **/*.{css,postcss,scss,html,vue}'
+npm pkg set 'scripts.fix=run-s fix:*'
+npm pkg set 'scripts.fix:js=eslint --cache --fix .'
+npm pkg set 'scripts.fix:style=stylelint --cache --fix **/*.{css,postcss,scss,html,vue}'
 ```
 
 ### 手动配置
@@ -261,10 +239,10 @@ package.json
   "scripts": {
     // ...
 
-    "lint": "npm-run-all -s lint:js lint:style",
+    "lint": "run-s lint:*",
     "lint:js": "eslint --cache .",
     "lint:style": "stylelint --cache **/*.{css,postcss,scss,html,vue}",
-    "fix": "npm-run-all -s fix:js fix:style",
+    "fix": "run-s fix:*",
     "fix:js": "eslint --cache --fix .",
     "fix:style": "stylelint --cache --fix **/*.{css,postcss,scss,html,vue}"
 
@@ -289,11 +267,10 @@ shell
 
 ```shell
 npm pkg set 'scripts.postinstall=simple-git-hooks'
-npm pkg set 'simple-git-hooks.pre-commit="npx lint-staged"'
+npm pkg set 'simple-git-hooks.pre-commit=npx lint-staged'
 npm pkg set 'lint-staged.*=eslint --fix'
 npm pkg set 'lint-staged[*.{css,postcss,scss,html,vue}]=stylelint --cache --fix'
 
-pcp vue2/.lintstagedrc.yaml -o
 pcp nodejs/commitlint.config.mjs -o
 ```
 

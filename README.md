@@ -128,8 +128,8 @@ Total catalogs:
   - `os/`
   - `git/`
   - `nodejs/`
-  - `vue2/`
-  - `nuxt2/`
+  - `vue/`
+  - `nuxt/`
 
 ## 🎈 Usage <a name="usage"></a>
 
