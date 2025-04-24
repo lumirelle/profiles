@@ -1,0 +1,8 @@
+catalogs:
+  dev:
+    '@antfu/eslint-config': ^4.12.0
+    bumpp: ^10.1.0
+    eslint: ^9.25.1
+    eslint-plugin-format: ^1.0.1
+    lint-staged: ^15.5.1
+    simple-git-hooks: ^2.12.1

@@ -31,13 +31,11 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
       "common${slash}.markdownlint.yaml",
       "nodejs${slash}.gitattributes",
       "nodejs${slash}.gitignore",
-      "nodejs${slash}.lintstagedrc.yaml",
       "nodejs${slash}.npmrc",
       "nodejs${slash}commitlint.config.mjs",
       "nodejs${slash}eslint.config.mjs",
       "nodejs${slash}jsconfig.json",
       "nodejs${slash}stylelint.config.mjs",
-      "vue2${slash}.lintstagedrc.yaml",
       "vue2${slash}eslint.config.mjs",
       "vue2${slash}stylelint.config.mjs",
       "webpack${slash}eslint.config.mjs"

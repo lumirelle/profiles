@@ -4,27 +4,48 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  dev:
+    '@antfu/eslint-config':
+      specifier: ^4.12.0
+      version: 4.12.0
+    bumpp:
+      specifier: ^10.1.0
+      version: 10.1.0
+    eslint:
+      specifier: ^9.25.1
+      version: 9.25.1
+    eslint-plugin-format:
+      specifier: ^1.0.1
+      version: 1.0.1
+    lint-staged:
+      specifier: ^15.5.1
+      version: 15.5.1
+    simple-git-hooks:
+      specifier: ^2.12.1
+      version: 2.12.1
+
 importers:
 
   .:
     devDependencies:
       '@antfu/eslint-config':
-        specifier: ^4.12.0
+        specifier: catalog:dev
         version: 4.12.0(@typescript-eslint/utils@8.31.0(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3))(@vue/compiler-sfc@3.5.13)(eslint-plugin-format@1.0.1(eslint@9.25.1(jiti@2.4.2)))(eslint@9.25.1(jiti@2.4.2))(typescript@5.8.3)
       bumpp:
-        specifier: ^10.1.0
+        specifier: catalog:dev
         version: 10.1.0
       eslint:
-        specifier: ^9.25.1
+        specifier: catalog:dev
         version: 9.25.1(jiti@2.4.2)
       eslint-plugin-format:
-        specifier: ^1.0.1
+        specifier: catalog:dev
         version: 1.0.1(eslint@9.25.1(jiti@2.4.2))
       lint-staged:
-        specifier: ^15.5.1
+        specifier: catalog:dev
         version: 15.5.1
       simple-git-hooks:
-        specifier: ^2.12.1
+        specifier: catalog:dev
         version: 2.12.1
 
 packages:
