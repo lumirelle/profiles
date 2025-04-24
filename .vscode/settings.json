@@ -1,9 +1,6 @@
 {
-  // cspell:disable
-
   // == format & lint ==
   "prettier.enable": false,
-  "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
@@ -23,14 +20,8 @@
     "xml"
   ],
   "cSpell.words": [
-    "Dobbeleer",
-    "guifont",
-    "Meiryo",
-    "mobi",
-    "RAPR",
-    "Schniz",
-    "shellcmdflag",
-    "shellquote",
-    "shellxquote"
+    "pcp",
+    "pdel",
+    "pset"
   ]
 }

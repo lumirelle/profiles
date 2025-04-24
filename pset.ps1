@@ -76,6 +76,11 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
       "windows-terminal${slash}",
       "zsh${slash}"
     );
+  },
+  @{
+    source       = "for-work${slash}constraint";
+    targetFolder = "~";
+    ignores      = @();
   }
 )
 

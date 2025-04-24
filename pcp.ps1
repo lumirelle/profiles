@@ -14,32 +14,39 @@
   Force to override the existing file
 
 .EXAMPLE
-  pcp .gitconfig
+  pcp [-s] .gitconfig
 
-  This will copy and paste `.gitconfig` (under `general` or `self` folder) to current directory.
+  This will copy and paste `.gitconfig` to current directory.
 
 .EXAMPLE
-  pcp .gitconfig "C:\Users\YourName\Documents\"
+  pcp [-s] .gitconfig [-t] "C:\Users\YourName\Documents\"
 
   If you want to copy and paste to a specific directory, you can add the `target` parameter.
 
   Note: The destination path **must** end with a forward slash `/` or a backslash `\`.
 
-  This will copy and paste `.gitconfig` (under `general` or `self` folder) to `C:\Users\YourName\Documents\`.
+  This will copy and paste `.gitconfig` to `C:\Users\YourName\Documents\`.
 
 .EXAMPLE
-  pcp .gitconfig "C:\Users\YourName\Documents\.my-gitconfig"
+  pcp [-s] .gitconfig [-t] "C:\Users\YourName\Documents\.my-gitconfig"
 
   If you want to copy and paste to a specific directory, and rename it, you can add the `target` parameter.
 
   Note: The destination path **must not** end with a forward slash `/` or a backslash `\`.
 
-  This will copy and paste `.gitconfig` (under `general` or `self` folder) to `C:\Users\YourName\Documents\gitconfig`.
+  This will copy and paste `.gitconfig` to `C:\Users\YourName\Documents\gitconfig`.
 
   The file will be renamed to `.my-gitconfig`.
 
 .EXAMPLE
-  pcp .gitconfig -o
+  pcp [-s] .gitconfig -l
+
+  If you want to create a symbolic link, you can add the `isSymbolicLink` parameter.
+
+  This will create a symbolic link to `.gitconfig`.
+
+.EXAMPLE
+  pcp [-s] .gitconfig -o
 
   If you want to force override the existing file, you can add the `override` parameter.
 
@@ -67,6 +74,7 @@ param (
 Write-Debug "Parameters:"
 Write-Debug "source = $source"
 Write-Debug "target = $target"
+Write-Debug "isSymbolicLink = $isSymbolicLink"
 Write-Debug "override = $override`n"
 
 # == INIT & CHECK ==
@@ -86,6 +94,9 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
   },
   @{
     source = "for-personal${slash}templates";
+  },
+  @{
+    source = "for-work${slash}constraint";
   }
 )
 
