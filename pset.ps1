@@ -52,7 +52,8 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
       "nodejs${slash}jsconfig.json",
       "nodejs${slash}stylelint.config.mjs",
       "vue2${slash}eslint.config.mjs",
-      "vue2${slash}stylelint.config.mjs",
+      "vue3${slash}eslint.config.mjs",
+      "vue${slash}stylelint.config.mjs",
       "webpack${slash}eslint.config.mjs"
     );
   },
