@@ -27,6 +27,7 @@
 
 [alias]
   # remote
+  cl = clone
   p = push
   l = pull
   f = fetch
