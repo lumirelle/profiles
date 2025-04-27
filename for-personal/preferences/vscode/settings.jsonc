@@ -34,7 +34,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/4/24 10:03:08",
+    "//": "Last update at 2025/4/27 10:31:54",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -311,17 +311,20 @@
     "package-lock.json",
     "yarn.lock",
     "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
     "bun.lockb",
     "bun.lock"
   ],
 
   // ↓↓ extensions: others
   // -- general
+  "formattingToggle.affects": [
+    "editor.formatOnSave"
+  ],
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
   "powershell.integratedConsole.showOnStartup": false,
   // -- js
   "css.enabledLanguages": ["html", "vue"],
   "css.styleSheets": ["**/*.css", "**/*.postcss", "**/*.scss"],
-  "dotenv.enableAutocloaking": true,
-  "npm-intellisense.importLinebreak": "\r\n"
+  "dotenv.enableAutocloaking": true
 }
