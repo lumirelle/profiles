@@ -4,25 +4,27 @@
     xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
     <mirrors>
-        <!-- 阿里云仓库 -->
+        <!-- Aliyun Maven Mirror -->
         <mirror>
-            <id>alimaven</id>
+            <id>aliyun</id>
             <mirrorOf>central</mirrorOf>
-            <name>aliyun maven</name>
+            <name>Aliyun Maven Mirror</name>
             <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
         </mirror>
-        <!-- 中央仓库1 -->
+
+        <!-- Official Mirror 1 -->
         <mirror>
-            <id>repo1</id>
+            <id>official-1</id>
             <mirrorOf>central</mirrorOf>
-            <name>Human Readable Name for this Mirror.</name>
+            <name>Official Maven Mirror 1</name>
             <url>http://repo1.maven.org/maven2/</url>
         </mirror>
-        <!-- 中央仓库2 -->
+
+        <!-- Official Mirror 2 -->
         <mirror>
-            <id>repo2</id>
+            <id>official-2</id>
             <mirrorOf>central</mirrorOf>
-            <name>Human Readable Name for this Mirror.</name>
+            <name>Official Maven Mirror 2</name>
             <url>http://repo2.maven.org/maven2/</url>
         </mirror>
     </mirrors>
@@ -42,6 +44,7 @@
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
         </profile>
+
         <!-- jdk11 -->
         <profile>
             <id>jdk11</id>
@@ -56,6 +59,7 @@
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
         </profile>
+
         <!-- jdk17 -->
         <profile>
             <id>jdk17</id>
@@ -70,6 +74,7 @@
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             </properties>
         </profile>
+
         <!-- jdk21 -->
         <profile>
             <id>jdk21</id>

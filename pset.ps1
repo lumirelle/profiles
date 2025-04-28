@@ -68,7 +68,6 @@ $SUPPORTED_PROFILE_COLLECTIONS = @(
     ignores      = @(
       "clash-for-windows${slash}",
       "idea${slash}",
-      "volta${slash}",
       "vs${slash}",
       "vscode${slash}",
       "vscode-ws${slash}",

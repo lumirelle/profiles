@@ -159,7 +159,7 @@ Now, you can use [the setup script](pset.ps1) for quick setup and receive the up
 pset
 ```
 
-You can also use [the delete script](pdel.ps1) for quick setdown:
+You can also use [the delete script](pdel.ps1) for quick set-down:
 
 ```shell
 # Use PowerShell command `help pdel -Full` for more detail.

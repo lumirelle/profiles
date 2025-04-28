@@ -1,10 +1,10 @@
-# 最佳使用 Best Usage
+# Best Usage
 
 > R.I.P. Clash.
 
-## Windows 任务计划程序
+## Windows Task Scheduler
 
-参考配置如下：
+Recommend configuration:
 
 - 常规
   - 安全选项
@@ -25,6 +25,6 @@
   - 如果任务失败，以 1 分钟的频率重新启动
   - 请勿启动新实例
 
-## GEO IP & Rules Provider
+## Clash Geo Ip & Rules Provider
 
-见 <https://github.com/Loyalsoldier/geoip> 和 <https://github.com/Loyalsoldier/clash-rules>。
+See <https://github.com/Loyalsoldier/geoip> & <https://github.com/Loyalsoldier/clash-rules> for more detail.
