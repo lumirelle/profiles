@@ -1,23 +1,15 @@
 #!/usr/bin/env node
-import { exit, stdout } from 'node:process'
-import { log, processProfileCollection, SUPPORTED_PROFILE_COLLECTIONS } from '../index'
+/* eslint-disable no-console */
+import { SUPPORTED_PROFILE_COLLECTIONS } from '../index'
+import { processProfileCollection } from '../profile'
+import { runCli } from '../runner'
 
-/**
- * 主函数
- */
-async function main(): Promise<void> {
-  stdout.write('\n')
-  log('开始删除配置文件...', 'success')
-  stdout.write('\n')
+runCli(async (context) => {
+  const { root } = context
 
-  // 遍历所有支持的配置文件集合
+  console.log('Start to remove profile...')
+
   for (const collection of SUPPORTED_PROFILE_COLLECTIONS) {
-    await processProfileCollection(collection, 'remove')
+    await processProfileCollection(root, collection, 'remove')
   }
-}
-
-// 执行主函数
-main().catch((error) => {
-  log(`执行过程中发生错误: ${error}`, 'error')
-  exit(1)
 })

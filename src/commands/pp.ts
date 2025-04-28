@@ -1,91 +1,49 @@
 #!/usr/bin/env node
-import { existsSync, statSync } from 'node:fs'
-import { basename, dirname, join } from 'node:path'
-import { argv, cwd, exit } from 'node:process'
+import type { RunnerContext } from '../runner'
+import { basename, join } from 'node:path'
+import process from 'node:process'
 import prompts from '@posva/prompts'
-import { copyFile, ensureDir, findProfilePath, log } from '../index'
+import { copyFile } from '../fs'
+import { findProfile } from '../profile'
+import { runCli } from '../runner'
+import { extract, extractBoolean } from '../utils'
 
-/**
- * 主函数
- */
-async function main(): Promise<void> {
-  // 解析命令行参数
-  const args = argv.slice(2)
+runCli(async (context: RunnerContext, args: string[]) => {
+  const { cwd, root } = context
 
-  // 查找源文件参数
-  let source = ''
-  let target = ''
-  let override = false
+  let sourceName = extract(args, '-s', '--source')
+  let targetPath = extract(args, '-t', '--target')
+  const override = extractBoolean(args, '-o', '--override')
 
-  // 解析源文件参数 (-s 或 --source)
-  const sourceIndex = args.findIndex(arg => arg === '-s' || arg === '--source')
-  if (sourceIndex !== -1 && sourceIndex + 1 < args.length) {
-    source = args[sourceIndex + 1]
-  }
-
-  // 解析目标路径参数 (-t 或 --target)
-  const targetIndex = args.findIndex(arg => arg === '-t' || arg === '--target')
-  if (targetIndex !== -1 && targetIndex + 1 < args.length) {
-    target = args[targetIndex + 1]
-  }
-
-  // 解析强制覆盖参数 (-o 或 --override)
-  override = args.includes('-o') || args.includes('--override')
-
-  // 如果没有提供源文件参数，交互式提示
-  if (!source) {
-    const response = await prompts({
+  if (!sourceName) {
+    const { source } = await prompts({
       type: 'text',
       name: 'source',
-      message: '请输入要复制的配置文件（例如：.editorconfig 或 nodejs/.editorconfig）:',
+      message: 'Please enter the source file (e.g. ".editorconfig" or "nodejs/.editorconfig"):',
     })
-    source = response.source
+    sourceName = source
   }
 
-  // 如果没有提供源文件或用户取消，退出
-  if (!source) {
-    log('未提供配置文件，操作取消', 'warning')
+  if (!sourceName) {
+    console.error('No source file provided, operation cancelled')
+    process.exitCode = 1
     return
   }
 
-  // 查找匹配的配置文件
-  const sourceFullPath = findProfilePath(source)
-  if (!sourceFullPath) {
-    log(`在任何配置文件文件夹中都找不到源配置文件: ${source}`, 'error')
-    exit(1)
+  const sourcePath = await findProfile(root, sourceName)
+  if (!sourcePath) {
+    console.error(`The source file was not found in any configuration file folder: ${sourceName}`)
+    process.exitCode = 1
+    return
   }
 
-  const profileName = basename(sourceFullPath)
-
-  // 如果没有提供目标路径，使用当前目录
-  if (!target) {
-    target = cwd()
+  if (!targetPath) {
+    targetPath = cwd
   }
 
-  // 处理目标路径
-  let targetFullPath: string
-
-  // 如果目标是目录（以斜杠或反斜杠结尾或存在且是目录）
-  if (target.endsWith('/') || target.endsWith('\\') || (existsSync(target) && statSync(target).isDirectory())) {
-    // 确保目标目录存在
-    ensureDir(target)
-    // 使用源文件名作为目标文件名
-    targetFullPath = join(target, profileName)
-  }
-  else {
-    // 目标是文件路径
-    const targetDir = dirname(target)
-    // 确保目标目录存在
-    ensureDir(targetDir)
-    targetFullPath = target
+  if (targetPath.match(/\/|\\$/)) {
+    targetPath = join(targetPath, basename(sourcePath))
   }
 
-  // 复制文件
-  copyFile(sourceFullPath, targetFullPath, override)
-}
-
-// 执行主函数
-main().catch((error) => {
-  log(`执行过程中发生错误: ${error}`, 'error')
-  exit(1)
+  copyFile(sourcePath, targetPath, override)
 })
