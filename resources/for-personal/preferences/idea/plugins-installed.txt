@@ -1,0 +1,10 @@
+# General
+.ignore
+Github Copilot
+Translation
+
+# IDEA
+MyBatisX
+
+# Android
+SimpleSqliteBrowser

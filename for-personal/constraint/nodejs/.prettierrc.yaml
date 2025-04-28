@@ -1,8 +1,0 @@
-semi: false
-singleQuote: true
-quoteProps: consistent
-trailingComma: all
-
-endOfLine: auto
-
-printWidth: 120

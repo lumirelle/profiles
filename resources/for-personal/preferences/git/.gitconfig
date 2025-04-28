@@ -1,0 +1,59 @@
+[core]
+  ignorecase = false
+  symlinks = true
+
+[user]
+  name = Lumirelle
+  email = shabbyacc@outlook.com
+
+[credential "https://gitee.com"]
+  provider = generic
+
+[init]
+  defaultBranch = main
+
+[fetch]
+  prune = true
+
+[pull]
+  rebase = true
+
+[merge]
+  ff = no
+
+[log]
+  date = short
+  decoration = short
+
+[alias]
+  # remote
+  cl = clone
+  p = push
+  l = pull
+  f = fetch
+  sync = "!git pull && git push"
+  # add & commit
+  a = add .
+  c = commit -m
+  ac = "!git add . && git commit -m"
+  amend = commit --amend --no-edit
+  undo = reset --soft HEAD^
+  unstage = reset HEAD --
+  discard = checkout --
+  # branch
+  b = branch -a
+  w = switch
+  wc = switch -c
+  # stash
+  st = stash
+  sp = stash pop
+  # log
+  log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  last = log -1 HEAD --stat
+  # wip
+  wip = "!git add . && git commit -m 'wip: temporary commit'"
+  unwip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
+  # alias
+  aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
+
+

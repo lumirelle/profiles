@@ -1,18 +1,67 @@
 {
-  "name": "profiles",
+  "name": "@lumirelle/profiles",
+  "type": "module",
   "version": "1.1.6",
   "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
+  "description": "Development profiles or something else.",
+  "author": "Lumirelle <shabbyacc@outlook.com>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/Lumirelle",
+  "homepage": "https://github.com/Lumirelle/profiles",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lumirelle/profiles.git"
+  },
+  "bugs": "https://github.com/Lumirelle/profiles/issues",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./pi": "./dist/pi.mjs",
+    "./pu": "./dist/pu.mjs",
+    "./pp": "./dist/pp.mjs"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "bin": {
+    "pi": "./dist/pi.mjs",
+    "pu": "./dist/pu.mjs",
+    "pp": "./dist/pp.mjs"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
   "scripts": {
     "postinstall": "simple-git-hooks",
-    "bump": "bumpp"
+    "prepublishOnly": "pnpm build",
+    "pi": "tsx src/commands/pi.ts",
+    "pu": "tsx src/commands/pu.ts",
+    "pp": "tsx src/commands/pp.ts",
+    "lint": "eslint",
+    "test": "vitest",
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "release": "bumpp && pnpm publish",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "ansis": "catalog:prod"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
+    "@posva/prompts": "catalog:prod-inlined",
+    "@types/node": "catalog:dev",
     "bumpp": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-plugin-format": "catalog:dev",
     "lint-staged": "catalog:dev",
-    "simple-git-hooks": "catalog:dev"
+    "simple-git-hooks": "catalog:dev",
+    "taze": "catalog:dev",
+    "tinyglobby": "catalog:dev",
+    "tsx": "catalog:dev",
+    "typescript": "catalog:dev",
+    "unbuild": "catalog:dev",
+    "vitest": "catalog:dev"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
