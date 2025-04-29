@@ -34,7 +34,7 @@
     "resources/personal"
   ],
   "scripts": {
-    "postinstall": "simple-git-hooks",
+    "prepare": "simple-git-hooks",
     "prepublishOnly": "pnpm build",
     "pi": "tsx src/commands/pi.ts",
     "pu": "tsx src/commands/pu.ts",
