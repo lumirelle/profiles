@@ -45,7 +45,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "ansis": "catalog:prod"
+    "ansis": "catalog:prod",
+    "tinyglobby": "catalog:prod"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:dev",
@@ -57,7 +58,6 @@
     "lint-staged": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "taze": "catalog:dev",
-    "tinyglobby": "catalog:dev",
     "tsx": "catalog:dev",
     "typescript": "catalog:dev",
     "unbuild": "catalog:dev",

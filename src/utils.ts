@@ -1,27 +1,58 @@
-export function extract<T>(arr: T[], ...v: T[]) {
-  const index = arr.findIndex(item => v.includes(item))
-  if (index >= 0 && index + 1 < arr.length) {
-    return arr[index + 1]
-  }
-  return null
+/* eslint-disable no-console */
+import process from 'node:process'
+import { bold, cyan, dim, green, magenta, red, reset, yellow } from 'ansis'
+
+const characters: Record<string, Record<string, string>> = {
+  main: {
+    success: '✔',
+    warn: '✖',
+    error: '✖',
+    debug: '•',
+  },
+  win: {
+    success: '√',
+    warn: '×',
+    error: '×',
+    debug: '•',
+  },
 }
 
-export function extractBoolean<T>(arr: T[], ...v: T[]) {
-  const index = arr.findIndex(item => v.includes(item))
-  if (index >= 0 && index + 1 < arr.length) {
-    return true
-  }
-  return false
+function getCharacter(key: string) {
+  const type = process.platform === 'win32' ? 'win' : 'main'
+  return characters[type][key]
 }
 
-export function remove<T>(arr: T[], v: T) {
-  const index = arr.indexOf(v)
-  if (index >= 0)
-    arr.splice(index, 1)
-
-  return arr
+export const log = {
+  info: (message: string): void => {
+    console.log(`${message}`)
+  },
+  success: (message: string): void => {
+    console.log(green(`${getCharacter('success')} ${message}`))
+  },
+  warn: (message: string): void => {
+    console.warn(yellow(`${getCharacter('warn')} ${message}`))
+  },
+  error: (message: string): void => {
+    console.error(red(`${getCharacter('error')} ${message}`))
+  },
+  debug: (message: string): void => {
+    console.log(magenta(`${getCharacter('debug')} ${dim(message)}`))
+  },
 }
 
-export function exclude<T>(arr: T[], ...v: T[]) {
-  return arr.slice().filter(item => !v.includes(item))
+export const format = {
+  path: (path: string): string => {
+    return bold(cyan(path))
+  },
+  title: (title: string): string => {
+    return bold(green(title))
+  },
+  highlight: (text: string): string => {
+    return magenta(text)
+  },
+  additional: (text: string): string => {
+    return yellow(text)
+  },
 }
+
+export const resetStyle = reset

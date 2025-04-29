@@ -1,18 +1,19 @@
-import type { ProfileCollection } from './config'
+import type { ProfileCollection } from '.'
 
-import { existsSync, readdirSync } from 'node:fs'
-import { basename, join, relative } from 'node:path'
+import { existsSync } from 'node:fs'
+import { basename, join, normalize, relative } from 'node:path'
 import prompts from '@posva/prompts'
 import { globSync } from 'tinyglobby'
-import { SUPPORTED_PROFILE_COLLECTIONS } from './config'
-import { createSymlink, ensureDir, getFilePathsRecursively, removeSymlink } from './fs'
+import { SUPPORTED_PROFILE_COLLECTIONS } from '.'
+import { createSymlink, ensureDir, removeSymlink } from './fs'
+import { format, log } from './utils'
 
 export async function findProfile(root: string, sourceName: string): Promise<string | null> {
   // For each collection
   for (const collection of SUPPORTED_PROFILE_COLLECTIONS) {
-    const collectionPath = collection.source
+    const collectionPath = join(root, collection.source)
     if (!existsSync(collectionPath)) {
-      console.warn(`Profile collection path not found: ${collectionPath}, skip`)
+      log.warn(`Profile collection path not found: ${format.path(collectionPath)}, skip`)
       continue
     }
 
@@ -20,24 +21,24 @@ export async function findProfile(root: string, sourceName: string): Promise<str
       cwd: collectionPath,
       absolute: true,
       dot: true,
-      ignore: collection.ignores,
-    })
+      followSymbolicLinks: false,
+    }).map(profile => normalize(profile))
 
-    if (profiles.length > 0) {
+    if (profiles.length === 1) {
       return profiles[0]
     }
-
-    const { profile } = await prompts({
-      type: 'select',
-      name: 'profile',
-      message: `Select a profile for ${sourceName}`,
-      choices: profiles.map(profile => ({
-        title: basename(profile),
-        value: profile,
-      })),
-    })
-
-    return profile
+    else if (profiles.length > 1) {
+      const { profile } = await prompts({
+        type: 'select',
+        name: 'profile',
+        message: `Select a certain profile named ${format.highlight(sourceName)}:`,
+        choices: profiles.map(profile => ({
+          title: relative(collectionPath, profile),
+          value: profile,
+        })),
+      })
+      return profile
+    }
   }
 
   return null
@@ -49,66 +50,50 @@ export async function processProfileCollection(
   action: 'symlink' | 'remove',
   override = false,
 ): Promise<void> {
-  const collectionPath = collection.source
+  const collectionPath = join(root, collection.source)
   if (!existsSync(collectionPath)) {
-    console.warn(`Profile collection path not found: ${collectionPath}, skip`)
+    log.warn(`Profile collection path not found: ${format.path(collectionPath)}, skip`)
     return
   }
 
-  const folders = readdirSync(collectionPath, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
+  const allProfilePaths = globSync(action === 'symlink' ? collection.matches : '**', {
+    cwd: collectionPath,
+    absolute: true,
+    dot: true,
+  })
 
-  for (const folder of folders) {
-    const folderPath = join(collectionPath, folder.name)
-    const folderName = folder.name
+  for (const profilePath of allProfilePaths) {
+    const relativePath = relative(collectionPath, profilePath)
+    const parts = relativePath.split(/[/\\]/)
+    const folderName = parts[0]
+    const profileName = basename(profilePath)
 
-    const profilePaths = getFilePathsRecursively(folderPath)
+    let targetFolderPath: string
+    if (typeof collection.targetFolder === 'object') {
+      targetFolderPath = collection.targetFolder[folderName]
+    }
+    else {
+      targetFolderPath = collection.targetFolder
+    }
 
-    for (const profilePath of profilePaths) {
-      const profileName = basename(profilePath)
-      const relativePath = relative(collectionPath, profilePath)
-      const profileKey = join(folderName, relativePath)
+    if (!targetFolderPath) {
+      continue
+    }
 
-      if (collection.ignores) {
-        let shouldIgnore = false
-        for (const ignore of collection.ignores) {
-          if (profileKey.startsWith(ignore)) {
-            shouldIgnore = true
-            break
-          }
-        }
-        if (shouldIgnore) {
-          continue
-        }
-      }
+    if (action === 'symlink') {
+      ensureDir(targetFolderPath)
+    }
+    else if (action === 'remove' && !existsSync(targetFolderPath)) {
+      continue
+    }
 
-      let targetFolderPath: string
-      if (typeof collection.targetFolder === 'object') {
-        targetFolderPath = collection.targetFolder[folderName]
-      }
-      else {
-        targetFolderPath = collection.targetFolder
-      }
+    const targetProfilePath = join(targetFolderPath, profileName)
 
-      if (!targetFolderPath) {
-        continue
-      }
-
-      if (action === 'symlink') {
-        ensureDir(targetFolderPath)
-      }
-      else if (action === 'remove' && !existsSync(targetFolderPath)) {
-        continue
-      }
-
-      const targetProfilePath = join(targetFolderPath, profileName)
-
-      if (action === 'symlink') {
-        await createSymlink(profilePath, targetProfilePath, override)
-      }
-      else if (action === 'remove') {
-        removeSymlink(targetProfilePath)
-      }
+    if (action === 'symlink') {
+      await createSymlink(root, profilePath, targetProfilePath, override)
+    }
+    else if (action === 'remove') {
+      removeSymlink(targetProfilePath)
     }
   }
 }

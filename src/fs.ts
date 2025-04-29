@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 import { constants, copyFileSync, existsSync, promises as fsPromises, lstatSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
-import { dirname, join } from 'node:path'
+import { dirname, join, relative } from 'node:path'
+import { format, log } from './utils'
 
 export function ensureDir(dirPath: string): void {
   if (!existsSync(dirPath)) {
@@ -17,25 +17,25 @@ export function getFilePathsRecursively(dir: string): string[] {
   return Array.prototype.concat(...files)
 }
 
-export async function createSymlink(sourcePath: string, targetPath: string, force = false): Promise<void> {
-  if (existsSync(targetPath) && !force) {
-    console.warn(`File already exists: ${targetPath}, skip`)
-    return
-  }
-
-  if (existsSync(targetPath) && force) {
-    console.warn(`File already exists: ${targetPath}, force override`)
-    unlinkSync(targetPath)
+export async function createSymlink(root: string, sourcePath: string, targetPath: string, force = false): Promise<void> {
+  if (existsSync(targetPath)) {
+    if (force) {
+      unlinkSync(targetPath)
+    }
+    else {
+      log.warn(`File already exists: ${format.path(targetPath)}, skip`)
+      return
+    }
   }
 
   try {
     ensureDir(dirname(targetPath))
 
     await fsPromises.symlink(sourcePath, targetPath, 'file')
-    console.log(`Create symlink: ${targetPath} -> ${sourcePath}`)
+    log.success(`Created symlink: ${format.path(targetPath)} -> ${format.path(relative(root, sourcePath))}`)
   }
   catch (error) {
-    console.error(`Create symlink failed: ${error}`)
+    log.error(`Failed to create symlink: ${error}`)
   }
 }
 
@@ -48,20 +48,20 @@ export function removeSymlink(targetPath: string): void {
     const stats = lstatSync(targetPath)
     if (stats.isSymbolicLink()) {
       unlinkSync(targetPath)
-      console.log(`Remove symlink: ${targetPath}`)
+      log.success(`Removed symlink: ${format.path(targetPath)}`)
     }
     else {
-      console.warn(`Target file is not a symlink: ${targetPath}, skip`)
+      log.warn(`Target file is not a symlink: ${format.path(targetPath)}, skip`)
     }
   }
   catch (error) {
-    console.error(`Remove symlink failed: ${error}`)
+    log.error(`Failed to remove symlink: ${error}`)
   }
 }
 
-export function copyFile(sourcePath: string, targetPath: string, force = false): void {
+export function copyFile(sourcePath: string, targetPath: string, force: boolean | null = false): void {
   if (existsSync(targetPath) && !force) {
-    console.warn(`File already exists: ${targetPath}, skip`)
+    log.warn(`File already exists: ${format.path(targetPath)}, skip`)
     return
   }
 
@@ -69,9 +69,9 @@ export function copyFile(sourcePath: string, targetPath: string, force = false):
 
   try {
     copyFileSync(sourcePath, targetPath, force ? constants.COPYFILE_FICLONE : 0)
-    console.log(`Copy file: from ${sourcePath} to ${targetPath}`)
+    log.success(`Copied file: ${format.path(sourcePath)} >> ${format.path(targetPath)}`)
   }
   catch (error) {
-    console.error(`Copy file failed: ${error}`)
+    log.error(`Failed to copy file: ${error}`)
   }
 }
