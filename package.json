@@ -29,7 +29,9 @@
   },
   "files": [
     "bin",
-    "dist"
+    "dist",
+    "resources/manual",
+    "resources/personal"
   ],
   "scripts": {
     "postinstall": "simple-git-hooks",
