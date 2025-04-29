@@ -1,7 +1,3 @@
-[core]
-  ignorecase = false
-  symlinks = true
-
 [user]
   name = Lumirelle
   email = shabbyacc@outlook.com
@@ -9,51 +5,82 @@
 [credential "https://gitee.com"]
   provider = generic
 
-[init]
-  defaultBranch = main
-
-[fetch]
-  prune = true
-
-[pull]
-  rebase = true
-
-[merge]
-  ff = no
+[core]
+  autocrlf = false
+  ignorecase = false
+  symlinks = true
 
 [log]
   date = short
   decoration = short
 
+[init]
+  defaultBranch = main
+
+[branch]
+  sort = -committerdate
+
+[fetch]
+  prune = true
+  output = compact
+
+[pull]
+  rebase = true
+[merge]
+  conflictstyle = zdiff3
+  ff = no
+
+[diff]
+  algorithm = histogram
+
+[rerere]
+  enabled = true
+
 [alias]
-  # remote
-  cl = clone
-  p = push
-  l = pull
-  f = fetch
-  sync = "!git pull && git push"
-  # add & commit
+  # aliases
+  # -- improvement
+  aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
+
+  # log
+  # -- improvement
+  log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  last = log -1 HEAD --stat
+
+  # edit
+  # -- improvement
+  discard = checkout --
+  delete = reset HEAD --
+  revocation = reset --soft HEAD^
+  wip = "!git add . && git commit -m 'wip: temporary commit'"
+  unwip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
+  # -- shortcuts
   a = add .
   c = commit -m
+  am = commit --amend --no-edit
+  dl = delete
+  rv = revocation
+  rs = reset
+  # -- combinations
   ac = "!git add . && git commit -m"
-  amend = commit --amend --no-edit
-  undo = reset --soft HEAD^
-  unstage = reset HEAD --
-  discard = checkout --
+
   # branch
+  # -- shortcuts
   b = branch -a
   w = switch
   wc = switch -c
+
   # stash
+  # -- shortcuts
   st = stash
   sp = stash pop
-  # log
-  log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  last = log -1 HEAD --stat
-  # wip
-  wip = "!git add . && git commit -m 'wip: temporary commit'"
-  unwip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
-  # alias
-  aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
+
+  # remote
+  # -- shortcuts
+  cl = clone
+  f = fetch
+  l = pull --rebase
+  p = push
+  cp = cherry-pick
+
 
 
