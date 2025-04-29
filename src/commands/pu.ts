@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import type { RunnerContext } from '../runner'
 import { SUPPORTED_PROFILE_COLLECTIONS } from '../index'
 import { processProfileCollection } from '../profile'

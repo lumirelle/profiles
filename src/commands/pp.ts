@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import type { Parameter } from '../parse'
 import type { RunnerContext } from '../runner'
 import { existsSync, lstatSync } from 'node:fs'
