@@ -23,9 +23,9 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "bin": {
-    "pi": "./dist/pi.mjs",
-    "pu": "./dist/pu.mjs",
-    "pp": "./dist/pp.mjs"
+    "pi": "./bin/pi.mjs",
+    "pu": "./bin/pu.mjs",
+    "pp": "./bin/pp.mjs"
   },
   "files": [
     "bin",
