@@ -19,11 +19,12 @@
     "eamodio.gitlens",
     "ultram4rine.vscode-choosealicense",
     "thomascsd.vscode-readme-pattern",
-    "ziyasal.vscode-open-in-github",
+    "antfu.open-in-github-button",
     "github.vscode-pull-request-github",
     // -- Profile:JS
     "idered.npm",
     "herrmannplatz.npm-dependency-links",
+    "antfu.pnpm-catalog-lens",
 
     // ↓↓ languages / files support
     // -- languages & files

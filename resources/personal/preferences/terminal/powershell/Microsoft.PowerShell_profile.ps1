@@ -1,6 +1,13 @@
 # Encoding
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = [Text.Encoding]::UTF8
 
+# Path
+# -- Add current node_modules/.bin to PATH if it exists, so you can run npm scripts without `npx`
+$sep = [System.IO.Path]::DirectorySeparatorChar
+if (Test-Path -Path "node_modules") {
+  $env:PATH = "{0}{1}node_modules{1}.bin;{2}" -f (Get-Location), $sep, $env:PATH
+}
+
 # Alias
 # -- touch
 Remove-Item Alias:ni -Force -ErrorAction Ignore
