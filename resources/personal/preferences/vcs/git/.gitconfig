@@ -85,6 +85,6 @@
   ut = untagremote
   # -- remote
   cl = clone
-  f = fetch --pruneTags
+  f = fetch -P
   l = pull
   p = push
