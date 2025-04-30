@@ -22,7 +22,6 @@
 
 [fetch]
   prune = true
-  pruneTags = true
   output = compact
 
 [pull]
@@ -86,6 +85,6 @@
   ut = untagremote
   # -- remote
   cl = clone
-  f = fetch
+  f = fetch --pruneTags
   l = pull
   p = push

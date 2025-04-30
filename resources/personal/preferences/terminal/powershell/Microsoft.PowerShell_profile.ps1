@@ -7,8 +7,6 @@ Remove-Item Alias:ni -Force -ErrorAction Ignore
 New-Alias -Name touch -Value New-Item
 # -- grep
 New-Alias -Name grep -Value Select-String
-# -- clr
-New-Alias -Name clr -Value Clear-Host
 # -- clh
 function Clear-AllHistory {
   [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
