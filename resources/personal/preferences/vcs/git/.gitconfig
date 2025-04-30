@@ -22,10 +22,12 @@
 
 [fetch]
   prune = true
+  pruneTags = true
   output = compact
 
 [pull]
   rebase = true
+
 [merge]
   conflictstyle = zdiff3
   ff = no
@@ -37,50 +39,49 @@
   enabled = true
 
 [alias]
-  # aliases
-  # -- improvement
+  # improvement
+  # -- aliases
   aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
-
-  # log
-  # -- improvement
+  # -- log
   log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   last = log -1 HEAD --stat
-
-  # edit
-  # -- improvement
-  discard = checkout --
-  delete = reset HEAD --
-  revocation = reset --soft HEAD^
+  # -- edit
+  discard = "!git checkout -- . && git clean -fd"
+  addcommit = "!git add . && git commit -m"
+  unadd = reset HEAD --
+  uncommit = reset --soft HEAD^
+  amend = commit --amend --no-edit
   wip = "!git add . && git commit -m 'wip: temporary commit'"
   unwip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
-  # -- shortcuts
+  # -- tag
+  tagremote = "!git tag $1 && git push origin $1"
+  untagremote = "!git tag -d $(git tag -l $1) && git push origin --delete $(git tag -l $1)"
+
+  # shortcuts
+  # -- edit
   a = add .
   c = commit -m
-  am = commit --amend --no-edit
-  dl = delete
-  rv = revocation
+  ac = addcommit
+  ua = unadd
+  uc = uncommit
+  am = amend
   rs = reset
-  # -- combinations
-  ac = "!git add . && git commit -m"
-
-  # branch
-  # -- shortcuts
-  b = branch -a
-  w = switch
-  wc = switch -c
-
-  # stash
-  # -- shortcuts
+  cp = cherry-pick
+  # -- stash
   st = stash
   sp = stash pop
-
-  # remote
-  # -- shortcuts
+  # -- branch
+  b = branch -a
+  nb = branch
+  ub = branch -d
+  w = switch
+  nw = switch -c
+  # -- tag
+  t = tag -l
+  nt = tagremote
+  ut = untagremote
+  # -- remote
   cl = clone
   f = fetch
-  l = pull --rebase
+  l = pull
   p = push
-  cp = cherry-pick
-
-
-

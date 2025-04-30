@@ -1,0 +1,6 @@
+[
+  {
+    "key": "ctrl+oem_1",
+    "command": "workbench.view.extension.gitlensPanel"
+  }
+]

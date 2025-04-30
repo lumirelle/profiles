@@ -5,6 +5,8 @@ $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = [Text.E
 # -- touch
 Remove-Item Alias:ni -Force -ErrorAction Ignore
 New-Alias -Name touch -Value New-Item
+# -- grep
+New-Alias -Name grep -Value Select-String
 # -- clr
 New-Alias -Name clr -Value Clear-Host
 # -- clh
