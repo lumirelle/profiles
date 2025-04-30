@@ -1,0 +1,159 @@
+{
+  "resources": {
+    "personal": {
+      "docs": {
+        "git": {
+          "git-manual.md": null
+        },
+        "life": {
+          "prefabricated-dish-manual.md": null,
+          "web-front-end-manual.md": null
+        },
+        "nodejs": {
+          "nodejs-manual.md": null,
+          "nodejs-pm-npm-manual.md": null,
+          "nodejs-pm-pnpm-manual.md": null,
+          "nodejs-pm-yarn-manual.md": null
+        },
+        "nuxt": {
+          "nuxt2-manual.md": null,
+          "nuxt2-specification-manual.md": null,
+          "nxut2-optimization-manual.md": null
+        },
+        "vue": {
+          "vue2-optimization-manual.md": null,
+          "vue2-specification-manual.md": null,
+          "vue3-specification-manual.md": null
+        },
+        "windows": {
+          "windows-manual.md": null
+        }
+      },
+      "preferences": {
+        "deployer": {
+          "docker": {
+            "docker-compose.yaml": null,
+            "nodejs": {
+              ".dockerignore": null,
+              "Dockerfile": null
+            },
+            "spring-boot": {
+              "Dockerfile": null
+            },
+            "tomcat": {
+              "Dockerfile": null
+            }
+          }
+        },
+        "editor": {
+          ".editorconfig": null,
+          "idea": {
+            "mobi.hsz.idea.gitignore": {
+              "ForIDEA.xml": null
+            },
+            "plugins-installed.txt": null
+          },
+          "neovim": {
+            "init.lua": null,
+            "lua": {
+              "config": {
+                "autocmds.lua": null,
+                "keymaps.lua": null,
+                "options.lua": null
+              }
+            }
+          },
+          "vs": {
+            "backup.vssettings": null
+          },
+          "vscode": {
+            "extensions.java.jsonc": null,
+            "extensions.js.jsonc": null,
+            "extensions.jsonc": null,
+            "keybindings.jsonc": null,
+            "settings.jsonc": null,
+            "trusted-domains.jsonc": null
+          },
+          "vscode-ws": {
+            "extensions.js.jsonc": null,
+            "extensions.vue.jsonc": null,
+            "jsconfig.json": null,
+            "settings.js.jsonc": null,
+            "settings.vue.jsonc": null
+          }
+        },
+        "formatter": {
+          "prettier": {
+            ".prettierrc.yaml": null
+          }
+        },
+        "linter": {
+          "commitlint": {
+            "commitlint.config.mjs": null
+          },
+          "cspell": {
+            ".cspell.dev.txt": null
+          },
+          "eslint": {
+            "eslint.config.mjs": null,
+            "vue2": {
+              "eslint.config.mjs": null
+            },
+            "vue3": {
+              "eslint.config.mjs": null
+            }
+          },
+          "markdownlint": {
+            ".markdownlint.yaml": null
+          },
+          "stylelint": {
+            "vue": {
+              "stylelint.config.mjs": null
+            }
+          }
+        },
+        "package-manager": {
+          "maven": {
+            "settings.xml": null
+          },
+          "npm": {
+            ".npmrc": null
+          }
+        },
+        "terminal": {
+          "powershell": {
+            "Microsoft.PowerShell_profile.ps1": null
+          },
+          "windows-terminal": {
+            "windows-terminal.settings.jsonc": null
+          },
+          "zsh": {
+            ".zshrc": null
+          }
+        },
+        "vcs": {
+          "git": {
+            ".gitattributes": null,
+            ".gitconfig": null,
+            "nodejs": {
+              ".gitignore": null
+            }
+          }
+        },
+        "vpn": {
+          "clash-for-windows": {
+            "cfw-settings.yaml": null,
+            "README.md": null
+          }
+        }
+      },
+      "resources": {
+        "fonts": {
+          "LxgwBrightCodeTC.7z": null,
+          "NerdFontsSymbolsOnly.zip": null,
+          "README.md": null
+        }
+      }
+    }
+  }
+}

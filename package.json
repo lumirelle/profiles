@@ -30,22 +30,21 @@
   "files": [
     "bin",
     "dist",
-    "resources/personal/constraints",
-    "resources/personal/preferences",
-    "resources/personal/templates"
+    "resources/personal/preferences"
   ],
   "scripts": {
     "prepare": "simple-git-hooks",
-    "prepublishOnly": "pnpm build",
-    "pi": "node bin/pi.mjs",
-    "pu": "node bin/pu.mjs",
-    "pp": "node bin/pp.mjs",
+    "prepublishOnly": "pnpm build && pnpm catalogs",
+    "pi": "tsx src/commands/pi.ts",
+    "pu": "tsx src/commands/pu.ts",
+    "pp": "tsx src/commands/pp.ts",
     "lint": "eslint",
     "test": "vitest",
     "build": "unbuild",
     "stub": "unbuild --stub",
     "release": "bumpp && pnpm publish",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "catalogs": "tsx scripts/generate-catalogs.ts"
   },
   "dependencies": {
     "ansis": "catalog:prod",
