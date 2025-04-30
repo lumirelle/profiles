@@ -1,6 +1,11 @@
 import { constants, copyFileSync, promises as fsPromises, lstatSync, mkdirSync, unlinkSync } from 'node:fs'
-import { dirname, relative } from 'node:path'
+import { dirname, relative, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { format, log } from './utils'
+
+export function getRoot(metaUrl: string): string {
+  return resolve(dirname(fileURLToPath(metaUrl)), '..')
+}
 
 /**
  * Check if a file or directory exists. Does not dereference symlinks.

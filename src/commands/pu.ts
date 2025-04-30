@@ -1,11 +1,11 @@
-import type { RunnerContext } from '../runner'
 import { SUPPORTED_PROFILE_COLLECTIONS } from '.'
+import { getRoot } from '../fs'
 import { installOrUninstallProfile } from '../profile'
 import { runCli } from '../runner'
 import { log } from '../utils'
 
-runCli(async (context: RunnerContext) => {
-  const { root } = context
+runCli(async () => {
+  const root = getRoot(import.meta.url)
 
   log.info('Starting to remove profiles...')
 

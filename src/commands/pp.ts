@@ -4,14 +4,16 @@ import { basename, join } from 'node:path'
 import process from 'node:process'
 import prompts from '@posva/prompts'
 import { SUPPORTED_PROFILE_COLLECTIONS } from '.'
-import { copyFile, isDirectory } from '../fs'
+import { copyFile, getRoot, isDirectory } from '../fs'
 import { extract } from '../parse'
 import { findProfile } from '../profile'
 import { runCli } from '../runner'
 import { format, log } from '../utils'
 
 runCli(async (context: RunnerContext, parameters: Parameter[]) => {
-  const { cwd, root } = context
+  const { cwd } = context
+
+  const root = getRoot(import.meta.url)
 
   let sourceName = extract<string>(parameters, { matches: ['-s', '--source'], position: 0, required: true })
   let targetPath = extract<string>(parameters, { matches: ['-t', '--target'], position: 1 })

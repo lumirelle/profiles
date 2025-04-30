@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
 import type { Parameter } from './parse'
-import { dirname, resolve } from 'node:path'
 import process from 'node:process'
-import { fileURLToPath } from 'node:url'
 import c from 'ansis'
 import { version } from '../package.json'
 import { extract, parse } from './parse'
@@ -10,7 +8,6 @@ import { format, log } from './utils'
 
 export interface RunnerContext {
   cwd: string
-  root: string
 }
 
 export type Runner = (context: RunnerContext, parameters: Parameter[]) => Promise<void>
@@ -42,7 +39,6 @@ export async function run(fn: Runner, parameters: Parameter[]): Promise<void> {
 
   const context: RunnerContext = {
     cwd: process.cwd(),
-    root: resolve(dirname(fileURLToPath(import.meta.url)), '..'),
   }
 
   if (debug) {
@@ -53,9 +49,9 @@ export async function run(fn: Runner, parameters: Parameter[]): Promise<void> {
   if (parameters.length === 1 && ['-h', '--help'].includes(parameters[0].key)) {
     const dash = c.dim('-')
     console.log(format.title('@lumirelle/profiles') + c.dim` use the right profile v${version}\n`)
-    console.log(`pi    ${dash}  install`)
-    console.log(`pu    ${dash}  uninstall`)
-    console.log(`pp    ${dash}  copy`)
+    console.log(`pi    ${dash}  install profiles`)
+    console.log(`pu    ${dash}  uninstall profiles`)
+    console.log(`pp    ${dash}  copy and paste profile`)
     console.log(`pi -h ${dash}  show help`)
     console.log(format.additional('\ncheck https://github.com/lumirelle/profiles for more documentation.'))
     return

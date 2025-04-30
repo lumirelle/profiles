@@ -46,11 +46,11 @@ export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
         installFolder: homedir(),
       },
       {
-        match: 'formatter/.prettierrc.yaml',
+        match: 'formatter/prettier/**/*',
         installFolder: homedir(),
       },
       {
-        match: 'linter/.cspell.dev.txt',
+        match: 'linter/cspell/**/*',
         installFolder: homedir(),
       },
       {
@@ -68,14 +68,10 @@ export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
     ],
   },
   {
-    source: 'resources/personal/templates',
-    installMatchers: [],
-  },
-  {
     source: 'resources/work/preferences',
     installMatchers: [
       {
-        match: 'linter/.cspell.wrk.txt',
+        match: 'linter/cspell/**/*',
         installFolder: homedir(),
       },
     ],
