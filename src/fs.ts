@@ -1,20 +1,35 @@
-import { constants, copyFileSync, existsSync, promises as fsPromises, lstatSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
-import { dirname, join, relative } from 'node:path'
+import { constants, copyFileSync, promises as fsPromises, lstatSync, mkdirSync, unlinkSync } from 'node:fs'
+import { dirname, relative } from 'node:path'
 import { format, log } from './utils'
+
+/**
+ * Check if a file or directory exists. Does not dereference symlinks.
+ * @param path - The path to check
+ * @returns `true` if the file or directory exists, `false` otherwise
+ */
+export function existsSync(path: string): boolean {
+  try {
+    lstatSync(path)
+    return true
+  }
+  catch (error) {
+    if (error instanceof Error && error.message.includes('ENOENT')) {
+      return false
+    }
+    else {
+      throw error
+    }
+  }
+}
+
+export function isDirectory(path: string): boolean {
+  return (existsSync(path) && lstatSync(path).isDirectory()) || path.match(/\/|\\$/) !== null
+}
 
 export function ensureDir(dirPath: string): void {
   if (!existsSync(dirPath)) {
     mkdirSync(dirPath, { recursive: true })
   }
-}
-
-export function getFilePathsRecursively(dir: string): string[] {
-  const dirents = readdirSync(dir, { withFileTypes: true })
-  const files = dirents.map((dirent) => {
-    const res = join(dir, dirent.name)
-    return dirent.isDirectory() ? getFilePathsRecursively(res) : [res]
-  })
-  return Array.prototype.concat(...files)
 }
 
 export async function createSymlink(root: string, sourcePath: string, targetPath: string, force = false): Promise<void> {
@@ -41,6 +56,7 @@ export async function createSymlink(root: string, sourcePath: string, targetPath
 
 export function removeSymlink(targetPath: string): void {
   if (!existsSync(targetPath)) {
+    log.warn(`Target file not found: ${format.path(targetPath)}, skip`)
     return
   }
 

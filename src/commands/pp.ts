@@ -1,10 +1,10 @@
 import type { Parameter } from '../parse'
 import type { RunnerContext } from '../runner'
-import { existsSync, lstatSync } from 'node:fs'
 import { basename, join } from 'node:path'
 import process from 'node:process'
 import prompts from '@posva/prompts'
-import { copyFile } from '../fs'
+import { SUPPORTED_PROFILE_COLLECTIONS } from '.'
+import { copyFile, isDirectory } from '../fs'
 import { extract } from '../parse'
 import { findProfile } from '../profile'
 import { runCli } from '../runner'
@@ -32,7 +32,14 @@ runCli(async (context: RunnerContext, parameters: Parameter[]) => {
     return
   }
 
-  const sourcePath = await findProfile(root, sourceName)
+  let sourcePath: string | null = null
+  for (const collection of SUPPORTED_PROFILE_COLLECTIONS) {
+    sourcePath = await findProfile(root, collection, sourceName)
+    if (sourcePath) {
+      break
+    }
+  }
+
   if (!sourcePath) {
     log.error(`Source file not found in any profile collection: ${format.highlight(sourceName)}`)
     process.exitCode = 1
@@ -43,8 +50,7 @@ runCli(async (context: RunnerContext, parameters: Parameter[]) => {
     targetPath = cwd
   }
 
-  if ((existsSync(targetPath) && lstatSync(targetPath).isDirectory())
-    || targetPath.match(/\/|\\$/)) {
+  if (isDirectory(targetPath)) {
     targetPath = join(targetPath, basename(sourcePath))
   }
 

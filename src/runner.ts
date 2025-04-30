@@ -42,7 +42,7 @@ export async function run(fn: Runner, parameters: Parameter[]): Promise<void> {
 
   const context: RunnerContext = {
     cwd: process.cwd(),
-    root: resolve(dirname(fileURLToPath(import.meta.url)), '../..'),
+    root: resolve(dirname(fileURLToPath(import.meta.url)), '..'),
   }
 
   if (debug) {

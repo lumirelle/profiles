@@ -4,76 +4,80 @@ import { env } from 'node:process'
 
 export const BOOLEAN_PARAMETER_KEYS = ['-?', '-h', '-v', '-o']
 
+export interface InstallableMatcher {
+  /**
+   * The glob pattern to match the profile collection, relative to the `source` path
+   */
+  match: string
+  /**
+   * The folder to install the profile collection
+   */
+  installFolder: string
+}
+
 export interface ProfileCollection {
+  /**
+   * The source path of the profile collection, relative to project root
+   */
   source: string
-  targetFolder: string | Record<string, string>
-  matches: string[]
+  /**
+   * The installMatchers for installing the profile collection.
+   *
+   * Profiles not matched by any matcher will not be installed.
+   */
+  installMatchers: InstallableMatcher[]
 }
 
 /**
  * Supported profile collections
  *
- * `source` is the collection path relative to `rootPath`
- *
- * `targetFolder` supports `string` and `dictionary`
- *
- * `matches` is a list of glob patterns to exclude files,
- * each pattern is relative to the folder inside `source`
- *
- * FIXME: Need test in unix & linux system
+ * FIXME: Need test `installFolder` in unix & linux like system
  */
 export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
   {
-    source: 'resources/personal/constraint',
-    targetFolder: homedir(),
-    matches: [
-      '**',
-      '!**/common/.gitattributes',
-      '!**/common/.markdownlint.yaml',
-      '!**/nodejs/.gitattributes',
-      '!**/nodejs/.gitignore',
-      '!**/nodejs/.npmrc',
-      '!**/nodejs/commitlint.config.mjs',
-      '!**/nodejs/eslint.config.mjs',
-      '!**/nodejs/jsconfig.json',
-      '!**/nodejs/stylelint.config.mjs',
-      '!**/vue2/eslint.config.mjs',
-      '!**/vue3/eslint.config.mjs',
-      '!**/vue/stylelint.config.mjs',
-      '!**/webpack/eslint.config.mjs',
-    ],
-  },
-  {
     source: 'resources/personal/preferences',
-    targetFolder: {
-      git: homedir(),
-      maven: join(homedir(), '.m2'),
-      neovim: join(env.LOCALAPPDATA || '', 'nvim'),
-      powershell: env.USERPROFILE ? join(env.USERPROFILE, 'Documents', 'PowerShell') : '',
-    },
-    matches: [
-      '**',
-      '!clash-windows/**',
-      '!idea/**',
-      '!vs/**',
-      '!vscode/**',
-      '!vscode-ws/**',
-      '!windows-terminal/**',
-      '!zsh/**',
-    ],
-  },
-  {
-    source: 'resources/work/constraint',
-    targetFolder: homedir(),
-    matches: [
-      '**',
+    installMatchers: [
+      {
+        match: 'editor/neovim/**/*',
+        installFolder: join(env.LOCALAPPDATA || '', 'nvim'),
+      },
+      {
+        match: 'editor/.editorconfig',
+        installFolder: homedir(),
+      },
+      {
+        match: 'formatter/.prettierrc.yaml',
+        installFolder: homedir(),
+      },
+      {
+        match: 'linter/.cspell.dev.txt',
+        installFolder: homedir(),
+      },
+      {
+        match: 'package-manager/maven/**/*',
+        installFolder: join(homedir(), '.m2'),
+      },
+      {
+        match: 'terminal/powershell/**/*',
+        installFolder: join(env.USERPROFILE || '', 'Documents', 'PowerShell'),
+      },
+      {
+        match: 'vcs/git/.gitconfig',
+        installFolder: homedir(),
+      },
     ],
   },
   {
     source: 'resources/personal/templates',
-    targetFolder: '',
-    matches: [
-      '!**',
+    installMatchers: [],
+  },
+  {
+    source: 'resources/work/preferences',
+    installMatchers: [
+      {
+        match: 'linter/.cspell.wrk.txt',
+        installFolder: homedir(),
+      },
     ],
   },
 ]
