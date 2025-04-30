@@ -138,6 +138,12 @@
             "nodejs": {
               ".gitignore": null
             }
+          },
+          "github": {
+            "workflows": {
+              "publish-commit.yaml": null,
+              "release.yaml": null
+            }
           }
         },
         "vpn": {

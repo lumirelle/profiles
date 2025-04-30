@@ -66,7 +66,7 @@
     "vitest": "catalog:dev"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm catalogs && pnpm lint-staged"
+    "pre-commit": "pnpm catalogs && git add CATALOGS.json && pnpm lint-staged"
   },
   "lint-staged": {
     "*": "eslint --cache --fix"
