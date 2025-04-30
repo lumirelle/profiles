@@ -34,143 +34,50 @@ Development profiles or something else.
 
 ## 📑 Catalogs <a name="catalogs"></a>
 
-Top level directory structure, group by purpose:
+The directory structure under `/resources`, is grouped by purpose:
 
-- `/for-personal`: **&lt;purpose&gt;** Personal usage profiles, support [<u>quickly setup & delete & copy and paste</u>](#script_setup)
-- `/for-work`: **&lt;purpose&gt;** Work only profiles (Of course, it's include in `.gitignore`)
-- `/manual`: Manuals
+- `/personal`: **&lt;purpose&gt;** Personal usage profiles
+- `/work`: **&lt;purpose&gt;** Work-only profiles (Of course, it should be ignored by git)
 
-Second level directory structure of **&lt;purpose&gt;**, group by category:
+The directory structure under folders marked as **&lt;purpose&gt;**, is grouped by category:
 
-- `/constraint`: **&lt;collection|constraint&gt;** Collection of constraint profiles, such as `.editorconfig`, support quickly <u>setup & delete & copy and paste</u>
-- `/preferences`: **&lt;collection|preferences&gt;** Collection of preferences profiles, such as `.zshrc`, support quickly <u>setup & delete & copy and paste</u>
-- `/templates`: **&lt;collection|templates&gt;** Collection of profile templates, such as `Dockerfile`, support quickly <u>copy and paste</u>
+- `/docs`: Documents, such as manuals
+- `/preferences`: **&lt;collection&gt;** Collection of preferences profiles, such as `.gitconfig`
 - `/resources`: Resources, such as fonts
 
-Third level directory structure of **&lt;collection|constraint&gt;**, group by situation:
+The directory structure under folders marked as **&lt;collection&gt;**, is grouped by situation:
 
-- `/common`: For commonly usage
-- `/nodejs`: For node.js based project
-- `/webpack`: For webpack based project（It is usually a pure js project）
-- `/vue2`: For vue@^2 based project
+- `/deployer`: **&lt;purpose&gt;** Profiles used by deployer
+- `/editor`: **&lt;purpose&gt;** Profiles used by editor
+- `/formatter`: **&lt;purpose&gt;** Profiles used by formatter
+- `/linter`: **&lt;purpose&gt;** Profiles used by linter
+- `/package-manager`: **&lt;purpose&gt;** Profiles used by package manager
+- `/terminal`: **&lt;purpose&gt;** Profiles used by terminal
+- `/vcs`: **&lt;purpose&gt;** Profiles used by version control system
+- `/vpn`: **&lt;purpose&gt;** Profiles used by vpn
 
-Third level directory structure of **&lt;collection|preferences&gt;**, group by application:
+The directory structure under folders marked as **&lt;purpose&gt;**, is grouped by program. I will not list them all here.
 
-- `/clash-for-windows`
-- `/git`
-- `/maven`
-- `/neovim`
-- `/powershell`
-- `/volta`
-- `/vs`
-- `/vscode`
-- `/windows-terminal`
-- `/zsh`
-
-Third level directory structure of **&lt;collection|templates&gt;**, group by situation:
-
-- `/common`: For commonly usage
-- `/nodejs`: For node.js based project
-- `/tomcat`: For tomcat based project
-- `/spring-boot`: For spring based project
-
-Total catalogs:
-
-- `for-personal/`
-
-  - `constraint/`
-
-    - `common/`
-    - `nodejs/`
-    - `webpack/`
-    - `vue2/`
-
-  - `preferences/`
-
-    - `clash-for-windows/`
-    - `windows-terminal/`
-    - `powershell/`
-    - `zsh/`
-    - `git/`
-    - `neovim/`
-    - `vscode/`
-    - `vscode-ws/`
-    - `vs/`
-    - `idea/`
-    - `maven/`
-    - `volta/`
-
-  - `templates/`
-
-    - `common/`
-    - `nodejs/`
-    - `tomcat/`
-    - `spring-boot/`
-
-  - `resources/`
-
-    - `fonts/`
-
-- `for-work/`
-
-  - `constraint/`
-
-    - `common/`
-
-  - `preferences/`
-
-    - `git/`
-    - `vscode/`
-
-- `manual/`
-
-  - `life/`
-  - `os/`
-  - `git/`
-  - `nodejs/`
-  - `vue/`
-  - `nuxt/`
+See total catalogs [here](CATALOGS.json).
 
 ## 🎈 Usage <a name="usage"></a>
 
 ### ✋🏼 Manually Setup <a name="manually_setup"></a>
 
-Just download the profiles you want and put it on the right place.
-
-**NOTE: On windows, you should add `create symbolic link permission` to your current user. For more detail, please Google yourself.**
-
-```shell
-# cd PATH_TO_HOLD_THIS_REPO
-# eg:
-cd C:/Projects
-
-# Clone this repo
-git clone -c core.symlinks=true https://github.com/Lumirelle/profiles.git
-```
+Just download the profile you want and put it in the right place.
 
 ### 📜 Script Setup <a name="script_setup"></a>
 
-If you want to use scripts for lazy setup, you should download and unzip this repo, then, add the root path to the `PATH` environment variable of your computer.
-
-Now, you can use [the setup script](pset.ps1) for quick setup and receive the updates automatically:
+Install this package by node.js package manager like `npm`, `yarn`, `pnpm` and so on.
 
 ```shell
-# Use PowerShell command `help pset -Full` for more detail.
-pset
+pnpm i lumirelle-profiles -g
 ```
 
-You can also use [the delete script](pdel.ps1) for quick set-down:
+Now, please enjoy! See the help information by using the command below:
 
 ```shell
-# Use PowerShell command `help pdel -Full` for more detail.
-pdel
-```
-
-You can also use [the copy and paste script](pcp.ps1) to copy and paste specified profile every where.
-
-```shell
-# Use PowerShell command `help pcp -Full` for more detail.
-pcp .editorconfig
+pi --help
 ```
 
 ## ✍️ Authors <a name="authors"></a>
