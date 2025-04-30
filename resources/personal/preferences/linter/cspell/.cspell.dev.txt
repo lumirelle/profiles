@@ -11,6 +11,7 @@ nuxt
 taze
 commitlint
 lintstagedrc
+changelogithub
 
 opencollective
 aliyun

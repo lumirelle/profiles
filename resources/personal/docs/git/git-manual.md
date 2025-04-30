@@ -200,8 +200,8 @@ git stash
 # 完成另一个分支上的工作...
 git switch dev
 ...
-git a .
-git c -m 'feat: just do sth'
+git add .
+git commit -m 'feat: just do sth'
 
 git switch feature/001
 git stash pop
