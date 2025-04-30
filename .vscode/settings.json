@@ -18,10 +18,5 @@
     "yaml",
     "toml",
     "xml"
-  ],
-  "cSpell.words": [
-    "pcp",
-    "pdel",
-    "pset"
   ]
 }

@@ -48,12 +48,9 @@ npm publish
 如果版本号没有更新，则 NPM 发布会失败。
 
 ```shell
-# 补丁版本,最后一位数加1
-npm version patch
-# 增加了新功能 中间的数字加1
-npm version minor
-# 大改动,不向下兼容 第一位数字加1
-npm version major
+# 使用 bumpp 包快速完成版本更新（同时提交到 git 并增加 tag）
+npm i bumpp -D
+npx bumpp
 ```
 
 ### 3. 删除 NPM 包

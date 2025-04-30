@@ -318,9 +318,7 @@
 
   // ↓↓ extensions: others
   // -- general
-  "formattingToggle.affects": [
-    "editor.formatOnSave"
-  ],
+  "formattingToggle.affects": ["editor.formatOnSave"],
   "l13BuiltInExtensions.autoUpdateModifiedBuiltInExtensions": true,
   "powershell.integratedConsole.showOnStartup": false,
   // -- js

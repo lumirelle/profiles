@@ -5,7 +5,12 @@ LOCALAPPDATA
 lxgw
 monaspace
 
+pwsh
+
 nvim
+
+graalvm
+webapps
 
 nuxt
 taze
@@ -13,5 +18,8 @@ commitlint
 lintstagedrc
 changelogithub
 
-opencollective
+iconfont
 aliyun
+opencollective
+
+nologo

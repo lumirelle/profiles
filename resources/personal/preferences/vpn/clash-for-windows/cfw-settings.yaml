@@ -1,3 +1,4 @@
+# cspell:disable
 showNewVersionIcon: false
 hideAfterStartup: true
 randomControllerPort: true
@@ -22,10 +23,7 @@ proxyDelayType: 1
 latencyUrl: http://www.apple.com/library/test/success.html
 theme: 0
 mixinText: |
-  # Mixin 配置（覆盖配置）
-  # Author：Lyana-nullptr (shabbyacc@outlook.com)
-  # Last Edit：2025-02-06
-  # Note：推荐为本配置使用 LF 换行格式
+  # Last Edit: 2025-04-30
   mixin:
     # 覆盖 DNS 配置
     dns:
@@ -162,13 +160,7 @@ mixinText: |
       auto-detect-interface: true
     # interface-name: 'tun0'
 profileParsersText: >
-  # Parsers 配置，Profile 处理器，支持设置多个（数组格式）
-
-  # Author: Lyana-nullptr (shabbyacc@outlook.com)
-
   # Last Edit: 2025/04/04
-
-  # Note：推荐为本配置使用 LF 换行格式
 
   parsers:
     # - reg: ^.*$ 匹配所有订阅

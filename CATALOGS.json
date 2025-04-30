@@ -67,19 +67,27 @@
             "backup.vssettings": null
           },
           "vscode": {
-            "extensions.java.jsonc": null,
-            "extensions.js.jsonc": null,
             "extensions.jsonc": null,
+            "java": {
+              "extensions.jsonc": null
+            },
+            "js": {
+              "extensions.jsonc": null
+            },
             "keybindings.jsonc": null,
             "settings.jsonc": null,
             "trusted-domains.jsonc": null
           },
           "vscode-ws": {
-            "extensions.js.jsonc": null,
-            "extensions.vue.jsonc": null,
-            "jsconfig.json": null,
-            "settings.js.jsonc": null,
-            "settings.vue.jsonc": null
+            "js": {
+              "extensions.jsonc": null,
+              "settings.jsonc": null
+            },
+            "vue": {
+              "extensions.jsonc": null,
+              "jsconfig.json": null,
+              "settings.jsonc": null
+            }
           }
         },
         "formatter": {

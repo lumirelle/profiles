@@ -4,6 +4,7 @@ export default antfu({
   pnpm: true,
   formatters: true,
   ignores: [
-    '!for-work/**',
+    'CATALOGS.json',
+    '!resources/**/*',
   ],
 })

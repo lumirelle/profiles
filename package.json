@@ -28,6 +28,7 @@
     "pp": "./bin/pp.mjs"
   },
   "files": [
+    "CATALOGS.json",
     "bin",
     "dist",
     "resources/personal/preferences"

@@ -51,6 +51,7 @@
   unadd = reset HEAD --
   uncommit = reset --soft HEAD^
   amend = commit --amend --no-edit
+  amendedit = commit --amend
   wip = "!git add . && git commit -m 'wip: temporary commit'"
   unwip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
   # -- tag
@@ -64,7 +65,8 @@
   ac = addcommit
   ua = unadd
   uc = uncommit
-  am = amend
+  amn = amend
+  ame = amendedit
   rs = reset
   cp = cherry-pick
   # -- stash
@@ -76,6 +78,8 @@
   ub = branch -d
   w = switch
   nw = switch -c
+  m = merge
+  r = rebase
   # -- tag
   t = tag -l
   nt = tagremote
