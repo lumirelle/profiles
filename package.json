@@ -36,6 +36,7 @@
   "scripts": {
     "prepare": "simple-git-hooks",
     "prepublishOnly": "pnpm build && pnpm catalogs",
+    "dev": "npm link && pnpm stub",
     "pi": "tsx src/commands/pi.ts",
     "pu": "tsx src/commands/pu.ts",
     "pp": "tsx src/commands/pp.ts",
