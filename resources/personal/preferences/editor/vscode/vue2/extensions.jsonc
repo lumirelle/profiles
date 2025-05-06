@@ -47,6 +47,8 @@
     // -- PROFILE_VUE language & file support
     "vue.volar",
     "lokalise.i18n-ally",
+    // -- PROFILE_VUE2 language & file support
+    "elemefe.vscode-element-helper", // also the snippets for element-ui
     // -- formatter
     "editorconfig.editorconfig",
     "biomejs.biome", // NOTE: not in use now
@@ -63,7 +65,6 @@
     "bierner.emojisense",
     // -- PROFILE_VUE2 snippets
     "nicholashsiang.vscode-vue2-snippets",
-    "ss.element-ui-snippets",
 
     // ↓↓ coding helper
     // -- views

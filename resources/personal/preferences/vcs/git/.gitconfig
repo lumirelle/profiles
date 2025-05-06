@@ -1,90 +1,100 @@
 [user]
-  name = Lumirelle
-  email = shabbyacc@outlook.com
+name = Lumirelle
+email = shabbyacc@outlook.com
 
 [credential "https://gitee.com"]
-  provider = generic
+provider = generic
 
 [core]
-  autocrlf = false
-  ignorecase = false
-  symlinks = true
+ignorecase = false
+symlinks = true
 
 [log]
-  date = short
-  decoration = short
+date = short
+decoration = short
 
 [init]
-  defaultBranch = main
+defaultBranch = main
 
 [branch]
-  sort = -committerdate
+sort = -committerdate
 
 [fetch]
-  prune = true
-  output = compact
+prune = true
+output = compact
 
 [pull]
-  rebase = true
+rebase = true
 
 [merge]
-  conflictstyle = zdiff3
-  ff = no
+conflictstyle = zdiff3
+ff = no
 
 [diff]
-  algorithm = histogram
+algorithm = histogram
 
 [rerere]
-  enabled = true
+enabled = true
 
 [alias]
-  # improvement
-  # -- aliases
-  aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
-  # -- log
-  log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  last = log -1 HEAD --stat
-  # -- edit
-  discard = "!git checkout -- . && git clean -fd"
-  addcommit = "!git add . && git commit -m"
-  unadd = reset HEAD --
-  uncommit = reset --soft HEAD^
-  amend = commit --amend --no-edit
-  amendedit = commit --amend
-  wip = "!git add . && git commit -m 'wip: temporary commit'"
-  unwip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
-  # -- tag
-  tagremote = "!git tag $1 && git push origin $1"
-  untagremote = "!git tag -d $(git tag -l $1) && git push origin --delete $(git tag -l $1)"
+# improvement
+# -- aliases
+aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
+# -- log
+log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+last = log -1 HEAD --stat
+# -- edit
+discard-all-changes = "!git checkout -- . && git clean -fd"
+add-all-then-commit = "!git add . && git commit -m"
+undo-add = reset HEAD --
+undo-commit = reset --soft HEAD^
+amend-commit-no-edit = commit --amend --no-edit
+amend-commit = commit --amend
+wip = "!git add . && git commit -m 'wip: temporary commit'"
+unwip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
+# -- branch
+branch-then-switch = switch -c
+abort-merge = "!git merge --abort"
+abort-rebase = "!git rebase --abort"
+# -- tag
+tag-local-then-remote = "!git tag $1 && git push origin $1"
+undo-tag-local-then-remote = "!git tag -d $(git tag -l $1) && git push origin --delete $(git tag -l $1)"
 
-  # shortcuts
-  # -- edit
-  a = add .
-  c = commit -m
-  ac = addcommit
-  ua = unadd
-  uc = uncommit
-  amn = amend
-  ame = amendedit
-  rs = reset
-  cp = cherry-pick
-  # -- stash
-  st = stash
-  sp = stash pop
-  # -- branch
-  b = branch -a
-  nb = branch
-  ub = branch -d
-  w = switch
-  nw = switch -c
-  m = merge
-  r = rebase
-  # -- tag
-  t = tag -l
-  nt = tagremote
-  ut = untagremote
-  # -- remote
-  cl = clone
-  f = fetch -P
-  l = pull
-  p = push
+# shortcuts
+# `x` is used for `discard & delete`
+# `l` is used for `list`
+# `u` is used for `undo`
+# `z` is used for `abort`
+# -- edit
+x = discard-all-changes    # discard all changes in the working directory
+a = add                    #
+ua = undo-add              # move staged changes back to the working directory
+c = commit -m              #
+uc = undo-commit           # move commit back to the staging area
+ac = add-all-then-commit   # add all changes and commit
+amc = amend-commit-no-edit # amend the last commit without editing the commit message
+ame = amend-commit         # amend the last commit and edit the commit message
+# -- stash
+st = stash
+sp = stash pop
+# -- branch
+lb = branch -a          # list all branches
+b = branch              #
+xb = branch -d          # delete a branch
+w = switch              #
+bw = branch-then-switch # create a new branch and switch to it
+m = merge               #
+zm = abort-merge        # abort the merge
+r = rebase              #
+zr = abort-rebase       # abort the rebase
+rs = reset
+cp = cherry-pick
+# -- tag
+lt = tag -l
+t = tag-local-then-remote       # tag the local branch and push it to the remote
+ut = undo-tag-local-then-remote # undo the tag and push it to the remote
+# -- remote
+cl = clone
+f = fetch -P # fetch the remote branch with --prune-tags
+l = pull
+p = push

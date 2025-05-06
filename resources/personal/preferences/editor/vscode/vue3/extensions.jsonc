@@ -48,6 +48,7 @@
     "vue.volar",
     "lokalise.i18n-ally",
     // -- PROFILE_VUE3 language & file support
+    "noxussj.element-plus", // also the snippets for element-plus
     "antfu.slidev",
     // -- formatter
     "editorconfig.editorconfig",
@@ -65,7 +66,6 @@
     "bierner.emojisense",
     // -- PROFILE_VUE3 snippets
     "nicholashsiang.vscode-vue3-snippets",
-    "noxussj.element-plus",
 
     // ↓↓ coding helper
     // -- views
