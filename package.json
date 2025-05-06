@@ -35,8 +35,7 @@
   ],
   "scripts": {
     "prepare": "simple-git-hooks",
-    "prepublishOnly": "pnpm build && pnpm catalogs && nrm use npm",
-    "postpublish": "nrm use taobao",
+    "prepublishOnly": "pnpm build && pnpm catalogs",
     "dev": "npm link && pnpm stub",
     "pi": "tsx src/commands/pi.ts",
     "pu": "tsx src/commands/pu.ts",
@@ -62,7 +61,6 @@
     "eslint": "catalog:dev",
     "eslint-plugin-format": "catalog:dev",
     "lint-staged": "catalog:dev",
-    "nrm": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "taze": "catalog:dev",
     "tsx": "catalog:dev",
