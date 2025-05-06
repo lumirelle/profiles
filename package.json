@@ -1,7 +1,7 @@
 {
   "name": "lumirelle-profiles",
   "type": "module",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "packageManager": "pnpm@10.10.0",
   "description": "Development profiles or something else.",
   "author": "Lumirelle <shabbyacc@outlook.com>",
