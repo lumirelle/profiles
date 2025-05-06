@@ -44,7 +44,7 @@
     "test": "vitest",
     "build": "unbuild",
     "stub": "unbuild --stub",
-    "release": "bumpp && pnpm publish",
+    "release": "nrm use npm && bumpp && pnpm publish && nrm use taobao",
     "typecheck": "tsc",
     "catalogs": "tsx scripts/generate-catalogs.ts"
   },
@@ -61,6 +61,7 @@
     "eslint": "catalog:dev",
     "eslint-plugin-format": "catalog:dev",
     "lint-staged": "catalog:dev",
+    "nrm": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "taze": "catalog:dev",
     "tsx": "catalog:dev",
