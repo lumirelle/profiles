@@ -35,7 +35,8 @@
   ],
   "scripts": {
     "prepare": "simple-git-hooks",
-    "prepublishOnly": "pnpm build && pnpm catalogs",
+    "prepublishOnly": "pnpm build && nrm use npm",
+    "postpublish": "nrm use taobao",
     "dev": "npm link && pnpm stub",
     "pi": "tsx src/commands/pi.ts",
     "pu": "tsx src/commands/pu.ts",
@@ -44,7 +45,7 @@
     "test": "vitest",
     "build": "unbuild",
     "stub": "unbuild --stub",
-    "release": "nrm use npm && bumpp && pnpm publish && nrm use taobao",
+    "release": "bumpp && pnpm publish",
     "typecheck": "tsc",
     "catalogs": "tsx scripts/generate-catalogs.ts"
   },
