@@ -17,8 +17,8 @@
         },
         "nuxt": {
           "nuxt2-manual.md": null,
-          "nuxt2-specification-manual.md": null,
-          "nxut2-optimization-manual.md": null
+          "nuxt2-optimization-manual.md": null,
+          "nuxt2-specification-manual.md": null
         },
         "vue": {
           "vue2-optimization-manual.md": null,
@@ -48,9 +48,6 @@
         "editor": {
           ".editorconfig": null,
           "idea": {
-            "mobi.hsz.idea.gitignore": {
-              "ForIDEA.xml": null
-            },
             "plugins-installed.txt": null
           },
           "neovim": {
@@ -76,9 +73,18 @@
             },
             "keybindings.jsonc": null,
             "settings.jsonc": null,
-            "trusted-domains.jsonc": null
+            "trusted-domains.jsonc": null,
+            "uniapp": {
+              "extensions.jsonc": null
+            },
+            "vue2": {
+              "extensions.jsonc": null
+            },
+            "vue3": {
+              "extensions.jsonc": null
+            }
           },
-          "vscode-ws": {
+          "vscode-workspace": {
             "js": {
               "extensions.jsonc": null,
               "settings.jsonc": null

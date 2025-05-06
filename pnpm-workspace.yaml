@@ -1,6 +1,7 @@
 catalogs:
   dev:
     '@antfu/eslint-config': ^4.12.0
+    '@prettier/plugin-xml': ^3.4.1
     '@types/node': ^22.15.3
     bumpp: ^10.1.0
     eslint: ^9.25.1

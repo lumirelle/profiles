@@ -141,7 +141,7 @@ shell
 
 ```shell
 # eslint & config & plugin
-ni eslint@latest @antfu/eslint-config@latest eslint-plugin-format@latest -D
+ni eslint@latest @antfu/eslint-config@latest eslint-plugin-format@latest @prettier/plugin-xml@latest -D
 ```
 
 ### 快速配置

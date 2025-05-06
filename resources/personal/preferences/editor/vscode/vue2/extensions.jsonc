@@ -44,6 +44,9 @@
     "sandcastle.vscode-open",
     // -- PROFILE_JS language & file support
     "dotenv.dotenv-vscode",
+    // -- PROFILE_VUE language & file support
+    "vue.volar",
+    "lokalise.i18n-ally",
     // -- formatter
     "editorconfig.editorconfig",
     "biomejs.biome", // NOTE: not in use now
@@ -58,6 +61,9 @@
     // -- snippets
     "jmsv.javascriptsnippetsstandard",
     "bierner.emojisense",
+    // -- PROFILE_VUE2 snippets
+    "nicholashsiang.vscode-vue2-snippets",
+    "ss.element-ui-snippets",
 
     // ↓↓ coding helper
     // -- views

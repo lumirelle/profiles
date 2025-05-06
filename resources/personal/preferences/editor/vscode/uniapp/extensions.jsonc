@@ -44,6 +44,9 @@
     "sandcastle.vscode-open",
     // -- PROFILE_JS language & file support
     "dotenv.dotenv-vscode",
+    // -- PROFILE_UNIAPP formatter
+    "uni-helper.uni-highlight-vscode",
+    "uni-helper.uni-app-schemas-vscode",
     // -- formatter
     "editorconfig.editorconfig",
     "biomejs.biome", // NOTE: not in use now
@@ -58,6 +61,9 @@
     // -- snippets
     "jmsv.javascriptsnippetsstandard",
     "bierner.emojisense",
+    // -- PROFILE_UNIAPP snippets
+    "uni-helper.uni-app-snippets-vscode",
+    "uni-helper.uni-ui-snippets-vscode",
 
     // ↓↓ coding helper
     // -- views

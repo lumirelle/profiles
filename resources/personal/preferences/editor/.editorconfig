@@ -11,6 +11,6 @@ trim_trailing_whitespace = true
 end_of_line = lf
 insert_final_newline = true
 
-[*.{py,java,c,cpp,h,vb,xml}]
+[*.{py,java,c,cpp,h,vb}]
 indent_size = 4
 tab_width = 4
