@@ -1,5 +1,8 @@
 Lumirelle
 
+Loong
+Merlion
+
 LOCALAPPDATA
 
 lxgw
@@ -10,8 +13,18 @@ pwsh
 nvim
 
 graalvm
+javax
+projectlombok
+mybatis
+baomidou
+jsqlparser
 webapps
+springframework
+thymeleaf
+pagehelper
+fastjson
 
+jquery
 nuxt
 taze
 commitlint
