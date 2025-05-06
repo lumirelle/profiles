@@ -35,7 +35,7 @@
   ],
   "scripts": {
     "prepare": "simple-git-hooks",
-    "prepublishOnly": "pnpm build && nrm use npm",
+    "prepublishOnly": "pnpm build && pnpm catalogs && nrm use npm",
     "postpublish": "nrm use taobao",
     "dev": "npm link && pnpm stub",
     "pi": "tsx src/commands/pi.ts",
