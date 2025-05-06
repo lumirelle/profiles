@@ -28,6 +28,7 @@
 
     // ↓↓ language & file support, formatter, linter, snippets
     // -- language & file support
+    "vstirbu.vscode-mermaid-preview",
     "bierner.markdown-mermaid",
     "redhat.vscode-yaml",
     "remcohaszing.schemastore",
