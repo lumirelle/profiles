@@ -1,17 +1,38 @@
+-- me --
 Lumirelle
 
+-- other people --
+antfu
+JanDeDobbeleer
+Schniz
+Meiryo
+
+-- animals --
 Loong
 Merlion
 
-LOCALAPPDATA
-
+-- fonts --
 lxgw
 monaspace
 
+-- os --
+LOCALAPPDATA
+winget
+
+-- software --
+Ventoy
+DISM++
+OhMyPosh
+gsudo
+fnm
+
+-- terminal --
 pwsh
 
+-- editor --
 nvim
 
+-- java --
 graalvm
 javax
 projectlombok
@@ -24,6 +45,7 @@ thymeleaf
 pagehelper
 fastjson
 
+-- js --
 jquery
 nuxt
 taze
@@ -31,8 +53,10 @@ commitlint
 lintstagedrc
 changelogithub
 
+-- third party platform --
 iconfont
 aliyun
 opencollective
 
+-- others --
 nologo

@@ -37,7 +37,7 @@ algorithm = histogram
 enabled = true
 
 [alias]
-# improvement
+# ENHANCEMENTS
 # -- aliases
 aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
 # -- log
@@ -60,11 +60,11 @@ abort-rebase = "!git rebase --abort"
 tag-local-then-remote = "!git tag $1 && git push origin $1"
 undo-tag-local-then-remote = "!git tag -d $(git tag -l $1) && git push origin --delete $(git tag -l $1)"
 
-# shortcuts
-# `x` is used for `discard & delete`
-# `l` is used for `list`
-# `u` is used for `undo`
-# `z` is used for `abort`
+# SHORTCUTS
+# leader `x` is used for `discard & delete`
+# leader `l` is used for `list`
+# leader `u` is used for `undo`
+# leader `z` is used for `abort`
 # -- edit
 x = discard-all-changes    # discard all changes in the working directory
 a = add                    #
@@ -72,11 +72,13 @@ ua = undo-add              # move staged changes back to the working directory
 c = commit -m              #
 uc = undo-commit           # move commit back to the staging area
 ac = add-all-then-commit   # add all changes and commit
-amc = amend-commit-no-edit # amend the last commit without editing the commit message
+amn = amend-commit-no-edit # amend the last commit without editing the commit message
 ame = amend-commit         # amend the last commit and edit the commit message
 # -- stash
-st = stash
-sp = stash pop
+ls = stash list
+s = stash push
+us = stash pop
+xs = stash drop
 # -- branch
 lb = branch -a          # list all branches
 b = branch              #

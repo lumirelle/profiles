@@ -106,7 +106,7 @@
             "commitlint.config.mjs": null
           },
           "cspell": {
-            ".cspell.dev.txt": null
+            ".cspell.common.txt": null
           },
           "eslint": {
             "eslint.config.mjs": null,
