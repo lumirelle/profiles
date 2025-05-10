@@ -33,7 +33,8 @@
     "dist",
     "resources/personal/preferences",
     "resources/personal/preferences/package-manager/npm/.npmrc",
-    "resources/personal/preferences/vcs/git/**/.gitignore"
+    "resources/personal/preferences/vcs/git/**/.gitignore",
+    "resources/personal/preferences/vcs/git/**/.npmignore"
   ],
   "scripts": {
     "prepare": "simple-git-hooks",
