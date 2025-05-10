@@ -31,7 +31,8 @@
     "CATALOGS.json",
     "bin",
     "dist",
-    "resources/personal/preferences"
+    "resources/personal/preferences",
+    "resources/personal/preferences/package-manager/npm/.npmrc"
   ],
   "scripts": {
     "prepare": "simple-git-hooks",
