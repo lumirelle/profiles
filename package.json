@@ -33,11 +33,12 @@
     "dist",
     "resources/personal/preferences",
     "resources/personal/preferences/package-manager/npm/.npmrc",
-    "resources/personal/preferences/vcs/git/**/.gitignore",
-    "resources/personal/preferences/vcs/git/**/.npmignore"
+    "scripts/rename-gitignore.ts",
+    "scripts/user-install-check.ts"
   ],
   "scripts": {
-    "prepare": "simple-git-hooks",
+    "prepare": "simple-git-hooks && npm run user-install-only",
+    "user-install-only": "tsx scripts/user-install-check.ts",
     "prepublishOnly": "pnpm build && pnpm catalogs",
     "dev": "npm link && pnpm stub",
     "pi": "tsx src/commands/pi.ts",

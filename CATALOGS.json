@@ -150,8 +150,7 @@
             ".gitattributes": null,
             ".gitconfig": null,
             "nodejs": {
-              ".gitignore": null,
-              ".npmignore": null
+              "gitignore": null
             }
           },
           "github": {
