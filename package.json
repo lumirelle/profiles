@@ -32,13 +32,10 @@
     "bin",
     "dist",
     "resources/personal/preferences",
-    "resources/personal/preferences/package-manager/npm/.npmrc",
-    "scripts/rename-gitignore.ts",
-    "scripts/user-install-check.ts"
+    "resources/personal/preferences/package-manager/npm/.npmrc"
   ],
   "scripts": {
-    "prepare": "simple-git-hooks && npm run user-install-only",
-    "user-install-only": "tsx scripts/user-install-check.ts",
+    "prepare": "simple-git-hooks",
     "prepublishOnly": "pnpm build && pnpm catalogs",
     "dev": "npm link && pnpm stub",
     "pi": "tsx src/commands/pi.ts",
@@ -76,6 +73,6 @@
     "pre-commit": "pnpm catalogs && git add CATALOGS.json && pnpm lint-staged"
   },
   "lint-staged": {
-    "*": "eslint --cache --fix"
+    "*": "eslint --cache --fix ."
   }
 }

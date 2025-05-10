@@ -149,9 +149,7 @@
           "git": {
             ".gitattributes": null,
             ".gitconfig": null,
-            "nodejs": {
-              "gitignore": null
-            }
+            "nodejs.gitignore": null
           },
           "github": {
             "workflows": {
