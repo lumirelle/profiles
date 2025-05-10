@@ -45,6 +45,9 @@
     "sandcastle.vscode-open",
     // -- PROFILE_JS language & file support
     "dotenv.dotenv-vscode",
+    // -- PROFILE_VUE language & file support
+    "vue.volar",
+    "lokalise.i18n-ally",
     // -- PROFILE_UNIAPP formatter
     "uni-helper.uni-highlight-vscode",
     "uni-helper.uni-app-schemas-vscode",
