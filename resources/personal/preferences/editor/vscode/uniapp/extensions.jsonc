@@ -23,6 +23,8 @@
     "herrmannplatz.npm-dependency-links",
     "antfu.pnpm-catalog-lens",
     "jasonnutter.search-node-modules",
+    // -- PROFILE_UNIAPP
+    "hb0730.uniapp-run",
 
     // ↓↓ remote dev
     "ms-azuretools.vscode-docker",

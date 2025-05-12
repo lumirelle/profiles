@@ -8,25 +8,9 @@
     <!-- Aliyun Maven Mirror -->
     <mirror>
       <id>aliyun</id>
-      <mirrorOf>central</mirrorOf>
+      <mirrorOf>*</mirrorOf>
       <name>Aliyun Maven Mirror</name>
-      <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
-    </mirror>
-
-    <!-- Official Mirror 1 -->
-    <mirror>
-      <id>official-1</id>
-      <mirrorOf>central</mirrorOf>
-      <name>Official Maven Mirror 1</name>
-      <url>http://repo1.maven.org/maven2/</url>
-    </mirror>
-
-    <!-- Official Mirror 2 -->
-    <mirror>
-      <id>official-2</id>
-      <mirrorOf>central</mirrorOf>
-      <name>Official Maven Mirror 2</name>
-      <url>http://repo2.maven.org/maven2/</url>
+      <url>https://maven.aliyun.com/repository/public</url>
     </mirror>
   </mirrors>
 

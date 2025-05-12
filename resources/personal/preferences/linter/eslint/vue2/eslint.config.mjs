@@ -73,12 +73,9 @@ export default antfu(
   // FIXME: Fix these warnings progressively, because they are too many
   .override('antfu/javascript/rules', {
     rules: {
-      eqeqeq: 'warn',
-    },
-  })
-  .override('antfu/imports/rules', {
-    rules: {
+      'eqeqeq': 'warn',
       'unused-imports/no-unused-vars': 'warn',
+      'unused-imports/no-unused-imports': 'warn',
     },
   })
   .override('antfu/vue/rules', {

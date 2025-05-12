@@ -3,7 +3,7 @@
 
   // ↓↓ vscode: ui
   // -- general
-  "window.zoomLevel": 1.2,
+  "window.zoomLevel": 1.1,
   "editor.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.lineNumbers": "interval",
@@ -37,7 +37,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/5/6 12:09:59",
+    "//": "Last update at 2025/5/13 00:21:16",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -191,6 +191,7 @@
   // ↓↓ extensions: ui
   "custom-ui-style.font.sansSerif": "'LXGW Bright Code TC', 'Symbols Nerd Font', sans-serif",
   "markdown.preview.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
+  "fileNestingUpdater.promptOnAutoUpdate": false,
 
   // ↓↓ extensions: project
   // -- general
@@ -250,6 +251,9 @@
   "npm-intellisense.importLinebreak": "",
   // -- PROFILE_JAVA
   "java.project.explorer.showNonJavaResources": false,
+  // -- PROFILE_UNIAPP
+  "uniapp-run.HBuilderX": "C:\\Program Files Portable\\HBuilderX",
+  "uniapp-run.wxDevtool": "C:\\Program Files (x86)\\Tencent\\微信web开发者工具",
 
   // ↓↓ extensions: language & file support, formatter, linter, snippets
   // -- language & file support
@@ -261,9 +265,9 @@
   // -- linter
   "cSpell.customDictionaries": {
     "dev": {
-      "name": "dev",
-      "path": "~/.cspell.dev.txt",
-      "description": "Words used in development.",
+      "name": "common",
+      "path": "~/.cspell.common.txt",
+      "description": "Words used in common situation.",
       "addWords": false
     },
     "wrk": {
