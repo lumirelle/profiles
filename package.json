@@ -61,6 +61,7 @@
     "bumpp": "catalog:dev",
     "eslint": "catalog:dev",
     "eslint-plugin-format": "catalog:dev",
+    "hint": "catalog:dev",
     "lint-staged": "catalog:dev",
     "simple-git-hooks": "catalog:dev",
     "taze": "catalog:dev",

@@ -257,6 +257,7 @@
 
   // ↓↓ extensions: language & file support, formatter, linter, snippets
   // -- language & file support
+  "docker.extension.dockerEngineAvailabilityPrompt": false,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.promptToUpdatePowerShell": false,
   // -- formatter

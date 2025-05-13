@@ -124,6 +124,9 @@
             "vue": {
               "stylelint.config.mjs": null
             }
+          },
+          "webhint": {
+            ".hintrc": null
           }
         },
         "package-manager": {

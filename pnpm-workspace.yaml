@@ -6,6 +6,7 @@ catalogs:
     bumpp: ^10.1.0
     eslint: ^9.25.1
     eslint-plugin-format: ^1.0.1
+    hint: ^7.1.13
     lint-staged: ^15.5.1
     simple-git-hooks: ^2.13.0
     taze: ^19.0.4
