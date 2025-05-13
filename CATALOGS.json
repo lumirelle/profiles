@@ -101,6 +101,9 @@
             ".prettierrc.yaml": null
           }
         },
+        "license": {
+          "LICENSE": null
+        },
         "linter": {
           "commitlint": {
             "commitlint.config.mjs": null
@@ -135,6 +138,14 @@
           },
           "npm": {
             ".npmrc": null
+          }
+        },
+        "readme": {
+          "minimal": {
+            "README.md": null
+          },
+          "standard": {
+            "README.md": null
           }
         },
         "terminal": {

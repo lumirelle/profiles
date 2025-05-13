@@ -42,16 +42,18 @@
 - 登录 Microsoft 账号，同步系统数据，调整系统设置
 - 浏览器登录 Microsoft 账号同步数据，设置插件（注意：`篡改猴` 扩展需要您启用开发者模式）
 
-  | 插件名称           | 来源/安装（空白同上） |
-  | ------------------ | --------------------- |
-  | AdGuard 广告拦截器 | Microsoft 扩展商店    |
-  | EdgeKeePass        |                       |
-  | 篡改猴             |                       |
-  | 沉浸式翻译         |                       |
-  | Grammarly          |                       |
-  | Vue.js devtools    |                       |
-  | Dark Reader        | Chrome 扩展商店       |
-  | Refined Github     |                       |
+  | 插件名称                         | 来源/安装（空白同上） |
+  | -------------------------------- | --------------------- |
+  | AdGuard 广告拦截器               | Microsoft 扩展商店    |
+  | EdgeKeePass                      |                       |
+  | 篡改猴                           |                       |
+  | 沉浸式翻译                       |                       |
+  | Grammarly                        |                       |
+  | Vue.js devtools                  |                       |
+  | Cookie-Editor                    |                       |
+  | Dark Reader                      | Chrome 扩展商店       |
+  | Refined Github                   |                       |
+  | File Icons for GitHub and GitLab |                       |
 
 - 使用 HEU KMS Activator 激活 Windows
 

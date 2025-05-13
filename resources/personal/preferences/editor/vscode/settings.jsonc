@@ -4,7 +4,7 @@
   // ↓↓ vscode: ui
   // -- general
   "window.zoomLevel": 1.1,
-  "editor.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
+  "editor.fontFamily": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.lineNumbers": "interval",
   "editor.rulers": [80, 120],
@@ -173,7 +173,6 @@
   "explorer.confirmDragAndDrop": false,
   "security.workspace.trust.enabled": false,
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "window.newWindowProfile": "默认",
   "workbench.startupEditor": "none",
 
   // ↓↓ vscode: format & formatter
@@ -189,17 +188,16 @@
   "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
 
   // ↓↓ extensions: ui
-  "custom-ui-style.font.sansSerif": "'LXGW Bright Code TC', 'Symbols Nerd Font', sans-serif",
-  "markdown.preview.fontFamily": "'LXGW Bright Code TC', 'Symbols Nerd Font', monospace",
+  "custom-ui-style.font.sansSerif": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', sans-serif",
+  "custom-ui-style.font.monospace": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monaspace",
+  "markdown.preview.fontFamily": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monospace",
+  "markdown.preview.fontSize": 16,
   "fileNestingUpdater.promptOnAutoUpdate": false,
 
   // ↓↓ extensions: project
   // -- general
   "projectManager.git.baseFolders": ["C:/Projects"],
   // -- remote
-  "license.author": "Lumirelle (shabbyacc@outlook.com)",
-  "license.default": "MIT",
-  "license.year": "2025-present",
   "git.autofetch": true,
   "git.confirmSync": true,
   "git.openRepositoryInParentFolders": "always",
@@ -247,8 +245,6 @@
     "scmItem": false
   },
   "gitlens.views.branches.showRemoteBranches": true,
-  // -- PROFILE_JS
-  "npm-intellisense.importLinebreak": "",
   // -- PROFILE_JAVA
   "java.project.explorer.showNonJavaResources": false,
   // -- PROFILE_UNIAPP
@@ -333,9 +329,8 @@
   },
   "todo-tree.regex.enableMultiLine": true,
   "todo-tree.regex.regex": "(//|#|;|%|REM|^[ \\t]*\\*+|--|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)|(\"\"\"|'''|<!--|/\\*+|--\\[\\[)\\s*($TAGS)[\\s\\S]*?(\"\"\"|'''|-->|\\*/|\\]\\])",
-  "todo-tree.regex.subTagRegex": "^[:：]\\s*", // support fullwidth colons
-  // -- actions
-  "smartClicks.triggerDelay": 300,
+  // support fullwidth colons
+  "todo-tree.regex.subTagRegex": "^[:：]\\s*",
   // -- PROFILE_JS actions
   "css.enabledLanguages": ["html", "vue"],
   "css.styleSheets": ["**/*.css", "**/*.postcss", "**/*.scss"],

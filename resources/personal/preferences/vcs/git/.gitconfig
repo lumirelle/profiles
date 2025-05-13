@@ -48,6 +48,7 @@ last = log -1 HEAD --stat
 # -- edit
 discard = checkout --
 discard-all-changes = "!git checkout -- . && git clean -fd"
+add-all = add .
 add-all-then-commit = "!git add . && git commit -m"
 undo-add = reset HEAD --
 undo-commit = reset --soft HEAD^

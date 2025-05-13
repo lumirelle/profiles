@@ -7,11 +7,23 @@
 
 ## 👫 Your Best Coding Friends <a name='coding'></a>
 
+It's a pity that I haven't found a Chinese font that can adapt well to `Monaspace Xenon` yet.
+
+Now, let's using `LXGW WenKai` instead first.
+
 ```json
-"'LXGW Bright Code TC', 'Symbols Nerd Font', monospace"
+"'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monospace"
 ```
 
 ## 📦 Other Nice Ones <a name="other"></a>
 
+Waiting for trial!
+
 - For Reading: `Caslon`
-- For Coding: `Monaspace Xenon`
+
+## 📑 Preview
+
+```js
+console.log('Holly shit!')
+console.log('我的娘亲嘞!')
+```
