@@ -27,7 +27,6 @@
     "ms-azuretools.vscode-docker",
     "ms-vscode-remote.remote-containers",
     "ms-vscode-remote.remote-wsl",
-    "ms-kubernetes-tools.vscode-kubernetes-tools",
 
     // ↓↓ language & file support, formatter, linter, snippets
     // -- language & file support
@@ -37,7 +36,6 @@
     "simonsiefke.svg-preview",
     "tomoki1207.pdf",
     "ms-vscode.powershell", // also the formatter & linter & snippets for powershell
-    "docker.docker", // also the linter for dockerfile
     "ms-vscode.hexeditor",
     "brandonfowler.exe-runner",
     "sandcastle.vscode-open",
@@ -45,9 +43,10 @@
     "dotenv.dotenv-vscode",
     // -- formatter
     "editorconfig.editorconfig",
-    "biomejs.biome", // NOTE: not in use now
     "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
+    // -- PROFILE_JS formatter
+    "biomejs.biome", // NOTE: not in use now
     // -- linter
     "streetsidesoftware.code-spell-checker",
     "davidanson.vscode-markdownlint",

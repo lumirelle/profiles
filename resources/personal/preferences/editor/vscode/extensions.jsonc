@@ -2,7 +2,6 @@
   // cspell:disable
   "recommendations": [
     // ↓↓ ui
-    "ms-ceintl.vscode-language-pack-zh-hans",
     "antfu.theme-vitesse",
     "pkief.material-icon-theme",
     "antfu.icons-carbon",
@@ -24,24 +23,20 @@
     "ms-azuretools.vscode-docker",
     "ms-vscode-remote.remote-containers",
     "ms-vscode-remote.remote-wsl",
-    "ms-kubernetes-tools.vscode-kubernetes-tools", // NOTE: not in use now
 
     // ↓↓ language & file support, formatter, linter, snippets
     // -- language & file support
     "mermaidchart.vscode-mermaid-chart",
-    "bierner.markdown-mermaid",
     "redhat.vscode-yaml",
     "remcohaszing.schemastore",
     "simonsiefke.svg-preview",
     "tomoki1207.pdf",
     "ms-vscode.powershell", // also the formatter & linter & snippets for powershell
-    "docker.docker", // also the linter for dockerfile
     "ms-vscode.hexeditor",
     "brandonfowler.exe-runner",
     "sandcastle.vscode-open",
     // -- formatter
     "editorconfig.editorconfig",
-    "biomejs.biome", // NOTE: not in use now
     "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
     // -- linter
@@ -68,8 +63,6 @@
     "visualstudioexptteam.vscodeintellicode",
     "visualstudioexptteam.intellicode-api-usage-examples",
     "kurkuza.svg-shrink",
-    "ultram4rine.vscode-choosealicense",
-    "thomascsd.vscode-readme-pattern",
     "github.copilot", // NOTE: vscode only
     "github.copilot-chat", // NOTE: vscode only
     // -- test
