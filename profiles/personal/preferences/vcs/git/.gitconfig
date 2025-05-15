@@ -86,8 +86,8 @@ i = init
 # -- edit
 x = discard
 xa = discard-all-changes   # discard all changes in the working directory
-a = add                    #
-aa = add-all               #
+ad = add                   #
+a = add-all                # use `a` for add-all by usage frequency reason
 ua = undo-add              # move staged changes back to the working directory
 c = commit -m              #
 uc = undo-commit           # move commit back to the staging area
