@@ -3,11 +3,11 @@ import process from 'node:process'
 import { globSync } from 'tinyglobby'
 import { log } from '../src/utils'
 
-const elements = globSync('resources/**/*', {
+const elements = globSync('profiles/**/*', {
   cwd: process.cwd(),
   dot: true,
   absolute: false,
-  ignore: ['resources/work/**/*'],
+  ignore: ['profiles/work/**/*'],
 })
 
 interface Catalog {

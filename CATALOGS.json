@@ -1,1 +1,190 @@
-{}
+{
+  "profiles": {
+    "personal": {
+      "docs": {
+        "git": {
+          "git-manual.md": null
+        },
+        "life": {
+          "prefabricated-dish-manual.md": null,
+          "web-front-end-manual.md": null
+        },
+        "nodejs": {
+          "nodejs-manual.md": null,
+          "nodejs-pm-npm-manual.md": null,
+          "nodejs-pm-pnpm-manual.md": null,
+          "nodejs-pm-yarn-manual.md": null
+        },
+        "nuxt": {
+          "nuxt2-manual.md": null,
+          "nuxt2-optimization-manual.md": null,
+          "nuxt2-specification-manual.md": null
+        },
+        "vue": {
+          "vue2-optimization-manual.md": null,
+          "vue2-specification-manual.md": null,
+          "vue3-specification-manual.md": null
+        },
+        "windows": {
+          "windows-setup-manual.md": null
+        }
+      },
+      "preferences": {
+        "deployer": {
+          "docker": {
+            "docker-compose.yaml": null,
+            "nodejs": {
+              ".dockerignore": null,
+              "Dockerfile": null
+            },
+            "spring-boot": {
+              "Dockerfile": null
+            },
+            "tomcat": {
+              "Dockerfile": null
+            }
+          }
+        },
+        "editor": {
+          ".editorconfig": null,
+          "idea": {
+            "plugins-installed.txt": null
+          },
+          "neovim": {
+            "init.lua": null,
+            "lua": {
+              "config": {
+                "autocmds.lua": null,
+                "keymaps.lua": null,
+                "options.lua": null
+              }
+            }
+          },
+          "vs": {
+            "backup.vssettings": null
+          },
+          "vscode": {
+            "extensions.json": null,
+            "js": {
+              "extensions.json": null
+            },
+            "keybindings.json": null,
+            "settings.json": null,
+            "trusted-domains.json": null,
+            "uniapp": {
+              "extensions.json": null
+            },
+            "vue2": {
+              "extensions.json": null
+            },
+            "vue3": {
+              "extensions.json": null
+            }
+          },
+          "vscode-workspace": {
+            "js": {
+              "extensions.json": null,
+              "settings.json": null,
+              "tsconfig.json": null
+            },
+            "vue": {
+              "extensions.json": null,
+              "jsconfig.json": null,
+              "settings.json": null
+            }
+          }
+        },
+        "formatter": {
+          "prettier": {
+            ".prettierrc.yaml": null
+          }
+        },
+        "license": {
+          "LICENSE": null
+        },
+        "linter": {
+          "commitlint": {
+            "commitlint.config.mjs": null
+          },
+          "cspell": {
+            ".cspell.common.txt": null
+          },
+          "eslint": {
+            "eslint.config.mjs": null,
+            "vue2": {
+              "eslint.config.mjs": null
+            },
+            "vue3": {
+              "eslint.config.mjs": null
+            }
+          },
+          "markdownlint": {
+            ".markdownlint.yaml": null
+          },
+          "stylelint": {
+            "vue": {
+              "stylelint.config.mjs": null
+            }
+          },
+          "webhint": {
+            ".hintrc": null
+          }
+        },
+        "package-manager": {
+          "maven": {
+            "settings.xml": null
+          },
+          "npm": {
+            ".npmrc": null
+          }
+        },
+        "readme": {
+          "minimal": {
+            "README.md": null
+          },
+          "standard": {
+            "README.md": null
+          }
+        },
+        "terminal": {
+          "powershell": {
+            "Microsoft.PowerShell_profile.ps1": null
+          },
+          "windows-terminal": {
+            "settings.json": null
+          },
+          "zsh": {
+            ".zshrc": null
+          }
+        },
+        "vcs": {
+          "git": {
+            ".gitattributes": null,
+            ".gitconfig": null,
+            "nodejs.gitignore": null
+          },
+          "github": {
+            "workflows": {
+              "publish-commit.yaml": null,
+              "release.yaml": null
+            }
+          }
+        },
+        "vpn": {
+          "clash-for-windows": {
+            "cfw-settings.yaml": null,
+            "README.md": null
+          }
+        }
+      },
+      "resources": {
+        "fonts": {
+          "LxgwWenKai.url": null,
+          "Monaspace.url": null,
+          "NerdFontsSymbolsOnly.zip": null,
+          "README.md": null
+        }
+      }
+    }
+  }
+}
