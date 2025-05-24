@@ -1,0 +1,454 @@
+showNewVersionIcon: false
+hideAfterStartup: true
+randomControllerPort: true
+runTimeFormat: 'hh : mm : ss'
+trayOrders:
+  -
+    - icon
+  -
+    - status
+    - traffic
+    - text
+hideTrayIcon: false
+connShowProcess: true
+showTrayProxyDelayIndicator: true
+connMode: true
+connProfile: true
+connProxy: 0
+latencyTimeout: .nan
+fontFamily: LXGW Bright Code TC
+proxyOrder: 0
+proxyDelayType: 1
+latencyUrl: http://www.apple.com/library/test/success.html
+theme: 0
+mixinText: |
+  # Last Edit: 2025-04-30
+  mixin:
+    # 覆盖 DNS 配置
+    dns:
+      enable: true
+      ipv6: true
+
+      # 增强模式，推荐使用 fake-ip
+      enhanced-mode: fake-ip
+      # fake-ip 模式使用的地址池
+      fake-ip-range: 198.18.0.1/16
+      # fake-ip 排除列表，支持通配符
+      # 设置了通配符的域名必须使用引号包裹
+      # 通配符：
+      #   - `*.` 匹配单级子域名：'*.qq.com' 匹配 a.qq.com，不匹配 qq.com
+      #   - `.` 匹配多级子域名：'.qq.com' 匹配 a.qq.com 和 a.b.qq.com，不匹配 qq.com
+      #   - `+.` 匹配多级子域名和自身：'+.qq.com' 匹配 a.qq.com、a.b.qq.com 和 qq.com
+      fake-ip-filter:
+        # Local & Internal
+        - '*.lan'
+        - '*.local'
+        - '*.docker.internal'
+        - WORKGROUP
+        # Connect Test
+        - '*.msftncsi.com'
+        - '*.msftconnecttest.com'
+        # NTP
+        - 'ntp.ntsc.ac.cn'
+        - '*.ntp.org.cn'
+        - 'ntp.*.edu.cn'
+        - 'time.*.edu.cn'
+        - '+.pool.ntp.org'
+        - 'ntp.*.com'
+        - 'ntp1.*.com'
+        - 'ntp2.*.com'
+        - 'ntp3.*.com'
+        - 'ntp4.*.com'
+        - 'ntp5.*.com'
+        - 'ntp6.*.com'
+        - 'ntp7.*.com'
+        - 'time.*.com'
+        - 'time1.*.com'
+        - 'time2.*.com'
+        - 'time3.*.com'
+        - 'time4.*.com'
+        - 'time5.*.com'
+        - 'time6.*.com'
+        - 'time7.*.com'
+        # Social Media
+        - localhost.ptlogin2.qq.com
+        # Music
+        - '*.y.qq.com'
+        - '*.music.tc.qq.com'
+        - aqqmusic.tc.qq.com
+        - '*.stream.qqmusic.qq.com'
+        - '*.music.163.com'
+        - '*.126.net'
+        - songsearch.kugou.com
+        - trackercdn.kugou.com
+        - '*.kuwo.cn'
+        - musicapi.taihe.com
+        - music.taihe.com
+        # Game
+        - 'xbox.*.*.microsoft.com'
+        - '*.*.xboxlive.com'
+        - '*.n.n.srv.nintendo.net'
+        - '*.stun.playstation.net'
+        # STUN Server
+        - '+.stun.*.*'
+        - '+.stun.*.*.*'
+        - '+.stun.*.*.*.*'
+        - '+.stun.*.*.*.*.*'
+        - '+.stun01.*.*'
+        - 'stunserver.*'
+        - 'stunserver.*.*'
+
+      # default-nameserver 用于解析 nameserver 和 fallback 中的 DNS 服务器
+      # 因此必须指定 IP，支持 UDP、TCP、DoT、DoH
+      # Clash 总是使用第一个结果，适当设置几个响应快的 DNS 服务器即可
+      # default-nameserver:
+      #   - '223.5.5.5' # 阿里 IPv4
+      #   - '119.29.29.29' # 腾讯 IPv4
+      #   - '[2400:3200::1]:53' # 阿里 IPv6
+      #   - '[2402:4e00::]:53' # 腾讯 IPv6
+      # nameserver 支持 UDP、TCP、DoT、DoH
+      nameserver:
+        - '223.5.5.5' # 阿里 IPv4
+        - '119.29.29.29' # 腾讯 IPv4
+        - '[2400:3200::1]:53' # 阿里 IPv6
+        - '[2402:4e00::]:53' # 腾讯 IPv6
+      # fallback 可以指定 IP 或域名，同样支持 UDP、TCP、DoT、DoH
+      # 配置 fallback 后默认启用 fallback-filter, geoip-code 默认为 CN
+      fallback:
+        - https://223.5.5.5/dns-query # 阿里 DoH, ECS Support
+        - https://1.1.1.1/dns-query # Cloudflare DoH
+        - https://8.8.8.8/dns-query # Google DoH
+        - tls://223.5.5.5:853 # 阿里 DoT, ECS Support
+        - tls://1.1.1.1:853 # Cloudflare DoT
+        - tls://8.8.8.8:853 # Google DoT
+      # fallback-filter 会对 IP 进行过滤，是对抗 DNS 污染攻击的一种措施
+      # 1. 当 geoip 开启且 code 设置为 CN 时
+      # 属于中国的 IP 将使用 nameserver 中的 dns
+      # 其它国家的 IP 将使用 fallback 中的 dns
+      # 2. 当请求的域名匹配 domain 且 dns 响应的 ip 匹配 ip-cidr 时
+      # 强制使用 fallback 中的 dns
+      fallback-filter:
+        geoip: true
+        geoip-code: CN
+        ip-cidr:
+          - 240.0.0.0/4
+        domain:
+          - '+.google.com'
+          - '+.facebook.com'
+          - '+.twitter.com'
+          - '+.youtube.com'
+          - '+.xn--ngstr-lra8j.com'
+          - '+.google.cn'
+          - '+.googleapis.cn'
+          - '+.googleapis.com'
+          - '+.gvt1.com'
+
+    # 覆盖 Tun 配置
+    tun:
+      # TUN 设备可以用来处理 TCP、UDP、ICMP 流量，将流量转发到虚拟网卡，实现代理
+      # 需要在 `General -> Service Mode` 安装服务
+      enable: true
+      # 推荐使用 system，需要在 `General -> Clash Core` 添加防火墙规则
+      stack: system
+      # 当 fake-ip-range 是 198.18.0.1/16, 应该劫持 198.18.0.2:53，请勿修改
+      dns-hijack:
+        - 198.18.0.2:53
+      # 自动管理系统路由表，实现代理，仅接收 IPv4 流量
+      auto-route: true
+      # 更推荐使用 interface-name 指定网卡名称
+      auto-detect-interface: true
+    # interface-name: 'tun0'
+profileParsersText: >
+  # Last Edit: 2025/05/06
+
+  parsers:
+    # `- reg: ^.*$` can match all subscriptions
+    # `- url: https://example.com/profile.yaml` can match specified subscriptions
+    - reg: ^.*$
+      # Use the following code to process the subscription
+      code: |
+        module.exports.parse = (raw, { yaml }) => {
+          const rawObj = yaml.parse(raw)
+
+          // ---- STEP 1: Process proxies ----
+          if (!rawObj?.proxies) {
+            console.log('There are no proxies in the config.')
+            return raw
+          }
+
+          const TRASH_PROXY_KEYS = ['流量', '到期', '导航', '重置']
+
+          const CHINA_PROXY_KEYS = ['香港', '澳门', '台湾', 'HongKong', 'Macau', 'Taiwan']
+          const SINGAPORE_PROXY_KEYS = ['新加坡', 'Singapore']
+          const JAPAN_PROXY_KEYS = ['日本', 'Japan']
+          const AMERICA_PROXY_KEYS = ['美国', 'America']
+          const GERMANY_PROXY_KEYS = ['德国', 'Germany']
+          const FRANCE_PROXY_KEYS = ['法国', 'France']
+          const ENGLAND_PROXY_KEYS = ['英国', 'England']
+          const KOREA_PROXY_KEYS = ['韩国', 'Korea']
+
+          // Filter out trash proxies
+          const proxyNames = rawObj?.proxies?.filter(item => !TRASH_PROXY_KEYS.some(key => item.name.includes(key))).map(item => item.name) || []
+
+          // Filter out proxies by country
+          const proxyNamesChina = proxyNames.filter(item => CHINA_PROXY_KEYS.some(key => item.includes(key))) || []
+          const proxyNamesSingapore = proxyNames.filter(item => SINGAPORE_PROXY_KEYS.some(key => item.includes(key))) || []
+          const proxyNamesJapan = proxyNames.filter(item => JAPAN_PROXY_KEYS.some(key => item.includes(key))) || []
+          const proxyNamesAmerica = proxyNames.filter(item => AMERICA_PROXY_KEYS.some(key => item.includes(key))) || []
+          const proxyNamesGermany = proxyNames.filter(item => GERMANY_PROXY_KEYS.some(key => item.includes(key))) || []
+          const proxyNamesFrance = proxyNames.filter(item => FRANCE_PROXY_KEYS.some(key => item.includes(key))) || []
+          const proxyNamesEngland = proxyNames.filter(item => ENGLAND_PROXY_KEYS.some(key => item.includes(key))) || []
+          const proxyNamesKorea = proxyNames.filter(item => KOREA_PROXY_KEYS.some(key => item.includes(key))) || []
+
+          // Filter out proxies that are not matched with any country
+          const proxyNamesOther = proxyNames.filter(item =>
+            !CHINA_PROXY_KEYS.some(key => item.includes(key))
+            && !SINGAPORE_PROXY_KEYS.some(key => item.includes(key))
+            && !JAPAN_PROXY_KEYS.some(key => item.includes(key))
+            && !AMERICA_PROXY_KEYS.some(key => item.includes(key))
+            && !GERMANY_PROXY_KEYS.some(key => item.includes(key))
+            && !FRANCE_PROXY_KEYS.some(key => item.includes(key))
+            && !ENGLAND_PROXY_KEYS.some(key => item.includes(key))
+            && !KOREA_PROXY_KEYS.some(key => item.includes(key)),
+          ) || []
+
+          // ---- STEP 2: Process proxy groups ----
+          const proxyGroups = [
+            {
+              name: '👾 PROXY',
+              type: 'select',
+              proxies: [
+                '🥰 CUTEST',
+                '🐼 PANDA',
+                '🦁 MERLION',
+                '🐦 NIPPON',
+                '🦅 EAGLE',
+                '🐻 BEAR',
+                '🐓 CHICKEN',
+                '🦜 ROBIN',
+                '🪵 STICK',
+                '❔ UNKNOWN',
+                '🤣 ENJOY YOUR SELF',
+              ],
+            },
+            {
+              name: '🥰 CUTEST',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 60,
+              tolerance: 100,
+              proxies: proxyNames,
+            },
+            {
+              name: '🐼 PANDA',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesChina,
+            },
+            {
+              name: '🦁 MERLION',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesSingapore,
+            },
+            {
+              name: '🐦 NIPPON',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesJapan,
+            },
+            {
+              name: '🦅 EAGLE',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesAmerica,
+            },
+            {
+              name: '🐻 BEAR',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesGermany,
+            },
+            {
+              name: '🐓 CHICKEN',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesFrance,
+            },
+            {
+              name: '🦜 ROBIN',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesEngland,
+            },
+            {
+              name: '🪵 STICK',
+              type: 'url-test',
+              url: 'http://www.apple.com/library/test/success.html',
+              interval: 180,
+              tolerance: 100,
+              proxies: proxyNamesKorea,
+            },
+            {
+              name: '❔ UNKNOWN',
+              type: 'select',
+              proxies: proxyNamesOther,
+            },
+            {
+              name: '🤣 ENJOY YOUR SELF',
+              type: 'select',
+              proxies: proxyNames,
+            },
+            {
+              name: '👻 GHOST',
+              type: 'select',
+              proxies: ['REJECT', 'DIRECT'],
+            },
+            {
+              name: '🦓 LOST',
+              type: 'select',
+              proxies: ['👾 PROXY', 'DIRECT'],
+            },
+          ]
+          // Set proxy groups
+          rawObj['proxy-groups'] = proxyGroups
+
+          // ---- STEP 3: Clean up DNS, rule providers and rules ----
+          rawObj.dns = {}
+          rawObj['rule-providers'] = []
+          rawObj.rules = []
+
+          return yaml.stringify({ ...rawObj })
+        }
+
+      # Use the following yaml config to insert rule providers
+      yaml:
+        # Insert rule providers
+        # Recommend using https://gcore.jsdelivr.net/ CDN to accelerate GitHub resources in China
+        mix-rule-providers:
+          applications:
+            type: http
+            behavior: classical
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt'
+            path: ./ruleset/applications.yaml
+            interval: 86400
+          private:
+            type: http
+            behavior: domain
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt'
+            path: ./ruleset/private.yaml
+            interval: 86400
+          reject:
+            type: http
+            behavior: domain
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt'
+            path: ./ruleset/reject.yaml
+            interval: 86400
+          icloud:
+            type: http
+            behavior: domain
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt'
+            path: ./ruleset/icloud.yaml
+            interval: 86400
+          apple:
+            type: http
+            behavior: domain
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt'
+            path: ./ruleset/apple.yaml
+            interval: 86400
+          google:
+            type: http
+            behavior: domain
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/google.txt'
+            path: ./ruleset/google.yaml
+            interval: 86400
+          proxy:
+            type: http
+            behavior: domain
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt'
+            path: ./ruleset/proxy.yaml
+            interval: 86400
+          direct:
+            type: http
+            behavior: domain
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt'
+            path: ./ruleset/direct.yaml
+            interval: 86400
+          lancidr:
+            type: http
+            behavior: ipcidr
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt'
+            path: ./ruleset/lancidr.yaml
+            interval: 86400
+          cncidr:
+            type: http
+            behavior: ipcidr
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt'
+            path: ./ruleset/cncidr.yaml
+            interval: 86400
+          telegramcidr:
+            type: http
+            behavior: ipcidr
+            url: 'https://gcore.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt'
+            path: ./ruleset/telegramcidr.yaml
+            interval: 86400
+
+        # Insert rules
+        # Rules are matched from top to bottom, that is, once a rule is hit, it will not be matched again
+        prepend-rules:
+          # Add your own rules here
+          # Connect Test
+          - DOMAIN,www.msftconnecttest.com,👾 PROXY
+          - DOMAIN,www.msftncsi.com,👾 PROXY
+          # Subscription service
+          - DOMAIN,cm-sub.pz.pe,DIRECT
+          # Game online
+          - PROCESS-NAME,ForzaHorizon4.exe,DIRECT
+          # Steam download service direct connection, save traffic
+          - DOMAIN-SUFFIX,cm.steampowered.com,DIRECT
+          - DOMAIN-SUFFIX,steamserver.net,DIRECT
+          # Other
+          - DOMAIN-SUFFIX,tampermonkey.net,👾 PROXY
+
+          # Recommended matching rules for providers
+          - RULE-SET,applications,DIRECT # Process/application that needs to be directly connected
+          - RULE-SET,private,DIRECT # Private domain that needs to be directly connected
+          - RULE-SET,reject,👻 GHOST # Blocked domain
+          - RULE-SET,icloud,DIRECT # iCloud
+          - RULE-SET,apple,DIRECT # Apple
+          - RULE-SET,google,👾 PROXY # Google
+          - RULE-SET,proxy,👾 PROXY # Domain that needs to be proxied
+          - RULE-SET,direct,DIRECT # Domain that needs to be directly connected
+          - RULE-SET,lancidr,DIRECT # Local IP pool
+          - RULE-SET,cncidr,DIRECT # Domestic IP pool
+          - RULE-SET,telegramcidr,👾 PROXY # Telegram IP pool
+          - GEOIP,LAN,DIRECT
+          - GEOIP,CN,DIRECT
+          - MATCH,🦓 LOST
+editor: 1
+editorFontSize: 14
+showNotifications: false
+titleBarText: 'Current Mode: %mode%, Mixin Status: %mixin%. (,,´•ω•)ノ"(´っω•｀。)'
+trayProxiesStyle: 1
+hideUnselectableGroup: false
+showProxyFilter: true
+connChainType: 2
+checkForUpdates: false
+childProcessText: |
+  processes: # array
+systemTheme: true
+useModeIcons: true

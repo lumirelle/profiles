@@ -86,7 +86,7 @@ export interface ExtractOptions {
  * @returns The extracted value
  * @throws If you don't provide a required parameter
  */
-export function extract<T>(arr: Parameter[], extractOptions: ExtractOptions): T | null {
+export function extract<T>(arr: Parameter[], extractOptions: ExtractOptions): T {
   const { matches, position = -1, required = false } = extractOptions
 
   let result: ParameterValue = null
@@ -110,12 +110,8 @@ export function extract<T>(arr: Parameter[], extractOptions: ExtractOptions): T 
   }
 
   // throw if required and no result
-  if (result === null) {
-    if (required)
-      throw new MissingParameter(matches.join(', '))
-    else
-      return null
-  }
+  if (required && result === null)
+    throw new MissingParameter(matches.join(', '))
 
   return result as T
 }

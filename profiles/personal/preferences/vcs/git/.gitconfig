@@ -1,0 +1,123 @@
+[user]
+# Please replace the following with your own information.
+name = Lumirelle
+email = shabbyacc@outlook.com
+
+[credential "https://gitee.com"]
+provider = generic
+
+[core]
+ignorecase = false
+symlinks = true
+
+[log]
+date = short
+decoration = short
+
+[init]
+defaultBranch = main
+
+[branch]
+sort = -committerdate
+
+[fetch]
+prune = true
+output = compact
+# Do not set `pruneTags` as `true`, it's not compatible with some tag tools, like `bumpp`
+
+[pull]
+rebase = true
+
+[merge]
+conflictstyle = zdiff3
+ff = no
+
+[diff]
+algorithm = histogram
+
+[rerere]
+enabled = true
+
+[alias]
+# ENHANCEMENTS
+# -- aliases
+aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
+# -- log
+log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+last = log -1 HEAD --stat
+# -- edit
+discard = checkout --
+discard-all-changes = "!git checkout -- . && git clean -fd"
+add-all = add .
+add-all-then-commit = "!git add . && git commit -m"
+undo-add = reset HEAD --
+undo-commit = reset --soft HEAD^
+amend-commit-no-edit = commit --amend --no-edit
+amend-commit = commit --amend
+wip = "!git add . && git commit -m 'wip: temporary commit'"
+undo-wip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
+# -- branch
+branch-then-switch = switch -c
+merge-message = "!git merge $1 --no-ff -m $2"
+abort-merge = "!git merge --abort"
+abort-rebase = "!git rebase --abort"
+# -- tag
+tag-local-then-remote = "!git tag $1 && git push origin $1"
+discard-tag-local-then-remote = "!git tag -d $(git tag -l $1) && git push origin --delete $(git tag -l $1)"
+
+# SHORTCUTS
+# perfix `l` is used for `list`
+# perfix `z` is used for `abort`, which means abort an operation
+# perfix `u` is used for `undo`, which recovers the status
+# perfix `x` is used for `discard & delete`, which means drop things
+# perfix `xx` is used for `force discard & delete`
+# suffix `a` is used for `all`
+# -- init
+i = init
+# -- edit
+x = discard
+xa = discard-all-changes   # discard all changes in the working directory
+a = add                    #
+aa = add-all               #
+ua = undo-add              # move staged changes back to the working directory
+c = commit -m              #
+uc = undo-commit           # move commit back to the staging area
+aac = add-all-then-commit  # add all changes and commit
+amn = amend-commit-no-edit # amend the last commit without editing the commit message
+ame = amend-commit         # amend the last commit and edit the commit message
+uwip = undo-wip            # undo the wip
+# -- stash
+ls = stash list
+s = stash push
+us = stash pop
+xs = stash drop
+# -- branch
+lb = branch -a          # list all branches
+b = branch              #
+xb = branch -d          # delete a branch
+xxb = branch -D         # delete a branch forcefully
+w = switch              #
+bw = branch-then-switch # create a new branch and switch to it
+m = merge-message       #
+zm = abort-merge        # abort the merge
+rb = rebase             #
+zrb = abort-rebase      # abort the rebase
+rs = reset
+cp = cherry-pick
+# -- tag
+lt = tag -l
+t = tag-local-then-remote          # tag the local branch and push it to the remote
+xt = discard-tag-local-then-remote # discard the tag and push it to the remote
+# -- remote
+lre = remote -v
+re = remote add
+cl = clone
+f = fetch -P # fetch the remote branch with --prune-tags
+l = pull
+p = push
+xp = push -d
+pu = push -u
+# -- config
+lcf = config --list
+cf = config
+cfg = config --global

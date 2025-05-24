@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      // Use `@/*` first, and compatible with `~/*`
+      "@/*": ["./*"],
+      "~/*": ["./*"]
+    }
+  },
+  "exclude": [".nuxt", "dist", "node_modules"]
+}

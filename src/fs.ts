@@ -49,8 +49,6 @@ export async function createSymlink(root: string, sourcePath: string, targetPath
   }
 
   try {
-    ensureDir(dirname(targetPath))
-
     await fsPromises.symlink(sourcePath, targetPath, 'file')
     log.success(`Created symlink: ${format.path(targetPath)} -> ${format.path(relative(root, sourcePath))}`)
   }
@@ -80,7 +78,7 @@ export function removeSymlink(targetPath: string): void {
   }
 }
 
-export function copyFile(sourcePath: string, targetPath: string, force: boolean | null = false): void {
+export function copyFile(sourcePath: string, targetPath: string, force: boolean = false): void {
   if (existsSync(targetPath) && !force) {
     log.warn(`File already exists: ${format.path(targetPath)}, skip`)
     return

@@ -1,5 +1,9 @@
 {
-  // == format & lint ==
+  // -- files
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+  // -- format & lint --
   "prettier.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",

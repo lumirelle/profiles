@@ -34,7 +34,7 @@ Development profiles or something else.
 
 ## 📑 Catalogs <a name="catalogs"></a>
 
-The directory structure under `/resources`, is grouped by purpose:
+The directory structure under `/profiles`, is grouped by purpose:
 
 - `/personal`: **&lt;purpose&gt;** Personal usage profiles
 - `/work`: **&lt;purpose&gt;** Work-only profiles (Of course, it should be ignored by git)

@@ -3,22 +3,22 @@ import process from 'node:process'
 import { bold, cyan, dim, green, magenta, red, reset, yellow } from 'ansis'
 
 const characters: Record<string, Record<string, string>> = {
-  main: {
-    success: '✔',
-    warn: '✖',
-    error: '✖',
-    debug: '•',
-  },
   win: {
     success: '√',
     warn: '×',
     error: '×',
     debug: '•',
   },
+  other: {
+    success: '✔',
+    warn: '✖',
+    error: '✖',
+    debug: '•',
+  },
 }
 
 function getCharacter(key: string) {
-  const type = process.platform === 'win32' ? 'win' : 'main'
+  const type = process.platform === 'win32' ? 'win' : 'other'
   return characters[type][key]
 }
 
