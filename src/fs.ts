@@ -84,13 +84,26 @@ export function copyFile(sourcePath: string, targetPath: string, force: boolean 
     return
   }
 
-  ensureDir(dirname(targetPath))
-
   try {
     copyFileSync(sourcePath, targetPath, force ? constants.COPYFILE_FICLONE : 0)
     log.success(`Copied file: ${format.path(sourcePath)} >> ${format.path(targetPath)}`)
   }
   catch (error) {
     log.error(`Failed to copy file: ${error}`)
+  }
+}
+
+export function removeFile(targetPath: string): void {
+  if (!existsSync(targetPath)) {
+    log.warn(`Target file not found: ${format.path(targetPath)}, skip`)
+    return
+  }
+
+  try {
+    unlinkSync(targetPath)
+    log.success(`Removed file: ${format.path(targetPath)}`)
+  }
+  catch (error) {
+    log.error(`Failed to remove file: ${error}`)
   }
 }

@@ -134,6 +134,11 @@
           "maven": {
             "settings.xml": null
           },
+          "miniconda": {
+            "Conda CMD.lnk": null,
+            "Conda PowerShell 7.lnk": null,
+            "Conda PowerShell.lnk": null
+          },
           "npm": {
             ".npmrc": null
           }

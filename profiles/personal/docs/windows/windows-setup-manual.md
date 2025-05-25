@@ -71,7 +71,7 @@ BypassNRO.cmd
   | PowerShell 7     | <https://github.com/PowerShell/PowerShell/releases/latest> |
   | Oh My Posh       | `winget install JanDeDobbeleer.OhMyPosh`                   |
   | gsudo            | `winget install gerardog.gsudo`                            |
-  | FNM              | `winget install schniz.fnm`                                |
+  | fnm              | `winget install Schniz.fnm`                                |
 
 - 修改系统环境变量 PATH 并重启
 
@@ -92,22 +92,23 @@ BypassNRO.cmd
 
 - 按顺序安装并配置如下基建软件：
 
-  | 软件名称                                                            | 来源/安装                                                                  |
-  | ------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-  | Brave                                                               | <https://brave.com/download/>                                              |
-  | uTools                                                              | <https://www.u-tools.cn/download/>                                         |
-  | Auto Dark Mode                                                      | <https://apps.microsoft.com/detail/xp8jk4hzbvf435>                         |
-  | NanaZip                                                             | <https://www.microsoft.com/store/apps/9N8G7TSCL18R>                        |
-  | KeePass 2 (Plugins：ColoredPassword + HaveIBeenPwned + KeePassHttp) | <https://keepass.info/download.html>                                       |
-  | Visual Studio Code                                                  | <https://code.visualstudio.com/Download>                                   |
-  | Cursor                                                              | <https://www.cursor.com/cn/downloads>                                      |
-  | IDM                                                                 | <https://www.internetdownloadmanager.com/download.html>                    |
-  | Git                                                                 | <https://git-scm.com/download/win>                                         |
-  | Visual C++ Redistributable                                          | <https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist> |
-  | Context Menu Manager                                                | <https://github.com/BluePointLilac/ContextMenuManager/releases>            |
-  | DISM++                                                              | <https://github.com/Chuyu-Team/Dism-Multi-language/releases>               |
-  | Driver Store Explorer                                               | <https://github.com/lostindark/DriverStoreExplorer/releases>               |
-  | Revo Uninstaller                                                    | <https://www.revouninstaller.com/zh/revo-uninstaller-free-download/>       |
+  | 软件名称                        | 来源/安装                                                                  | 备注                                               |
+  | ------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------- |
+  | Brave                           | <https://brave.com/download/>                                              |                                                    |
+  | uTools                          | <https://www.u-tools.cn/download/>                                         |                                                    |
+  | Auto Dark Mode                  | <https://apps.microsoft.com/detail/xp8jk4hzbvf435>                         |                                                    |
+  | NanaZip                         | <https://www.microsoft.com/store/apps/9N8G7TSCL18R>                        |                                                    |
+  | KeePass 2                       | <https://keepass.info/download.html>                                       | 插件：ColoredPassword、HaveIBeenPwned、KeePassHttp |
+  | Visual Studio Code              | <https://code.visualstudio.com/Download>                                   |                                                    |
+  | Cursor                          | <https://www.cursor.com/cn/downloads>                                      |                                                    |
+  | IDM                             | <https://www.internetdownloadmanager.com/download.html>                    |                                                    |
+  | Git                             | <https://git-scm.com/download/win>                                         |                                                    |
+  | Visual C++ Redistributable      | <https://learn.microsoft.com/zh-cn/cpp/windows/latest-supported-vc-redist> |                                                    |
+  | Context Menu Manager            | <https://github.com/BluePointLilac/ContextMenuManager/releases>            |                                                    |
+  | Windows 11 Context Menu Manager | <https://github.com/branhill/windows-11-context-menu-manager/releases>     |                                                    |
+  | DISM++                          | <https://github.com/Chuyu-Team/Dism-Multi-language/releases>               |                                                    |
+  | Driver Store Explorer           | <https://github.com/lostindark/DriverStoreExplorer/releases>               |                                                    |
+  | Revo Uninstaller                | <https://www.revouninstaller.com/zh/revo-uninstaller-free-download/>       |                                                    |
 
 - 按顺序安装如下工具软件：
 
@@ -142,14 +143,13 @@ BypassNRO.cmd
 
 - （可选）安装配置其他软件
 
-  | 软件名称             | 来源/安装                                                          |
-  | -------------------- | ------------------------------------------------------------------ |
-  | Ventoy               | <https://github.com/ventoy/Ventoy/releases>                        |
-  | qBittorrent Enhanced | <https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases> |
-  | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |
-  | Google Earth Pro     | /                                                                  |
-  | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |
-  | noMeiryoUI           | <https://github.com/Tatsu-syo/noMeiryoUI/releases>                 |
+  | 软件名称             | 来源/安装                                                          | 备注                |
+  | -------------------- | ------------------------------------------------------------------ | ------------------- |
+  | Ventoy               | <https://github.com/ventoy/Ventoy/releases>                        |                     |
+  | qBittorrent Enhanced | <https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases> |                     |
+  | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |                     |
+  | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |                     |
+  | PDF SAM              | <https://pdfsam.org/zh/download-pdfsam-basic/>                     | PDF 拆分 & 合并工具 |
 
 ### 步骤五：配置浏览器
 

@@ -14,6 +14,11 @@ export interface InstallableMatcher {
    * The folder to install the profile collection
    */
   installFolder: string | string[]
+
+  /**
+   * The type of installation, if not specified, it will behave as `symlink`
+   */
+  installType?: 'symlink' | 'copy'
 }
 
 export interface ProfileCollection {
@@ -67,16 +72,21 @@ export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
         installFolder: join(homedir(), '.m2'),
       },
       {
+        match: 'package-manager/miniconda/*.lnk',
+        installFolder: join(env.ProgramData || '', 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Anaconda (miniconda3)'),
+        installType: 'copy',
+      },
+      {
         match: 'terminal/bash/.bash_profile',
         installFolder: homedir(),
       },
       {
         match: 'terminal/cmd/autorun.cmd',
-        installFolder: join(env.USERPROFILE || '', 'Documents', 'CMD'),
+        installFolder: join(homedir() || '', 'Documents', 'CMD'),
       },
       {
         match: 'terminal/powershell/Microsoft.PowerShell_profile.ps1',
-        installFolder: join(env.USERPROFILE || '', 'Documents', 'PowerShell'),
+        installFolder: join(homedir() || '', 'Documents', 'PowerShell'),
       },
       {
         match: 'terminal/windows-terminal/settings.json',
