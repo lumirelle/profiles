@@ -55,19 +55,27 @@ export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
         installFolder: homedir(),
       },
       {
-        match: 'formatter/prettier/**/*',
+        match: 'formatter/prettier/.prettierrc.yaml',
         installFolder: homedir(),
       },
       {
-        match: 'linter/cspell/**/*',
+        match: 'linter/cspell/.cspell.common.txt',
         installFolder: homedir(),
       },
       {
-        match: 'package-manager/maven/**/*',
+        match: 'package-manager/maven/settings.xml',
         installFolder: join(homedir(), '.m2'),
       },
       {
-        match: 'terminal/powershell/**/*',
+        match: 'terminal/bash/.bash_profile',
+        installFolder: homedir(),
+      },
+      {
+        match: 'terminal/cmd/autorun.cmd',
+        installFolder: join(env.USERPROFILE || '', 'Documents', 'CMD'),
+      },
+      {
+        match: 'terminal/powershell/Microsoft.PowerShell_profile.ps1',
         installFolder: join(env.USERPROFILE || '', 'Documents', 'PowerShell'),
       },
       {
@@ -88,7 +96,7 @@ export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
     source: 'profiles/work/preferences',
     installMatchers: [
       {
-        match: 'linter/cspell/**/*',
+        match: 'linter/cspell/.cspell.wrk.txt',
         installFolder: homedir(),
       },
     ],

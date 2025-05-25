@@ -147,6 +147,13 @@
           }
         },
         "terminal": {
+          "bash": {
+            ".bash_profile": null
+          },
+          "cmd": {
+            "autorun.cmd": null,
+            "autorun.reg": null
+          },
           "powershell": {
             "Microsoft.PowerShell_profile.ps1": null
           },
