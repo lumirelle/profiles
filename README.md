@@ -6,6 +6,7 @@
 
 <div align="center">
 
+[![NPM Version](https://img.shields.io/npm/v/lumirelle-profiles)](https://www.npmjs.com/package/lumirelle-profiles)
 [![Status](https://img.shields.io/badge/status-active-success.svg)](.)
 [![GitHub Issues](https://img.shields.io/github/issues/Lumirelle/profiles.svg)](https://github.com/Lumirelle/profiles/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Lumirelle/profiles.svg)](https://github.com/Lumirelle/profiles/pulls)
