@@ -62,8 +62,8 @@ merge-message = "!git merge $1 --no-ff -m $2"
 abort-merge = "!git merge --abort"
 abort-rebase = "!git rebase --abort"
 # -- tag
-tag-local-then-remote = "!git tag $1 && git push origin $1"
-discard-tag-local-then-remote = "!git tag -d $(git tag -l $1) && git push origin --delete $(git tag -l $1)"
+tag-local-then-remote = "!git push origin $1 && git tag $1"
+discard-tag-local-then-remote = "!tags=$(git tag -l $1) && git push origin --delete $tags && git tag -d $tags"
 
 # SHORTCUTS
 # perfix `l` is used for `list`
