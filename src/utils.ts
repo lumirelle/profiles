@@ -1,54 +1,57 @@
 /* eslint-disable no-console */
-import process from 'node:process'
 import { bold, cyan, dim, green, magenta, red, reset, yellow } from 'ansis'
 
-const characters: Record<string, Record<string, string>> = {
-  win: {
-    success: '√',
-    warn: '×',
-    error: '×',
-    debug: '•',
-  },
-  other: {
-    success: '✔',
-    warn: '✖',
-    error: '✖',
-    debug: '•',
-  },
+interface LogCharacters {
+  success: string
+  warn: string
+  progress: string
+  error: string
+  debug: string
 }
 
-function getCharacter(key: string) {
-  const type = process.platform === 'win32' ? 'win' : 'other'
-  return characters[type][key]
+const logCharacters: LogCharacters = {
+  success: '\uEAB2',
+  warn: '\uEA6C',
+  progress: '\uDB82\uDD96', // Nerd Font Progress
+  error: '\uEA87',
+  debug: '\uEAD8',
+}
+
+function getCharacter(key: keyof LogCharacters): string {
+  return logCharacters[key]
 }
 
 export const log = {
   info: (message: string): void => {
-    console.log(`${message}`)
+    console.log(`${message}\n`)
   },
   success: (message: string): void => {
-    console.log(green(`${getCharacter('success')} ${message}`))
+    console.log(green(`${getCharacter('success')} ${message}\n`))
   },
   warn: (message: string): void => {
-    console.warn(yellow(`${getCharacter('warn')} ${message}`))
+    console.warn(yellow(`${getCharacter('warn')} ${message}\n`))
+  },
+  progress: (message: string): void => {
+    console.log(yellow(`${getCharacter('progress')} ${message}\n`))
   },
   error: (message: string): void => {
-    console.error(red(`${getCharacter('error')} ${message}`))
+    console.error(red(`${getCharacter('error')} ${message}\n`))
   },
   debug: (message: string): void => {
-    console.log(magenta(`${getCharacter('debug')} ${dim(message)}`))
+    console.log(magenta(`${getCharacter('debug')} ${dim(message)}\n`))
   },
 }
 
 export const format = {
   path: (path: string): string => {
-    return bold(cyan(path))
+    // Replace backslashes with forward slashes
+    return bold(cyan(path.replace(/\\/g, '/')))
   },
   title: (title: string): string => {
     return bold(green(title))
   },
   highlight: (text: string): string => {
-    return magenta(text)
+    return bold(magenta(text))
   },
   additional: (text: string): string => {
     return yellow(text)

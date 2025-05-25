@@ -42,8 +42,8 @@ export async function run(fn: Runner, parameters: Parameter[]): Promise<void> {
   }
 
   if (debug) {
-    log.debug(`parameters: ${JSON.stringify(parameters, null, 2)}`)
-    log.debug(`context: ${JSON.stringify(context, null, 2)}`)
+    log.debug(`Running with parameters: ${JSON.stringify(parameters, null, 2)}`)
+    log.debug(`Running with context: ${JSON.stringify(context, null, 2)}`)
   }
 
   if (parameters.length === 1 && ['-h', '--help'].includes(parameters[0].key)) {

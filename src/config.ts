@@ -16,9 +16,9 @@ export interface InstallableMatcher {
   installFolder: string | string[]
 
   /**
-   * The type of installation, if not specified, it will behave as `symlink`
+   * The mode of installation, if not specified, it will behave as `symlink`
    */
-  installType?: 'symlink' | 'copy'
+  installMode?: 'symlink' | 'copy'
 }
 
 export interface ProfileCollection {
@@ -74,7 +74,7 @@ export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
       {
         match: 'package-manager/miniconda/*.lnk',
         installFolder: join(env.ProgramData || '', 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Anaconda (miniconda3)'),
-        installType: 'copy',
+        installMode: 'copy',
       },
       {
         match: 'terminal/bash/.bash_profile',

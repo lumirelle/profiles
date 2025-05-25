@@ -1,5 +1,5 @@
 import { constants, copyFileSync, promises as fsPromises, lstatSync, mkdirSync, unlinkSync } from 'node:fs'
-import { dirname, relative, resolve } from 'node:path'
+import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { format, log } from './utils'
 
@@ -48,13 +48,7 @@ export async function createSymlink(root: string, sourcePath: string, targetPath
     }
   }
 
-  try {
-    await fsPromises.symlink(sourcePath, targetPath, 'file')
-    log.success(`Created symlink: ${format.path(targetPath)} -> ${format.path(relative(root, sourcePath))}`)
-  }
-  catch (error) {
-    log.error(`Failed to create symlink: ${error}`)
-  }
+  await fsPromises.symlink(sourcePath, targetPath, 'file')
 }
 
 export function removeSymlink(targetPath: string): void {
@@ -63,18 +57,12 @@ export function removeSymlink(targetPath: string): void {
     return
   }
 
-  try {
-    const stats = lstatSync(targetPath)
-    if (stats.isSymbolicLink()) {
-      unlinkSync(targetPath)
-      log.success(`Removed symlink: ${format.path(targetPath)}`)
-    }
-    else {
-      log.warn(`Target file is not a symlink: ${format.path(targetPath)}, skip`)
-    }
+  const stats = lstatSync(targetPath)
+  if (stats.isSymbolicLink()) {
+    unlinkSync(targetPath)
   }
-  catch (error) {
-    log.error(`Failed to remove symlink: ${error}`)
+  else {
+    log.warn(`Target file is not a symlink: ${format.path(targetPath)}, skip`)
   }
 }
 
@@ -84,13 +72,7 @@ export function copyFile(sourcePath: string, targetPath: string, force: boolean 
     return
   }
 
-  try {
-    copyFileSync(sourcePath, targetPath, force ? constants.COPYFILE_FICLONE : 0)
-    log.success(`Copied file: ${format.path(sourcePath)} >> ${format.path(targetPath)}`)
-  }
-  catch (error) {
-    log.error(`Failed to copy file: ${error}`)
-  }
+  copyFileSync(sourcePath, targetPath, force ? constants.COPYFILE_FICLONE : 0)
 }
 
 export function removeFile(targetPath: string): void {
@@ -99,11 +81,5 @@ export function removeFile(targetPath: string): void {
     return
   }
 
-  try {
-    unlinkSync(targetPath)
-    log.success(`Removed file: ${format.path(targetPath)}`)
-  }
-  catch (error) {
-    log.error(`Failed to remove file: ${error}`)
-  }
+  unlinkSync(targetPath)
 }

@@ -28,6 +28,8 @@ export async function processProfileCollection(
   }
 
   for (const matcher of collection.installMatchers) {
+    log.progress(`Processing matcher ${format.highlight(matcher.match)} in ${format.highlight(matcher.installMode || 'symlink')} mode ...`)
+
     const installableProfilePaths = globSync(matcher.match, {
       cwd: collectionPath,
       absolute: true,
@@ -48,7 +50,7 @@ export async function processProfileCollection(
 
       for (const installFolderPath of installFolders) {
         if (action === 'install' && !existsSync(installFolderPath)) {
-          log.warn(`Install folder not exists, may be you haven't install the program who uses profile '${format.path(profileName)}' yet, skip`)
+          log.warn(`Install folder not exists, may be you haven't install the program who uses profile ${format.path(profileName)} yet, skip`)
           continue
         }
         else if (action === 'uninstall' && !existsSync(installFolderPath)) {
@@ -56,20 +58,50 @@ export async function processProfileCollection(
         }
 
         const installProfilePath = join(installFolderPath, profileName)
+        // Install
         if (action === 'install') {
-          if (matcher.installType === 'copy') {
-            copyFile(profilePath, installProfilePath, override)
+          // Copy mode
+          if (matcher.installMode === 'copy') {
+            try {
+              copyFile(profilePath, installProfilePath, override)
+              log.success(`Copied file: ${format.path(relative(root, profilePath))} >> ${format.path(installProfilePath)}`)
+            }
+            catch (error) {
+              log.error(`Failed to copy file: ${error}`)
+            }
           }
+          // Symlink mode
           else {
-            await createSymlink(root, profilePath, installProfilePath, override)
+            try {
+              await createSymlink(root, profilePath, installProfilePath, override)
+              log.success(`Created symlink: ${format.path(installProfilePath)} -> ${format.path(relative(root, profilePath))}`)
+            }
+            catch (error) {
+              log.error(`Failed to create symlink: ${error}`)
+            }
           }
         }
+        // Uninstall
         else if (action === 'uninstall') {
-          if (matcher.installType === 'copy') {
-            removeFile(installProfilePath)
+          // Copy mode
+          if (matcher.installMode === 'copy') {
+            try {
+              removeFile(installProfilePath)
+              log.success(`Removed file: ${format.path(installProfilePath)}`)
+            }
+            catch (error) {
+              log.error(`Failed to remove file: ${error}`)
+            }
           }
+          // Symlink mode
           else {
-            removeSymlink(installProfilePath)
+            try {
+              removeSymlink(installProfilePath)
+              log.success(`Removed symlink: ${format.path(installProfilePath)}`)
+            }
+            catch (error) {
+              log.error(`Failed to remove symlink: ${error}`)
+            }
           }
         }
       }
