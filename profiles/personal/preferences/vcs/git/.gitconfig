@@ -66,6 +66,9 @@ list-tag-remote = ls-remote --tags
 tag-remote = push origin
 discard-tag = "!git tag -d $(git tag -l $1 | grep -v $1)"
 discard-tag-remote = push origin --delete
+# -- remote
+fetch-prune-tags = fetch -P
+pull-prune-tags = "!git fetch -P && git pull"
 
 # SHORTCUTS
 #
@@ -121,8 +124,8 @@ xtre = discard-tag-remote
 lre = remote -v
 re = remote add
 cl = clone
-f = fetch -P # fetch the remote branch with --prune-tags
-l = pull
+f = fetch-prune-tags
+l = pull-prune-tags
 p = push
 xp = push -d
 pu = push -u
