@@ -59,19 +59,25 @@ undo-wip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
 # -- branch
 branch-then-switch = switch -c
 merge-message = "!git merge $1 --no-ff -m $2"
-abort-merge = "!git merge --abort"
-abort-rebase = "!git rebase --abort"
+abort-merge = merge --abort
+abort-rebase = rebase --abort
 # -- tag
-tag-local-then-remote = "!git push origin $1 && git tag $1"
-discard-tag-local-then-remote = "!tags=$(git tag -l $1) && git push origin --delete $tags && git tag -d $tags"
+list-tag-remote = ls-remote --tags
+tag-remote = push origin
+discard-tag = "!git tag -d $(git tag -l $1 | grep -v $1)"
+discard-tag-remote = push origin --delete
 
 # SHORTCUTS
+#
 # perfix `l` is used for `list`
 # perfix `z` is used for `abort`, which means abort an operation
 # perfix `u` is used for `undo`, which recovers the status
 # perfix `x` is used for `discard & delete`, which means drop things
 # perfix `xx` is used for `force discard & delete`
+#
 # suffix `a` is used for `all`
+# suffix `m` is used for `multiple`
+#
 # -- init
 i = init
 # -- edit
@@ -106,8 +112,11 @@ rs = reset
 cp = cherry-pick
 # -- tag
 lt = tag -l
-t = tag-local-then-remote          # tag the local branch and push it to the remote
-xt = discard-tag-local-then-remote # discard the tag and push it to the remote
+ltre = list-tag-remote
+t = tag
+tre = tag-remote
+xt = discard-tag
+xtre = discard-tag-remote
 # -- remote
 lre = remote -v
 re = remote add
