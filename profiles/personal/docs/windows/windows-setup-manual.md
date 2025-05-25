@@ -116,12 +116,13 @@ BypassNRO.cmd
   | 微信             | <https://pc.weixin.qq.com/>                            |
   | QQ               | <https://im.qq.com/pcqq/index.shtml>                   |
   | Telegram         | <https://desktop.telegram.org/>                        |
+  | WPS Office       | <https://www.123pan.com/s/sXtA-iLVEh.html>             |
+  | PixPin           | <https://pixpin.cn/>                                   |
   | LX Music Desktop | <https://github.com/lyswhut/lx-music-desktop/releases> |
+  | PotPlayer        | <https://apps.microsoft.com/detail/xp8bsbgqw2dks0>     |
   | NVIDIA App       | <https://www.nvidia.cn/software/nvidia-app/>           |
   | Steam            | <https://store.steampowered.com/about>                 |
   | Epic Games       | <https://store.epicgames.com/zh-CN/download>           |
-  | PixPin           | <https://pixpin.cn/>                                   |
-  | PotPlayer        | <https://apps.microsoft.com/detail/xp8bsbgqw2dks0>     |
   | OBS Studio       | <https://obsproject.com/download>                      |
 
 - 按顺序安装如下开发环境：
@@ -133,9 +134,9 @@ BypassNRO.cmd
   | LazyVim           | <https://www.lazyvim.org/installation>                                 |
   | JDK               | <https://www.oracle.com/cn/java/technologies/downloads/#graalvmjava21> |
   | Miniconda         | <https://www.anaconda.com/download/success#miniconda>                  |
-  | Visual Studio     | <https://visualstudio.microsoft.com/zh-hans/downloads/>                |
   | JetBrains Toolbox | <https://www.jetbrains.com/zh-cn/lp/toolbox/>                          |
   | JetBrains IDEA    | 使用 JetBrains Toolbox 安装                                            |
+  | Visual Studio     | <https://visualstudio.microsoft.com/zh-hans/downloads/>                |
   | WSL               | `wsl --install`                                                        |
 
 - （可选）安装配置其他软件
@@ -187,10 +188,11 @@ BypassNRO.cmd
 
 - 程序只允许安装在如下路径：
 
-  - `C:/Program Files/`
-  - `C:/Program Files (x86)/`
-  - `C:/Program Files Portable/`
-  - `C:/Users/Lumirelle/AppData/Local/Programs/`
+  - `C:/ProgramData/`：无空格路径
+  - `C:/Program Files/`：标准应用程序安装路径
+  - `C:/Program Files (x86)/`：x86 程序安装路径
+  - `C:/Program Files Portable/`：便携程序安装路径
+  - `C:/Users/Lumirelle/AppData/Local/Programs/`：用户级程序安装路径
 
 - 定期使用 Revo Uninstaller 卸载无用软件
 - 定期使用 DISM++ 清理系统
