@@ -127,17 +127,18 @@ BypassNRO.cmd
 
 - 按顺序安装如下开发环境：
 
-  | 软件名称          | 来源/安装                                                              |
-  | ----------------- | ---------------------------------------------------------------------- |
-  | Mingw-w64         | <https://github.com/niXman/mingw-builds-binaries/releases/latest>      |
-  | Neovim            | `winget install Neovim.Neovim`                                         |
-  | LazyVim           | <https://www.lazyvim.org/installation>                                 |
-  | JDK               | <https://www.oracle.com/cn/java/technologies/downloads/#graalvmjava21> |
-  | Miniconda         | <https://www.anaconda.com/download/success#miniconda>                  |
-  | JetBrains Toolbox | <https://www.jetbrains.com/zh-cn/lp/toolbox/>                          |
-  | JetBrains IDEA    | 使用 JetBrains Toolbox 安装                                            |
-  | Visual Studio     | <https://visualstudio.microsoft.com/zh-hans/downloads/>                |
-  | WSL               | `wsl --install`                                                        |
+  | 软件名称             | 来源/安装                                                              |
+  | -------------------- | ---------------------------------------------------------------------- |
+  | Mingw-w64            | <https://github.com/niXman/mingw-builds-binaries/releases/latest>      |
+  | Neovim               | `winget install Neovim.Neovim`                                         |
+  | LazyVim              | <https://www.lazyvim.org/installation>                                 |
+  | JDK                  | <https://www.oracle.com/cn/java/technologies/downloads/#graalvmjava21> |
+  | Miniconda            | <https://www.anaconda.com/download/success#miniconda>                  |
+  | JetBrains Toolbox    | <https://www.jetbrains.com/zh-cn/lp/toolbox/>                          |
+  | JetBrains IDEA       | 使用 JetBrains Toolbox 安装                                            |
+  | Visual Studio        | <https://visualstudio.microsoft.com/zh-hans/downloads/>                |
+  | Navicat Premium Lite | <https://www.navicat.com.cn/download/navicat-premium-lite>             |
+  | WSL                  | `wsl --install`                                                        |
 
 - （可选）安装配置其他软件
 

@@ -25,6 +25,7 @@ DISM++
 OhMyPosh
 gsudo
 fnm
+Navicat
 
 -- terminal --
 pwsh
