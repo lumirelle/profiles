@@ -23,7 +23,11 @@ sort = -committerdate
 [fetch]
 prune = true
 output = compact
-# Do not set `pruneTags` as `true`, it's not compatible with some tag tools, like `bumpp`
+# !! Do not set `pruneTags` as `true`, it's not compatible with some tag tools, like `bumpp` !!
+# Because `bumpp` will create a local tag and fetch from remote, then push the local tag to remote.
+# If we set `pruneTags` as `true`, it will delete the local tag when fetching from remote, which is not what we want.
+# So, we need to set `pruneTags` as `false`.
+pruneTags = false
 
 [pull]
 rebase = true
@@ -39,97 +43,143 @@ algorithm = histogram
 enabled = true
 
 [alias]
-# ENHANCEMENTS
-# -- aliases
+# ENHANCEMENTS ALIASES
+# aliases
 aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
-# -- log
+# log
 log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 last = log -1 HEAD --stat
-# -- edit
-discard = checkout --
-discard-all-changes = "!git checkout -- . && git clean -fd"
-add-all = add .
-add-all-then-commit = "!git add . && git commit -m"
-undo-add = reset HEAD --
-undo-commit = reset --soft HEAD^
-amend-commit-no-edit = commit --amend --no-edit
-amend-commit = commit --amend
-wip = "!git add . && git commit -m 'wip: temporary commit'"
+# config
+list-config = config --list
+config-global = config --global
+# discard
+discard = "!git checkout -- $@"
+discard-all = "!git checkout -- ." # Discard all tracked changes in the working directory
+# add
+add-all = "!git add ."
+undo-add = "!git reset HEAD -- $@"    # Move staged changes back to the working directory
+undo-add-all = "!git reset HEAD -- ." # Move all staged changes back to the working directory
+# commit
+commit-with-message = commit --message
+undo-commit = "!git reset --soft HEAD^"                    # Move commit back to the staging area
+add-all-then-commit = "!git add . && git commit --message" # Add all changes and commit.
+# amend
+amend-commit = commit --amend --no-edit
+amend-commit-with-edit = commit --amend
+# wip
+wip = "!git add . && git commit --message 'wip: temporary commit'"
 undo-wip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
-# -- branch
-branch-then-switch = switch -c
-merge-message = "!git merge $1 --no-ff -m $2"
+# stash
+list-stash = stash list
+new-stash = stash push
+undo-stash = stash pop
+delete-stash = stash drop
+# branch
+list-branches = branch
+list-remote-branches = branch --remote
+list-all-branches = branch --all
+new-branch = branch
+delete-branch = branch --delete
+force-delete-branch = branch --delete --force
+# switch
+branch-then-switch = switch --create
+# merge
+merge-with-message = "!git merge $1 --no-ff --message $2"
 abort-merge = merge --abort
+# rebase
 abort-rebase = rebase --abort
-# -- tag
-list-tag-remote = ls-remote --tags
+# tag
+list-tags = tag --list
+list-tags-remote = ls-remote --tags
 tag-remote = push origin
-discard-tag = "!git tag -d $(git tag -l $1 | grep -v $1)"
+discard-tag = "!git tag --delete $(git tag --list $1 | grep -v $1)"
 discard-tag-remote = push origin --delete
-# -- remote
-fetch-prune-tags = fetch -P
-pull-prune-tags = "!git fetch -P && git pull"
+# remote
+list-remotes = remote --verbose
+fetch-prune-tags = fetch --prune-tags # We will clean up unused tags when specify command `*-prune-tags`
+pull-prune-tags = "!git fetch --prune-tags && git pull"
+# push
+delete-push = push --delete
+push-upstream = push --set-upstream
 
-# SHORTCUTS
-#
+# SHORTCUTS ALIASES
+# -- PREFIX INTRO
 # perfix `l` is used for `list`
 # perfix `z` is used for `abort`, which means abort an operation
 # perfix `u` is used for `undo`, which recovers the status
 # perfix `x` is used for `discard & delete`, which means drop things
 # perfix `xx` is used for `force discard & delete`
-#
+# -- SUFFIX INTRO
+# suffix `g` is used for `global`
 # suffix `a` is used for `all`
 # suffix `m` is used for `multiple`
-#
-# -- init
-i = init
-# -- edit
-x = discard
-xa = discard-all-changes   # discard all changes in the working directory
-ad = add                   #
-a = add-all                # use `a` for add-all by usage frequency reason
-ua = undo-add              # move staged changes back to the working directory
-c = commit -m              #
-uc = undo-commit           # move commit back to the staging area
-ac = add-all-then-commit   # add all changes and commit
-amn = amend-commit-no-edit # amend the last commit without editing the commit message
-ame = amend-commit         # amend the last commit and edit the commit message
-uwip = undo-wip            # undo the wip
-# -- stash
-ls = stash list
-s = stash push
-us = stash pop
-xs = stash drop
-# -- branch
-lb = branch -a          # list all branches
-b = branch              #
-xb = branch -d          # delete a branch
-xxb = branch -D         # delete a branch forcefully
-w = switch              #
-bw = branch-then-switch # create a new branch and switch to it
-m = merge-message       #
-zm = abort-merge        # abort the merge
-r = rebase              #
-zr = abort-rebase       # abort the rebase
-rs = reset
-cp = cherry-pick
-# -- tag
-lt = tag -l
-ltre = list-tag-remote
-t = tag
-tre = tag-remote
-xt = discard-tag
-xtre = discard-tag-remote
-# -- remote
-lre = remote -v
-re = remote add
-cl = clone
-f = fetch-prune-tags
-l = pull-prune-tags
-p = push
-xp = push -d
-pu = push -u
-# -- config
-lcf = config --list
+# suffix `r` is used for `remote`
+# -- ALIAS LIST
+# config: cf
+lcf = list-config
 cf = config
-cfg = config --global
+cfg = config-global
+# init: i
+i = init
+# clone: cl
+cl = clone
+# discard: x
+x = discard
+xa = discard-all
+# add: a
+a = add
+aa = add-all
+ua = undo-add
+uaa = undo-add-all
+# commit: c
+c = commit-with-message
+uc = undo-commit
+ac = add-all-then-commit # Why not use `aac`? Because `add-all` is used very frequently, and `ac` is more concise
+# amend: amd
+amd = amend-commit
+amde = amend-commit-with-edit
+# wip: wip
+uwip = undo-wip
+# stash: s
+ls = list-stash
+s = new-stash
+us = undo-stash
+xs = delete-stash
+# branch: b
+lb = list-branches
+lbr = list-remote-branches
+lba = list-all-branches
+b = new-branch
+xb = delete-branch
+xxb = force-delete-branch
+# switch: w
+w = switch
+bw = branch-then-switch
+# merge: m
+m = merge-with-message
+zm = abort-merge
+# rebase: r
+r = rebase
+zr = abort-rebase
+# reset: rs
+rs = reset
+# cherry-pick: cp
+cp = cherry-pick
+# tag: t
+lt = list-tags
+ltr = list-tags-remote
+t = tag
+tr = tag-remote
+xt = discard-tag
+xtr = discard-tag-remote
+# remote: re
+lre = list-remotes
+re = remote add
+# fetch: f
+f = fetch-prune-tags
+# pull: l
+l = pull-prune-tags
+# push: p
+p = push
+xp = delete-push
+pu = push-upstream
