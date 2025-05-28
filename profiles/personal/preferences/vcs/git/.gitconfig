@@ -45,11 +45,6 @@ enabled = true
 [alias]
 # ENHANCEMENTS ALIASES
 # aliases
-# Use function wrapper to avoid default parameters transformation
-# For example, call alias `test = echo $1` with `git test Oh` will be transformed to `echo Oh Oh` by default
-# If we use function wrapper, it will be transformed to `echo Oh`, no duplicate parameters any more!!!
-# So, if we using positional parameters, it's recommended to use function wrapper.
-# Using function wrapper can also prevent unexpected parameters provided by user.
 aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
 # log
 log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -66,8 +61,14 @@ undo-add = reset HEAD --       # Move staged changes back to the working directo
 undo-add-all = reset HEAD -- . # Move all staged changes back to the working directory
 # commit
 commit-with-message = commit --message
-undo-commit = reset --soft HEAD^                           # Move commit back to the staging area
-add-all-then-commit = "!git add . && git commit --message" # Add all changes and commit.
+undo-commit = reset --soft HEAD^ # Move commit back to the staging area
+# 1: Using the function wrapper to avoid default parameters transformation.
+# For example, call alias `test = echo $1` with `git test Oh` will be transformed to `echo Oh Oh` by default
+# If we use function wrapper, it will be transformed to `echo Oh`, no duplicate parameters any more!!!
+# So, if we using positional parameters, it's recommended to use function wrapper.
+# Using function wrapper can also prevent unexpected parameters provided by user.
+# 2: Using quote to avoid default parameters expansion.
+add-all-then-commit = "!f() { git add . && git commit --message \"$1\"; }; f" # Add all changes and commit.
 # amend
 amend-commit = commit --amend --no-edit
 amend-commit-with-edit = commit --amend
@@ -89,7 +90,7 @@ force-delete-branch = branch --delete --force
 # switch
 branch-then-switch = switch --create
 # merge
-merge-with-message = "!f() { git merge $1 --no-ff --message $2; }; f"
+merge-with-message = "!f() { git merge \"$1\" --no-ff --message \"$2\"; }; f"
 abort-merge = merge --abort
 # rebase
 abort-rebase = rebase --abort
@@ -97,9 +98,9 @@ abort-rebase = rebase --abort
 list-tags = tag --list
 list-tags-remote = ls-remote --tags
 delete-tag = tag --delete
-delete-tag-multiple = "!f() { git tag --list $1 | xargs git tag --delete; }; f"
+delete-tag-multiple = "!f() { git tag --list \"$1\" | xargs git tag --delete; }; f"
 sync-tag-remote = "!f() { git push origin :refs/tags/$1 && git fetch-prune-tags; }; f"
-sync-tag-remote-multiple = "!f() { git tag --list $1 | xargs -I {} git push origin :refs/tags/{} && git fetch-prune-tags; }; f"
+sync-tag-remote-multiple = "!f() { git tag --list \"$1\" | xargs -I {} git push origin :refs/tags/{} && git fetch-prune-tags; }; f"
 # remote
 list-remotes = remote --verbose
 fetch-prune-tags = fetch --prune-tags # We will clean up unused tags when specify command `*-prune-tags`
