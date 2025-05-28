@@ -47,7 +47,8 @@
     "stub": "unbuild --stub",
     "release": "bumpp && pnpm publish",
     "typecheck": "tsc",
-    "catalogs": "tsx scripts/generate-catalogs.ts"
+    "catalogs": "tsx scripts/generate-catalogs.ts",
+    "deprecate": "tsx scripts/deprecate.ts"
   },
   "dependencies": {
     "ansis": "catalog:prod",
