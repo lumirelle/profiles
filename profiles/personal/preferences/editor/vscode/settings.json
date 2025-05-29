@@ -247,6 +247,7 @@
     "scmItem": false
   },
   "gitlens.views.branches.showRemoteBranches": true,
+  "gitlens.views.commitDetails.files.layout": "tree",
   // -- PROFILE_JAVA
   "java.project.explorer.showNonJavaResources": false,
   // -- PROFILE_UNIAPP
