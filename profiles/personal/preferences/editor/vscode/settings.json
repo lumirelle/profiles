@@ -37,7 +37,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 5/28/2025, 10:37:29 AM",
+    "//": "Last update at 6/4/2025, 9:36:24 AM",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -138,6 +138,9 @@
 
   // ↓↓ vscode: file associations
   "files.associations": {
+    "*.page-template": "vue",
+    "*.layout-template": "vue",
+    "*.vue": "vue",
     "LICENSE": "plaintext",
     ".env*": "dotenv",
     "*.json": "jsonc"
