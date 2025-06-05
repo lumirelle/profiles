@@ -18,7 +18,7 @@ HEAD：指向当前分支的最新提交。
 
 ## 怎么使用？ How to use?
 
-NOTE：本文中的命令基于 [`.gitconfig`](../../preferences/vcs/git/.gitconfig) 中设置的 aliases。
+NOTE：本文中的命令缩写基于 [`.gitconfig`](../../preferences/vcs/git/.gitconfig) 中设置的 aliases。
 
 ### 1. 创建版本库并完成初始化提交（init commit）
 
@@ -34,7 +34,7 @@ cursor .prettierrc.yml
 ...
 
 # 初始化提交
-git aac "init: init project"
+git ac "init: init project"
 ```
 
 ### 2. 添加远程并推送
@@ -44,7 +44,7 @@ git aac "init: init project"
 ```shell
 # 添加远程
 # 格式：`git re <远程名> <远程库 URL>`
-git re origin https://github.com/Lyana-nullptr/profiles.git
+git re origin https://github.com/Lumirelle/profiles.git
 
 # 首次推送分支，需要设置上游
 # 格式：`git pu <远程名> <本地分支名>:<远程分支名>`
@@ -66,21 +66,21 @@ git p
 NOTE：在刚完成本地与远程的冲突合并后，请不要拉取远程代码，应直接推送到远程。否则会再次执行冲突合并流程，导致文件混乱。
 
 ```shell
-# 基于默认远程 origin
+# 以下基于默认远程 origin
 
-# 默认 pull 行为
+# 未使用 `--rebase` 参数
 git l
-# 使用默认的远程，自动推断分支和上游
+# 等价于使用默认的远程，自动推断分支和上游
 git l origin main
 # 等价于
 git f origin main && git m origin/main
 
 # 使用 `--rebase` 参数
 git l --rebase
-# 使用默认的远程，自动推断分支和上游
+# 等价于使用默认的远程，自动推断分支和上游
 git l origin main --rebase
 # 等价于
-git f origin main && git rb origin/main
+git f origin main && git r origin/main
 
 # 你也可以将 .gitconfig 中的 pull.rebase 配置项设置为 true
 # 这是推荐的设置
@@ -109,7 +109,7 @@ git bw feature/001 dev # 推荐的功能分支命名规则：`feature/<feature-c
 
 cursor git-manual.md
 
-git aac "feat: complete feature/001"
+git ac "feat: complete feature/001"
 ```
 
 ### 6. 丢弃工作区的更改
@@ -145,9 +145,9 @@ git rs HEAD^
 
 ```shell
 # 如果你不需要修改提交信息
-git amn
-# 如果你项修改提交信息
-git amc
+git amd
+# 如果你想修改提交信息
+git amde
 ```
 
 ### 9. 合并功能分支
@@ -171,7 +171,7 @@ git cfg merge.ff false
 ```shell
 # branch1 必须是尚未推送到远程的分支
 git w branch1
-git rb branch2
+git r branch2
 ```
 
 ### 11. 删除冗余临时分支
@@ -227,7 +227,7 @@ git cp xxxxxxxxxxxxxxxxxxxxxxxxxxxx # commit hash
 
 ```shell
 # 准备 1.0.0 发布
-git b release-1.0.0 dev
+git bw release-1.0.0 dev
 
 # 测试和修复问题...
 ```
@@ -243,7 +243,7 @@ git m release-1.0.0 "merge: v1.0.0 release"
 git t v1.0.0
 
 # 修改同样要合并入开发分支
-git switch dev
+git w dev
 git m release-1.0.0 "merge: v1.0.0 release"
 ```
 
@@ -252,7 +252,7 @@ git m release-1.0.0 "merge: v1.0.0 release"
 当主分支上存在致命缺陷时，应当从主分支分出一个紧急修复分支。修复完成后，应当将紧急修复分支合并到主分支和开发分支上。
 
 ```shell
-git b hotfix/route-missing main # 分支命名规则：hotfix/<place-problem>
+git bw hotfix/route-missing main # 分支命名规则：hotfix/<place-problem>
 
 cursor src/router/index.js
 

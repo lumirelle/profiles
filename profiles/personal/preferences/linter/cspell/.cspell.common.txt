@@ -31,6 +31,9 @@ Navicat
 -- terminal --
 pwsh
 
+-- git --
+amde
+
 -- editor --
 nvim
 
