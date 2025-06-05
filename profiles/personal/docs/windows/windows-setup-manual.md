@@ -80,6 +80,9 @@ BypassNRO.cmd
 - 安装我的个人配置
 
   ```shell
+  # 允许执行本地脚本
+  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
   # 启动 FNM 环境
   fnm env --use-on-cd --corepack-enabled --shell powershell | Out-String | Invoke-Expression
 
