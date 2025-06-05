@@ -28,7 +28,7 @@ fnm install 18
 ### 2. 安装必备全局依赖
 
 ```shell
-npm i nrm @antfu/ni nip hint -g
+npm i nrm @antfu/ni @antfu/nip hint -g
 
 # 如果你使用 node 18，推荐升级 npm 至 >= 10.9.2
 npm i npm@^10.9.2 -g
