@@ -9,10 +9,10 @@
 
 It's a pity that I haven't found a Chinese font that can adapt well to `0xProto` yet.
 
-Now, let's using `LXGW WenKai` instead first.
+Now, let's using `SJlurong` instead first.
 
 ```json
-"'0xProto, 'LXGW WenKai', 'Symbols Nerd Font', monospace"
+"'0xProto, 'SJlurong', 'Symbols Nerd Font', monospace"
 ```
 
 ## 📦 Other Nice Ones <a name="other"></a>
