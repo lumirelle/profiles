@@ -7,12 +7,12 @@
 
 ## 👫 Your Best Coding Friends <a name='coding'></a>
 
-It's a pity that I haven't found a Chinese font that can adapt well to `Monaspace Xenon` yet.
+It's a pity that I haven't found a Chinese font that can adapt well to `0xProto` yet.
 
 Now, let's using `LXGW WenKai` instead first.
 
 ```json
-"'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monospace"
+"'0xProto, 'LXGW WenKai', 'Symbols Nerd Font', monospace"
 ```
 
 ## 📦 Other Nice Ones <a name="other"></a>
@@ -20,6 +20,7 @@ Now, let's using `LXGW WenKai` instead first.
 Waiting for trial!
 
 - For Reading: `Caslon`
+- For Coding: `Monaspace Xenon`
 
 ## 📑 Preview
 

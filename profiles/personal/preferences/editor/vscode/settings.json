@@ -4,7 +4,7 @@
   // ↓↓ vscode: ui
   // -- general
   "window.zoomLevel": 1.1,
-  "editor.fontFamily": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monospace",
+  "editor.fontFamily": "'0xProto', 'LXGW WenKai', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.lineNumbers": "interval",
   "editor.rulers": [80, 120],
@@ -193,9 +193,9 @@
   "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
 
   // ↓↓ extensions: ui
-  "custom-ui-style.font.sansSerif": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', sans-serif",
-  "custom-ui-style.font.monospace": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monaspace",
-  "markdown.preview.fontFamily": "'Monaspace Xenon Frozen', 'LXGW WenKai', 'Symbols Nerd Font', monospace",
+  "custom-ui-style.font.sansSerif": "'0xProto', 'LXGW WenKai', 'Symbols Nerd Font', sans-serif",
+  "custom-ui-style.font.monospace": "'0xProto', 'LXGW WenKai', 'Symbols Nerd Font', monaspace",
+  "markdown.preview.fontFamily": "'0xProto', 'LXGW WenKai', 'Symbols Nerd Font', monospace",
   "markdown.preview.fontSize": 16,
   "fileNestingUpdater.promptOnAutoUpdate": false,
 
