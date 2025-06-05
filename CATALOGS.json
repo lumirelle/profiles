@@ -6,8 +6,7 @@
           "git-manual.md": null
         },
         "life": {
-          "prefabricated-dish-manual.md": null,
-          "web-front-end-manual.md": null
+          "prefabricated-dish-manual.md": null
         },
         "nodejs": {
           "nodejs-manual.md": null,
@@ -19,6 +18,9 @@
           "nuxt2-manual.md": null,
           "nuxt2-optimization-manual.md": null,
           "nuxt2-specification-manual.md": null
+        },
+        "technique": {
+          "web-front-end-manual.md": null
         },
         "vue": {
           "vue2-optimization-manual.md": null,

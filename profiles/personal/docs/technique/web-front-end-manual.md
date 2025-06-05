@@ -1,37 +1,65 @@
-# Front End Manual
+# Web Front End Manual
 
-## TOC
+## 📚 TOC
 
-- [规范化开发](#normalize)
-- [前端技术发展过程](#tech-development)
-- [CSS 框架](#css-framework)
-- [用户界面构建框架 & 应用框架 & 组件库](#frameworks)
-- Vue.js（用户界面构建框架）
-  - Vue 响应式系统
-  - Vue 生命周期
-  - Vue 渲染机制和渲染函数
-  - Vue 内置组件
-  - Vue 性能优化
-  - Vue Router
-  - Vuex、Pinia
-  - CSR、SSR、SSG 渲染模式
-  - Nuxt.js（适用于 Vue.js 的应用框架）
-  - Element UI/Plus（适用于 Vue.js 的组件库）
-  - Vant（适用于 Vue.js 的移动端组件库）
+- [规范开发](#normalize)
+
+- [前端技术发展](#tech-development)
+
+- HTML & CSS & JS
+
+  - 必学滴 Flex 布局
+  - 必学滴 Grid 布局
+
+- [框架](#framework)
+
+  - JS 框架
+  - [CSS 框架](#css-framework)
+  - [UI 构建框架 & 应用框架 & 组件库](#ui-framework)
+
+  - Vue.js（用户界面构建框架）
+    - Vue 响应式系统
+    - Vue 生命周期
+    - Vue 渲染机制和渲染函数
+    - Vue 内置组件
+    - Vue 性能优化
+    - Vue Router
+    - Vuex、Pinia
+    - CSR、SSR、SSG 渲染模式
+    - Nuxt.js（适用于 Vue.js 的应用框架）
+    - Element UI/Plus（适用于 Vue.js 的组件库）
+    - Vant（适用于 Vue.js 的移动端组件库）
+
 - [前端项目工程化](#engineering)
-  - TS
-  - [模块化](#module)
-  - [构建工具](#build)
-    - Webpack
-    - Vite
+
+  - JS & TS
+  - [模块化](#modularization)
+
+  - [工具生态](#tool-ecosystem)
+
+    - Parser
+    - Transformer
+    - Test runner
+    - Linter
+    - Formatter
+
+    - [Bundler](#bundler)
+
+      - Webpack
+      - Vite
+
+    - Monorepo tool
+    - Runtime
+    - Package manager
+
   - [CSS 预处理](#pre-css)
   - [CSS 后处理](#post-css)
-  - [Babel](#babel)
+
   - [设备屏幕兼容](#screen-comp)
     - [设备像素 & 逻辑像素](#dpx-lpx)
     - [rem & postcss-pxtorem](#rem)
-  - 测试工具
-- 工具库
+
+- 必会滴工具库
   - cross-env
   - Axios
   - Day.js
@@ -43,17 +71,15 @@
   - JS Cookie
   - NProgress
   - ECharts
-- 杂项
-  - JSON Schema
 
-## 规范开发 <a name="normalize"></a>
+## 👩🏼‍💻 规范开发 <a name="normalize"></a>
 
-- 代码规范：使用 editorconfig + eslint + stylelint + prettier
-- 提交规范：使用 husky
-- 开发环境规范：使用 corepack/volta + npm/pnpm/yarn
-- 配置文件：<https://github.com/Lyana-nullptr/profiles>
+- 代码规范：使用 editorconfig + eslint + stylelint
+- 提交规范：使用 simple-git-hook + commitlint
+- 开发环境规范：使用 fnm + corepack + npm/pnpm/yarn
+- 配置文件：<https://github.com/Lumirelle/profiles>
 
-## 前端技术发展过程 <a name="tech-development"></a>
+## 🚀 前端技术发展 <a name="tech-development"></a>
 
 1990 年 12 月，Tim Berners-Lee 创造了万维网（World Wide Web）和 HTML，与随后诞生的 CSS、JavaScript
 技术，一同标志着静态网页技术的诞生。
@@ -75,14 +101,18 @@ React.js、Vue.js 随之诞生，带来了 MVP、MVVM 等前端项目架构，�
 
 2010 年，基于 V8 引擎的 Node.js JavaScript 运行时诞生，为前端项目带来了服务端能力。SPA 客户端侧渲染（CSR）导致
 SEO 不友好、网页白屏时间长、界面渲染慢等问题得到缓解，基于 Vue.js、React.js 生态的应用框架 Nuxt.js、Next.js
-诞生，提供了服务端侧渲染（SSR）的解决方案。
+诞生，提供了服务端侧渲染（SSR）的解决方案。也因此，衍生出了基于前端技术的全栈开发、跨平台原生开发。
 
-## CSS 框架 <a name="css-framework"></a>
+## 🏹 框架 <a name="framework"></a>
+
+### CSS 框架 <a name="css-framework"></a>
+
+基于原子化 CSS 的概念诞生了如下 CSS 框架：
 
 - Bootstrap
 - Tailwind
 
-## 用户界面构建框架 & 应用框架 & 组件库 <a name="frameworks"></a>
+### UI 构建框架 & 应用框架 & 组件库 <a name="ui-framework"></a>
 
 用户界面构建框架：
 
@@ -104,9 +134,9 @@ SEO 不友好、网页白屏时间长、界面渲染慢等问题得到缓解，�
 
   其下组件库：Element UI/Element Plus、Vuetify、Ant Design Vue、Vant
 
-## 前端项目工程化 <a name="engineering"></a>
+## 📏 前端项目工程化 <a name="engineering"></a>
 
-### 模块化 <a name="module"></a>
+### 模块化 <a name="modularization"></a>
 
 随着前端技术的发展和项目代码量的膨胀，外联 JS 的方式已经无法满足组织项目代码的需求，由 RequireJS 带来的 AMD
 规范和 Sea.js 带来的 CMD 规范随之诞生，二者使用异步模块加载方式，带来了 JS 模块化。
@@ -114,7 +144,17 @@ SEO 不友好、网页白屏时间长、界面渲染慢等问题得到缓解，�
 随着 Node.js 的兴起，CommonJS 模块化规范成为主流，采用同步模块加载方式。2015 年，JS 官方模块化规范 ESM
 才姗姗来迟，同时支持同步和异步模块加载方式，成为了现今最流行的模块化规范。
 
-### 构建工具 <a name="build"></a>
+### 工具生态 <a name="tool-ecosystem"></a>
+
+- Parser: babel / acorn / esbuild / espree / flow / TS / swc / uglify-js
+- Transformer: babel / esbuild / swc / sucrase / TS
+- Test runner: mocha / jasmine / tape / ava / jest
+- Linter: jshint / eslint / biome / hint
+- Formatter: prettier / eslint
+- Bundler: webpack / rollup / esbuild / parcel
+- Monorepo tools: nx / tuborepo / rush / lerna / lage / wireit
+
+#### Bundler <a name="bundler"></a>
 
 构建，最终的目标是将源代码转换为生产环境下的代码。围绕着这个终极目标，我们需要使用构建工具的模块打包、代码压缩、代码分割、树摇优化等功能，优化产出的代码。
 
@@ -151,10 +191,6 @@ Postcss 是一个支持插件的 CSS 后处理器，能为开发人员解决浏�
 
 - autoprefixer
 - postcss-pxtorem
-
-### Babel <a name="babel"></a>
-
-Babel 是一个 JS 编译器，可以将 ES6+ 规范的代码编译为 ES5 规范的代码，解决浏览器兼容问题。
 
 ### 设备屏幕兼容 <a name="screen-comp"></a>
 
