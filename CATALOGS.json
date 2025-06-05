@@ -2,33 +2,43 @@
   "profiles": {
     "personal": {
       "docs": {
-        "git": {
-          "git-manual.md": null
+        "js": {
+          "framework": {
+            "nuxt": {
+              "nuxt2-manual.md": null,
+              "nuxt2-optimization-manual.md": null,
+              "nuxt2-specification-manual.md": null
+            },
+            "vue": {
+              "vue2-optimization-manual.md": null,
+              "vue2-specification-manual.md": null,
+              "vue3-specification-manual.md": null
+            }
+          },
+          "runtime": {
+            "nodejs": {
+              "nodejs-manual.md": null,
+              "nodejs-pm-npm-manual.md": null,
+              "nodejs-pm-pnpm-manual.md": null,
+              "nodejs-pm-yarn-manual.md": null
+            }
+          }
         },
         "life": {
           "prefabricated-dish-manual.md": null
         },
-        "nodejs": {
-          "nodejs-manual.md": null,
-          "nodejs-pm-npm-manual.md": null,
-          "nodejs-pm-pnpm-manual.md": null,
-          "nodejs-pm-yarn-manual.md": null
-        },
-        "nuxt": {
-          "nuxt2-manual.md": null,
-          "nuxt2-optimization-manual.md": null,
-          "nuxt2-specification-manual.md": null
+        "os": {
+          "windows": {
+            "windows-setup-manual.md": null
+          }
         },
         "technique": {
           "web-front-end-manual.md": null
         },
-        "vue": {
-          "vue2-optimization-manual.md": null,
-          "vue2-specification-manual.md": null,
-          "vue3-specification-manual.md": null
-        },
-        "windows": {
-          "windows-setup-manual.md": null
+        "vcs": {
+          "git": {
+            "git-manual.md": null
+          }
         }
       },
       "preferences": {
@@ -194,8 +204,6 @@
       "resources": {
         "fonts": {
           "0xProto.url": null,
-          "LxgwWenKai.url": null,
-          "Monaspace.url": null,
           "NerdFontsSymbolsOnly.zip": null,
           "README.md": null,
           "SJlurongti.zip": null

@@ -1,22 +1,22 @@
-# Nuxt.js 2 手册 Nuxt.js 2 Manual
+# Nuxt.js 2 手册 / Nuxt.js 2 Manual
 
 Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-Using node@18.20.8, npm@10.9.2, pnpm@10.9.0.
+This article base on node@18.20.8, npm@10.9.2, pnpm@10.11.1.
 
 Main dependencies:
 
-- nuxt@^2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
+- nuxt@^2.18.1 (Integrated with vue@^2, webpack@^4, babel@^7, core-js@^3)
 - eslint@latest, stylelint@latest
 
-## 为什么使用？ Why use it?
+## 📑 为什么使用？ / Why use it?
 
 1. 基于 Vue.js 生态
 2. 模块化功能，无需重复造轮子
 3. 高性能和默认的应用优化
 4. 封装好的 SSR 渲染模式，开箱即用，SEO 友好
 
-## 依赖 Dependency
+## 📦 依赖 / Dependency
 
 核心支持:
 
@@ -39,9 +39,9 @@ Main dependencies:
 - @nuxt/loading-screen: 项目启动页面
 - @nuxt/telemetry: Nuxt.js 遥测数据收集
 
-## 最佳使用！ Best practice
+## 最佳使用！ / Best practice!
 
-### 1. 配置！ Setup
+### 1. 配置！ / Setup!
 
 基于任意的 Nuxt.js 2 项目模板依照 [Nuxt.js 2 Specification Manual](nuxt2-specification-manual.md) 完成基础设置。
 
@@ -165,11 +165,12 @@ export default {
   build: {
     cache: false,
     parallel: true,
+    // If you want to use element ui
     transpile: [/^element-ui/],
 
     // Babel
     babel: {
-      // 按需导入 element-ui 样式
+      // 按需导入 element-ui 样式 scss
       plugins: [
         [
           'component',
@@ -224,7 +225,9 @@ export default {
           terserOptions: {
             // 移除 console.*
             compress: { drop_console: true },
-            mangle: true, // 混淆变量名
+            // 混淆变量名
+            mangle: true,
+            // 去除注释 & 压缩代码
             output: { comments: false, beautify: false },
           },
         }
@@ -236,7 +239,6 @@ export default {
     //     preset: 'nuxt',
     //     ignores: [
     //       // 添加你需要忽略的文件... / Add files you need to ignore...
-    //       'app.html',
     //       '**/*.scss',
     //     ],
     //     important: [
@@ -246,11 +248,6 @@ export default {
     // ],
 
     // Webpack Optimization Configuration
-    splitChunks: {
-      layouts: false,
-      pages: true,
-      commons: true,
-    },
     optimization: {
       splitChunks: {
         chunks: 'all',

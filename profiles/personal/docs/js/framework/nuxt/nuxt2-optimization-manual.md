@@ -1,8 +1,8 @@
-# Nuxt.js 2 优化手册 Nuxt.js 2 Optimization Manual
+# Nuxt.js 2 优化手册 / Nuxt.js 2 Optimization Manual
 
 Requires node@'^18.18.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-Using node@18.20.8, npm@10.9.2, pnpm@10.9.0.
+This article base on node@18.20.8, npm@10.9.2, pnpm@10.11.1.
 
 Main dependencies:
 
@@ -81,7 +81,9 @@ export default {
           terserOptions: {
             // 移除 console.*
             compress: { drop_console: true },
-            mangle: true, // 混淆变量名
+            // 混淆变量名
+            mangle: true,
+            // 去除注释 & 压缩代码
             output: { comments: false, beautify: false },
           },
         }
@@ -102,11 +104,6 @@ export default {
     // ],
 
     // Webpack Optimization Configuration
-    splitChunks: {
-      layouts: false,
-      pages: true,
-      commons: true,
-    },
     optimization: {
       splitChunks: {
         chunks: 'all',

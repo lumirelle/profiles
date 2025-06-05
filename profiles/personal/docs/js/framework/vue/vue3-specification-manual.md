@@ -1,54 +1,57 @@
-# Vue.js 2 规范手册 Vue.js 2 Specification Manual
+# Vue.js 3 规范手册 Vue.js / 3 Specification Manual
 
 Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-Using node@18.20.8, npm@10.9.2, pnpm@10.9.0.
+This article base on node@18.20.8, npm@10.9.2, pnpm@10.9.0.
 
 Main dependencies:
 
-- vue@^2.7.16, vue-cli@^4 (webpack@^4, babel@^7, core-js@^3)
+- vue@latest, vite@latest (@vitejs/plugin-vue@latest)
 - eslint@latest, stylelint@latest
 
 ## 0. 更新 vscode 配置 和 git 配置
 
 ### 快速配置
 
-shell（For command `pcp`, please see [README.md#script_setup](../../README.md#script_setup)）
+shell（For command `pp`, please see [README.md#script_setup](../../../../../../README.md#script_setup)）
 
 ```shell
-pcp vscode-ws/extensions.vue.jsonc .vscode/extensions.json -o
-pcp vscode-ws/settings.vue.jsonc .vscode/settings.json -o
-pcp nodejs/jsconfig.json -o
-pcp .editorconfig -o
-pcp .gitattributes -o
-pcp nodejs/.gitignore -o
+pp vue/extensions.json .vscode/ -o
+pp vue/settings.json .vscode/ -o
+
+pp vue/jsconfig.json -o
+
+pp .editorconfig -o
+
+pp .gitattributes -o
+pp nodejs.gitignore .gitignore -o
 ```
 
 ### 手动配置
 
 .vscode/extensions.json
 
-See [here](../../for-personal/preferences/vscode-ws/extensions.vue.jsonc).
+See [here](../../../../preferences/editor/vscode-workspace/vue/extensions.json).
 
 .vscode/settings.json
 
-See [here](../../for-personal/preferences/vscode-ws/settings.vue.jsonc).
+See [here](../../../../preferences/editor/vscode-workspace/vue/settings.json).
 
 jsconfig.json
 
-See [here](../../for-personal/constraint/nodejs/jsconfig.json).
+See [here](../../../../preferences/editor/vscode-workspace/vue/jsconfig.json).
 
 .editorconfig
 
-See [here](../../for-personal/constraint/common/.editorconfig).
+See [here](../../../../preferences/editor/.editorconfig).
 
 .gitattributes
 
-See [here](../../for-personal/constraint/nodejs/.gitattributes).
+See [here](../../../../preferences/vcs/git/.gitattributes).
 
 .gitignore
 
-See [here](../../for-personal/constraint/nodejs/.gitignore).
+See [here](../../../../preferences/vcs/git/nodejs.gitignore).
 
 ## 1. 配置包管理器和 .npmrc
 
@@ -70,10 +73,7 @@ corepack use pnpm@latest-10
 
 npm pkg set 'engines.node=^18.12.0 || ^20.9.0 || >=22' 'engines.npm=>=9' 'engines.pnpm=>=7' 'engines.yarn=Please use pnpm for instead!'
 
-npm pkg set 'pnpm.overrides.@achrinza/node-ipc=9.2.9'
-npm pkg set 'overrides.@achrinza/node-ipc=9.2.9'
-
-pcp nodejs/.npmrc -o
+pp npm/.npmrc -o
 ```
 
 ### 手动配置
@@ -85,7 +85,7 @@ package.json
   // ...
 
   // Used by corepack
-  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
+  "packageManager": "pnpm@10.11.1",
   "engines": {
     "node": "^18.12.0 || ^20.9.0 || >=22",
     "npm": ">=9",
@@ -97,38 +97,17 @@ package.json
 }
 ```
 
-为兼容 node 版本，还需要配置 pnpm.overrides（requires pnpm@>=6.25.0）或 overrides（requires npm@>=8.3.0）
-
-package.json
-
-```json
-{
-  // ...
-
-  "pnpm": {
-    "overrides": {
-      "@achrinza/node-ipc": "9.2.9"
-    }
-  },
-  "overrides": {
-    "@achrinza/node-ipc": "9.2.9"
-  }
-
-  // ...
-}
-```
-
 .npmrc
 
-See [here](../../for-personal/constraint/nodejs/.npmrc).
+See [here](../../../../preferences/package-manager/npm/.npmrc).
 
 ## 2. 基础依赖升级
 
 shell
 
 ```shell
-ni vue@^2.7.16 vue-router@legacy vuex@^3.6.2 core-js@latest
-ni @vue/cli-service@^4.5.19 @vue/cli-plugin-babel@latest vue-template-compiler@latest -D
+ni vue@latest vue-router@latest pinia@latest
+ni vite@latest @vitejs/plugin-vue@latest -D
 ```
 
 ## 3. 设置代码检查与格式化
@@ -149,14 +128,14 @@ ni eslint@latest @antfu/eslint-config@latest eslint-plugin-format@latest @pretti
 shell
 
 ```shell
-pcp vue2/eslint.config.mjs -o
+pp vue3/eslint.config.mjs -o
 ```
 
 ### 手动配置
 
 eslint.config.mjs
 
-See [here](../../for-personal/constraint/vue2/eslint.config.mjs).
+See [here](../../../../preferences/linter/eslint/vue3/eslint.config.mjs).
 
 ## 4. 设置样式检查与格式化
 
@@ -176,14 +155,14 @@ ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-stand
 shell
 
 ```shell
-pcp vue/stylelint.config.mjs -o
+pp vue/stylelint.config.mjs -o
 ```
 
 ### 手动配置
 
 stylelint.config.mjs
 
-See [here](../../for-personal/constraint/vue/stylelint.config.mjs).
+See [here](../../../../preferences/linter/stylelint/vue/stylelint.config.mjs).
 
 ## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
@@ -195,8 +174,8 @@ shell
 # 限制 node 版本的罪魁祸首！
 nun node-sass
 
-# sass 和 sass-loader
-ni sass@latest sass-loader@version-10 -D
+# sass
+ni sass@latest -D
 ```
 
 ### 手动配置
@@ -208,7 +187,7 @@ module.exports = {
   // ...
 
   css: {
-    loaderOptions: {
+    preprocessorOptions: {
       scss: {
         sassOptions: {
           // scss 支持本身不需要任何配置
@@ -295,7 +274,7 @@ npm pkg set 'simple-git-hooks.pre-commit=npx lint-staged'
 npm pkg set 'lint-staged.*=eslint --fix'
 npm pkg set 'lint-staged[*.{css,postcss,scss,html,vue}]=stylelint --cache --fix'
 
-pcp nodejs/commitlint.config.mjs -o
+pp commitlint/commitlint.config.mjs -o
 ```
 
 ### 手动配置
@@ -327,4 +306,4 @@ package.json（配置 simple-git-hooks）
 
 commitlint.config.mjs
 
-See [here](../../for-personal/constraint/nodejs/commitlint.config.mjs).
+See [here](../../../../preferences/linter/commitlint/commitlint.config.mjs).

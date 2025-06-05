@@ -57,12 +57,16 @@ taze
 commitlint
 lintstagedrc
 changelogithub
+adduser
+preprod
 
 -- third party platform --
 iconfont
 aliyun
 opencollective
 ITELLYOU
+taobao
+cnpm
 
 -- others --
 nologo
