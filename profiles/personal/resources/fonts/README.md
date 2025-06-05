@@ -20,7 +20,6 @@ Now, let's using `SJlurong` instead first.
 Waiting for trial!
 
 - For Reading: `Caslon`
-- For Coding: `Monaspace Xenon`
 
 ## 📑 Preview
 
