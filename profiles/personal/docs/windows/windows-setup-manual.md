@@ -9,15 +9,24 @@
 > 注意：Ventoy 默认跳过了 Windows 系统的设备检测和联网激活，如你不小心联网，可以通过拔掉网线再登录的方式实现本地账户登录。
 
 - 插入 U 盘，下载并安装 [Ventoy](https://www.ventoy.net/cn/download.html)，安装过程遵循[官方说明](https://www.ventoy.net/cn/doc_start.html)
-- 下载并安装 BT 工具[qBittorrent 增强版](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
-- 设置 Tracker <https://fastly.jsdelivr.net/gh/XIU2/TrackersListCollection/all.txt>
-- 使用 BT 工具下载 Windows ISO（推荐专业版），并放入 U 盘（如你正在使用 VPN，推荐切换到直连模式）
+- 从 Microsoft 官网下载 ISO
 
-  - [Windows 11 ISO](https://next.itellyou.cn/Original/#cbp=Product?ID=42e87ac8-9cd6-eb11-bdf8-e0d4e850c9c6)
-  - [Windows 10 ISO](https://next.itellyou.cn/Original/#cbp=Product?ID=f905b2d9-11e7-4ee3-8b52-407a8befe8d1)
-  - [其他](https://next.itellyou.cn/Original/#)
+  - 访问 Microsoft 官网，下载适用于你的设备的 Windows 磁盘映像 (ISO)
 
-- （可选）在 U 盘中准备必要的软件及配置
+    - [Windows 11 ISO](https://www.microsoft.com/zh-cn/software-download/windows11)
+    - [Windows 10 ISO](https://www.microsoft.com/zh-cn/software-download/windows10)
+
+- （可选）从 NEXT, ITELLYOU 下载特定的版本的 ISO
+
+  - 下载并安装 BT 工具 [qBittorrent 增强版](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
+  - 设置 Tracker <https://fastly.jsdelivr.net/gh/XIU2/TrackersListCollection/all.txt>
+  - 使用 BT 工具下载 Windows ISO（推荐专业版），并放入 U 盘（如你正在使用 VPN，推荐切换到直连模式）
+
+    - [Windows 11 ISO](https://next.itellyou.cn/Original/#cbp=Product?ID=42e87ac8-9cd6-eb11-bdf8-e0d4e850c9c6)
+    - [Windows 10 ISO](https://next.itellyou.cn/Original/#cbp=Product?ID=f905b2d9-11e7-4ee3-8b52-407a8befe8d1)
+    - [其他](https://next.itellyou.cn/Original/#)
+
+- 在 U 盘中准备必要的软件及配置
 - 通过 U 盘启动，选择 Ventoy 中的 Windows ISO 文件，启动执行引导程序，选择安装专业版系统，等待系统安装完毕
 
 ### 方法二：重置电脑来重装系统
@@ -41,15 +50,15 @@ BypassNRO.cmd
 
 - 卸载系统捆绑软件（如：Office365、微软电脑管家等）
 - 关闭 Windows Defender 的所有防病毒功能
-- 安装火绒并重启系统
+- 安装火绒并**重启系统**
 
-  | 软件名称 | 来源/安装                       |
+  | 软件名称 | 来源/安装命令                   |
   | -------- | ------------------------------- |
   | 火绒     | <https://www.huorong.cn/person> |
 
 - 使用 Windows 11 轻松设置关闭防火墙、调整系统设置、卸载内置软件（Windows 10 可用）并重启
 
-  | 软件名称            | 来源/安装                                          |
+  | 软件名称            | 来源/安装命令                                      |
   | ------------------- | -------------------------------------------------- |
   | Windows 11 轻松设置 | <https://www.bilibili.com/opus/904672369138729017> |
 
@@ -57,15 +66,15 @@ BypassNRO.cmd
 
 - 安装 Clash for Windows，搭梯子！
 
-  | 软件名称          | 来源/安装                                                     |
+  | 软件名称          | 来源/安装命令                                                 |
   | ----------------- | ------------------------------------------------------------- |
   | Clash for Windows | <https://github.com/clashdownload/Clash_for_Windows/releases> |
 
 ### 步骤三：安装个人配置
 
-- 准备运行环境并重启电脑
+- 准备运行环境
 
-  | 软件名称         | 来源/安装                                                  |
+  | 软件名称         | 来源/安装命令                                              |
   | ---------------- | ---------------------------------------------------------- |
   | Windows Terminal | <https://apps.microsoft.com/detail/9n0dx20hk701>           |
   | PowerShell 7     | <https://github.com/PowerShell/PowerShell/releases/latest> |
@@ -73,13 +82,13 @@ BypassNRO.cmd
   | gsudo            | `winget install gerardog.gsudo`                            |
   | fnm              | `winget install Schniz.fnm`                                |
 
-- 修改系统环境变量 PATH 并重启
+- 修改系统环境变量 PATH
 
   如果安装的是较新版的 Windows 11，请务必将 gsudo 放于 PATH 的最前面，防止被系统内置的垃圾残缺 sudo 命令覆盖。
 
 - 安装我的个人配置
 
-  ```shell
+  ```powershell
   # 允许执行本地脚本
   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
@@ -98,7 +107,7 @@ BypassNRO.cmd
 
 - 按顺序安装并配置剩余的基建软件：
 
-  | 软件名称                        | 来源/安装                                                                  | 备注                                               |
+  | 软件名称                        | 来源/安装命令                                                              | 备注                                               |
   | ------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------- |
   | Brave                           | <https://brave.com/download/>                                              |                                                    |
   | uTools                          | <https://www.u-tools.cn/download/>                                         |                                                    |
@@ -118,7 +127,7 @@ BypassNRO.cmd
 
 - 按顺序安装如下工具软件：
 
-  | 软件名称         | 来源/安装                                              |
+  | 软件名称         | 来源/安装命令                                          |
   | ---------------- | ------------------------------------------------------ |
   | 微信             | <https://pc.weixin.qq.com/>                            |
   | QQ               | <https://im.qq.com/pcqq/index.shtml>                   |
@@ -134,7 +143,7 @@ BypassNRO.cmd
 
 - 按顺序安装如下开发环境：
 
-  | 软件名称             | 来源/安装                                                              |
+  | 软件名称             | 来源/安装命令                                                          |
   | -------------------- | ---------------------------------------------------------------------- |
   | Mingw-w64            | <https://github.com/niXman/mingw-builds-binaries/releases/latest>      |
   | Neovim               | `winget install Neovim.Neovim`                                         |
@@ -149,35 +158,40 @@ BypassNRO.cmd
 
 - （可选）安装配置其他软件
 
-  | 软件名称             | 来源/安装                                                          | 备注                |
-  | -------------------- | ------------------------------------------------------------------ | ------------------- |
-  | Ventoy               | <https://github.com/ventoy/Ventoy/releases>                        |                     |
-  | qBittorrent Enhanced | <https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases> |                     |
-  | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |                     |
-  | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |                     |
-  | PDF SAM              | <https://pdfsam.org/zh/download-pdfsam-basic/>                     | PDF 拆分 & 合并工具 |
+  | 软件名称             | 来源/安装命令                                                      |
+  | -------------------- | ------------------------------------------------------------------ |
+  | Ventoy               | <https://github.com/ventoy/Ventoy/releases>                        |
+  | qBittorrent Enhanced | <https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases> |
+  | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |
+  | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |
+  | PDF SAM              | <https://pdfsam.org/zh/download-pdfsam-basic/>                     |
 
-### 步骤五：配置浏览器
+- 再次安装我的个人配置。安装配置中添加了“工具不存在则不生成配置”的设定，因此推荐在完成应用安装后再次执行配置安装。
+
+```powershell
+sudo pi -o
+```
+
+### 步骤五：配置 Brave 浏览器
 
 - 安装实用扩展（注意：`篡改猴` 扩展需要您启用开发者模式）
 
-  | 扩展名称      | 来源/安装（空白同上） |
-  | ------------- | --------------------- |
-  | 篡改猴        | Chrome 扩展商店       |
-  | ChromeKeePass |                       |
-  | Dark Reader   |                       |
-  | 沉浸式翻译    |                       |
-  | Grammarly     |                       |
+  | 扩展名称      | 来源/安装命令（空白同上） |
+  | ------------- | ------------------------- |
+  | 篡改猴        | Chrome 扩展商店           |
+  | ChromeKeePass |                           |
+  | Dark Reader   |                           |
+  | 沉浸式翻译    |                           |
+  | Grammarly     |                           |
 
-  - 安装开发扩展（注意：`篡改猴` 扩展需要您启用开发者模式）
+- 安装开发扩展
 
-  | 扩展名称                         | 来源/安装（空白同上）                 |
+  | 扩展名称                         | 来源/安装命令（空白同上）             |
   | -------------------------------- | ------------------------------------- |
   | Vue.js devtools                  | Chrome 扩展商店                       |
   | Vue.js devtools （Legacy）       |                                       |
   | Cookie Editor                    | Key：ookdjilphngeeeghgngjabigmpepanpl |
-  | SEO META in 1 CLICK              |                                       |
-  | Designer Tools                   |                                       |
+  | SEO META in 1 CLICK              | TEST NEEDED                           |
   | Refined Github                   |                                       |
   | File Icons for GitHub and GitLab |                                       |
 
@@ -185,7 +199,7 @@ BypassNRO.cmd
 
 - （可选）使用 HEU KMS Activator 激活 Windows
 
-  | 软件名称          | 来源/安装                                             |
+  | 软件名称          | 来源/安装命令                                         |
   | ----------------- | ----------------------------------------------------- |
   | HEU KMS Activator | <https://github.com/zbezj/HEU_KMS_Activator/releases> |
 
@@ -200,6 +214,10 @@ BypassNRO.cmd
   - `C:/Program Files (x86)/`：x86 程序安装路径
   - `C:/Program Files Portable/`：便携程序安装路径
   - `C:/Users/Lumirelle/AppData/Local/Programs/`：用户级程序安装路径
+
+- 项目文件只允许放置在如下路径：
+
+  - `D:/Projects/`
 
 - 定期使用 Revo Uninstaller 卸载无用软件
 - 定期使用 DISM++ 清理系统

@@ -59,6 +59,7 @@ changelogithub
 iconfont
 aliyun
 opencollective
+ITELLYOU
 
 -- others --
 nologo
