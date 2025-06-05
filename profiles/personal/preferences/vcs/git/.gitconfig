@@ -105,6 +105,7 @@ sync-tag-remote-multiple = "!f() { git tag --list \"$1\" | xargs -I {} git push 
 list-remotes = remote --verbose
 fetch-prune-tags = fetch --prune-tags # We will clean up unused tags when specify command `*-prune-tags`
 pull-prune-tags = "!git fetch --prune-tags && git pull"
+pull-then-push = "!git pull-prune-tags && git push"
 # push
 delete-push = push --delete
 push-upstream = push --set-upstream
@@ -188,6 +189,7 @@ re = remote add
 f = fetch-prune-tags
 # pull: l
 l = pull-prune-tags
+lp = pull-then-push
 # push: p
 p = push
 xp = delete-push
