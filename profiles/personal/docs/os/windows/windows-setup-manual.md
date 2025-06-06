@@ -95,8 +95,8 @@ BypassNRO.cmd
   # 启动 FNM 环境
   fnm env --use-on-cd --corepack-enabled --shell powershell | Out-String | Invoke-Expression
 
-  # 安装 lts
-  fnm i lts
+  # 安装 22
+  fnm i 22
 
   # 安装个人配置
   npm i lumirelle-profiles -g
@@ -162,6 +162,7 @@ BypassNRO.cmd
   | -------------------- | ------------------------------------------------------------------ |
   | Ventoy               | <https://github.com/ventoy/Ventoy/releases>                        |
   | qBittorrent Enhanced | <https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases> |
+  | AIDE64               |                                                                    |
   | Crystal Disk Info    | <https://crystalmark.info/en/software/crystaldiskinfo/>            |
   | KeyboardSplitter     | <https://github.com/djlastnight/KeyboardSplitterXbox/releases>     |
   | PDF SAM              | <https://pdfsam.org/zh/download-pdfsam-basic/>                     |
