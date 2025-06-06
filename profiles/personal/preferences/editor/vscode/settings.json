@@ -6,7 +6,6 @@
   "window.zoomLevel": 1.1,
   "editor.fontFamily": "'0xProto', 'SJlurongti', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
-  "editor.lineNumbers": "interval",
   "editor.rulers": [80, 120],
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 120,
@@ -37,7 +36,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
-    "//": "Last update at 2025/6/5 15:43:02",
+    "//": "Last update at 6/6/2025, 9:30:22 AM",
     ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
     ".env": "*.env, .env.*, .envrc, env.d.ts",
     ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .lfsconfig, .mailmap, .git-blame*",
@@ -296,6 +295,8 @@
 
   // ↓↓ extensions: coding helper
   // -- views
+  "inlineFold.regex": "<svg(\\\\s*.*?\\\\s*)<\\/svg>",
+  "inlineFold.regexFlags": "gs",
   "todo-tree.general.tags": ["BUG", "FIXME", "TODO", "[ ]", "[x]", "NOTE"],
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "#eeeeee"

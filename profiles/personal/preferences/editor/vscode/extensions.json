@@ -3,10 +3,9 @@
   "recommendations": [
     // ↓↓ ui
     "antfu.theme-vitesse",
-    "pkief.material-icon-theme",
     "antfu.icons-carbon",
+    "pkief.material-icon-theme",
     "subframe7536.custom-ui-style",
-    "antfu.file-nesting",
 
     // ↓↓ project management
     // -- general
@@ -27,13 +26,13 @@
 
     // ↓↓ language & file support, formatter, linter, snippets
     // -- language & file support
-    "redhat.vscode-yaml",
     "remcohaszing.schemastore",
+    "redhat.vscode-yaml",
     "simonsiefke.svg-preview",
     "ms-vscode.powershell", // also the formatter & linter & snippets for powershell
+    "sandcastle.vscode-open",
     "ms-vscode.hexeditor",
     "brandonfowler.exe-runner",
-    "sandcastle.vscode-open",
     // -- formatter
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
@@ -47,12 +46,15 @@
 
     // ↓↓ coding helper
     // -- views
-    "oderwat.indent-rainbow",
-    "naumovs.color-highlight",
-    "antfu.array-index-inlay",
-    "usernamehw.errorlens",
-    "ibm.output-colorizer",
+    "antfu.file-nesting",
     "gruntfuggly.todo-tree",
+    "oderwat.indent-rainbow",
+    "vincaslt.highlight-matching-tag",
+    "naumovs.color-highlight",
+    "usernamehw.errorlens",
+    "antfu.array-index-inlay",
+    "moalamri.inline-fold",
+    "ibm.output-colorizer",
     // -- dev
     "antfu.smart-clicks",
     "albert.tabout",
@@ -63,7 +65,6 @@
     "tombonnike.vscode-status-bar-format-toggle",
     "visualstudioexptteam.vscodeintellicode",
     "visualstudioexptteam.intellicode-api-usage-examples",
-    "kurkuza.svg-shrink",
     "github.copilot", // NOTE: vscode only
     "github.copilot-chat", // NOTE: vscode only
     // -- test
