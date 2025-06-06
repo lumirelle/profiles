@@ -4,7 +4,7 @@
   // ↓↓ vscode: ui
   // -- general
   "window.zoomLevel": 1.1,
-  "editor.fontFamily": "'0xProto', 'SJlurongti', 'Symbols Nerd Font', monospace",
+  "editor.fontFamily": "'0xProto', '三极露融体', 'Symbols Nerd Font', monospace",
   "editor.fontSize": 18,
   "editor.rulers": [80, 120],
   "editor.wordWrap": "bounded",
@@ -191,9 +191,9 @@
   "[shellscript]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
 
   // ↓↓ extensions: ui
-  "custom-ui-style.font.sansSerif": "'0xProto', 'SJlurongti', 'Symbols Nerd Font', sans-serif",
-  "custom-ui-style.font.monospace": "'0xProto', 'SJlurongti', 'Symbols Nerd Font', monaspace",
-  "markdown.preview.fontFamily": "'0xProto', 'SJlurongti', 'Symbols Nerd Font', monospace",
+  "custom-ui-style.font.sansSerif": "'0xProto', '三极露融体', 'Symbols Nerd Font', sans-serif",
+  "custom-ui-style.font.monospace": "'0xProto', '三极露融体', 'Symbols Nerd Font', monaspace",
+  "markdown.preview.fontFamily": "'0xProto', '三极露融体', 'Symbols Nerd Font', monospace",
   "markdown.preview.fontSize": 16,
   "fileNestingUpdater.promptOnAutoUpdate": false,
 
