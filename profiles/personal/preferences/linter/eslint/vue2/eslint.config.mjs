@@ -74,6 +74,12 @@ export default antfu(
       'unicorn/prefer-node-protocol': 'off',
     },
   })
+  .override('antfu/vue/rules', {
+    rules: {
+      // Vue 2 recommends kebab-case for custom event names
+      'vue/custom-event-name-casing': ['error', 'kebab-case'],
+    },
+  })
   // FIXME: Fix these warnings progressively, because they are too many
   .override('antfu/javascript/rules', {
     rules: {
