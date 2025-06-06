@@ -14,6 +14,9 @@ export default antfu(
       vueVersion: 2,
     },
 
+    // Disable typescript support
+    typescript: false,
+
     // Enable formatters for html and markdown (requires `eslint-plugin-format`)
     formatters: {
       css: false, // Use stylelint instead
@@ -29,6 +32,7 @@ export default antfu(
       '**/assets/images',
       '**/assets/lang',
       '**/assets/langs',
+      '**/assets/json',
       '**/static',
       '**/public',
       '**/theme',

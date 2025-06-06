@@ -1,29 +1,36 @@
-# Nuxt.js 2 规范手册 Nuxt.js 2 Specification Manual
+# Nuxt.js 2 规范手册 / Nuxt.js 2 Specification Manual
 
 Requires node@'^18.18.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-This article base on node@18.20.8, npm@10.9.2, pnpm@10.11.1.
+This article is based on node@18.20.8, npm@10.9.2, corepack@0.32.0, pnpm@10.11.1.
 
 Main dependencies:
 
 - nuxt@^2.18.1 (vue@^2, webpack@^4, babel@^7, core-js@^3)
 - eslint@latest, stylelint@latest
+- simple-git-hooks@latest, lint-staged@latest, commitlint@latest
 
-## 0. 更新 vscode 配置和 git 配置
+## 🔧 更新 vscode 配置和 git 配置
 
 ### 快速配置
 
 shell（For command `pp`, please see [README.md#script_setup](../../../../../../README.md#script_setup)）
 
 ```shell
+# vscode 配置
+# -- 推荐扩展
 pp vue/extensions.json .vscode/ -o
+# -- 工作区设置
 pp vue/settings.json .vscode/ -o
-
+# -- js 编译器设置
 pp vue/jsconfig.json -o
-
+# -- 通用代码格式设置
 pp .editorconfig -o
 
+# git 配置
+# -- 文件属性
 pp .gitattributes -o
+# -- 忽略文件
 pp nodejs.gitignore .gitignore -o
 ```
 
@@ -53,7 +60,7 @@ See [here](../../../../preferences/vcs/git/.gitattributes).
 
 See [here](../../../../preferences/vcs/git/nodejs.gitignore).
 
-## 1. 配置包管理器和 .npmrc
+## 📦 配置包管理器和 .npmrc
 
 ### 前置任务
 
@@ -71,6 +78,10 @@ shell（This syntax of command `npm pkg set` requires npm@>=10.9.2）
 ```shell
 corepack use pnpm@latest-10
 
+# 本文所安装的依赖要求:
+# node 版本符合 ^18.12.0 || ^20.9.0 || >=22，
+# npm 版本符合 >=9
+# pnpm 版本符合 >=7
 npm pkg set 'engines.node=^18.12.0 || ^20.9.0 || >=22' 'engines.npm=>=9' 'engines.pnpm=>=7' 'engines.yarn=Please use pnpm for instead!'
 
 pp npm/.npmrc -o
@@ -85,7 +96,7 @@ package.json
   // ...
 
   // Used by corepack
-  "packageManager": "pnpm@10.11.1",
+  "packageManager": "pnpm@10.11.1+sha512.e519b9f7639869dc8d5c3c5dfef73b3f091094b0a006d7317353c72b124e80e1afd429732e28705ad6bfa1ee879c1fce46c128ccebd3192101f43dd67c667912",
   "engines": {
     "node": "^18.12.0 || ^20.9.0 || >=22",
     "npm": ">=9",
@@ -101,26 +112,31 @@ package.json
 
 See [here](../../../../preferences/package-manager/npm/.npmrc).
 
-## 2. 基础依赖升级
+## 🥡 基础依赖升级
 
 shell
 
 ```shell
+# nuxt
 ni nuxt@^2.18.1
 ni @nuxt/types@^2.18.1 -D
 ```
 
-## 3. 设置代码检查与格式化
+## 🌟 设置代码检查与格式化
 
-> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 ESLint 迁移为 Biome 了（等它完全支持 Vue）。
+> 真心期待前端有一个大统一的、完整的生态工具链！！！
 
 ### 前置任务
 
 shell
 
 ```shell
-# eslint & config & plugin
-ni eslint@latest @antfu/eslint-config@latest eslint-plugin-format@latest @prettier/plugin-xml@latest -D
+# eslint
+ni eslint@latest -D
+# eslint config
+ni @antfu/eslint-config@latest -D
+# eslint & prettier plugin
+ni eslint-plugin-format@latest @prettier/plugin-xml@latest -D
 ```
 
 ### 快速配置
@@ -137,17 +153,25 @@ eslint.config.mjs
 
 See [here](../../../../preferences/linter/eslint/vue2/eslint.config.mjs).
 
-## 4. 设置样式检查与格式化
+## ✨ 设置样式检查与格式化
 
-> 随着 Biome 功能逐渐稳定，我觉得很快就是时候把 Stylelint 迁移为 Biome 了（等它完全支持 Vue）。
+> 真心期待前端有一个大统一的、完整的生态工具链！！！
 
 ### 前置任务
 
 shell
 
 ```shell
-# stylelint & configs，捆绑了 stylelint-scss、stylelint-order，以及 postcss 处理器
-ni stylelint@latest stylelint-config-standard-scss@latest stylelint-config-standard-vue@latest stylelint-config-recess-order@latest @stylistic/stylelint-config@latest stylelint-config-html@latest -D
+# stylelint
+ni stylelint@latest -D
+# stylelint config for scss
+ni stylelint-config-standard-scss@latest -D
+# stylelint config for vue
+ni stylelint-config-standard-vue@latest -D
+# stylelint config for stylistic
+ni @stylistic/stylelint-config@latest stylelint-config-recess-order@latest -D
+# stylelint config for html
+ni stylelint-config-html@latest -D
 ```
 
 ### 快速配置
@@ -164,7 +188,111 @@ stylelint.config.mjs
 
 See [here](../../../../preferences/linter/stylelint/vue/stylelint.config.mjs).
 
-## 5. 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
+## 📜 配置 npm 快速检查与格式化脚本
+
+### 前置任务
+
+shell
+
+```shell
+ni npm-run-all2@latest -D
+```
+
+### 快速配置
+
+shell
+
+```shell
+npm pkg set 'scripts.lint=run-s lint:*'
+npm pkg set 'scripts.lint:js=eslint --cache .'
+npm pkg set 'scripts.lint:style=stylelint --cache **/*.{css,postcss,scss,html,vue}'
+npm pkg set 'scripts.fix=run-s fix:*'
+npm pkg set 'scripts.fix:js=eslint --cache --fix .'
+npm pkg set 'scripts.fix:style=stylelint --cache --fix **/*.{css,postcss,scss,html,vue}'
+```
+
+### 手动配置
+
+package.json
+
+```json
+{
+  // ...
+  "scripts": {
+    // ...
+
+    "lint": "run-s lint:*",
+    "lint:js": "eslint --cache .",
+    "lint:style": "stylelint --cache **/*.{css,postcss,scss,html,vue}",
+    "fix": "run-s fix:*",
+    "fix:js": "eslint --cache --fix .",
+    "fix:style": "stylelint --cache --fix **/*.{css,postcss,scss,html,vue}"
+
+    // ...
+  }
+}
+```
+
+## 🤖 配置提交检查与格式化
+
+### 前置任务
+
+shell
+
+```shell
+# The performance of `simple-git-hooks` is much better than `husky`
+ni simple-git-hooks@latest -D
+# lint-staged & commitlint
+ni lint-staged@latest @commitlint/cli@latest @commitlint/config-conventional@latest -D
+```
+
+### 快速配置
+
+shell
+
+```shell
+npm pkg set 'scripts.prepare=simple-git-hooks'
+npm pkg set 'simple-git-hooks.pre-commit=npx lint-staged'
+npm pkg set 'simple-git-hooks.commit-msg=npx commitlint --edit $1'
+npm pkg set 'lint-staged.*=eslint --fix'
+npm pkg set 'lint-staged[*.{css,postcss,scss,html,vue}]=stylelint --cache --fix'
+
+pp commitlint/commitlint.config.mjs -o
+```
+
+### 手动配置
+
+package.json（配置 simple-git-hooks）
+
+```json
+{
+  // ...
+
+  "scripts": {
+    // ...
+    "prepare": "simple-git-hooks"
+  },
+
+  // ...
+
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged",
+    "commit-msg": "npx commitlint --edit $1"
+  },
+  "lint-staged": {
+    "*": "eslint --cache --fix",
+    "*.{css,postcss,scss,html,vue}": "stylelint --cache --fix"
+  }
+
+  // ...
+}
+```
+
+commitlint.config.mjs
+
+See [here](../../../../preferences/linter/commitlint/commitlint.config.mjs).
+
+## 💪🏼 使用 Dart Sass 提供 Sass 支持，移除 Node Sass
 
 ### 前置任务
 
@@ -213,117 +341,20 @@ export default {
 }
 ```
 
-## 6. 配置 npm 快速检查/修复脚本
+## 🧹 项目兼容性 & 可维护性
 
-### 前置任务
+### [cross-env](https://www.npmjs.com/package/cross-env)
 
-shell
-
-```shell
-ni npm-run-all2@latest -D
-```
-
-### 快速配置
+#### 前置任务
 
 shell
 
 ```shell
-npm pkg set 'scripts.lint=run-s lint:*'
-npm pkg set 'scripts.lint:js=eslint --cache .'
-npm pkg set 'scripts.lint:style=stylelint --cache **/*.{css,postcss,scss,html,vue}'
-npm pkg set 'scripts.fix=run-s fix:*'
-npm pkg set 'scripts.fix:js=eslint --cache --fix .'
-npm pkg set 'scripts.fix:style=stylelint --cache --fix **/*.{css,postcss,scss,html,vue}'
+# cross-env：为运行 NPM 脚本时设置环境变量提供跨平台兼容性，目前仅在基于 webpack 4 的项目见到过使用案例（不包括封装了 webpack 4 的 vue-cli）
+ni cross-env@latest -D
 ```
 
-### 手动配置
-
-package.json
-
-```json
-{
-  // ...
-  "scripts": {
-    // ...
-
-    "lint": "run-s lint:*",
-    "lint:js": "eslint --cache .",
-    "lint:style": "stylelint --cache **/*.{css,postcss,scss,html,vue}",
-    "fix": "run-s fix:*",
-    "fix:js": "eslint --cache --fix .",
-    "fix:style": "stylelint --cache --fix **/*.{css,postcss,scss,html,vue}"
-
-    // ...
-  }
-}
-```
-
-## 7. 配置提交检查/修复
-
-### 前置任务
-
-shell
-
-```shell
-ni simple-git-hooks@latest lint-staged@latest @commitlint/cli@latest @commitlint/config-conventional@latest -D
-```
-
-### 快速配置
-
-shell
-
-```shell
-npm pkg set 'scripts.postinstall=simple-git-hooks'
-npm pkg set 'simple-git-hooks.pre-commit=npx lint-staged'
-npm pkg set 'lint-staged.*=eslint --fix'
-npm pkg set 'lint-staged[*.{css,postcss,scss,html,vue}]=stylelint --cache --fix'
-
-pp commitlint/commitlint.config.mjs -o
-```
-
-### 手动配置
-
-package.json（配置 simple-git-hooks）
-
-```json
-{
-  // ...
-
-  "scripts": {
-    // ...
-    "postinstall": "simple-git-hooks"
-  },
-
-  // ...
-
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
-  },
-  "lint-staged": {
-    "*": "eslint --cache --fix",
-    "*.{css,postcss,scss,html,vue}": "stylelint --cache --fix"
-  }
-
-  // ...
-}
-```
-
-commitlint.config.mjs
-
-See [here](../../../../preferences/linter/commitlint/commitlint.config.mjs).
-
-## 8. 项目兼容性 & 可维护性
-
-### 前置任务
-
-shell
-
-```shell
-# cross-env：为环境变量提供跨平台兼容性
-ni -D cross-env@latest
-```
-
-### 手动配置
+#### 手动配置
 
 NOTE：需要使用 cross-env 代理的 npm 脚本应手动配置。设置了环境变量，才需要改为通过 cross-env 来执行。
 
@@ -353,4 +384,13 @@ package.json
 
   // ...
 }
+```
+
+### [taze](https://www.npmjs.com/package/taze)
+
+#### 使用
+
+```shell
+# taze：帮你轻松完成依赖升级
+npx taze minor -Iw
 ```

@@ -1,6 +1,6 @@
 # Node.js 包管理器 - NPM 手册 / Node.js Package Manager - NPM Manual
 
-This article base on node@18.20.8 (npm@10.9.2)。
+This article is based on node@18.20.8 (npm@10.9.2)。
 
 ## 📚 什么是 NPM？ / What is NPM?
 

@@ -3,9 +3,9 @@ export default {
   extends: [
     'stylelint-config-standard-scss',
     'stylelint-config-standard-vue/scss',
-    'stylelint-config-recess-order',
-    // Style formatter
+    // Stylistic rules support
     '@stylistic/stylelint-config',
+    'stylelint-config-recess-order',
     // It bundles postcss-html custom syntax for `.html` like files
     'stylelint-config-html',
   ],
@@ -20,6 +20,8 @@ export default {
     '**/assets/icon/**/*',
     '**/assets/images/**/*',
     '**/assets/lang/**/*',
+    '**/assets/langs/**/*',
+    '**/assets/json/**/*',
     '**/static/**/*',
     '**/public/**/*',
     '**/theme/**/*',
@@ -43,6 +45,7 @@ export default {
     'font-family-no-missing-generic-family-keyword': null,
 
     // Warning for descending specificity, for better maintainability
+    // Actually, some times this rule may give false positives, and it's not worth fixing it
     'no-descending-specificity': [true, { severity: 'warning' }],
 
     // Support pseudo classes and elements provided by vue, webpack and element-ui
@@ -52,14 +55,7 @@ export default {
     ],
     'selector-pseudo-element-no-unknown': [
       true,
-      {
-        ignorePseudoElements: [
-          'v-deep',
-          'v-global',
-          'v-slotted',
-          'input-placeholder',
-        ],
-      },
+      { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted', 'input-placeholder'] },
     ],
 
     // We disable this rule because it doesn't provide auto-fix operation and it makes no sense
