@@ -24,7 +24,7 @@
     "hb0730.uniapp-run",
 
     // ↓↓ remote dev
-    "ms-azuretools.vscode-docker",
+    "ms-azuretools.vscode-containers",
     "ms-vscode-remote.remote-containers", // NOTE: vscode only
     "ms-vscode-remote.remote-wsl", // NOTE: vscode only
     "anysphere.remote-containers", // NOTE: cursor only
@@ -51,13 +51,11 @@
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
     "foxundermoon.shell-format",
-    // -- PROFILE_JS formatter
-    "biomejs.biome", // NOTE: not in use now
     // -- linter
     "streetsidesoftware.code-spell-checker",
     "davidanson.vscode-markdownlint",
     // -- PROFILE_JS linter
-    "dbaeumer.vscode-eslint",
+    "dbaeumer.vscode-eslint", // also the formatter for js
     "stylelint.vscode-stylelint",
     "webhint.vscode-webhint",
     // -- snippets
@@ -86,8 +84,6 @@
     "christian-kohler.path-intellisense",
     "jakob101.relativepath",
     "tombonnike.vscode-status-bar-format-toggle",
-    "visualstudioexptteam.vscodeintellicode",
-    "visualstudioexptteam.intellicode-api-usage-examples",
     "github.copilot", // NOTE: vscode only
     "github.copilot-chat", // NOTE: vscode only
     // -- test
@@ -105,5 +101,9 @@
     // ↓↓ extension customization
     "l13rary.l13-built-in-extensions",
     "vscode.javascript-modified" // NOTE: modified by extension "l13rary.l13-built-in-extensions", snippets disabled
+
+    // ↓↓ extension count
+    // vscode: 71 - 2 = 69
+    // cursor: 71 - 4 = 67
   ]
 }

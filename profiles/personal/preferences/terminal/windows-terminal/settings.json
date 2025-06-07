@@ -16,10 +16,6 @@
         "id": "User.paste"
       },
       {
-        "command": "find",
-        "id": "User.find"
-      },
-      {
         "command":
             {
               "action": "splitPane",
@@ -27,6 +23,10 @@
               "splitMode": "duplicate"
             },
         "id": "User.splitPane.A6751878"
+      },
+      {
+        "command": "find",
+        "id": "User.find"
       }
     ],
   "centerOnLaunch": true,
@@ -68,7 +68,7 @@
           "font":
             {
               "builtinGlyphs": false,
-              "face": "'0xProto', '三极露融体', 'Symbols Nerd Font'"
+              "face": "'0xProto', '\u4e09\u6781\u9732\u878d\u4f53', 'Symbols Nerd Font'"
             },
           "opacity": 80,
           "padding": "12",
@@ -121,6 +121,12 @@
           },
           {
             "guid": "{95bced8d-5efb-5932-bc4b-6c1582edcefb}",
+            "hidden": false,
+            "name": "Ubuntu",
+            "source": "Microsoft.WSL"
+          },
+          {
+            "guid": "{fe17aa87-deab-5f09-b7c5-9749095b9f01}",
             "hidden": false,
             "name": "Ubuntu",
             "source": "Microsoft.WSL"

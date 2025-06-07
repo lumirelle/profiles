@@ -18,7 +18,7 @@
     "eamodio.gitlens",
 
     // ↓↓ remote dev
-    "ms-azuretools.vscode-docker",
+    "ms-azuretools.vscode-containers",
     "ms-vscode-remote.remote-containers", // NOTE: vscode only
     "ms-vscode-remote.remote-wsl", // NOTE: vscode only
     "anysphere.remote-containers", // NOTE: cursor only
@@ -63,8 +63,6 @@
     "christian-kohler.path-intellisense",
     "jakob101.relativepath",
     "tombonnike.vscode-status-bar-format-toggle",
-    "visualstudioexptteam.vscodeintellicode",
-    "visualstudioexptteam.intellicode-api-usage-examples",
     "github.copilot", // NOTE: vscode only
     "github.copilot-chat", // NOTE: vscode only
     // -- test
@@ -74,5 +72,9 @@
     // ↓↓ extension customization
     "l13rary.l13-built-in-extensions",
     "vscode.javascript-modified" // NOTE: modified by extension "l13rary.l13-built-in-extensions", snippets disabled
+
+    // ↓↓ extension count
+    // vscode: 51 - 2 = 49
+    // cursor: 51 - 4 = 47
   ]
 }
