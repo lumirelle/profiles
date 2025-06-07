@@ -155,6 +155,7 @@ BypassNRO.cmd
   | Visual Studio        | <https://visualstudio.microsoft.com/zh-hans/downloads/>                |
   | Navicat Premium Lite | <https://www.navicat.com.cn/download/navicat-premium-lite>             |
   | WSL                  | `wsl --install`                                                        |
+  | Docker Desktop       | <https://www.docker.com/products/docker-desktop/>                      |
 
 - （可选）安装配置其他软件
 
