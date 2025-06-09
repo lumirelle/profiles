@@ -2,7 +2,7 @@
 
 Requires node@'^18.12.0 || ^20.9.0 || >=22', npm@>=9, pnpm@>=7.
 
-Using node@18.20.8, npm@10.9.2, pnpm@10.9.0.
+This article is based on node@18.20.8, npm@10.9.2, pnpm@10.11.1.
 
 Main dependencies:
 

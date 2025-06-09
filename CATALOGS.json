@@ -2,42 +2,51 @@
   "profiles": {
     "personal": {
       "docs": {
-        "js": {
-          "framework": {
-            "nuxt": {
-              "nuxt2-manual.md": null,
-              "nuxt2-optimization-manual.md": null,
-              "nuxt2-specification-manual.md": null
-            },
-            "vue": {
-              "vue2-optimization-manual.md": null,
-              "vue2-specification-manual.md": null,
-              "vue3-specification-manual.md": null
-            }
-          },
-          "runtime": {
-            "nodejs": {
-              "nodejs-manual.md": null,
-              "nodejs-pm-npm-manual.md": null,
-              "nodejs-pm-pnpm-manual.md": null,
-              "nodejs-pm-yarn-manual.md": null
-            }
-          }
+        ".obsidian": {
+          "app.json": null,
+          "appearance.json": null,
+          "core-plugins.json": null,
+          "workspace.json": null
         },
         "life": {
           "prefabricated-dish-manual.md": null
         },
-        "os": {
-          "windows": {
-            "windows-setup-manual.md": null
-          }
-        },
         "technique": {
-          "web-front-end-manual.md": null
-        },
-        "vcs": {
-          "git": {
-            "git-manual.md": null
+          "os": {
+            "windows": {
+              "windows-setup-manual.md": null
+            }
+          },
+          "vcs": {
+            "git": {
+              "git-manual.md": null
+            }
+          },
+          "wfe": {
+            "js": {
+              "framework": {
+                "nuxt": {
+                  "nuxt2-manual.md": null,
+                  "nuxt2-optimization-manual.md": null,
+                  "nuxt2-specification-manual.md": null
+                },
+                "vue": {
+                  "vue2-optimization-manual.md": null,
+                  "vue2-specification-manual.md": null,
+                  "vue3-specification-manual.md": null
+                }
+              },
+              "js-basic-manual.md": null,
+              "runtime": {
+                "nodejs": {
+                  "nodejs-manual.md": null,
+                  "nodejs-pm-npm-manual.md": null,
+                  "nodejs-pm-pnpm-manual.md": null,
+                  "nodejs-pm-yarn-manual.md": null
+                }
+              }
+            },
+            "web-front-end-manual.md": null
           }
         }
       },

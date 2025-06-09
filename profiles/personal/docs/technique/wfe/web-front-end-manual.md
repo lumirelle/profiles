@@ -1,38 +1,40 @@
-# Web Front End Manual
+# Web 前端手册 / Web Front End Manual
 
-## 📚 TOC
+## 📚 目录 / TOC
 
-- [规范开发](#normalize)
+- [规范开发 / Standardized Development](#standardized-dev)
 
-- [前端技术发展](#tech-development)
+- [前端技术发展 / Development of Front End Techniques](#dev-of-front-end)
 
-- HTML & CSS & JS
+- [HTML & CSS & JS](#html-css-js)
 
-  - 必学滴 Flex 布局
-  - 必学滴 Grid 布局
+  - [必学滴 Flex 布局](#flex-layout)
+  - [必学滴 Grid 布局](#grid-layout)
 
-- [框架](#framework)
+- [框架 / Framework](#framework)
 
-  - JS 框架
   - [CSS 框架](#css-framework)
-  - [UI 构建框架 & 应用框架 & 组件库](#ui-framework)
+  - [JS 框架](#js-framework)
+  - [UI 构建框架（及其衍生的应用框架 & 组件库）](#ui-framework)
 
-  - Vue.js（用户界面构建框架）
-    - Vue 响应式系统
-    - Vue 生命周期
-    - Vue 渲染机制和渲染函数
-    - Vue 内置组件
-    - Vue 性能优化
-    - Vue Router
-    - Vuex、Pinia
-    - CSR、SSR、SSG 渲染模式
-    - Nuxt.js（适用于 Vue.js 的应用框架）
-    - Element UI/Plus（适用于 Vue.js 的组件库）
-    - Vant（适用于 Vue.js 的移动端组件库）
+    - Vue.js
 
-- [前端项目工程化](#engineering)
+      - Vue 响应式系统
+      - Vue SFC
+      - Vue 生命周期
+      - Vue 渲染机制和渲染函数
+      - Vue 内置组件
+      - Vue 性能优化
+      - Vue Router
+      - Vuex & Pinia
+      - CSR、SSR、SSG 渲染模式
+      - Nuxt.js（适用于 Vue.js 的应用框架）
+      - Element UI/Plus（适用于 Vue.js 的 PC 端组件库）
+      - Vant（适用于 Vue.js 的 H5 端组件库）
 
-  - JS & TS
+- [前端项目工程化 / Engineering of Front End Project](#engineering-of-project)
+
+  - [TS](#ts)
   - [模块化](#modularization)
 
   - [工具生态](#tool-ecosystem)
@@ -56,10 +58,12 @@
   - [CSS 后处理](#post-css)
 
   - [设备屏幕兼容](#screen-comp)
+
     - [设备像素 & 逻辑像素](#dpx-lpx)
     - [rem & postcss-pxtorem](#rem)
 
 - 必会滴工具库
+
   - cross-env
   - Axios
   - Day.js
@@ -72,14 +76,14 @@
   - NProgress
   - ECharts
 
-## 👩🏼‍💻 规范开发 <a name="normalize"></a>
+## 👩🏼‍💻 规范开发 / Standardized Development <a name="standardized-dev"></a>
 
 - 代码规范：使用 editorconfig + eslint + stylelint
 - 提交规范：使用 simple-git-hook + commitlint
 - 开发环境规范：使用 fnm + corepack + npm/pnpm/yarn
 - 配置文件：<https://github.com/Lumirelle/profiles>
 
-## 🚀 前端技术发展 <a name="tech-development"></a>
+## 🚀 前端技术发展 / Development of Front End Techniques <a name="dev-of-front-end"></a>
 
 1990 年 12 月，Tim Berners-Lee 创造了万维网（World Wide Web）和 HTML，与随后诞生的 CSS、JavaScript
 技术，一同标志着静态网页技术的诞生。
@@ -103,7 +107,19 @@ React.js、Vue.js 随之诞生，带来了 MVP、MVVM 等前端项目架构，�
 SEO 不友好、网页白屏时间长、界面渲染慢等问题得到缓解，基于 Vue.js、React.js 生态的应用框架 Nuxt.js、Next.js
 诞生，提供了服务端侧渲染（SSR）的解决方案。也因此，衍生出了基于前端技术的全栈开发、跨平台原生开发。
 
-## 🏹 框架 <a name="framework"></a>
+NOTE：现代前端技术的核心可以说是 JS 技术，HTML 与 CSS 都成为了 JS 所管理的成分。
+
+## 🎭 HTML & CSS & JS <a name="html-css-js"></a>
+
+### 必学滴 Flex 布局 <a name="flex-layout"></a>
+
+每天看一遍 MDN 之 [Flex](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)。
+
+### 必学滴 Grid 布局 <a name="grid-layout"></a>
+
+每天看一遍 MDN 之 [Grid](https://developer.mozilla.org/zh-CN/docs/Web/CSS/grid)。
+
+## 🏹 框架 / Framework <a name="framework"></a>
 
 ### CSS 框架 <a name="css-framework"></a>
 
@@ -112,7 +128,13 @@ SEO 不友好、网页白屏时间长、界面渲染慢等问题得到缓解，�
 - Bootstrap
 - Tailwind
 
-### UI 构建框架 & 应用框架 & 组件库 <a name="ui-framework"></a>
+### JS 框架 <a name="js-framework"></a>
+
+JS 框架主要有如下：
+
+- JQuery
+
+### UI 构建框架（及其衍生的应用框架 & 组件库） <a name="ui-framework"></a>
 
 用户界面构建框架：
 
@@ -134,7 +156,11 @@ SEO 不友好、网页白屏时间长、界面渲染慢等问题得到缓解，�
 
   其下组件库：Element UI/Element Plus、Vuetify、Ant Design Vue、Vant
 
-## 📏 前端项目工程化 <a name="engineering"></a>
+## 📏 前端项目工程化 / Engineering of Front End Project <a name="engineering-of-project"></a>
+
+### TS <a name="ts"></a>
+
+TypeScript 相较于 JavaScript 增加了类型检查，在项目工程化中起到提高可读性、可维护性的作用。
 
 ### 模块化 <a name="modularization"></a>
 
@@ -143,6 +169,9 @@ SEO 不友好、网页白屏时间长、界面渲染慢等问题得到缓解，�
 
 随着 Node.js 的兴起，CommonJS 模块化规范成为主流，采用同步模块加载方式。2015 年，JS 官方模块化规范 ESM
 才姗姗来迟，同时支持同步和异步模块加载方式，成为了现今最流行的模块化规范。
+
+- CommonJS 方案由 Node.js 原生支持，其他 JS 运行时兼容但非核心，使用 `require` 函数和 `modules.export` 属性实现模块化
+- ESM 方案在现代浏览器（除 IE 11）和主流 JS 运行时（Node.js、Deno、Bun）中都支持，使用 `import` 和 `export` 关键字实现模块化
 
 ### 工具生态 <a name="tool-ecosystem"></a>
 
