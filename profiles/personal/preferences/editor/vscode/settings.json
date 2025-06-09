@@ -258,6 +258,7 @@
   // ↓↓ extensions: language & file support, formatter, linter, snippets
   // -- language & file support
   "docker.extension.dockerEngineAvailabilityPrompt": false,
+  "json.schemaDownload.enable": true,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.promptToUpdatePowerShell": false,
   "redhat.telemetry.enabled": false,
