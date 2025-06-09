@@ -41,6 +41,7 @@ export default antfu(
       '**/app/view',
       '**/app.html',
       // Add your custom ignored files here
+      '**/_scripts',
     ],
   },
 )
@@ -88,5 +89,6 @@ export default antfu(
       // Vue 2 recommends kebab-case for custom event names
       'vue/custom-event-name-casing': ['warn', 'kebab-case'],
       'vue/no-reserved-component-names': 'warn',
+      'vue/no-unused-refs': 'warn',
     },
   })

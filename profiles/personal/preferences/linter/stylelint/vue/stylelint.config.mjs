@@ -35,18 +35,24 @@ export default {
   ],
 
   rules: {
-    // We need custom at-rule, property, selector pattern
-    'at-rule-no-unknown': null,
-    'property-no-unknown': null,
-    'selector-class-pattern': null,
-    'selector-id-pattern': null,
-
-    // We don't want to set a generic family when we use iconfont
+    // We don't want to set a generic family in some cases, like when we use iconfont
     'font-family-no-missing-generic-family-keyword': null,
 
-    // Warning for descending specificity, for better maintainability
-    // Actually, some times this rule may give false positives, and it's not worth fixing it
-    'no-descending-specificity': [true, { severity: 'warning' }],
+    // It's recommended to use BEM class & id selector pattern
+    'selector-class-pattern': [
+      '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?$',
+      {
+        message: selector => `Expected class selector "${selector}" to be BEM case`,
+        severity: 'warning',
+      },
+    ],
+    'selector-id-pattern': [
+      '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?$',
+      {
+        message: selector => `Expected id selector "${selector}" to be BEM case`,
+        severity: 'warning',
+      },
+    ],
 
     // Support pseudo classes and elements provided by vue, webpack and element-ui
     'selector-pseudo-class-no-unknown': [
@@ -58,7 +64,27 @@ export default {
       { ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted', 'input-placeholder'] },
     ],
 
-    // We disable this rule because it doesn't provide auto-fix operation and it makes no sense
+    // It's recommended to use kebab-case for keyframe name
+    'keyframes-name-pattern': [
+      '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
+      {
+        message: name => `Expected keyframe name "${name}" to be kebab-case`,
+        severity: 'warning',
+      },
+    ],
+
+    // Warning for descending specificity, for better maintainability
+    // Actually, some times this rule may give false positives, and it's not so worth fixing it
+    'no-descending-specificity': [true, { severity: 'warning' }],
+
+    'scss/dollar-variable-pattern': [
+      '^(-|--)?[a-z][a-z0-9]*(-[a-z0-9]+)*$',
+      {
+        message: 'Expected variable to be kebab-case, start with "-" or "--"',
+      },
+    ],
+
+    // We disable this rule because it doesn't provide auto-fix operation and it's not worth fixing it
     'scss/double-slash-comment-whitespace-inside': null,
 
     // Stylistic rules

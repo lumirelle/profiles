@@ -60,5 +60,9 @@ export default antfu(
   .override('antfu/vue/rules', {
     rules: {
       'vue/eqeqeq': 'warn',
+      // Vue 3 recommends camelCase for custom event names
+      'vue/custom-event-name-casing': ['warn', 'camelCase'],
+      'vue/no-reserved-component-names': 'warn',
+      'vue/no-unused-refs': 'warn',
     },
   })
