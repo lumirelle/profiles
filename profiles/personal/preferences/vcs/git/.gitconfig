@@ -68,7 +68,11 @@ undo-commit = reset --soft HEAD^ # Move commit back to the staging area
 # So, if we using positional parameters, it's recommended to use function wrapper.
 # Using function wrapper can also prevent unexpected parameters provided by user.
 # 2: Using quote to avoid default parameters expansion.
-add-all-then-commit = "!f() { git add . && git commit --message \"$1\"; }; f" # Add all changes and commit.
+# Add all changes and commit.
+add-all-then-commit = "!f() { \
+  git add .; \
+  git commit --message \"$1\"; \
+}; f"
 # amend
 amend-commit = commit --amend --no-edit
 amend-commit-with-edit = commit --amend
@@ -90,7 +94,10 @@ force-delete-branch = branch --delete --force
 # switch
 branch-then-switch = switch --create
 # merge
-merge-with-message = "!f() { git merge \"$1\" --no-ff --message \"$2\"; }; f"
+merge-with-default-message = "!f() { \
+  current_branch=$(git branch --show-current); \
+  git merge \"$1\" --no-ff --message \"merge: merge $1 into $current_branch\"; \
+}; f"
 abort-merge = merge --abort
 # rebase
 abort-rebase = rebase --abort
@@ -98,9 +105,17 @@ abort-rebase = rebase --abort
 list-tags = tag --list
 list-tags-remote = ls-remote --tags
 delete-tag = tag --delete
-delete-tag-multiple = "!f() { git tag --list \"$1\" | xargs git tag --delete; }; f"
-sync-tag-remote = "!f() { git push origin :refs/tags/$1 && git fetch-prune-tags; }; f"
-sync-tag-remote-multiple = "!f() { git tag --list \"$1\" | xargs -I {} git push origin :refs/tags/{} && git fetch-prune-tags; }; f"
+delete-tag-multiple = "!f() { \
+  git tag --list \"$1\" | xargs git tag --delete; \
+}; f"
+sync-tag-remote = "!f() { \
+  git push origin :refs/tags/$1; \
+  git fetch-prune-tags; \
+}; f"
+sync-tag-remote-multiple = "!f() { \
+  git tag --list \"$1\" | xargs -I {} git push origin :refs/tags/{}; \
+  git fetch-prune-tags; \
+}; f"
 # remote
 list-remotes = remote --verbose
 fetch-prune-tags = fetch --prune-tags # We will clean up unused tags when specify command `*-prune-tags`
@@ -108,7 +123,10 @@ pull-prune-tags = "!git fetch --prune-tags && git pull"
 pull-then-push = "!git pull-prune-tags && git push"
 # push
 delete-push = push --delete
-push-upstream = push --set-upstream
+push-upstream-current-branch = "!f() { \
+  current_branch=$(git branch --show-current); \
+  git push --set-upstream origin \"$current_branch\"; \
+}; f"
 
 # SHORTCUTS ALIASES
 # -- PREFIX INTRO
@@ -164,7 +182,7 @@ xxb = force-delete-branch
 w = switch
 bw = branch-then-switch
 # merge: m
-m = merge-with-message
+m = merge-with-default-message
 zm = abort-merge
 # rebase: r
 r = rebase
@@ -193,4 +211,4 @@ lp = pull-then-push
 # push: p
 p = push
 xp = delete-push
-pu = push-upstream
+pu = push-upstream-current-branch
