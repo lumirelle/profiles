@@ -10,6 +10,7 @@
 
   - [必学滴 Flex 布局](#flex-layout)
   - [必学滴 Grid 布局](#grid-layout)
+  - [必学滴 JS 知识](#js-basic)
 
 - [框架 / Framework](#framework)
 
@@ -118,6 +119,10 @@ NOTE：现代前端技术的核心可以说是 JS 技术，HTML 与 CSS 都成�
 ### 必学滴 Grid 布局 <a name="grid-layout"></a>
 
 每天看一遍 MDN 之 [Grid](https://developer.mozilla.org/zh-CN/docs/Web/CSS/grid)。
+
+### 必学滴 JS 知识 <a name="js-basic"></a>
+
+见 [js-basic.md](js/js-basic-manual.md)
 
 ## 🏹 框架 / Framework <a name="framework"></a>
 
@@ -246,10 +251,23 @@ iOS 设备，DPR 是固定的，如 iPhone 6 的 DPR 为 2、iPhone 13 Pro Max �
 逻辑像素（以下简称 px）解决了高分辨率屏幕的显示问题，但他仍然是一个绝对单位（取决于
 DPR），无法实现与屏幕成比例的尺寸。实现一个这样的尺寸主要是为了完成移动设备的适配。
 
-rem 可以实现与屏幕成比例的尺寸。当我们给 HTML 设置了 meta 标签
-`<meta name="viewport" content="width=device-width, initial-scale=1">`，将视口宽度设置为逻辑像素宽度，配合
-`html { font-size: 10vw; }` 则可以在任意设备上实现 1rem = 10% 屏幕宽度。通过这种方式，使用 rem
+rem 可以实现与屏幕成比例的尺寸。当我们给 HTML 页面设置了 meta 标签，将视口宽度设置为逻辑像素宽度，配合 CSS 样式，将 HTML 元素的字体设置为 10vw 后，我们就可以在任意设备上实现 1rem = 10% 屏幕宽度。通过这种方式，使用 rem
 可以实现在不同的设备上实现统一的显示效果。
+
+```html
+<html>
+  <head>
+    <!-- 设置 meta 标签，1vw = 1 logic px = 1% 屏幕宽度 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 设置样式：1rem = 10vw = 10% 屏幕宽度 -->
+    <style>
+      html {
+        font-size: 10vw;
+      }
+    </style>
+  </head>
+</html>
+```
 
 在将设计稿中的尺寸从 px 转换为 rem 时，需要不停地换算，如 375px 的设计稿中宽度 120px 的元素需要换算为
 $\frac{元素宽度}{设计稿宽度} * 10 = \frac{120px}{375px} * 10 = 3.2rem$，这对开发来说是一种负担。
