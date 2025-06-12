@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This project is deprecated, please use project [Grocery Store](https://github.com/Lumirelle/grocery-store) instead.
+
 <h1 align="center">
   <a href="https://github.com/Lumirelle/profiles" rel="noopener">
 </h1>
