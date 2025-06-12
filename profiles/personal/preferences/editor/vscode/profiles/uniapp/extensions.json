@@ -70,7 +70,6 @@
     "gruntfuggly.todo-tree",
     "oderwat.indent-rainbow",
     "vincaslt.highlight-matching-tag",
-    "naumovs.color-highlight",
     "usernamehw.errorlens",
     "antfu.array-index-inlay",
     "moalamri.inline-fold",
@@ -102,7 +101,7 @@
     "vscode.javascript-modified" // NOTE: modified by extension "l13rary.l13-built-in-extensions", snippets disabled
 
     // ↓↓ extension count
-    // vscode: 71 - 2 = 69
-    // cursor: 71 - 4 = 67
+    // vscode: 69 - 2 = 67
+    // cursor: 69 - 4 = 65
   ]
 }
