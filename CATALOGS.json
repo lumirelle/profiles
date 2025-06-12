@@ -86,21 +86,26 @@
           },
           "vscode": {
             "extensions.json": null,
-            "js": {
-              "extensions.json": null
-            },
             "keybindings.json": null,
+            "profiles": {
+              "js": {
+                "extensions.json": null
+              },
+              "uniapp": {
+                "extensions.json": null
+              },
+              "vue2": {
+                "extensions.json": null
+              },
+              "vue3": {
+                "extensions.json": null
+              }
+            },
             "settings.json": null,
-            "trusted-domains.json": null,
-            "uniapp": {
-              "extensions.json": null
+            "snippets": {
+              "vue.json": null
             },
-            "vue2": {
-              "extensions.json": null
-            },
-            "vue3": {
-              "extensions.json": null
-            }
+            "trusted-domains.json": null
           },
           "vscode-workspace": {
             "js": {

@@ -55,7 +55,6 @@
     // -- PROFILE_JS linter
     "dbaeumer.vscode-eslint", // also the formatter for js
     "stylelint.vscode-stylelint",
-    "webhint.vscode-webhint",
     // -- snippets
     "jmsv.javascriptsnippetsstandard",
     "bierner.emojisense",

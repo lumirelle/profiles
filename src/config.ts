@@ -56,6 +56,13 @@ export const SUPPORTED_PROFILE_COLLECTIONS: ProfileCollection[] = [
         ],
       },
       {
+        match: 'editor/vscode/snippets/**/*.json',
+        installFolder: [
+          join(env.APPDATA || '', 'Code', 'User', 'snippets'),
+          join(env.APPDATA || '', 'Cursor', 'User', 'snippets'),
+        ],
+      },
+      {
         match: 'editor/.editorconfig',
         installFolder: homedir(),
       },

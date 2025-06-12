@@ -20,6 +20,8 @@
     "herrmannplatz.npm-dependency-links",
     "antfu.pnpm-catalog-lens",
     "jasonnutter.search-node-modules",
+    // -- PROFILE_UNIAPP
+    "hb0730.uniapp-run",
 
     // ↓↓ remote dev
     "ms-azuretools.vscode-containers",
@@ -39,6 +41,12 @@
     "brandonfowler.exe-runner",
     // -- PROFILE_JS language & file support
     "dotenv.dotenv-vscode",
+    // -- PROFILE_VUE language & file support
+    "vue.volar",
+    "lokalise.i18n-ally",
+    // -- PROFILE_UNIAPP formatter
+    "uni-helper.uni-highlight-vscode",
+    "uni-helper.uni-app-schemas-vscode",
     // -- formatter
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode",
@@ -49,10 +57,12 @@
     // -- PROFILE_JS linter
     "dbaeumer.vscode-eslint", // also the formatter for js
     "stylelint.vscode-stylelint",
-    "webhint.vscode-webhint",
     // -- snippets
     "jmsv.javascriptsnippetsstandard",
     "bierner.emojisense",
+    // -- PROFILE_UNIAPP snippets
+    "uni-helper.uni-app-snippets-vscode",
+    "uni-helper.uni-ui-snippets-vscode",
 
     // ↓↓ coding helper
     // -- views
@@ -84,13 +94,15 @@
     "antfu.goto-alias",
     "chakrounanas.turbo-console-log",
     "ritwickdey.liveserver",
+    // -- PROFILE_VUE dev
+    "dariofuzinato.vue-peek",
 
     // ↓↓ extension customization
     "l13rary.l13-built-in-extensions",
     "vscode.javascript-modified" // NOTE: modified by extension "l13rary.l13-built-in-extensions", snippets disabled
 
     // ↓↓ extension count
-    // vscode: 63 - 2 = 61
-    // cursor: 63 - 4 = 59
+    // vscode: 71 - 2 = 69
+    // cursor: 71 - 4 = 67
   ]
 }
