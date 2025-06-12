@@ -1,14 +1,14 @@
 import type { Parameter } from '../parse'
 import type { RunnerContext } from '../runner'
 import { SUPPORTED_PROFILE_COLLECTIONS } from '.'
-import { getRoot } from '../fs'
+import { getCommandRoot } from '../fs'
 import { extract } from '../parse'
 import { processProfileCollection } from '../profile'
 import { runCli } from '../runner'
 import { format, log } from '../utils'
 
 runCli(async (context: RunnerContext, parameters: Parameter[]) => {
-  const root = getRoot(import.meta.url)
+  const root = getCommandRoot(import.meta.url)
 
   const override = extract<boolean>(parameters, { matches: ['-o', '--override'] })
 

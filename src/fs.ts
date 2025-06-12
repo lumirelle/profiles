@@ -3,8 +3,19 @@ import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { format, log } from './utils'
 
-export function getRoot(metaUrl: string): string {
-  return resolve(dirname(fileURLToPath(metaUrl)), '..')
+/**
+ * Get the root directory of the command `.ts` file.
+ *
+ * @param metaUrl - The meta URL of the command `.ts` file
+ * @returns The root directory of the command `.ts` file
+ */
+export function getCommandRoot(metaUrl: string): string {
+  const grandParentDir = resolve(dirname(fileURLToPath(metaUrl)), '..')
+  // Compatible with stubbed build mode
+  if (grandParentDir.includes('src')) {
+    return resolve(grandParentDir, '..')
+  }
+  return grandParentDir
 }
 
 /**
