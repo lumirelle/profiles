@@ -26,7 +26,7 @@ output = compact
 # !! Do not set `pruneTags` as `true`, it's not compatible with some tag tools, like `bumpp` !!
 # Because `bumpp` will create a local tag and fetch from remote, then push the local tag to remote.
 # If we set `pruneTags` as `true`, it will delete the local tag when fetching from remote, which is not what we want.
-# So, we need to set `pruneTags` as `false`.
+# So, it's recommended to set `pruneTags` as `false`, and set a alias to sync tags instead.
 pruneTags = false
 
 [pull]
@@ -45,106 +45,112 @@ enabled = true
 [alias]
 # ENHANCEMENTS ALIASES
 # aliases
+# WHY USING `!`?
+# 1: `!` means execute the command in the shell, not in the git command line.
 aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
 # log
 log = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-last = log -1 HEAD --stat
+log-last = log -1 HEAD --stat
 # config
-list-config = config --list
+config-list = config --list
 config-global = config --global
 # discard
 discard = checkout --
-discard-all = checkout -- . # Discard all tracked changes in the working directory
+discard-all = checkout -- . # Discard all **tracked changes** in the working directory
 # add
 add-all = add .
-undo-add = reset HEAD --       # Move staged changes back to the working directory
-undo-add-all = reset HEAD -- . # Move all staged changes back to the working directory
+add-undo = reset HEAD --       # Move staged changes back to the working directory
+add-undo-all = reset HEAD -- . # Move all staged changes back to the working directory
 # commit
 commit-with-message = commit --message
-undo-commit = reset --soft HEAD^ # Move commit back to the staging area
-# 1: Using the function wrapper to avoid default parameters transformation.
-# For example, call alias `test = echo $1` with `git test Oh` will be transformed to `echo Oh Oh` by default
-# If we use function wrapper, it will be transformed to `echo Oh`, no duplicate parameters any more!!!
-# So, if we using positional parameters, it's recommended to use function wrapper.
-# Using function wrapper can also prevent unexpected parameters provided by user.
-# 2: Using quote to avoid default parameters expansion.
-# Add all changes and commit.
+commit-undo = reset --soft HEAD^ # Move commit back to the staging area
+# add & commit
+# WHY USING FUNCTION?
+# 1: Support special characters in parameters.
+# 2: Support variables.
+# 3: Refuse unexpected parameters provided by user.
 add-all-then-commit = "!f() { \
   git add .; \
   git commit --message \"$1\"; \
 }; f"
-# amend
+# amend commit
 amend-commit = commit --amend --no-edit
 amend-commit-with-edit = commit --amend
 # wip
 wip = "!git add . && git commit --message 'wip: temporary commit'"
-undo-wip = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
+wip-undo = "!git log -n 1 | grep -q -c 'wip' && git reset HEAD~1"
 # stash
-list-stash = stash list
-new-stash = stash push
-undo-stash = stash pop
-delete-stash = stash drop
+stash-list = stash list
+stash-push = stash push
+stash-undo = stash pop
+stash-drop = stash drop
 # branch
-list-branches = branch
-list-remote-branches = branch --remote
-list-all-branches = branch --all
-new-branch = branch
-delete-branch = branch --delete
-force-delete-branch = branch --delete --force
-# switch
+branch-list = branch
+branch-list-remote = branch --remote
+branch-list-all = branch --all
+branch-delete = branch --delete
+branch-force-delete = branch --delete --force
+# branch & switch
 branch-then-switch = switch --create
 # merge
 merge-with-default-message = "!f() { \
   current_branch=$(git branch --show-current); \
   git merge \"$1\" --no-ff --message \"merge: merge $1 into $current_branch\"; \
 }; f"
-abort-merge = merge --abort
+merge-abort = merge --abort
 # rebase
-abort-rebase = rebase --abort
+rebase-abort = rebase --abort
 # tag
-list-tags = tag --list
-list-tags-remote = ls-remote --tags
-delete-tag = tag --delete
-delete-tag-multiple = "!f() { \
+tag-list = tag --list
+tag-list-remote = ls-remote --tags
+tag-delete = tag --delete
+tag-delete-multiple = "!f() { \
   git tag --list \"$1\" | xargs git tag --delete; \
 }; f"
-sync-tag-remote = "!f() { \
+tag-sync-remote = "!f() { \
   git push origin :refs/tags/$1; \
   git fetch-prune-tags; \
 }; f"
-sync-tag-remote-multiple = "!f() { \
+tag-sync-remote-multiple = "!f() { \
   git tag --list \"$1\" | xargs -I {} git push origin :refs/tags/{}; \
   git fetch-prune-tags; \
 }; f"
 # remote
-list-remotes = remote --verbose
+remote-list = remote --verbose
+# fetch
 fetch-prune-tags = fetch --prune-tags # We will clean up unused tags when specify command `*-prune-tags`
+# pull
 pull-prune-tags = "!git fetch --prune-tags && git pull"
-pull-then-push = "!git pull-prune-tags && git push"
 # push
-delete-push = push --delete
+push-delete = push --delete
 push-upstream-current-branch = "!f() { \
   current_branch=$(git branch --show-current); \
   git push --set-upstream origin \"$current_branch\"; \
 }; f"
+# pull & push
+pull-then-push = "!git pull-prune-tags && git push"
 
 # SHORTCUTS ALIASES
-# -- PREFIX INTRO
-# perfix `l` is used for `list`
-# perfix `z` is used for `abort`, which means abort an operation
-# perfix `u` is used for `undo`, which recovers the status
-# perfix `x` is used for `discard & delete`, which means drop things
-# perfix `xx` is used for `force discard & delete`
-# -- SUFFIX INTRO
-# suffix `g` is used for `global`
-# suffix `a` is used for `all`
-# suffix `m` is used for `multiple`
-# suffix `r` is used for `remote`
+#
+# -- SUFFIX INTRODUCTION
+# <TO SPECIFY ADDITIONAL BEHAVIOR>
+# `l`: `list`
+# `z`: `abort`, which means **interrupt an operation**, we will not complete the operation
+# `u`: `undo`, which means recover the status **after an operation is completed**
+# `x`: `discard | delete | drop`, which means **drop things** we don't need any more
+# `xx`: `forcely discard | delete | drop`
+# `s`: `sync`, which means **sync the changes** with the remote repository after we complete an operation locally
+# <TO SPECIFY TARGET>
+# `a`: `all`
+# `r`: `remote`
+# `g`: `global`
+# `m`: `multiple`
+#
 # -- ALIAS LIST
 # config: cf
-lcf = list-config
 cf = config
 cfg = config-global
+cfl = config-list
 # init: i
 i = init
 # clone: cl
@@ -155,60 +161,63 @@ xa = discard-all
 # add: a
 a = add
 aa = add-all
-ua = undo-add
-uaa = undo-add-all
+au = add-undo
+aua = add-undo-all
 # commit: c
 c = commit-with-message
-uc = undo-commit
+cu = commit-undo
+# add & commit: a*c*
 ac = add-all-then-commit # Why not use `aac`? Because `add-all` is used very frequently, and `ac` is more concise
-# amend: amd
-amd = amend-commit
-amde = amend-commit-with-edit
+# amend commit: amc
+amc = amend-commit
+amce = amend-commit-with-edit
 # wip: wip
-uwip = undo-wip
+wipu = wip-undo
 # stash: s
-ls = list-stash
-s = new-stash
-us = undo-stash
-xs = delete-stash
+s = stash-push # Why not use `sp`? Because `s` is more concise
+sl = stash-list
+su = stash-undo
+sx = stash-drop
 # branch: b
-lb = list-branches
-lbr = list-remote-branches
-lba = list-all-branches
-b = new-branch
-xb = delete-branch
-xxb = force-delete-branch
+b = branch
+bl = branch-list
+blr = branch-list-remote
+bla = branch-list-all
+bx = branch-delete
+bxx = branch-force-delete
 # switch: w
 w = switch
+# branch & switch: b*w*
 bw = branch-then-switch
 # merge: m
 m = merge-with-default-message
-zm = abort-merge
+mz = merge-abort
 # rebase: r
 r = rebase
-zr = abort-rebase
+rz = rebase-abort
 # reset: rs
 rs = reset
 # cherry-pick: cp
 cp = cherry-pick
 # tag: t
-lt = list-tags
-ltr = list-tags-remote
 t = tag
+tl = tag-list
+tlr = tag-list-remote
 tr = tag-remote
-xt = delete-tag
-xtm = delete-tag-multiple
-str = sync-tag-remote
-strm = sync-tag-remote-multiple
+tx = tag-delete
+txm = tag-delete-multiple
+tsr = tag-sync-remote
+tsrm = tag-sync-remote-multiple
 # remote: re
-lre = list-remotes
+rel = remote-list
 re = remote add
 # fetch: f
 f = fetch-prune-tags
 # pull: l
 l = pull-prune-tags
-lp = pull-then-push
 # push: p
 p = push
-xp = delete-push
+px = push-delete
 pu = push-upstream-current-branch
+# pull & push: l*p*
+lp = pull-then-push
