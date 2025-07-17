@@ -1,8 +1,8 @@
 > [!CAUTION]
-> This project is deprecated, please use project [Grocery Store](https://github.com/Lumirelle/grocery-store) instead.
+> This project is deprecated, please use project [Impurities](https://github.com/lumirelle/impurities) instead.
 
 <h1 align="center">
-  <a href="https://github.com/Lumirelle/profiles" rel="noopener">
+  <a href="https://github.com/lumirelle/profiles" rel="noopener">
 </h1>
 
 <h3 align="center">Profiles</h3>
@@ -11,8 +11,8 @@
 
 [![NPM Version](https://img.shields.io/npm/v/lumirelle-profiles)](https://www.npmjs.com/package/lumirelle-profiles)
 [![Status](https://img.shields.io/badge/status-active-success.svg)](.)
-[![GitHub Issues](https://img.shields.io/github/issues/Lumirelle/profiles.svg)](https://github.com/Lumirelle/profiles/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Lumirelle/profiles.svg)](https://github.com/Lumirelle/profiles/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/lumirelle/profiles.svg)](https://github.com/lumirelle/profiles/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/lumirelle/profiles.svg)](https://github.com/lumirelle/profiles/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
@@ -86,4 +86,4 @@ pi --help
 
 ## ✍️ Authors <a name="authors"></a>
 
-- [@Lumirelle](https://github.com/Lumirelle) - Anything
+- [@lumirelle](https://github.com/lumirelle) - Anything
